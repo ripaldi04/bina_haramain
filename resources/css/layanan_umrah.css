@@ -1,0 +1,177 @@
+body{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    background-color: #f0f0f0;
+}
+.navbar {
+    box-shadow: 0 15px 40px #9090906c;
+    border-bottom: 14px solid #909090;
+}
+.navbar-brand img {
+    height: 100px;
+}
+.logo-shadow{
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.3));
+}
+.nav-link {
+    color: black !important;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+.navbar-nav .nav-item {
+    margin: 0 15px; /* Menambahkan jarak horizontal antara item */
+    font-size: 18px;
+}
+/* Agar dropdown menu tampil dengan baik */
+.dropdown-menu {
+    border-radius: 5px; /* Membuat sudut membulat */
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3); /* Menambahkan bayangan */
+    transition: all 0.5s ease-in-out;
+}
+
+/* Mengubah warna background saat hover */
+.dropdown-item:hover {
+    background-color: #f7c53a;/* Warna kuning */
+    color: #000; /* Warna teks hitam */
+    transition: background-color 0.5s ease-in-out;
+}
+
+/* Menghilangkan garis biru saat item diklik */
+.dropdown-item:focus,
+.dropdown-item:active {
+    background-color: #f7c53a !important;
+    color: #000 !important;
+    outline: none;
+}
+
+.navbar-nav .nav-link {
+    padding: 10px 15px; /* Memberikan ruang lebih di dalam link */
+    font-weight: 500; /* Membuat teks lebih tegas */
+}
+.nav-link:hover {
+    color: #f7c53a !important; /* Warna berubah saat hover */
+}
+.nav-link.active {
+    color: black !important;
+}
+.nav-link.active::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #f7c53a;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+}
+.btn-auth {
+    background-color: #b97012;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: 1px solid black;
+}
+.btn-auth:hover {
+    background-color: #f0f0f0;
+    color: rgb(0, 0, 0);
+    border: 1px solid black;
+
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.search-btn {
+    background-color: #b97012; /* Warna coklat sesuai desain */
+    color: white;
+    border-radius: 5px;
+    width: 70px;
+    height: 38px;
+    margin-left: 20px;
+}
+
+.search-btn:hover {
+    background-color: #ffffff; /* Warna lebih gelap saat hover */
+}
+
+.card {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    position: relative;
+}
+
+.card-img-top img {
+    width: 100%;
+    height: 400px; /* Atur tinggi sesuai kebutuhan */
+    object-fit: contain; /* Pastikan gambar tidak terpotong */
+    margin-top: -30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #f8f8f8; /* Latar belakang jika gambar tidak penuh */
+}
+
+/* .overlay-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.overlay-text h5,
+.overlay-text p {
+    margin: 0;
+    color: white;
+}
+
+.overlay-text .stars {
+    font-size: 16px;
+    color:#b97012;
+} */
+
+.card-body h6{
+    color: #b97012;
+    margin-top: -20px;
+    margin-bottom: 20px;
+
+}
+
+.card-body hr {
+    margin-top: -10px;
+
+}
+
+.card-body ul {
+    padding: 10px;
+}
+
+.card-body ul li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+.card-body p{
+    color:#b97012
+}
+
+.card-body .btn {
+    background-color: #b97012;
+    color: white;
+    border-radius: 5px;
+}
+
+.card-body .btn:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}

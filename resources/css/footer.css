@@ -1,0 +1,18 @@
+footer {
+    /* position: relative; */
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f0f0f0;
+}
+
+.garis-bawah-footer {
+    width:100%;
+    margin: 20px auto;
+    margin-top: 70px;
+    border: 1px solid #f7c53a;
+    opacity: 100%;
+}

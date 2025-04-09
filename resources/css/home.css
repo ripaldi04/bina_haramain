@@ -1,0 +1,437 @@
+:root {
+    --primary-color: #B97012;
+    --secondary-color: #F7C53A;
+    --tertinary-color: #909090;
+    --for-color: #F0F0F0;}
+
+body,
+html {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    background-color: var(--for-color);
+}
+
+.hero-section {
+    /* position: relative; */
+    width: 100%;
+    height: 710px;
+    /* Sesuaikan tinggi */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/public/images/v146_19.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.container-card-highlight {
+    padding: 150px;
+    margin-top: -300px;
+}
+
+.card-highlight {
+    height: max-content
+}
+
+.card-highlight h5 {
+    font-size: 22px;
+    margin-bottom: 13px;
+}
+
+.card-highlight p {
+    font-size: 16px;
+}
+
+input[type="search"] {
+    width: 60% !important;
+    /* Atur ukuran lebih kecil */
+}
+
+.text-search {
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    /* Mencegah teks turun ke bawah */
+}
+
+.card-title {
+    color: var(--tertinary-color);
+    font-weight: bold;
+    font-size: 24;
+}
+
+.card-text {
+    font-size: 14;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-text p {
+    margin: 0;
+}
+
+.rounded-img {
+    width: 352px;
+    height: 406px;
+    border-radius: 30px;
+}
+
+.fixed-img {
+    width: 91px;
+    height: 91px;
+    object-fit: contain;
+}
+
+.item-row {
+    min-height: 120px;
+    /* Menyamakan tinggi setiap row */
+}
+
+.ps-3 {
+    padding-left: 16px;
+    /* Menambah jarak antara gambar dan teks */
+}
+
+.keunggulan {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* Susun elemen ke bawah */
+    justify-content: start;
+    color: white;
+    overflow: hidden;
+    /* Hindari blur keluar dari container */
+}
+
+.keunggulan::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/public/images/v287_3.png');
+    background-size: cover;
+    background-position: top;
+    /* Gambar menempel di atas */
+    filter: blur(3px);
+    /* Blur background */
+    z-index: -2;
+    /* Tetap di belakang */
+}
+
+.keunggulan::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 223, 0, 0.3);
+    /* Overlay kuning */
+    z-index: -1;
+    /* Di atas background blur */
+}
+
+.galeri-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.galeri-img-small {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.garis-bawah {
+    display: block;
+    width: 240px;
+    /* Panjang garis */
+    height: 3px;
+    /* Ketebalan garis */
+    background-color: var(--primary-color);
+    /* Warna garis */
+    margin: 5px auto 0;
+    /* Pusatkan garis */
+}
+
+.gambar-atas {
+    position: absolute;
+    top: -50px;
+    /* Sesuaikan agar gambar naik */
+    width: 100px;
+    /* Sesuaikan ukuran gambar */
+    height: auto;
+}
+
+.muthawif {
+    position: relative;
+    /* Agar elemen di dalamnya bisa diatur absolut */
+    overflow: hidden;
+    /* Hindari background keluar */
+    background: url('/public/images/v160_99.png') center/cover no-repeat;
+}
+
+.muthawif::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(71, 71, 71, 0.361);
+    z-index: 1;
+}
+
+.muthawif .image-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/public/images/v160_99.png') center/cover no-repeat;
+    filter: blur(2px);
+    /* Tambahkan efek blur pada gambar */
+    z-index: 1;
+    /* Di bawah elemen teks */
+}
+
+.card-img-top {
+    position: relative;
+    /* Tetap di atas */
+    z-index: 2;
+    /* Pastikan gambar tidak tertutup */
+}
+
+.muthawif-body {
+    position: relative;
+    z-index: 3;
+    background-color: var(--tertinary-color);
+    /* Warna abu-abu transparan */
+}
+
+.garis-bawah-galeri {
+    display: block;
+    width: 470px;
+    /* Panjang garis */
+    height: 3px;
+    /* Ketebalan garis */
+    background-color: var(--primary-color);
+}
+
+.galeri-bawah {
+    display: block;
+    width: 100%;
+    /* Panjang garis */
+    height: 3px;
+    /* Ketebalan garis */
+    background-color: var(--primary-color);
+    margin-top: 5%;
+}
+
+.paket-haji {
+    position: relative;
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* Susun elemen ke bawah */
+    justify-content: start;
+    color: white;
+    overflow: hidden;
+    /* Hindari blur keluar dari container */
+}
+
+.paket-haji::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/public/images/MadinahPic.png');
+    /* Memutar gambar 90 derajat */
+    background-size: cover;
+    background-position: center;
+    /* Gambar menempel di atas */
+    filter: blur(3px);
+    /* Blur background */
+    z-index: -2;
+    /* Tetap di belakang */
+}
+
+.paket-haji::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    /* Overlay kuning */
+    z-index: -1;
+    /* Di atas background blur */
+}
+
+.garis-bawah-paket {
+    display: block;
+    width: 240px;
+    /* Panjang garis */
+    height: 3px;
+    /* Ketebalan garis */
+    background-color: var(--for-color);
+    /* Warna garis */
+    margin: 20px auto 0;
+    /* Pusatkan garis */
+}
+
+.garis-bawah-fasilitas {
+    display: block;
+    width: 275px;
+    /* Panjang garis */
+    height: 3px;
+    /* Ketebalan garis */
+    background-color: var(--primary-color);
+    /* Warna garis */
+    margin: 10px auto 70px;
+    /* Pusatkan garis */
+}
+
+.btn {
+    width: 150px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.garis-bawah-qanda {
+    display: block;
+    width: 420px;
+    /* Panjang garis */
+    height: 3px;
+    /* Ketebalan garis */
+    background-color: var(--primary-color)
+}
+
+
+@media (min-width: 1400px) {
+    #tanya-card {
+        margin-top: 27px;
+    }
+    .galeri-img {
+        height: 350px;
+    }
+    .galeri-img-small {
+        height: 170px;
+    }
+}
+
+@media (max-width:1200px) {
+    .container-card-highlight {
+        width: 100%;
+    }
+    .card-highlight .dua {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 414px) {
+    .mobile-card--highlight-container {
+        flex-direction: column;
+        /* Ubah dari row ke column */
+        align-items: center;
+        /* Tengahkan setiap card */
+        flex-wrap: wrap;
+    }
+    .container-card-highlight .col-4 {
+        width: 100%;
+        /* Supaya setiap card full width di mobile */
+    }
+    .card-highlight {
+        width: 100%;
+        /* Jangan terlalu kecil */
+        height: auto;
+        /* Sesuaikan tinggi */
+        text-align: center;
+        /* Tengahin teks */
+        padding: 10px;
+    }
+    .card-highlight .dua {
+        margin-top: 0;
+    }
+    .card-highlight .card-title {
+        font-size: 10px;
+        /* Ubah ukuran font */
+    }
+    .card-highlight .card-text {
+        font-size: 8px;
+    }
+    .header-sudah-siap {
+        font-size: 20px !important;
+        text-align: center;
+        margin-bottom: 40px !important;
+    }
+    .sudah-siap .col-md-7,
+    .col-md-5,
+    .col-md-6 {
+        width: 100% !important;
+        /* Paksa elemen menjadi full width */
+    }
+    .sudah-siap .col-md-7 div {
+        margin-left: 0 !important;
+        /* Hilangkan margin kiri */
+        margin-bottom: 5% !important;
+        /* Kurangi margin bawah */
+    }
+    .sudah-siap .col-md-5 img,
+    .col-md-6 img {
+        width: 100% !important;
+        /* Gambar jadi full width */
+        height: auto !important;
+        /* Sesuaikan tinggi */
+    }
+    .sudah-siap .row {
+        flex-direction: column;
+        /* Susun elemen jadi satu kolom */
+        align-items: center !important;
+        /* Tengahin semua item */
+    }
+    .sudah-siap .icon-text {
+        flex-direction: row !important;
+        /* Supaya icon tetap di samping teks */
+        justify-content: center;
+        align-items: center;
+    }
+    .sudah-siap .icon-text img {
+        margin-right: 10px;
+    }
+    .mbl-img-none {
+        display: none;
+    }
+    .sudah-siap .icon-text .img {
+        margin-top: -20px;
+    }
+}

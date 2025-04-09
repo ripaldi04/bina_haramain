@@ -1,0 +1,28 @@
+body{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    background-color: #f0f0f0;
+}
+.container-history {
+    max-width: 1300px; /* Atur sesuai kebutuhan */
+    margin: 0 auto;
+}
+.card {
+    border-radius: 5px;
+}
+.search-box {
+    max-width: 300px; /* Sesuaikan ukuran sesuai kebutuhan */
+    margin: 0 auto;
+    margin-left: -1px;
+}
+
+.input-group-text {
+    background-color: #f0f0f0; /* Warna background icon */
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+    box-shadow: none;
+}

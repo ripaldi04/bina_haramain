@@ -332,6 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeModalButtons = document.querySelectorAll(".close-modal, .modal .btn-close");
     const editName = document.getElementById("editName");
     const editEmail = document.getElementById("editEmail");
+    const editReferral = document.getElementById("editReferral");
     const saveChanges = document.getElementById("saveChanges");
 
     let currentRow = null; // Untuk menyimpan referensi baris yang sedang diedit
@@ -344,10 +345,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Ambil data dari baris yang dipilih
             const name = row.cells[1].textContent;
-            const email = row.cells[2].textContent; // Pisahkan email & phone
+            const email = row.cells[2].textContent;
+            const referral = row.cells[3].textContent;
 
             editName.value = name;
             editEmail.value = email; // Email
+            editReferral.value = referral;
 
             // Tampilkan modal edit
             editModal.show();
@@ -363,18 +366,76 @@ document.addEventListener("DOMContentLoaded", function () {
     // Simpan perubahan setelah edit
     saveChanges.addEventListener("click", function () {
         if (currentRow) {
-            currentRow.cells[1].textContent = editName.value;
-            currentRow.cells[2].textContent = editEmail.value;
+            // Ambil id row yang sedang diedit
+            const rowId = currentRow.dataset.rowId; // Pastikan Anda memberikan data-row-id pada <tr>
 
-            // Tutup modal setelah menyimpan
-            editModal.hide();
+            // Ambil data baru dari form
+            const newName = editName.value;
+            const newEmail = editEmail.value;
+
+            // Update data pada baris tabel
+            currentRow.cells[1].textContent = newName;
+            currentRow.cells[2].textContent = newEmail;
+
+            // Kirim data perubahan menggunakan AJAX
+            fetch('/update-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token
+                },
+                body: JSON.stringify({
+                    id: rowId,           // ID pengguna yang diedit
+                    name: newName,       // Nama baru
+                    email: newEmail,      // Email baru
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Update data di baris tabel setelah berhasil
+                        currentRow.cells[1].textContent = newName;
+                        currentRow.cells[2].textContent = newEmail;
+
+                        // Tutup modal setelah berhasil
+                        editModal.hide();
+
+                        // SweetAlert sukses
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'user berhasil di update!',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'user gagal di update.',
+                            icon: 'error',
+                            confirmButtonText: 'Try Again'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Something went wrong.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
         }
     });
+
 
     // Event listener untuk ikon hapus
     tableBody.addEventListener("click", function (event) {
         if (event.target.classList.contains("fa-trash")) {
             const row = event.target.closest("tr");
+
+            // Ambil id pengguna yang akan dihapus (misalnya menggunakan data-row-id)
+            const rowId = row.dataset.rowId;
 
             Swal.fire({
                 title: "Apakah Anda yakin?",
@@ -386,8 +447,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 confirmButtonText: "Ya, hapus!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    row.remove();
-                    Swal.fire("Dihapus!", "Data telah berhasil dihapus.", "success");
+                    // Kirim permintaan untuk menghapus data
+                    fetch(`/delete-user/${rowId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token
+                        },
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);  // Untuk memastikan respons yang dikirimkan
+                            if (data.status === 'success') {
+                                // Hapus baris dari tabel setelah berhasil dihapus
+                                row.remove();
+
+                                // Tampilkan SweetAlert sukses
+                                Swal.fire("Dihapus!", "Data telah berhasil dihapus.", "success");
+                            } else {
+                                Swal.fire({
+                                    title: 'Gagal!',
+                                    text: 'Gagal menghapus data.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Coba Lagi'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Terjadi kesalahan saat menghapus data.',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        });
                 }
             });
         }

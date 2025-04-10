@@ -84,6 +84,9 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 
 Route::get('/admin/user', [AdminController::class, 'index']);
 
+Route::post('/update-user', [AdminController::class, 'updateUser'])->name('update.user');
+Route::delete('/delete-user/{id}', [AdminController::class, 'destroy']);
+
 
 Route::get('/admin/affiliate', function () {
     return view('pages.admin.admin_affiliate');

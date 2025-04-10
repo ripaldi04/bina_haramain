@@ -63,9 +63,14 @@
                                         <label for="editEmail" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="editEmail">
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="editReferral" class="form-label">Kode Referral</label>
+                                        <input type="text" class="form-control" id="editReferral" readonly>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary close-modal" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary close-modal"
+                                        data-bs-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
                                 </div>
                             </div>
@@ -135,6 +140,7 @@
                                 <th><input type="checkbox" id="selectAll"></th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Kode Referral</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -145,6 +151,7 @@
                                     <td><input type="checkbox" class="rowCheckbox"></td>
                                     <td>{{ $user->name }}</td> <!-- Menampilkan nama user -->
                                     <td>{{ $user->email }}</td> <!-- Menampilkan email user -->
+                                    <td>{{ $user->kode_referral }}</td>
                                     <td>
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
                                         <i class="fas fa-trash text-danger cursor-pointer"></i>

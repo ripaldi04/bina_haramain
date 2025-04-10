@@ -3,7 +3,7 @@
 @section('title', 'Hubungi Kami')
 
 @section('style')
-    @vite(['resources/css/hubungi_kami.css'])
+    @vite(['resources/css/user/hubungi_kami.css'])
 @endsection
 
 @section('content')

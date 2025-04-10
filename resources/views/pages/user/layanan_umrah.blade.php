@@ -3,7 +3,7 @@
 @section('title', 'Layanan Umrah')
 
 @section('style')
-    @vite(['resources/css/layanan_umrah.css'])
+    @vite(['resources/css/user/layanan_umrah.css'])
 @endsection
 
 @section('content')

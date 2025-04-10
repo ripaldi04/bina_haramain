@@ -3,7 +3,7 @@
 @section('title', 'Haji Bintang 3')
 
 @section('style')
-    @vite(['resources/css/detailb3_layanan_haji.css'])
+    @vite(['resources/css/user/detailb3_layanan_haji.css'])
 @endsection
 
 @section('content')

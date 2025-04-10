@@ -3,7 +3,7 @@
 @section('title', 'Beranda')
 
 @section('style')
-    @vite(['resources/css/home.css'])
+    @vite(['resources/css/user/home.css'])
 @endsection
 
 @section('script')

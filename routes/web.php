@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -79,3 +80,23 @@ Route::get('/riwayat', function () {
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
+
+Route::get('/admin/user', [AdminController::class, 'index']);
+
+
+Route::get('/admin/affiliate', function () {
+    return view('pages.admin.admin_affiliate');
+})->name('admin_affiliate');
+
+Route::get('/admin/jamaah', function () {
+    return view('pages.admin.admin_jamaah');
+})->name('admin_jamaah');
+
+Route::get('/admin/paket', function () {
+    return view('pages.admin.admin_paket');
+})->name('admin_paket');
+
+Route::get('/admin/agen', function () {
+    return view('pages.admin.admin_agen');
+})->name('admin_agen');

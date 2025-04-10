@@ -3,7 +3,7 @@
 @section('title', 'Riwayat')
 
 @section('style')
-    @vite(['resources/css/riwayat.css'])
+    @vite(['resources/css/user/riwayat.css'])
 @endsection
 
 @section('content')

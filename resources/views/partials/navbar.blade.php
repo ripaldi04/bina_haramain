@@ -1,3 +1,7 @@
+@section('script')
+    @vite(['resources/js/alert.js'])
+@endsection
+
 <nav class="navbar navbar-expand-lg bg-white">
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -11,7 +15,8 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Beranda</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="layananDropdown" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="layananDropdown" role="button"
+                        data-bs-toggle="dropdown">
                         Layanan
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="layananDropdown">
@@ -37,9 +42,9 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item" href="{{ route('profile') }}">Profil Saya</a></li>
                     <li>
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button class="dropdown-item" type="submit">Keluar</button>
+                            <button type="button" id="logout-confirm" class="dropdown-item">Keluar</button>
                         </form>
                     </li>
                 </ul>

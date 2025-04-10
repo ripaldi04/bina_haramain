@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('pages.user.home');
+    return view('pages.user.home')->with('success', 'Selamat datang di halaman beranda!');
 })->name('home');
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
@@ -50,13 +50,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login.proses');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::post('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-    return redirect('/login');
-})->name('logout');
 
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 

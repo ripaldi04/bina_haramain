@@ -6,12 +6,25 @@
     @vite(['resources/css/home.css'])
 @endsection
 
+@section('script')
+    @vite(['resources/js/alert.js'])
+@endsection
+
 @section('content')
-
-
     <div class="hero-section bg-light">
         <div class="container">
             <div class="row d-flex align-items-center justify-content-evenly px-3 py-5">
+                @if (session('success'))
+                    <meta name="success-message" content="{{ session('success') }}">
+                @endif
+
+                @if (session('error'))
+                    <div id="error-message" data-message="{{ session('error') }}"></div>
+                @endif
+
+                @foreach ($errors->all() as $error)
+                    <div class="error-list" data-message="{{ $error }}"></div>
+                @endforeach
 
                 <!-- Teks utama (Desktop) -->
                 <div class="col-md-6 text-md-start d-none d-md-block">

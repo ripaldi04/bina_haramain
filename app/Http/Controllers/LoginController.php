@@ -36,6 +36,7 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ]);
+        return redirect()->intended('/')->with('success', 'Berhasil login, selamat datang!');
     }
 
     public function logout(Request $request)
@@ -44,6 +45,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login')->with('success', 'Berhasil logout');;
     }
 }

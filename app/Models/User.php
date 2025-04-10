@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'kode_referral',
     ];
 
     /**
@@ -45,4 +47,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Automatically generate a unique referral code when creating a new user.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            do {
+                $kode = strtoupper(Str::random(6)); // Contoh: A1B2C3
+            } while (User::where('kode_referral', $kode)->exists());
+
+            $user->kode_referral = $kode;
+        });
+    }
 }
+

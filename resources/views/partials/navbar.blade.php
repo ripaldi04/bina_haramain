@@ -6,24 +6,44 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{{route ('home')}}">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Beranda</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="layananDropdown" role="button"
-                        data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="layananDropdown" role="button" data-bs-toggle="dropdown">
                         Layanan
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="layananDropdown">
                         <li><a class="dropdown-item" href="{{ route('layanan_haji') }}">Layanan Haji</a></li>
-                        <li><a class="dropdown-item" href="{{route ('layanan_umrah')}}">Layanan Umrah</a></li>
-                        <li><a class="dropdown-item" href="{{route('riwayat')}}">Riwayat Pesanan</a></li>
+                        <li><a class="dropdown-item" href="{{ route('layanan_umrah') }}">Layanan Umrah</a></li>
+                        <li><a class="dropdown-item" href="{{ route('riwayat') }}">Riwayat Pesanan</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{route('hubungi_kami')}}">Hubungi Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('hubungi_kami') }}">Hubungi Kami</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Tentang Kami</a></li>
             </ul>
         </div>
-        <a href="{{asset ('register')}}" class="btn btn-auth">Masuk/Registrasi</a>
+
+        {{-- Auth Section --}}
+        @guest
+            <a href="{{ route('register') }}" class="btn btn-auth">Masuk/Registrasi</a>
+        @else
+            <div class="dropdown">
+                <a href="#" class="btn btn-auth dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle"></i> {{-- Bootstrap Icons --}}
+                    {{ Auth::user()->name }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profil Saya</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="dropdown-item" type="submit">Keluar</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        @endguest
     </div>
 </nav>

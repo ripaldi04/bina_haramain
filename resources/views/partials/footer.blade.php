@@ -1,7 +1,6 @@
 <footer style="margin-top: 5%; background-image: url('{{ asset('images/v240_335.png') }}'); height: 700px;">
-    <div class="container" style="margin-top: -26%;">
-        <img src="{{ asset('images/Logo Bina Haramain Baru.png') }}" alt="" width="171px"
-            style="margin-top: 40%;">
+    <div class="container">
+        <img src="{{ asset('images/Logo Bina Haramain Baru.png') }}" alt="" width="151px">
         <hr class="garis-bawah-footer">
         </hr>
         <div class="row">

@@ -23,7 +23,7 @@
 <body>
 
     @include('pages.admin.partials.sidebar')
-
+    
     <main>
         @yield('content')
     </main>

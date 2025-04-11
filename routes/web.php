@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -82,10 +82,13 @@ Route::get('/register', [RegisterController::class, 'showForm'])->name('register
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 
-Route::get('/admin/user', [AdminController::class, 'index']);
+Route::resource('/admin/users', AdminUserController::class)->names([
+    'index' => 'admin.users.index',
+    'store' => 'admin.users.store',
+    'update' => 'admin.users.update',
+    'destroy' => 'admin.users.destroy',
+]);
 
-Route::post('/update-user', [AdminController::class, 'updateUser'])->name('update.user');
-Route::delete('/delete-user/{id}', [AdminController::class, 'destroy']);
 
 
 Route::get('/admin/affiliate', function () {

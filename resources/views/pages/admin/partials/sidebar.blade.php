@@ -1,11 +1,7 @@
-@section('script')
-    @vite(['resources/js/admin/admin.js'])
-@endsection
-
 <div class="bg-white shadow p-3 d-flex flex-column min-vh-100 sidebar">
     <div class="text-center pb-3">
-        <img src="https://binaharamain.com/wp-content/uploads/2025/01/Logo-Bina-Haramain-Baru-1024x872.png"
-            alt="Logo" width="80">
+        <img src="https://binaharamain.com/wp-content/uploads/2025/01/Logo-Bina-Haramain-Baru-1024x872.png" alt="Logo"
+            width="80">
     </div>
     <h5 class="text-secondary mt-3 px-3">MAIN MENU</h5>
     <ul class="list-unstyled flex-grow-1">

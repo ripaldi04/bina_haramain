@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('script')
-    @vite(['resources/js/admin/admin.js', 'resources/js/admin/partials/sidebar.js'])
+    @vite(['resources/js/admin/partials/sidebar.js'])
 @endsection
 
 @section('content')

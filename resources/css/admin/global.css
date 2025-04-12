@@ -68,7 +68,7 @@ th:first-child, td:first-child {
 /* /tabel data pemesan/ */
 /* Agar tabel tidak melebar melebihi container */
 .table {
-    table-layout: fixed;
+    table-layout: auto;
     width: 100%;
     word-wrap: break-word;
 }
@@ -79,13 +79,19 @@ th:nth-child(6), td:nth-child(6) {
     overflow-wrap: break-word;
     white-space: normal;
 }
+/* Mengatur agar teks panjang di dalam tabel bisa terbungkus */
+.text-wrap {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Memastikan teks di dalam td bisa membungkus ke baris berikutnya */
+}
 
 
 
 /* /tabel paket/ */
 /* Agar tabel tidak melebar melebihi container */
 .table {
-    table-layout: fixed;
+    table-layout: auto;
     width: 100%;
     word-wrap: break-word;
 }

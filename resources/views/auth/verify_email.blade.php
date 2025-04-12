@@ -3,7 +3,7 @@
 @section('title', 'Verifikasi Email')
 
 @section('style')
-    @vite(['resources/css/register.css']) {{-- Menggunakan style register --}}
+    @vite(['resources/css/user/register.css']) {{-- Menggunakan style register --}}
 @endsection
 
 @section('content')

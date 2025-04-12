@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const activeElement = document.getElementById(activeMenu);
         if (activeElement) {
             activeElement.classList.add("active");
+        } else {
+            // Jika tidak ada menu aktif di localStorage, set menu pertama (misalnya "menuUser") sebagai aktif
+            menuItems[0].classList.add("active");
+            localStorage.setItem("activeMenu", menuItems[0].id);
         }
     }
 
@@ -30,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let route = "";
             switch (this.id) {
                 case "menuUser":
-                    route = "/admin/user";
+                    route = "/admin/users";
                     break;
                 case "menuAgen":
                     route = "/admin/agen";

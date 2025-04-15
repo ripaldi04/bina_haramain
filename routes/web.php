@@ -105,6 +105,10 @@ Route::get('/admin/paket', function () {
     return view('pages.admin.admin_paket');
 })->name('admin_paket');
 
+Route::prefix('admin')->group(function () {
+    Route::resource('paket', App\Http\Controllers\PaketController::class);
+});
+
 Route::get('/admin/agen', function () {
     return view('pages.admin.admin_agen');
 })->name('admin_agen');

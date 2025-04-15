@@ -7,30 +7,6 @@
 @section('content')
     <div class="bg-light">
         <div class="d-flex">
-            <!-- Sidebar -->
-            <div class="bg-white shadow p-3 d-flex flex-column min-vh-100 sidebar">
-                <div class="text-center pb-3">
-                    <img src="https://binaharamain.com/wp-content/uploads/2025/01/Logo-Bina-Haramain-Baru-1024x872.png"
-                        alt="Logo" width="80">
-                </div>
-                <h5 class="text-secondary mt-3 px-3">MAIN MENU</h5>
-                <ul class="list-unstyled flex-grow-1">
-                    <li id="menuUser" class="p-2 text-dark menu-item active"><i class="fas fa-user me-2"></i> User</li>
-                    <li id="menuAgen" class="p-2 text-dark menu-item"><i class="fas fa-users me-2"></i> Agen</li>
-                    <li id="menuAffiliate" class="p-2 text-dark menu-item"><i class="fas fa-handshake me-2"></i> Affiliate
-                    </li>
-                    <li id="menuJamaah" class="p-2 text-dark menu-item"><i class="fas fa-user-shield me-2"></i> Data Pemesan
-                    </li>
-                    <li id="menuPaket" class="p-2 text-dark menu-item"><i class="fas fa-plane me-2"></i> Paket Umrah & Haji
-                    </li>
-                </ul>
-                <div class="mt-auto">
-                    <button class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sign-out-alt me-2"></i> Log out
-                    </button>
-                </div>
-            </div>
-
             <!-- Main Content -->
             <div class="container-fluid p-4">
                 <div class="d-flex justify-content-end align-items-center mb-4">
@@ -112,8 +88,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button type="button" class="btn btn-primary" id="savePaket">Simpan</button>
                                 </div>
                             </div>
@@ -192,57 +167,28 @@
                             </tr>
                         </thead>
                         <tbody id="tableBody">
-                            <tr data-row-id="1">
-                                <td><input type="checkbox" class="rowCheckbox"></td>
-                                <td>
-                                    <img src="https://binaharamain.com/wp-content/uploads/2024/10/Haji-2025-Bintang-4-768x768.jpeg"
-                                        alt="gambar" width="100" class="clickable-image" style="cursor: pointer;">
-                                </td>
-                                <td>Haji Furoda</td>
-                                <td style="text-align: left;"> - Hotel Makkah (Nada Deafah/Setaraf)
-                                    <br>- Hotel Madinah (Almukhtara Gorbi/Setaraf)
-                                    <br>- Hotel Aziziyah Al Hidayah Tower (Fly Nas)
-                                    <br>- Pesawat Internasional PP Start Jkt
-                                    <br>- aktab Arafah
-                                    <br>- Maktab Mina Fly Nas Zona A
-                                    <br>- Bus ber-AC selama di Saudi
-                                    <br>- Handling Bandara di Indonesia & Saudi
-                                    <br>- Bimbingan Secara Intensif
-                                    <br>- Makan Pagi, Siang, & Malam
-                                    <br>- Sertifikat Haji
-                                    <br>- Perlengkapan Haji
-                                </td>
-                                <td>$27.000</td>
-                                <td>
-                                    <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
-                                    <i class="fas fa-trash text-danger cursor-pointer"></i>
-                                </td>
-                            </tr>
-                            <tr data-row-id="2">
-                                <td><input type="checkbox" class="rowCheckbox"></td>
-                                <td>
-                                    <img src="https://binaharamain.com/wp-content/uploads/2024/10/Haji-2025-Bintang-4-768x768.jpeg"
-                                        alt="gambar" width="100" class="clickable-image" style="cursor: pointer;">
-                                </td>
-                                <td>Haji Plus</td>
-                                <td style="text-align: left;"> - Hotel Makkah (Nada Deafah/Setaraf)
-                                    <br>- Hotel Madinah (Almukhtara Gorbi/Setaraf)
-                                    <br>- Hotel Aziziyah Al Hidayah Tower (Fly Nas)
-                                    <br>- Pesawat Internasional PP Start Jkt
-                                    <br>- aktab Arafah
-                                    <br>- Maktab Mina Fly Nas Zona A
-                                    <br>- Bus ber-AC selama di Saudi
-                                    <br>- Handling Bandara di Indonesia & Saudi
-                                    <br>- Bimbingan Secara Intensif
-                                    <br>- Makan Pagi, Siang, & Malam
-                                    <br>- Sertifikat Haji
-                                    <br>- Perlengkapan Haji
-                                </td>
-                                <td>$20.000</td>
-                                <td>
-                                    <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
-                                    <i class="fas fa-trash text-danger cursor-pointer"></i>
-                                </td>
+                            @foreach ($paket as $paket)
+                                <tr data-row-id="{{ $paket->id }}">
+                                    <td><input type="checkbox" class="rowCheckbox"></td>
+                                    <td>
+                                        <img src="{{ asset('storage/' . $paket->gambar) }}" alt="gambar" width="100"
+                                            class="clickable-image" style="cursor: pointer;">
+                                    </td>
+                                    <td>{{ $paket->nama_paket }}</td>
+                                    <td style="text-align: left;">
+                                        - Hotel Makkah: {{ $paket->hotel_mekkah }}<br>
+                                        - Hotel Madinah: {{ $paket->hotel_madinah }}<br>
+                                        - Maskapai: {{ $paket->maskapai }}<br>
+                                        - Keberangkata: {{ $paket->keberangkatan }}<br>
+                                        - Bandara: {{ $paket->bandara }}<br>
+                                    </td>
+                                    <td>${{ $paket->harga }}</td>
+                                    <td>
+                                        <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
+                                        <i class="fas fa-trash text-danger cursor-pointer"></i>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\AdminPaketController;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -101,9 +102,14 @@ Route::get('/admin/jamaah', function () {
     return view('pages.admin.admin_jamaah');
 })->name('admin_jamaah');
 
-Route::get('/admin/paket', function () {
-    return view('pages.admin.admin_paket');
-})->name('admin_paket');
+Route::prefix('admin')->group(function () {
+    Route::get('/paket', [AdminPaketController::class, 'index'])->name('admin_paket');
+    Route::get('/paket/data', [AdminPaketController::class, 'getData']);
+    Route::post('/paket/store', [AdminPaketController::class, 'store'])->name('paket.store');
+    Route::post('/paket/update/{id}', [AdminPaketController::class, 'update']);
+    Route::delete('/paket/delete/{id}', [AdminPaketController::class, 'destroy']);
+    Route::post('/paket/delete-multiple', [AdminPaketController::class, 'destroyMultiple']);
+});
 
 Route::get('/admin/agen', function () {
     return view('pages.admin.admin_agen');

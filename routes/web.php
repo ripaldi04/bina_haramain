@@ -103,6 +103,10 @@ Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin_paket
 Route::post('/admin/paket', [PaketController::class, 'store'])->name('paket.store');
 Route::get('/admin/paket/{id}/edit', [PaketController::class, 'edit'])->name('paket.edit');
 Route::put('/admin/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
+Route::delete('/admin/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+Route::delete('/admin/paket/hapus-semua', [PaketController::class, 'destroyAll'])->name('paket.destroyAll');
+
+
 
 
 Route::get('/admin/agen', function () {

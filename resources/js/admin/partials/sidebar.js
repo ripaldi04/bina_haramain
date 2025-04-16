@@ -56,3 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+$(document).ready(function () {
+    // Set csrf token globally untuk semua AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    // Script lainnya untuk AJAX
+});

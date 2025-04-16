@@ -25,6 +25,8 @@ $(document).ready(function () {
                 $('#addPaketModal').modal('hide');
                 alert("Paket berhasil ditambahkan!");
                 // Tambahkan aksi reload tabel atau refresh daftar paket jika ada
+                location.reload();  // Ini akan me-refresh halaman dan menampilkan paket yang baru ditambahkan
+
             },
             error: function (xhr) {
                 $('#savePaket').prop('disabled', false).text('Simpan');
@@ -100,5 +102,31 @@ $(document).ready(function () {
                 console.error(xhr.responseText);
             }
         });
+    });
+});
+
+$(document).ready(function () {
+    // Event listener untuk klik tombol delete
+    $('.delete-paket').on('click', function () {
+        var paketId = $(this).data('id'); // Ambil ID dari atribut data-id
+
+        // Konfirmasi hapus
+        if (confirm('Apakah Anda yakin ingin menghapus paket ini?')) {
+            $.ajax({
+                url: '/admin/paket/' + paketId,  // URL ke route destroy
+                method: 'DELETE',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'), // Kirim token CSRF
+                },
+                success: function (response) {
+                    // Hapus baris tabel
+                    $('tr[data-row-id="' + paketId + '"]').remove();
+                    alert('Paket berhasil dihapus!');
+                },
+                error: function (error) {
+                    alert('Gagal menghapus paket!');
+                }
+            });
+        }
     });
 });

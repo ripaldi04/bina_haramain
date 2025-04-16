@@ -246,7 +246,8 @@
                                             data-hotel-madinah="{{ $paket->hotel_madinah }}"
                                             data-maskapai="{{ $paket->maskapai }}" data-bandara="{{ $paket->bandara }}"
                                             data-harga="{{ $paket->harga }}" data-gambar="{{ $paket->gambar }}"></i>
-                                        <i class="fas fa-trash text-danger cursor-pointer"></i>
+                                        <i class="fas fa-trash text-danger cursor-pointer delete-paket"
+                                            data-id="{{ $paket->id }}"></i>
                                     </td>
                                 </tr>
                             @endforeach

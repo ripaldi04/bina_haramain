@@ -6,6 +6,7 @@ use App\Http\Controllers\LandingBannerController;
 use App\Http\Controllers\AdminLandingPageController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PaketController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserController;
@@ -80,9 +81,6 @@ Route::get('/riwayat', function () {
     return view('pages.user.riwayat');
 })->name('riwayat');
 
-Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
-
 
 Route::resource('/admin/users', AdminUserController::class)->names([
     'index' => 'admin.users.index',
@@ -101,13 +99,8 @@ Route::get('/admin/jamaah', function () {
     return view('pages.admin.admin_jamaah');
 })->name('admin_jamaah');
 
-Route::get('/admin/paket', function () {
-    return view('pages.admin.admin_paket');
-})->name('admin_paket');
-
-Route::prefix('admin')->group(function () {
-    Route::resource('paket', App\Http\Controllers\PaketController::class);
-});
+Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin_paket');
+Route::post('/admin/paket', [PaketController::class, 'store'])->name('paket.store');
 
 Route::get('/admin/agen', function () {
     return view('pages.admin.admin_agen');

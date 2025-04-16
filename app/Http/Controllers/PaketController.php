@@ -33,8 +33,35 @@ class PaketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'nama_paket' => 'required|string',
+            'hotel_mekkah' => 'required|string',
+            'hotel_madinah' => 'required|string',
+            'maskapai' => 'required|string',
+            'bandara' => 'required|string',
+            'harga' => 'required|numeric',
+            'jenis' => 'required|string',
+            'keberangkatan' => 'required|date',
+        ]);
+    
+        $path = $request->file('gambar')->store('paket', 'public');
+    
+        Paket::create([
+            'gambar' => $path,
+            'nama_paket' => $request->nama_paket,
+            'hotel_mekkah' => $request->hotel_mekkah,
+            'hotel_madinah' => $request->hotel_madinah,
+            'maskapai' => $request->maskapai,
+            'bandara' => $request->bandara,
+            'harga' => $request->harga,
+            'jenis' => $request->jenis, // default
+            'keberangkatan' => $request->keberangkatan,
+        ]);
+    
+        return redirect()->route('admin_paket')->with('success', 'Paket berhasil ditambahkan!');
     }
+    
 
     /**
      * Display the specified resource.

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('script')
-    @vite(['resources/js/admin/partials/sidebar.js'])
+    @vite(['resources/js/admin/partials/sidebar.js', 'resources/js/admin/admin_paket.js'])
 @endsection
 
 @section('content')
@@ -43,55 +43,76 @@
                     <div class="modal fade" id="addPaketModal" tabindex="-1" aria-labelledby="addPaketModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addPaketModalLabel">Tambah Paket Baru</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                            <form id="formTambahPaket" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" id="paketStoreUrl" value="{{ route('paket.store') }}">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addPaketModalLabel">Tambah Paket Baru</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="paketGambar" class="form-label">Gambar Paket</label>
+                                            <input type="file" class="form-control" id="paketGambar" name="gambar"
+                                                accept="image/*" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketNama" class="form-label">Nama Paket</label>
+                                            <input type="text" class="form-control" id="paketNama" name="nama_paket"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketJenis" class="form-label">Jenis Paket</label>
+                                            <select class="form-control" id="paketJenis" name="jenis" required>
+                                                <option value="haji">Haji</option>
+                                                <option value="umrah">Umrah</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketKeberangkatan" class="form-label">Keberangkatan</label>
+                                            <input type="date" class="form-control" id="paketKeberangkatan"
+                                                name="keberangkatan" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketHotelMakkah" class="form-label">Hotel Makkah</label>
+                                            <input class="form-control" id="paketHotelMakkah" name="hotel_mekkah" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketHotelMadinah" class="form-label">Hotel Madinah</label>
+                                            <input class="form-control" id="paketHotelMadinah" name="hotel_madinah"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketMaskapai" class="form-label">Maskapai</label>
+                                            <input class="form-control" id="paketMaskapai" name="maskapai" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketBandara" class="form-label">Bandara</label>
+                                            <input class="form-control" id="paketBandara" name="bandara" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="paketHarga" class="form-label">Harga</label>
+                                            <input type="text" class="form-control" id="paketHarga" name="harga"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary" id="savePaket">Simpan</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <label for="paketGambar" class="form-label">Gambar Paket</label>
-                                        <input type="file" class="form-control" id="paketGambar" accept="image/*">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketNama" class="form-label">Nama Paket</label>
-                                        <input type="text" class="form-control" id="paketNama" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketHotelMakkah" class="form-label">Hotel Makkah</label>
-                                        <input class="form-control" id="paketHotelMakkah" required></input>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketHotelMadinah" class="form-label">Hotel Madinah</label>
-                                        <input class="form-control" id="paketHotelMadinah" required></input>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketMaskapai" class="form-label">Maskapai</label>
-                                        <input class="form-control" id="paketMaskapai" required></input>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketMaktab" class="form-label">Maktab</label>
-                                        <input class="form-control" id="paketMaktab" required></input>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketHandlingBandara" class="form-label">Handling Bandara</label>
-                                        <input class="form-control" id="paketHandlingBandara" required></input>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketMakan" class="form-label">Makan</label>
-                                        <input class="form-control" id="paketMakan" required></input>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="paketHarga" class="form-label">Harga</label>
-                                        <input type="text" class="form-control" id="paketHarga" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    <button type="button" class="btn btn-primary" id="savePaket">Simpan</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
 

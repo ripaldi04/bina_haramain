@@ -122,7 +122,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalLabel">Edit User</h5>
+                                    <h5 class="modal-title" id="editModalLabel">Edit Paket</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -132,14 +132,45 @@
                                             style="max-height: 150px;" alt="Pratinjau Gambar">
                                         <input type="file" class="form-control" id="editGambar" accept="image/*">
                                     </div>
+
                                     <div class="mb-3">
-                                        <label for="editPaket" class="form-label">Paket</label>
-                                        <input type="email" class="form-control" id="editPaket">
+                                        <label for="editPaket" class="form-label">Nama Paket</label>
+                                        <input type="text" class="form-control" id="editPaket">
                                     </div>
+
                                     <div class="mb-3">
-                                        <label for="editFasilitas" class="form-label">Fasilitas</label>
-                                        <input type="text" class="form-control" id="editFasilitas">
+                                        <label for="editJenis" class="form-label">Jenis Paket</label>
+                                        <select class="form-control" id="editJenis">
+                                            <option value="haji">Haji</option>
+                                            <option value="umrah">Umrah</option>
+                                        </select>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label for="editKeberangkatan" class="form-label">Keberangkatan</label>
+                                        <input type="date" class="form-control" id="editKeberangkatan">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="editHotelMakkah" class="form-label">Hotel Makkah</label>
+                                        <input class="form-control" id="editHotelMakkah">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="editHotelMadinah" class="form-label">Hotel Madinah</label>
+                                        <input class="form-control" id="editHotelMadinah">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="editMaskapai" class="form-label">Maskapai</label>
+                                        <input class="form-control" id="editMaskapai">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="editBandara" class="form-label">Bandara</label>
+                                        <input class="form-control" id="editBandara">
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="editHarga" class="form-label">Harga</label>
                                         <input type="text" class="form-control" id="editHarga">
@@ -147,12 +178,14 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" class="btn btn-primary" id="saveChanges">Simpan
+                                        Perubahan</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
 
 
@@ -205,7 +238,14 @@
                                     </td>
                                     <td>${{ $paket->harga }}</td>
                                     <td>
-                                        <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
+                                        <i class="fas fa-edit text-primary me-2 cursor-pointer btn-edit"
+                                            data-id="{{ $paket->id }}" data-nama="{{ $paket->nama_paket }}"
+                                            data-jenis="{{ $paket->jenis }}"
+                                            data-keberangkatan="{{ $paket->keberangkatan }}"
+                                            data-hotel-mekkah="{{ $paket->hotel_mekkah }}"
+                                            data-hotel-madinah="{{ $paket->hotel_madinah }}"
+                                            data-maskapai="{{ $paket->maskapai }}" data-bandara="{{ $paket->bandara }}"
+                                            data-harga="{{ $paket->harga }}" data-gambar="{{ $paket->gambar }}"></i>
                                         <i class="fas fa-trash text-danger cursor-pointer"></i>
                                     </td>
                                 </tr>

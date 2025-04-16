@@ -101,6 +101,9 @@ Route::get('/admin/jamaah', function () {
 
 Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin_paket');
 Route::post('/admin/paket', [PaketController::class, 'store'])->name('paket.store');
+Route::get('/admin/paket/{id}/edit', [PaketController::class, 'edit'])->name('paket.edit');
+Route::put('/admin/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
+
 
 Route::get('/admin/agen', function () {
     return view('pages.admin.admin_agen');

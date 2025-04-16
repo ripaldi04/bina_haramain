@@ -76,7 +76,8 @@ class PaketController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $paket = Paket::findOrFail($id);
+        return response()->json($paket); // Untuk AJAX
     }
 
     /**
@@ -84,7 +85,37 @@ class PaketController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $paket = Paket::findOrFail($id);
+
+    $request->validate([
+        'nama_paket' => 'required|string',
+        'hotel_mekkah' => 'required|string',
+        'hotel_madinah' => 'required|string',
+        'maskapai' => 'required|string',
+        'bandara' => 'required|string',
+        'harga' => 'required|numeric',
+        'jenis' => 'required|string',
+        'keberangkatan' => 'required|date',
+    ]);
+
+    // Jika user upload gambar baru
+    if ($request->hasFile('gambar')) {
+        $path = $request->file('gambar')->store('images/paket', 'public');
+        $paket->gambar = $path;
+    }
+
+    $paket->update([
+        'nama_paket' => $request->nama_paket,
+        'hotel_mekkah' => $request->hotel_mekkah,
+        'hotel_madinah' => $request->hotel_madinah,
+        'maskapai' => $request->maskapai,
+        'bandara' => $request->bandara,
+        'harga' => $request->harga,
+        'jenis' => $request->jenis,
+        'keberangkatan' => $request->keberangkatan,
+    ]);
+
+    return redirect()->route('admin_paket')->with('success', 'Paket berhasil diperbarui!');
     }
 
     /**

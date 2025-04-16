@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\User\UserPaketController;
 
 
 Route::get('/', [LandingBannerController::class, 'index'])->name('home');
@@ -28,11 +29,11 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
     $user = User::findOrFail($id);
 
-    if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+    if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
         abort(403);
     }
 
-    if (! $user->hasVerifiedEmail()) {
+    if (!$user->hasVerifiedEmail()) {
         $user->markEmailAsVerified();
     }
 
@@ -57,9 +58,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-Route::get('/haji', function () {
-    return view('pages.user.layanan_haji');
-})->name('layanan_haji');
+Route::get('/haji', [UserPaketController::class, 'index'])->name('layanan_haji');
+
 
 Route::get('/haji/detail-bintang-tiga', function () {
     return view('pages.user.detailb3_layanan_haji');

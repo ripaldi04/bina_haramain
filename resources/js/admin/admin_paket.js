@@ -23,19 +23,28 @@ $(document).ready(function () {
                 $('#savePaket').prop('disabled', false).text('Simpan');
                 $('#formTambahPaket')[0].reset();
                 $('#addPaketModal').modal('hide');
-                alert("Paket berhasil ditambahkan!");
-                // Tambahkan aksi reload tabel atau refresh daftar paket jika ada
-                location.reload();  // Ini akan me-refresh halaman dan menampilkan paket yang baru ditambahkan
-
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Paket berhasil ditambahkan!',
+                    icon: 'success',
+                    showConfirmButton: true
+                }).then(() => {
+                    location.reload();
+                });
             },
             error: function (xhr) {
                 $('#savePaket').prop('disabled', false).text('Simpan');
                 let errors = xhr.responseJSON?.errors;
                 if (errors) {
                     let pesan = Object.values(errors).map(e => `- ${e[0]}`).join("\n");
-                    alert("Gagal menyimpan paket:\n" + pesan);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal menyimpan paket!',
+                        html: pesan
+                    });
                 } else {
-                    alert("Terjadi kesalahan. Coba lagi.");
+                    Swal.fire('Error!', 'Terjadi kesalahan. Coba lagi.', 'error');
                 }
             }
         });
@@ -95,10 +104,18 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                // Reload atau update row tertentu
-                location.reload();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Paket berhasil diperbarui.',
+                    icon: 'success',
+                    showConfirmButton: true
+                }).then(() => {
+                    location.reload();
+                });
             },
             error: function (xhr) {
+                Swal.fire('Gagal!', 'Terjadi kesalahan saat menyimpan perubahan.', 'error');
                 console.error(xhr.responseText);
             }
         });
@@ -111,22 +128,33 @@ $(document).ready(function () {
         var paketId = $(this).data('id'); // Ambil ID dari atribut data-id
 
         // Konfirmasi hapus
-        if (confirm('Apakah Anda yakin ingin menghapus paket ini?')) {
-            $.ajax({
-                url: '/admin/paket/' + paketId,  // URL ke route destroy
-                method: 'DELETE',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'), // Kirim token CSRF
-                },
-                success: function (response) {
-                    // Hapus baris tabel
-                    $('tr[data-row-id="' + paketId + '"]').remove();
-                    alert('Paket berhasil dihapus!');
-                },
-                error: function (error) {
-                    alert('Gagal menghapus paket!');
-                }
-            });
-        }
+        Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            text: "Data akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/admin/paket/' + paketId,  // URL ke route destroy
+                    method: 'DELETE',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'), // Kirim token CSRF
+                    },
+                    success: function (response) {
+                        // Hapus baris tabel
+                        $('tr[data-row-id="' + paketId + '"]').remove();
+                        Swal.fire('Terhapus!', 'Paket berhasil dihapus.', 'success');
+                    },
+                    error: function (error) {
+                        Swal.fire('Gagal!', 'Gagal menghapus paket.', 'error');
+                    }
+                });
+            }
+        });
     });
-});
+})

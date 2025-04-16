@@ -45,7 +45,7 @@ class PaketController extends Controller
             'keberangkatan' => 'required|date',
         ]);
     
-        $path = $request->file('gambar')->store('paket', 'public');
+        $path = $request->file('gambar')->store('images/paket', 'public');
     
         Paket::create([
             'gambar' => $path,

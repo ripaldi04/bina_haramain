@@ -7,14 +7,16 @@ use App\Http\Controllers\AdminLandingPageController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PackageDetailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 
+Route::get('/transaksi/create', [PackageDetailController::class, 'create'])->name('transaksi.create');
 Route::get('/', [LandingBannerController::class, 'index'])->name('home');
-
+Route::post('/package-details/store', [PackageDetailController::class, 'store'])->name('package-details.store');
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -80,6 +82,10 @@ Route::get('/riwayat', function () {
     return view('pages.user.riwayat');
 })->name('riwayat');
 
+Route::get('/transaksi', function () {
+    return view('pages.user.transaksi');
+})->name('transaksi');
+
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
@@ -114,3 +120,4 @@ Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])-
 Route::get('admin/edit-banner/{id}', [AdminLandingPageController::class, 'editBanner'])->name('admin.banner.edit');
 Route::post('admin/update-banner/{id}', [AdminLandingPageController::class, 'updateBanner'])->name('admin.banner.update');
 
+Route::post('/packages-details', [PackageDetailController::class, 'store'])->name('packages.details.store');

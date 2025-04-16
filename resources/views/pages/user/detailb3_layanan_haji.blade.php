@@ -91,7 +91,10 @@
                         <p>Total: <span>USD 0,00</span></p>
                     </div>
 
-                    <button class="btn-pesan"><i class="bi bi-cart-fill"></i> Pesan Paket</button>
+                    <form method="GET" action="{{ route('transaksi.create') }}">
+                        <input type="hidden" name="package_id" value="{{ $package->id ?? 1 }}"> {{-- sesuaikan dengan ID dari paket --}}
+                        <button type="submit" class="btn-pesan"><i class="bi bi-cart-fill"></i> Pesan Paket</button>
+                    </form>
                     <button class="btn-download">Konsultasi Paket</button>
                     <button class="btn-download">Download Brosur</button>
                 </div>
@@ -136,7 +139,8 @@
                             Itenary
                         </button>
                     </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">Isi dari Itenary.</div>
                     </div>
                 </div>

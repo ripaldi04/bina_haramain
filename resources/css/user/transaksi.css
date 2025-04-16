@@ -1,0 +1,101 @@
+.kode-paket {
+    color: #B97012;
+    font-weight: 600;
+}
+
+
+.form-control {
+    background-color: #f3f3f3;
+    /* Warna putih */
+    border: 1px solid #909090;
+    /* Warna border lembut */
+    border-radius: 10px;
+    /* Sudut membulat */
+    padding: 10px 15px;
+    box-shadow: none;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #a0a4aa;
+    box-shadow: 0 0 0 3px rgba(160, 164, 170, 0.2);
+}
+
+
+.judul-pemesan {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.garis-pemesan {
+    width: 90%;
+    height: 1px;
+    background-color: #cfcfcf;
+}
+
+.review-header {
+    background-color: #B36913;
+    /* Warna coklat sesuai gambar */
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.card.rounded {
+    border-radius: 1rem;
+}
+
+
+.kode-negara {
+    background-color: #B97012;
+    color: white;
+}
+
+.custom-voucher {
+    background-color: #B97012;
+    color: white;
+}
+
+.custom-total-box {
+    background-color: #B97012;
+    color: white;
+}
+
+.jamaah-box {
+    background-color: #f3f3f3;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-top: 20px;
+}
+
+.jamaah-header {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #f3f3f3;
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #555;
+    border-radius: 4px 4px 0 0;
+}
+
+.jamaah-box .form-group {
+    margin-bottom: 16px;
+}
+
+.jamaah-box .form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.jamaah-box input,
+.jamaah-box select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #999;
+    border-radius: 6px;
+    font-size: 14px;
+}

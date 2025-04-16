@@ -22,6 +22,6 @@ class PaketSeeder extends Seeder
             'hotel_madinah' => 'Hotel Madinah Bintang 3',
             'maskapai' => 'Garuda Indonesia',
             'bandara' => 'Soekarno Hatta',
-            'gambar' => 'public/images/DetailB3.png',
+            'gambar' => 'images/DetailB3.png',
         ]);    }
 }

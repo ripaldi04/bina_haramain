@@ -96,10 +96,17 @@
                     </div>
 
                     @auth
-                    <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'">
-                        <i class="bi bi-cart-fill"></i> Pesan Paket
-                    </button>
+                    @if (auth()->user()->email_verified_at)
+                        <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'">
+                            <i class="bi bi-cart-fill"></i> Pesan Paket
+                        </button>
+                    @else
+                        <button class="btn-pesan" onclick="showVerifyAlert()">
+                            <i class="bi bi-cart-fill"></i> Pesan Paket
+                        </button>
+                    @endif
                 @endauth
+                
                 
                 @guest
                     <button class="btn-pesan" onclick="showLoginAlert()">

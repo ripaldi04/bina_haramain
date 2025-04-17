@@ -86,6 +86,7 @@ Route::get('/transaksi', function () {
 })->name('transaksi');
 
 
+
 Route::resource('/admin/users', AdminUserController::class)->names([
     'index' => 'admin.users.index',
     'store' => 'admin.users.store',

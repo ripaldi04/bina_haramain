@@ -1,8 +1,8 @@
-window.showLoginAlert = function () {
+window.showVerifyAlert = function () {
     Swal.fire({
         icon: 'warning',
         title: 'Akses Ditolak',
-        text: 'Silakan login terlebih dahulu untuk memesan paket!',
+        text: 'Silakan login dan verifikasi email terlebih dahulu untuk memesan paket!',
         confirmButtonText: 'Login Sekarang',
         showCancelButton: true,
         cancelButtonText: 'Batal',

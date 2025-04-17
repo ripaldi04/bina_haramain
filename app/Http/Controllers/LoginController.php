@@ -29,6 +29,7 @@ class LoginController extends Controller
                 Auth::logout();
                 return back()->withErrors(['email' => 'Akun kamu belum diverifikasi. Silakan cek email untuk verifikasi.']);
             }
+            $request->session()->regenerate(); // Tambahkan regenerasi session demi keamanan
 
             return redirect()->intended('/'); // redirect ke home setelah login
         }
@@ -36,7 +37,6 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ]);
-        return redirect()->intended('/')->with('success', 'Berhasil login, selamat datang!');
     }
 
     public function logout(Request $request)
@@ -45,6 +45,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Berhasil logout');;
+        return redirect('/login')->with('success', 'Berhasil logout');
+        ;
     }
 }

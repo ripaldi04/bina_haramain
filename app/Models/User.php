@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'kode_referral',
+        'email_verified_at',  // Pastikan kolom ini termasuk
     ];
 
     /**

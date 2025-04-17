@@ -91,7 +91,7 @@
                         <p>Total: <span>USD 0,00</span></p>
                     </div>
 
-                    <button class="btn-pesan"><i class="bi bi-cart-fill"></i> Pesan Paket</button>
+                    <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'"><i class="bi bi-cart-fill"></i> Pesan Paket</button>
                     <button class="btn-download">Konsultasi Paket</button>
                     <button class="btn-download">Download Brosur</button>
                 </div>

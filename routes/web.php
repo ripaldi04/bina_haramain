@@ -80,6 +80,10 @@ Route::get('/riwayat', function () {
     return view('pages.user.riwayat');
 })->name('riwayat');
 
+Route::get('/transaksi', function () {
+    return view('pages.user.transaksi');
+})->name('transaksi');
+
 
 Route::resource('/admin/users', AdminUserController::class)->names([
     'index' => 'admin.users.index',

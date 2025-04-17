@@ -59,6 +59,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/haji', [UserPaketController::class, 'index'])->name('layanan_haji');
+Route::get('/umrah', [UserPaketController::class, 'store'])->name('layanan_umrah');
 
 
 Route::get('/haji/detail-bintang-tiga', function () {
@@ -68,10 +69,6 @@ Route::get('/haji/detail-bintang-tiga', function () {
 Route::get('/haji/detail-bintang-lima', function () {
     return view('pages.user.detailb5_layanan_haji');
 })->name('detailb5_layanan_haji');
-
-Route::get('/umrah', function () {
-    return view('pages.user.layanan_umrah');
-})->name('layanan_umrah');
 
 Route::get('/hubungi-kami', function () {
     return view('pages.user.hubungi_kami');

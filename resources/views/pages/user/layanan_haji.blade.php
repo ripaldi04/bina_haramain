@@ -49,7 +49,7 @@
 
     <div class="container mt-5">
         <div class="row g-4">
-            @foreach ($pakets as $paket)
+            @foreach ($paket_haji as $paket)
                 <div class="col-md-4">
                     <div class="card shadow-sm">
                         <div class="card-img-top position-relative">

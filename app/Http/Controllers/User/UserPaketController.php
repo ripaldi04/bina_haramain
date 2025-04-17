@@ -11,7 +11,13 @@ class UserPaketController extends Controller
     public function index()
     {
         // Ambil paket yang jenisnya adalah 'Haji'
-        $pakets = Paket::where('jenis', 'Haji')->get();
-        return view('pages.user.layanan_haji', compact('pakets')); // Mengirim data paket ke view
+        $paket_haji = Paket::where('jenis', 'Haji')->get();
+        return view('pages.user.layanan_haji', compact('paket_haji')); // Mengirim data paket ke view
+    }
+    public function store()
+    {
+        // Ambil paket yang jenisnya adalah 'Haji'
+        $paket_umrah = Paket::where('jenis', 'Umrah')->get();
+        return view('pages.user.layanan_umrah', compact('paket_umrah')); // Mengirim data paket ke view
     }
 }

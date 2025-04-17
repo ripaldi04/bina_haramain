@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -102,6 +103,12 @@ class PaketController extends Controller
 
         // Jika user upload gambar baru
         if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($paket->gambar && Storage::disk('public')->exists($paket->gambar)) {
+                Storage::disk('public')->delete($paket->gambar);
+            }
+
+            // Simpan gambar baru
             $path = $request->file('gambar')->store('images/paket', 'public');
             $paket->gambar = $path;
         }
@@ -126,6 +133,10 @@ class PaketController extends Controller
     public function destroy(string $id)
     {
         $paket = Paket::findOrFail($id);
+        // Hapus file gambar dari storage
+        if ($paket->gambar && Storage::disk('public')->exists($paket->gambar)) {
+            Storage::disk('public')->delete($paket->gambar);
+        }
         $paket->delete();
 
         return response()->json(['message' => 'Paket berhasil dihapus']);

@@ -72,7 +72,7 @@
                                 <span
                                     class="fw-bolder fs-5 text-warning">${{ number_format($paket->harga, 0, ',', '.') }}</span><br>
                             </p>
-                            <a href="{{ route('detailb3_layanan_haji') }}" class="btn btn-dark w-100 fw-bolder">Detail
+                            <a href="{{ route('layanan_haji.detail', $paket->id) }}" class="btn btn-dark w-100 fw-bolder">Detail
                                 Paket</a>
                         </div>
                     </div>

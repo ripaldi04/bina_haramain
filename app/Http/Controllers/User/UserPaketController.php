@@ -20,4 +20,10 @@ class UserPaketController extends Controller
         $paket_umrah = Paket::where('jenis', 'Umrah')->get();
         return view('pages.user.layanan_umrah', compact('paket_umrah')); // Mengirim data paket ke view
     }
+    public function show($id)
+    {
+        $paket = Paket::findOrFail($id); // atau where('slug', $slug) kalau pakai slug
+        return view('pages.user.detail_layanan', compact('paket'));
+    }
+    
 }

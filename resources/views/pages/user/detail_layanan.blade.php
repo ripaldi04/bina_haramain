@@ -3,19 +3,19 @@
 @section('title', 'Haji Bintang 3')
 
 @section('style')
-    @vite(['resources/css/user/detailb3_layanan_haji.css'])
+    @vite(['resources/css/user/detail_layanan.css'])
 @endsection
 
 @section('content')
     <!-- Container -->
     <div class="container mt-5  ">
-        <h2 class="fw-bold" style="font-size: 40px; margin-top: 100px;">Haji Furoda 2025</h2>
+        <h2 class="fw-bold" style="font-size: 40px; margin-top: 100px;">{{ $paket->nama_paket }}</h2>
         <div class="row mt-5 bg-white p-4 rounded">
             <div class="col-md-8">
 
                 <!-- Header dengan Gambar -->
                 <div class="container header-container mt-4">
-                    <img src="{{ asset('images/DetailB3.png') }}" class="header-image" alt="Haji Furoda">
+                    <img src="{{ asset('storage/' . $paket->gambar) }}" class="header-image" alt="Haji Furoda">
                 </div>
             </div>
 
@@ -101,28 +101,23 @@
             <div class="container info-box">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5><strong>Hotel Makkah</strong></h5>
-                        <p><i class="bi bi-geo-alt-fill custom-icon fs-4"></i> <span class="warna-text">Nada
-                                Deafah/Setaraf</span></p>
-                        <p class="star-rating fs-4">★★★</p>
-                        <h5 class="mt-3 fw-bold 15px">Jenis Paket</h5>
-                        <p><i class="fa-solid fa-kaaba custom-icon fs-4"></i><span class="warna-text">Haji Furoda
-                                2025</span></p>
-                        <h5><strong>Hotel Lain</strong></h5>
-                        <p><i class="bi bi-building-fill custom-icon fs-4"></i> <span class="warna-text">Maktab
-                                Arafah</span> (Makkah)</p>
-                        <p><i class="bi bi-building-fill custom-icon fs-4"></i> <span class="warna-text">Hotel
-                                Transit</span> (Makkah)</p>
+                        <h5 class="mb-2"><strong>Hotel Makkah</strong></h5>
+                        <p class="mb-4"><i class="bi bi-building custom-icon fs-4"></i> <span
+                                class="warna-text">{{ $paket->hotel_mekkah }}</span></p>
+                        <h5 class="mb-2 fw-bold 15px">Keberangkatan</h5>
+                        <p class="mb-4"><i class="bi bi-calendar-event custom-icon fs-4"></i><span
+                                class="warna-text">{{ $paket->keberangkatan }}</span></p>
+                        <h5 class="fw-bold 15px">Bandara</h5>
+                        <p><i class="bi bi-geo-alt custom-icon fs-4"></i><span
+                                class="warna-text">{{ $paket->bandara }}</span> </p>
                     </div>
                     <div class="col-md-6">
-                        <h5><strong>Hotel Madinah</strong></h5>
-                        <p><i class="bi bi-geo-alt-fill custom-icon fs-4"></i> <span class="warna-text">Almukthara
-                                Gorbi/Setaraf</span></p>
-                        <p class="star-rating fs-4">★★★</p>
-
-                        <h5 class="mt-3 fw-bold 15px">Maskapai</h5>
-                        <p><i class="bi bi-airplane-fill custom-icon fs-4"></i><span class="warna-text">Airlines /
-                                Garuda Indonesia</span> </p>
+                        <h5 class="mb-2"><strong>Hotel Madinah</strong></h5>
+                        <p class="mb-4"><i class="bi bi-building custom-icon fs-4"></i> <span
+                                class="warna-text">{{ $paket->hotel_madinah }}</span></p>
+                        <h5 class="fw-bold 15px">Maskapai</h5>
+                        <p><i class="bi bi-airplane-engines custom-icon fs-4"></i><span
+                                class="warna-text">{{ $paket->maskapai }}</span> </p>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use App\Models\Paket;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -44,13 +45,26 @@ class PaketController extends Controller
             'maskapai' => 'required|string',
             'bandara' => 'required|string',
             'harga' => 'required|numeric',
-            'jenis' => 'required|string',
+            'jenis' => 'required|string|in:umrah,haji',
             'keberangkatan' => 'required|date',
         ]);
 
         $path = $request->file('gambar')->store('images/paket', 'public');
 
+        // Format kode_paket: [Jenis]-[Tanggal Keberangkatan (dd-mm-yyyy)]
+        $keberangkatan = Carbon::parse($request->keberangkatan);
+        $tanggal = $keberangkatan->format('d');
+        $bulan = $keberangkatan->format('m');
+        $tahun = $keberangkatan->format('Y');
+
+        // Tentukan jenis paket (UMR untuk Umrah, HAJ untuk Haji)
+        $jenis = $request->jenis == 'umrah' ? 'UMR' : 'HAJ';
+
+        // Buat kode_paket
+        $kode_paket = $jenis . $tanggal . $bulan . $tahun;
+
         Paket::create([
+            'kode_paket' => $kode_paket,
             'gambar' => $path,
             'nama_paket' => $request->nama_paket,
             'hotel_mekkah' => $request->hotel_mekkah,

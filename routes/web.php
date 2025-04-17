@@ -62,6 +62,7 @@ Route::get('/haji', [UserPaketController::class, 'index'])->name('layanan_haji')
 Route::get('/umrah', [UserPaketController::class, 'store'])->name('layanan_umrah');
 
 
+
 // Route::get('/haji/detail-bintang-tiga', function () {
 //     return view('pages.user.detailb3_layanan_haji');
 // })->name('detailb3_layanan_haji');

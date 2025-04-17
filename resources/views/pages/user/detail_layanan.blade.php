@@ -6,6 +6,10 @@
     @vite(['resources/css/user/detail_layanan.css'])
 @endsection
 
+@section('script')
+    @vite(['resources/js/user/detail_layanan.js'])
+@endsection
+
 @section('content')
     <!-- Container -->
     <div class="container mt-5  ">
@@ -91,8 +95,18 @@
                         <p>Total: <span>USD 0,00</span></p>
                     </div>
 
-                    <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'"><i class="bi bi-cart-fill"></i> Pesan Paket</button>
-                    <button class="btn-download">Konsultasi Paket</button>
+                    @auth
+                    <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'">
+                        <i class="bi bi-cart-fill"></i> Pesan Paket
+                    </button>
+                @endauth
+                
+                @guest
+                    <button class="btn-pesan" onclick="showLoginAlert()">
+                        <i class="bi bi-cart-fill"></i> Pesan Paket
+                    </button>
+                @endguest
+                                    <button class="btn-download">Konsultasi Paket</button>
                     <button class="btn-download">Download Brosur</button>
                 </div>
             </div>

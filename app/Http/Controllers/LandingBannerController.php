@@ -12,5 +12,5 @@ class LandingBannerController extends Controller
 {
     $banner = LandingBanner::first(); // atau berdasarkan id
     return view('pages.user.home', compact('banner'));
-}
+}   
 }

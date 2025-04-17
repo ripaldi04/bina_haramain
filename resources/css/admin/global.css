@@ -8,7 +8,6 @@
 .menu-item:hover, .menu-item.active {
     background-color: #f7c53a !important;
     color: #f0f0f0 !important;
-    margin-bottom: 5px;
 }
 
 .fa-user-circle {
@@ -63,38 +62,6 @@ th:first-child, td:first-child {
     cursor: pointer;
 }
 
-
-
-/* /tabel data pemesan/ */
-/* Agar tabel tidak melebar melebihi container */
-.table {
-    table-layout: auto;
-    width: 100%;
-    word-wrap: break-word;
-}
-/* Membatasi lebar kolom "Jemaah" agar tidak terlalu lebar */
-th:nth-child(6), td:nth-child(6) {
-    max-width: 200px; /* Sesuaikan dengan kebutuhan */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
-/* Mengatur agar teks panjang di dalam tabel bisa terbungkus */
-.text-wrap {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal; /* Memastikan teks di dalam td bisa membungkus ke baris berikutnya */
-}
-
-
-
-/* /tabel paket/ */
-/* Agar tabel tidak melebar melebihi container */
-.table {
-    table-layout: auto;
-    width: 100%;
-    word-wrap: break-word;
-}
 /* Membatasi lebar kolom "Jemaah" agar tidak terlalu lebar */
 th:nth-child(4), td:nth-child(4) {
     white-space: normal;
@@ -120,21 +87,14 @@ th:nth-child(4), td:nth-child(4) {
     width: calc(100% - 250px); /* Agar konten tidak tertutup sidebar */
 }
 
-
-/* /navbar profile/ */
-.navbar-custom {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: auto;
-    width: auto;
-    padding: 10px 20px;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1030;
-}
-
 .profile-dropdown .dropdown-menu {
     right: 0 !important;
     left: auto !important;
+}
+
+.menu-item.active {
+    background-color: #f0f0f0; /* jika perlu highlight */
+    margin-left: 0 !important;
+    padding-left: 1rem;
+    transform: none !important;
 }

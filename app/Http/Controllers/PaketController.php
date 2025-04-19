@@ -46,22 +46,23 @@ class PaketController extends Controller
             'bandara' => 'required|string',
             'harga' => 'required|numeric',
             'jenis' => 'required|string|in:umrah,haji',
-            'keberangkatan' => 'required|date',
+            'program_hari' => 'required|integer|min:1',
         ]);
 
         $path = $request->file('gambar')->store('images/paket', 'public');
 
         // Format kode_paket: [Jenis]-[Tanggal Keberangkatan (dd-mm-yyyy)]
-        $keberangkatan = Carbon::parse($request->keberangkatan);
-        $tanggal = $keberangkatan->format('d');
-        $bulan = $keberangkatan->format('m');
-        $tahun = $keberangkatan->format('Y');
+        // $keberangkatan = Carbon::parse($request->keberangkatan);
+        // $tanggal = $keberangkatan->format('d');
+        // $bulan = $keberangkatan->format('m');
+        // $tahun = $keberangkatan->format('Y');
 
         // Tentukan jenis paket (UMR untuk Umrah, HAJ untuk Haji)
         $jenis = $request->jenis == 'umrah' ? 'UMR' : 'HAJ';
+        $nama_paket = $request->nama_paket;
 
         // Buat kode_paket
-        $kode_paket = $jenis . $tanggal . $bulan . $tahun;
+        $kode_paket = $jenis . $nama_paket;
 
         Paket::create([
             'kode_paket' => $kode_paket,
@@ -73,7 +74,7 @@ class PaketController extends Controller
             'bandara' => $request->bandara,
             'harga' => $request->harga,
             'jenis' => $request->jenis, // default
-            'keberangkatan' => $request->keberangkatan,
+            'program_hari' => $request->program_hari,
         ]);
 
         return redirect()->route('admin_paket')->with('success', 'Paket berhasil ditambahkan!');
@@ -112,7 +113,7 @@ class PaketController extends Controller
             'bandara' => 'required|string',
             'harga' => 'required|numeric',
             'jenis' => 'required|string',
-            'keberangkatan' => 'required|date',
+            'program_hari' => 'required|integer|min:1',
         ]);
 
         // Jika user upload gambar baru
@@ -135,7 +136,7 @@ class PaketController extends Controller
             'bandara' => $request->bandara,
             'harga' => $request->harga,
             'jenis' => $request->jenis,
-            'keberangkatan' => $request->keberangkatan,
+            'program_hari' => $request->program_hari,
         ]);
 
         return redirect()->route('admin_paket')->with('success', 'Paket berhasil diperbarui!');

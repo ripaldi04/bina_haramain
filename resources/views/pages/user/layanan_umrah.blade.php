@@ -62,7 +62,7 @@
                             <h6 class="fw-bold text-center">{{ $paket->nama_paket }}</h6>
                             <hr>
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-calendar-event"></i> {{ $paket->keberangkatan }}</li>
+                                {{-- <li><i class="bi bi-calendar-event"></i> {{ $paket->keberangkatan }}</li> --}}
                                 <li><i class="bi bi-building"></i> {{ $paket->hotel_mekkah }} (Makkah)</li>
                                 <li><i class="bi bi-building"></i> {{ $paket->hotel_madinah }} (Madinah)</li>
                                 <li><i class="bi bi-airplane"></i> {{ $paket->maskapai }}</li>

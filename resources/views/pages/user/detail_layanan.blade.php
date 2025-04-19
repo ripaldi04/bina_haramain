@@ -125,9 +125,9 @@
                         <h5 class="mb-2"><strong>Hotel Makkah</strong></h5>
                         <p class="mb-4"><i class="bi bi-building custom-icon fs-4"></i> <span
                                 class="warna-text">{{ $paket->hotel_mekkah }}</span></p>
-                        <h5 class="mb-2 fw-bold 15px">Keberangkatan</h5>
+                        {{-- <h5 class="mb-2 fw-bold 15px">Keberangkatan</h5>
                         <p class="mb-4"><i class="bi bi-calendar-event custom-icon fs-4"></i><span
-                                class="warna-text">{{ $paket->keberangkatan }}</span></p>
+                                class="warna-text">{{ $paket->keberangkatan }}</span></p> --}}
                         <h5 class="fw-bold 15px">Bandara</h5>
                         <p><i class="bi bi-geo-alt custom-icon fs-4"></i><span
                                 class="warna-text">{{ $paket->bandara }}</span> </p>

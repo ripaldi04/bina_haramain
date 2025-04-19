@@ -74,9 +74,9 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="paketKeberangkatan" class="form-label">Keberangkatan</label>
-                                            <input type="date" class="form-control" id="paketKeberangkatan"
-                                                name="keberangkatan" required>
+                                            <label for="paketProgramHari" class="form-label">Program Hari</label>
+                                            <input type="number" class="form-control" id="paketProgramHari"
+                                                name="program_hari" required>
                                         </div>
 
                                         <div class="mb-3">
@@ -147,8 +147,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="editKeberangkatan" class="form-label">Keberangkatan</label>
-                                        <input type="date" class="form-control" id="editKeberangkatan">
+                                        <label for="editProgramHari" class="form-label">Program Hari</label>
+                                        <input type="number" class="form-control" id="editProgramHari">
                                     </div>
 
                                     <div class="mb-3">
@@ -233,7 +233,7 @@
                                         - Hotel Makkah: {{ $paket->hotel_mekkah }}<br>
                                         - Hotel Madinah: {{ $paket->hotel_madinah }}<br>
                                         - Maskapai: {{ $paket->maskapai }}<br>
-                                        - Keberangkata: {{ $paket->keberangkatan }}<br>
+                                        - Program Hari: {{ $paket->program_hari }}<br>
                                         - Bandara: {{ $paket->bandara }}<br>
                                     </td>
                                     <td>${{ $paket->harga }}</td>
@@ -241,7 +241,7 @@
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer btn-edit"
                                             data-id="{{ $paket->id }}" data-nama="{{ $paket->nama_paket }}"
                                             data-jenis="{{ $paket->jenis }}"
-                                            data-keberangkatan="{{ $paket->keberangkatan }}"
+                                            data-program-hari="{{ $paket->program_hari }}"
                                             data-hotel-mekkah="{{ $paket->hotel_mekkah }}"
                                             data-hotel-madinah="{{ $paket->hotel_madinah }}"
                                             data-maskapai="{{ $paket->maskapai }}" data-bandara="{{ $paket->bandara }}"

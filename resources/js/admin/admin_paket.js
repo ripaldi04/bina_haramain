@@ -62,7 +62,7 @@ $(document).ready(function () {
         // Isi input-edit dengan data paket
         $('#editPaket').val(data.nama);
         $('#editJenis').val(data.jenis);
-        $('#editKeberangkatan').val(data.keberangkatan);
+        $('#editProgramHari').val(data.programHari);
         $('#editHotelMakkah').val(data.hotelMekkah);
         $('#editHotelMadinah').val(data.hotelMadinah);
         $('#editMaskapai').val(data.maskapai);
@@ -84,7 +84,7 @@ $(document).ready(function () {
         formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
         formData.append('nama_paket', $('#editPaket').val());
         formData.append('jenis', $('#editJenis').val());
-        formData.append('keberangkatan', $('#editKeberangkatan').val());
+        formData.append('program_hari', $('#editProgramHari').val());
         formData.append('hotel_mekkah', $('#editHotelMakkah').val());
         formData.append('hotel_madinah', $('#editHotelMadinah').val());
         formData.append('maskapai', $('#editMaskapai').val());

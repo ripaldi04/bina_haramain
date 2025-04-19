@@ -15,7 +15,8 @@ class Paket extends Model
         'kode_paket',
         'jenis',
         'nama_paket',
-        'keberangkatan',
+        // 'keberangkatan',
+        'program_hari',        
         'hotel_mekkah',
         'hotel_madinah',
         'maskapai',
@@ -23,4 +24,10 @@ class Paket extends Model
         'harga',
         'gambar',
     ];
+
+    // public function detailPaket()
+    // {
+    //     return $this->hasMany(DetailPaket::class);
+    // }
+
 }

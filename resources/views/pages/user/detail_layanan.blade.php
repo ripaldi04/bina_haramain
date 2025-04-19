@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Haji Bintang 3')
+@section('title', 'Detail Paket')
 
 @section('style')
     @vite(['resources/css/user/detail_layanan.css'])
@@ -109,7 +109,7 @@
                 
                 
                 @guest
-                    <button class="btn-pesan" onclick="showLoginAlert()">
+                    <button class="btn-pesan" onclick="showVerifyAlert()">
                         <i class="bi bi-cart-fill"></i> Pesan Paket
                     </button>
                 @endguest

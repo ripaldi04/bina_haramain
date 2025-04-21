@@ -25,9 +25,9 @@ class Paket extends Model
         'gambar',
     ];
 
-    // public function detailPaket()
-    // {
-    //     return $this->hasMany(DetailPaket::class);
-    // }
+    public function detail_Paket()
+    {
+        return $this->hasMany(DetailPaket::class, 'paket_id');
+    }
 
 }

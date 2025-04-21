@@ -158,3 +158,14 @@ $(document).ready(function () {
         });
     });
 })
+
+document.getElementById('tambah-jadwal').addEventListener('click', function () {
+    const container = document.getElementById('jadwal-container');
+    const item = document.createElement('div');
+    item.classList.add('jadwal-item', 'mb-2');
+    item.innerHTML = `
+        <input type="date" name="tanggal_keberangkatan[]" class="form-control mb-1" required>
+        <input type="number" name="jumlah_seat[]" class="form-control" placeholder="Jumlah Seat" required>
+    `;
+    container.appendChild(item);
+});

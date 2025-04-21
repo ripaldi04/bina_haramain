@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPaket;
 use App\Models\Paket;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
@@ -47,6 +48,8 @@ class PaketController extends Controller
             'harga' => 'required|numeric',
             'jenis' => 'required|string|in:umrah,haji',
             'program_hari' => 'required|integer|min:1',
+            'tanggal_keberangkatan.*' => 'required|date',
+            'jumlah_seat.*' => 'required|integer|min:1',
         ]);
 
         $path = $request->file('gambar')->store('images/paket', 'public');
@@ -64,7 +67,7 @@ class PaketController extends Controller
         // Buat kode_paket
         $kode_paket = $jenis . $nama_paket;
 
-        Paket::create([
+        $paket = Paket::create([
             'kode_paket' => $kode_paket,
             'gambar' => $path,
             'nama_paket' => $request->nama_paket,
@@ -77,6 +80,15 @@ class PaketController extends Controller
             'program_hari' => $request->program_hari,
         ]);
 
+        // Simpan semua jadwal keberangkatan (detail_paket)
+        foreach ($request->tanggal_keberangkatan as $index => $tanggal) {
+            DetailPaket::create([
+                'paket_id' => $paket->id,
+                'tanggal_keberangkatan' => $tanggal,
+                'jumlah_seat' => $request->jumlah_seat[$index],
+            ]);
+        }
+
         return redirect()->route('admin_paket')->with('success', 'Paket berhasil ditambahkan!');
     }
 
@@ -86,7 +98,8 @@ class PaketController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $paket = Paket::with(['detail_layanan', 'detail_paket'])->findOrFail($id);
+        return view('pages.user.detail_layanan', compact('paket'));
     }
 
     /**

@@ -105,6 +105,19 @@
                                             <input type="text" class="form-control" id="paketHarga" name="harga"
                                                 required>
                                         </div>
+                                        <div id="jadwal-container">
+                                            <div class="jadwal-item mb-2">
+                                                <label for="tanggal" class="form-label">Tanggal Keberangkatan</label>
+                                                <input type="date" name="tanggal_keberangkatan[]"
+                                                    class="form-control mb-1" required>
+                                                <input type="number" name="jumlah_seat[]" class="form-control"
+                                                    placeholder="Jumlah Seat" required>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" id="tambah-jadwal" class="btn btn-sm btn-secondary mt-2">+
+                                            Tambah Jadwal</button>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

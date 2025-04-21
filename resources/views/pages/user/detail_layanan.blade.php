@@ -30,16 +30,25 @@
 
                     <label>Program Hari</label>
                     <select class="form-select">
-                        <option>Program 26 Hari</option>
+                        <option> {{ $paket->program_hari }} Hari</option>
                     </select>
 
                     <label>Bandara Keberangkatan</label>
                     <select class="form-select">
-                        <option>Soekarno-Hatta</option>
+                        <option> {{ $paket->bandara }}</option>
                     </select>
 
                     <label>Tanggal Keberangkatan</label>
-                    <input type="date" class="form-control">
+                    <select class="form-select">
+                        @if ($paket->detail_paket && $paket->detail_paket->count() > 0)
+                            @foreach ($paket->detail_paket as $detail)
+                            <option>{{ \Carbon\Carbon::parse($detail->tanggal_keberangkatan)->format('d-m-Y') }} (Seat Tersedia {{$detail->jumlah_seat}})
+                                </option>
+                            @endforeach
+                        @else
+                            <option enable>Belum ada jadwal keberangkatan</option>
+                        @endif
+                    </select>
 
                     <label>Kamar</label>
 
@@ -96,24 +105,24 @@
                     </div>
 
                     @auth
-                    @if (auth()->user()->email_verified_at)
-                        <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'">
-                            <i class="bi bi-cart-fill"></i> Pesan Paket
-                        </button>
-                    @else
+                        @if (auth()->user()->email_verified_at)
+                            <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'">
+                                <i class="bi bi-cart-fill"></i> Pesan Paket
+                            </button>
+                        @else
+                            <button class="btn-pesan" onclick="showVerifyAlert()">
+                                <i class="bi bi-cart-fill"></i> Pesan Paket
+                            </button>
+                        @endif
+                    @endauth
+
+
+                    @guest
                         <button class="btn-pesan" onclick="showVerifyAlert()">
                             <i class="bi bi-cart-fill"></i> Pesan Paket
                         </button>
-                    @endif
-                @endauth
-                
-                
-                @guest
-                    <button class="btn-pesan" onclick="showVerifyAlert()">
-                        <i class="bi bi-cart-fill"></i> Pesan Paket
-                    </button>
-                @endguest
-                                    <button class="btn-download">Konsultasi Paket</button>
+                    @endguest
+                    <button class="btn-download">Konsultasi Paket</button>
                     <button class="btn-download">Download Brosur</button>
                 </div>
             </div>

@@ -193,13 +193,19 @@ $(document).ready(function () {
     });
 })
 
-document.getElementById('tambah-jadwal').addEventListener('click', function () {
-    const container = document.getElementById('jadwal-container');
-    const item = document.createElement('div');
-    item.classList.add('jadwal-item', 'mb-2');
-    item.innerHTML = `
-        <input type="date" name="tanggal_keberangkatan[]" class="form-control mb-1" required>
-        <input type="number" name="jumlah_seat[]" class="form-control" placeholder="Jumlah Seat" required>
+$(document).on('click', '#tambah-jadwal', function () {
+    const jadwalItem = `
+        <div class="jadwal-item mb-3 row">
+            <div class="col-md-6">
+                <label class="form-label">Tanggal Keberangkatan</label>
+                <input type="date" name="tanggal_keberangkatan[]" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Jumlah Seat</label>
+                <input type="number" name="jumlah_seat[]" class="form-control" placeholder="Jumlah Seat" required>
+            </div>
+        </div>
     `;
-    container.appendChild(item);
+    $('#jadwalContainer').append(jadwalItem);
 });
+

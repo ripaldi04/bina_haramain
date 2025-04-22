@@ -193,6 +193,8 @@
                                             <label class="form-label">Jadwal Keberangkatan & Jumlah Seat</label>
                                         </div>
                                         <div id="jadwalContainer"></div>
+                                        <button type="button" id="tambah-jadwal" class="btn btn-secondary mt-3">Tambah
+                                            Jadwal</button>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

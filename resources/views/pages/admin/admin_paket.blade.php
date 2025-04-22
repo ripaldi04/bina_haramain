@@ -110,6 +110,7 @@
                                                 <label for="tanggal" class="form-label">Tanggal Keberangkatan</label>
                                                 <input type="date" name="tanggal_keberangkatan[]"
                                                     class="form-control mb-1" required>
+                                                    <label for="seat" class="form-label">Jumlah Seat</label>
                                                 <input type="number" name="jumlah_seat[]" class="form-control"
                                                     placeholder="Jumlah Seat" required>
                                             </div>
@@ -189,22 +190,14 @@
                                         <input type="text" class="form-control" id="editHarga">
                                     </div>
                                     <div class="row mb-2 jadwal-item">
-                                        {{-- <div class="col">
-                                            <input type="date" class="form-control tanggal-keberangkatan"
-                                                name="tanggal_keberangkatan[]" placeholder="Tanggal Keberangkatan">
-                                        </div>
-                                        <div class="col">
-                                            <input type="number" class="form-control jumlah-seat" name="jumlah_seat[]"
-                                                placeholder="Jumlah Seat">
-                                        </div> --}}
                                         <div class="mb-3">
                                             <div>
                                                 <label class="form-label">Jadwal Keberangkatan & Jumlah Seat</label>
                                             </div>
                                             <div id="jadwalContainer"></div>
-                                            <button type="button" id="tambah-jadwal"
+                                            {{-- <button type="button" id="tambah-jadwal-edit"
                                                 class="btn btn-secondary mt-3">Tambah
-                                                Jadwal</button>
+                                                Jadwal</button> --}}
                                         </div>
                                     </div>
                                 </div>

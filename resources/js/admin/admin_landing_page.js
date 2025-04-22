@@ -17,3 +17,19 @@ $('#editButton').on('click', function (event) {
     var modalInstance = new bootstrap.Modal(modal[0]);
     modalInstance.show();
 });
+
+
+$(document).ready(function () {
+    $('.btn-warning').click(function () {
+        const id = $(this).data('id');
+        $('#banner_id').val(id);
+        $('#header1').val($(this).data('header1'));
+        $('#header2').val($(this).data('header2'));
+        $('#deskripsi').val($(this).data('deskripsi'));
+
+        // Set form action dengan ID yang benar
+        $('#editBannerForm').attr('action', '/admin/update-banner/' + id);
+
+        $('#editBannerModal').modal('show');
+    });
+});

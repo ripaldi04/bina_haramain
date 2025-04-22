@@ -38,7 +38,7 @@
 
                 <!-- Gambar (Desktop) -->
                 <div class="col-md-6 text-end d-none d-md-block">
-                    <img src="{{ asset($banner->image_url) }}" class="img-fluid" alt="Icon">
+                <img src="{{ asset('storage/' . $banner->image_url) }}" class="img-fluid" alt="Banner">
                 </div>
 
                 <!-- Semua elemen dalam satu kolom (Mobile) -->

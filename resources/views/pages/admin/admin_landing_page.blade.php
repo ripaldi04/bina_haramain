@@ -31,7 +31,8 @@
                                 <td class="text-wrap">{{ $banner->header1 }}</td>
                                 <td class="text-wrap">{{ $banner->header2 }}</td>
                                 <td class="text-wrap">{{ $banner->deskripsi }}</td>
-                                <td><img src="{{ asset('images/v146_30.png') }}" width="100" class="img-fluid"/></td>
+                                <td><img src="{{ asset('storage/' . $banner->image_url) }}" class="img-fluid" alt="Banner">
+                                </td>
                                 <td>
                                     <!-- Tombol Edit -->
                                     <button class="btn btn-warning btn-sm" id="editButton" data-id="{{ $banner->id }}"
@@ -58,8 +59,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin.banner.update', '$banner->id') }}" method="POST"
-                            enctype="multipart/form-data" id="editBannerForm">
+                    <form action="{{ route('admin.banner.update', ['id' => 0]) }}" method="POST" enctype="multipart/form-data" id="editBannerForm">
                             @csrf
                             <input type="hidden" id="banner_id" name="banner_id">
 

@@ -123,3 +123,4 @@ Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])-
 Route::get('admin/edit-banner/{id}', [AdminLandingPageController::class, 'editBanner'])->name('admin.banner.edit');
 Route::post('admin/update-banner/{id}', [AdminLandingPageController::class, 'updateBanner'])->name('admin.banner.update');
 
+Route::get('/admin/paket/{id}/detail-paket', [PaketController::class, 'getDetailPaket']);

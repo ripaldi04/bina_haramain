@@ -25,6 +25,12 @@ class PaketController extends Controller
         return view('pages.admin.admin_paket', compact('paket'));
     }
 
+    public function getDetailPaket($id)
+    {
+        $details = DetailPaket::where('paket_id', $id)->get(['tanggal_keberangkatan', 'jumlah_seat']);
+        return response()->json($details);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

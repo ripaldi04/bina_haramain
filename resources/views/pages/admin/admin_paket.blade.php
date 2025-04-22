@@ -188,6 +188,12 @@
                                         <label for="editHarga" class="form-label">Harga</label>
                                         <input type="text" class="form-control" id="editHarga">
                                     </div>
+                                    <div class="mb-3">
+                                        <div>
+                                            <label class="form-label">Jadwal Keberangkatan & Jumlah Seat</label>
+                                        </div>
+                                        <div id="jadwalContainer"></div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"

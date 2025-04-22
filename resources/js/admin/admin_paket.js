@@ -72,6 +72,36 @@ $(document).ready(function () {
         // Simpan ID ke button saveChanges
         $('#saveChanges').data('id', data.id);
 
+        $.ajax({
+            url: `/admin/paket/${data.id}/detail-paket`,
+            method: 'GET',
+            success: function (detailData) {
+                const container = $('#jadwalContainer');
+                container.empty();
+
+                if (!detailData || detailData.length === 0) {
+                    container.append(`<div class="text-muted">Tidak ada jadwal keberangkatan.</div>`);
+                } else {
+                    detailData.forEach(item => {
+                        const html = `
+                            <div class="jadwal-item mb-3">
+                                <label class="form-label">Tanggal Keberangkatan</label>
+                                <input type="date" class="form-control" name="tanggal_keberangkatan[]" value="${item.tanggal_keberangkatan}" readonly>
+
+                                <label class="form-label mt-2">Jumlah Seat</label>
+                                <input type="number" class="form-control" name="jumlah_seat[]" value="${item.jumlah_seat}" readonly>
+                            </div>
+                        `;
+                        container.append(html);
+                    });
+                }
+            },
+            error: function (xhr) {
+                console.error('Gagal mengambil data detail_paket:', xhr.responseText);
+                $('#jadwalContainer').html(`<div class="text-danger">Gagal mengambil data jadwal.</div>`);
+            }
+        });
+
         // Tampilkan modal edit
         $('#editModal').modal('show');
     });

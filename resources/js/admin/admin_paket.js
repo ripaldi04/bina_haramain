@@ -84,13 +84,17 @@ $(document).ready(function () {
                 } else {
                     detailData.forEach(item => {
                         const html = `
-                            <div class="jadwal-item mb-3">
-                                <label class="form-label">Tanggal Keberangkatan</label>
-                                <input type="date" class="form-control" name="tanggal_keberangkatan[]" value="${item.tanggal_keberangkatan}" readonly>
+                            <div class="jadwal-item mb-3 row">
+        <div class="col-md-6">
+            <label class="form-label">Tanggal Keberangkatan</label>
+            <input type="date" class="form-control" name="tanggal_keberangkatan[]" value="${item.tanggal_keberangkatan}" readonly>
+        </div>
 
-                                <label class="form-label mt-2">Jumlah Seat</label>
-                                <input type="number" class="form-control" name="jumlah_seat[]" value="${item.jumlah_seat}" readonly>
-                            </div>
+        <div class="col-md-6">
+            <label class="form-label">Jumlah Seat</label>
+            <input type="number" class="form-control" name="jumlah_seat[]" value="${item.jumlah_seat}" readonly>
+        </div>
+    </div>
                         `;
                         container.append(html);
                     });

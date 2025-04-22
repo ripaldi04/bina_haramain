@@ -158,6 +158,17 @@ class PaketController extends Controller
             'program_hari' => $request->program_hari,
         ]);
 
+        // Simpan tanggal keberangkatan baru
+        if ($request->has('tanggal_keberangkatan')) {
+            foreach ($request->tanggal_keberangkatan as $i => $tanggal) {
+                DetailPaket::create([
+                    'paket_id' => $paket->id,
+                    'tanggal_keberangkatan' => $tanggal,
+                    'jumlah_seat' => $request->jumlah_seat[$i] ?? 0,
+                ]);
+            }
+        }
+
         return redirect()->route('admin_paket')->with('success', 'Paket berhasil diperbarui!');
     }
 

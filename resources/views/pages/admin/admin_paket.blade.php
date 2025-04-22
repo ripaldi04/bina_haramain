@@ -188,13 +188,24 @@
                                         <label for="editHarga" class="form-label">Harga</label>
                                         <input type="text" class="form-control" id="editHarga">
                                     </div>
-                                    <div class="mb-3">
-                                        <div>
-                                            <label class="form-label">Jadwal Keberangkatan & Jumlah Seat</label>
+                                    <div class="row mb-2 jadwal-item">
+                                        {{-- <div class="col">
+                                            <input type="date" class="form-control tanggal-keberangkatan"
+                                                name="tanggal_keberangkatan[]" placeholder="Tanggal Keberangkatan">
                                         </div>
-                                        <div id="jadwalContainer"></div>
-                                        <button type="button" id="tambah-jadwal" class="btn btn-secondary mt-3">Tambah
-                                            Jadwal</button>
+                                        <div class="col">
+                                            <input type="number" class="form-control jumlah-seat" name="jumlah_seat[]"
+                                                placeholder="Jumlah Seat">
+                                        </div> --}}
+                                        <div class="mb-3">
+                                            <div>
+                                                <label class="form-label">Jadwal Keberangkatan & Jumlah Seat</label>
+                                            </div>
+                                            <div id="jadwalContainer"></div>
+                                            <button type="button" id="tambah-jadwal"
+                                                class="btn btn-secondary mt-3">Tambah
+                                                Jadwal</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -237,6 +248,8 @@
                                 <th>Gambar</th>
                                 <th>Paket</th>
                                 <th>Fasilitas</th>
+                                <th>
+                                    Tanggal berangkat <br>dan Sisa Seat</th>
                                 <th>Harga</th>
                                 <th>Action</th>
                             </tr>
@@ -256,6 +269,17 @@
                                         - Maskapai: {{ $paket->maskapai }}<br>
                                         - Program Hari: {{ $paket->program_hari }}<br>
                                         - Bandara: {{ $paket->bandara }}<br>
+                                    </td>
+                                    <td>
+                                        <ul style="padding-left: 16px; margin: 0;">
+                                            @foreach ($paket->detail_paket as $detail)
+                                                <li>
+                                                    {{ \Carbon\Carbon::parse($detail->tanggal_keberangkatan)->format('d M Y') }}
+                                                    <br>
+                                                    (Sisa seat: {{ $detail->jumlah_seat }})
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </td>
                                     <td>${{ $paket->harga }}</td>
                                     <td>

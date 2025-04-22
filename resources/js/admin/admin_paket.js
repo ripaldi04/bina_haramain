@@ -208,4 +208,3 @@ $(document).on('click', '#tambah-jadwal', function () {
     `;
     $('#jadwalContainer').append(jadwalItem);
 });
-

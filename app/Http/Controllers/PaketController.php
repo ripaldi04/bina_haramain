@@ -92,9 +92,9 @@ class PaketController extends Controller
         $hargaPaketDasar = $request->harga;
 
         $tipeKamarData = [
-            ['tipe' => 'quad', 'harga' => $request->harga_kamar_quad + $hargaPaketDasar],
             ['tipe' => 'double', 'harga' => $request->harga_kamar_double + $hargaPaketDasar],
             ['tipe' => 'triple', 'harga' => $request->harga_kamar_triple + $hargaPaketDasar],
+            ['tipe' => 'quad', 'harga' => $request->harga_kamar_quad + $hargaPaketDasar],
         ];
 
         foreach ($tipeKamarData as $data) {
@@ -124,6 +124,18 @@ class PaketController extends Controller
     {
         $paket = Paket::with(['detail_layanan', 'detail_paket', 'tipeKamars'])->findOrFail($id);
         return view('pages.user.detail_layanan', compact('paket'));
+    }
+
+    public function showLayananHaji()
+    {
+        // Ambil paket dengan tipe kamar yang terkait, dan cari tipe kamar 'quad'
+        $paket = Paket::with([
+            'tipeKamars' => function ($query) {
+                $query->where('tipe', 'quad');
+            }
+        ])->first(); // Ambil paket pertama, atau gunakan get() jika ingin semua
+
+        return view('pages.user.layanan-haji', compact('paket'));
     }
 
     /**

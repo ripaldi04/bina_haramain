@@ -105,25 +105,20 @@
                                             <input type="text" class="form-control" id="paketHarga" name="harga"
                                                 required>
                                         </div>
-                                        <!-- Tipe Kamar dan Harga (semua wajib ada) -->
-                                        <!-- Tipe Kamar dan Harga (semua wajib ada) -->
-                                        <div class="mb-3">
-                                            <label class="form-label">Harga Kamar Quad</label>
-                                            <input type="number" class="form-control" name="harga_kamar_quad" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label">Harga Kamar Triple</label>
-                                            <input type="number" class="form-control" name="harga_kamar_triple"
-                                                required>
-                                        </div>
-
                                         <div class="mb-3">
                                             <label class="form-label">Harga Kamar Double</label>
                                             <input type="number" class="form-control" name="harga_kamar_double"
                                                 required>
                                         </div>
-
+                                        <div class="mb-3">
+                                            <label class="form-label">Harga Kamar Triple</label>
+                                            <input type="number" class="form-control" name="harga_kamar_triple"
+                                                required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Harga Kamar Quad</label>
+                                            <input type="number" class="form-control" name="harga_kamar_quad" required>
+                                        </div>
                                         <div id="jadwal-container">
                                             <div class="jadwal-item mb-2">
                                                 <label for="tanggal" class="form-label">Tanggal Keberangkatan</label>
@@ -283,7 +278,8 @@
                                         - Program Hari: {{ $paket->program_hari }}<br>
                                         - Bandara: {{ $paket->bandara }}<br>
                                         @foreach ($paket->tipeKamars as $tipeKamar)
-                                            - Tipe : {{ $tipeKamar->tipe }},  Harga ${{ $tipeKamar->harga }}<br>
+                                            - Tipe Kamar: {{ $tipeKamar->tipe }},
+                                            ${{ number_format($tipeKamar->harga - $paket->harga, 0, ',', '.') }}<br>
                                         @endforeach
                                     </td>
                                     <td>

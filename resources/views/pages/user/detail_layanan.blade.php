@@ -58,12 +58,12 @@
                             <div class="room-header">
                                 <strong>{{ ucfirst($tipe->tipe) }}</strong>
                                 <span class="room-type">
-                                    @if ($tipe->tipe == 'quad')
-                                        (1 Kamar Ber-4)
-                                    @elseif ($tipe->tipe == 'double')
+                                    @if ($tipe->tipe == 'double')
                                         (1 Kamar Ber-2)
                                     @elseif ($tipe->tipe == 'triple')
                                         (1 Kamar Ber-3)
+                                    @elseif ($tipe->tipe == 'quad')
+                                        (1 Kamar Ber-4)
                                     @endif
                                 </span>
                             </div>

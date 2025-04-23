@@ -42,7 +42,8 @@
                     <select class="form-select">
                         @if ($paket->detail_paket && $paket->detail_paket->count() > 0)
                             @foreach ($paket->detail_paket as $detail)
-                            <option>{{ \Carbon\Carbon::parse($detail->tanggal_keberangkatan)->format('d-m-Y') }} (Seat Tersedia {{$detail->jumlah_seat}})
+                                <option>{{ \Carbon\Carbon::parse($detail->tanggal_keberangkatan)->format('d-m-Y') }} (Seat
+                                    Tersedia {{ $detail->jumlah_seat }})
                                 </option>
                             @endforeach
                         @else
@@ -58,7 +59,9 @@
                             <strong>Quad</strong> <span class="room-type">(1 Kamar Ber-4)</span>
                         </div>
                         <div class="room-price">
-                            Harga : <span class="price">$ 20,000</span>/pax
+                            Harga : <span class="price">
+                                Rp {{ number_format($hargaKamar['quad'] ?? 0, 0, ',', '.') }}
+                            </span>/pax
                         </div>
                         <div class="room-input d-flex">
                             <label for="number-input" class="form-label">Jumlah</label>
@@ -74,7 +77,9 @@
                             <strong>Double</strong> <span class="room-type">(1 Kamar Ber-2)</span>
                         </div>
                         <div class="room-price">
-                            Harga : <span class="price">$ 27,500</span>/pax
+                            Harga : <span class="price">
+                                Rp {{ number_format($hargaKamar['double'] ?? 0, 0, ',', '.') }}
+                            </span>/pax
                         </div>
                         <div class="room-input d-flex">
                             <label for="number-input" class="form-label">Jumlah</label>
@@ -90,8 +95,9 @@
                             <strong>Triple</strong> <span class="room-type">(1 Kamar Ber-3)</span>
                         </div>
                         <div class="room-price">
-                            Harga : <span class="price">$ 27,500</span>/pax
-                        </div>
+                            Harga : <span class="price">
+                                Rp {{ number_format($hargaKamar['triple'] ?? 0, 0, ',', '.') }}
+                            </span>/pax                        </div>
                         <div class="room-input d-flex">
                             <label for="number-input" class="form-label">Jumlah</label>
                             <input type="number" class="form-control custom-input" id="number-input" min="0"

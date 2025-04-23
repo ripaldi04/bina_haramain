@@ -105,12 +105,31 @@
                                             <input type="text" class="form-control" id="paketHarga" name="harga"
                                                 required>
                                         </div>
+                                        <!-- Tipe Kamar dan Harga (semua wajib ada) -->
+                                        <!-- Tipe Kamar dan Harga (semua wajib ada) -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Harga Kamar Quad</label>
+                                            <input type="number" class="form-control" name="harga_kamar_quad" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Harga Kamar Triple</label>
+                                            <input type="number" class="form-control" name="harga_kamar_triple"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Harga Kamar Double</label>
+                                            <input type="number" class="form-control" name="harga_kamar_double"
+                                                required>
+                                        </div>
+
                                         <div id="jadwal-container">
                                             <div class="jadwal-item mb-2">
                                                 <label for="tanggal" class="form-label">Tanggal Keberangkatan</label>
                                                 <input type="date" name="tanggal_keberangkatan[]"
                                                     class="form-control mb-1" required>
-                                                    <label for="seat" class="form-label">Jumlah Seat</label>
+                                                <label for="seat" class="form-label">Jumlah Seat</label>
                                                 <input type="number" name="jumlah_seat[]" class="form-control"
                                                     placeholder="Jumlah Seat" required>
                                             </div>
@@ -256,12 +275,16 @@
                                             class="clickable-image" style="cursor: pointer;">
                                     </td>
                                     <td>{{ $paket->nama_paket }}</td>
+
                                     <td style="text-align: left;">
                                         - Hotel Makkah: {{ $paket->hotel_mekkah }}<br>
                                         - Hotel Madinah: {{ $paket->hotel_madinah }}<br>
                                         - Maskapai: {{ $paket->maskapai }}<br>
                                         - Program Hari: {{ $paket->program_hari }}<br>
                                         - Bandara: {{ $paket->bandara }}<br>
+                                        @foreach ($paket->tipeKamars as $tipeKamar)
+                                            - Tipe : {{ $tipeKamar->tipe }},  Harga ${{ $tipeKamar->harga }}<br>
+                                        @endforeach
                                     </td>
                                     <td>
                                         <ul style="padding-left: 16px; margin: 0;">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TipeKamarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LandingBannerController;
@@ -124,3 +125,6 @@ Route::get('admin/edit-banner/{id}', [AdminLandingPageController::class, 'editBa
 Route::post('admin/update-banner/{id}', [AdminLandingPageController::class, 'updateBanner'])->name('admin.banner.update');
 
 Route::get('/admin/paket/{id}/detail-paket', [PaketController::class, 'getDetailPaket']);
+
+Route::resource('tipe-kamar', TipeKamarController::class);
+

@@ -56,6 +56,9 @@ class PaketController extends Controller
             'program_hari' => 'required|integer|min:1',
             'tanggal_keberangkatan.*' => 'required|date',
             'jumlah_seat.*' => 'required|integer|min:1',
+            'harga_kamar_quad' => 'required|numeric',
+            'harga_kamar_triple' => 'required|numeric',
+            'harga_kamar_double' => 'required|numeric',
         ]);
 
         $path = $request->file('gambar')->store('images/paket', 'public');
@@ -85,6 +88,18 @@ class PaketController extends Controller
             'jenis' => $request->jenis, // default
             'program_hari' => $request->program_hari,
         ]);
+        $tipeKamarData = [
+            ['tipe' => 'quad', 'harga' => $request->harga_kamar_quad],
+            ['tipe' => 'double', 'harga' => $request->harga_kamar_double],
+            ['tipe' => 'triple', 'harga' => $request->harga_kamar_triple],
+        ];
+
+        foreach ($tipeKamarData as $data) {
+            $paket->tipeKamars()->create([
+                'tipe' => $data['tipe'],
+                'harga' => $data['harga'],
+            ]);
+        }
 
         // Simpan semua jadwal keberangkatan (detail_paket)
         foreach ($request->tanggal_keberangkatan as $index => $tanggal) {
@@ -104,8 +119,15 @@ class PaketController extends Controller
      */
     public function show(string $id)
     {
-        $paket = Paket::with(['detail_layanan', 'detail_paket'])->findOrFail($id);
-        return view('pages.user.detail_layanan', compact('paket'));
+        $paket = Paket::with(['detail_layanan', 'detail_paket', 'tipeKamars'])->findOrFail($id);
+
+        $hargaKamar = [
+            'quad' => optional($paket->tipeKamars->firstWhere('tipe', 'quad'))->harga,
+            'double' => optional($paket->tipeKamars->firstWhere('tipe', 'double'))->harga,
+            'triple' => optional($paket->tipeKamars->firstWhere('tipe', 'triple'))->harga,
+        ];
+
+        return view('pages.user.detail_layanan', compact('paket', 'hargaKamar'));
     }
 
     /**

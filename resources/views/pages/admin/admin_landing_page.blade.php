@@ -123,31 +123,79 @@
         </div>
 
         {{-- Highlight 2 --}}
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="m-0">Highlight 2</h5>
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="m-0">Highlight 2</h5>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Header</th>
+                    <th>Deskripsi</th>
+                    <th>Gambar</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($highlights2 as $item)
+                    <tr>
+                        <td>{{ $item->header }}</td>
+                        <td>{{ $item->deskripsi }}</td>
+                        <td><img src="{{ asset('storage/' . $item->image_url) }}" width="100" class="img-fluid" /></td>
+                        <td>
+                            <!-- Tombol Edit -->
+                            <button class="btn btn-sm btn-primary edit-highlight2" data-id="{{ $item->id }}" 
+                                    data-header="{{ $item->header }}" 
+                                    data-deskripsi="{{ $item->deskripsi }}" 
+                                    data-image_url="{{ $item->image_url }}">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Edit Highlight 2 -->
+<div class="modal fade" id="editHighlight2Modal" tabindex="-1" aria-labelledby="editHighlight2ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editHighlight2ModalLabel">Edit Highlight 2</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="card-body table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Header</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($highlights2 as $item)
-                            <tr>
-                                <td>{{ $item->header }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            <form id="highlight2-edit-form" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <div class="modal-body">
+        <input type="hidden" name="id" id="highlight2-id">
+        <div class="mb-3">
+            <label for="header" class="form-label">Header</label>
+            <input type="text" class="form-control" id="header" name="header" required>
         </div>
+        <div class="mb-3">
+            <label for="deskripsi" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image_url" class="form-label">Gambar</label>
+            <input type="file" class="form-control" id="image_url" name="image_url">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
+    </div>
+</form>
+
+        </div>
+    </div>
+</div>
+
+
 
         {{-- Highlight Points --}}
         <div class="card mb-4">

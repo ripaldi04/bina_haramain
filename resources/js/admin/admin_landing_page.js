@@ -33,3 +33,39 @@ $(document).ready(function () {
         $('#editBannerModal').modal('show');
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.edit-highlight2');
+    
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Ambil data dari button dan masukkan ke dalam form modal
+            document.getElementById('highlight2-id').value = this.getAttribute('data-id');
+            document.getElementById('header').value = this.getAttribute('data-header');
+            document.getElementById('deskripsi').value = this.getAttribute('data-deskripsi');
+            // Jika diperlukan menampilkan gambar yang lama, bisa ditambahkan di sini
+            // document.getElementById('image_url').value = this.getAttribute('data-image_url');
+        });
+    });
+});
+
+document.querySelectorAll('.edit-highlight2').forEach(button => {
+    button.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+        const header = this.getAttribute('data-header');
+        const deskripsi = this.getAttribute('data-deskripsi');
+
+        // Isi form dengan data yang diklik
+        document.getElementById('highlight2-id').value = id;
+        document.getElementById('header').value = header;
+        document.getElementById('deskripsi').value = deskripsi;
+
+        // Update action form agar menyertakan ID
+        const form = document.getElementById('highlight2-edit-form');
+        form.action = `/admin/highlight2/${id}`;
+
+        // Tampilkan modal
+        const modal = new bootstrap.Modal(document.getElementById('editHighlight2Modal'));
+        modal.show();
+    });
+});

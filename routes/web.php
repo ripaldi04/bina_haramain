@@ -120,3 +120,6 @@ Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])-
 Route::get('admin/edit-banner/{id}', [AdminLandingPageController::class, 'editBanner'])->name('admin.banner.edit');
 Route::post('admin/update-banner/{id}', [AdminLandingPageController::class, 'updateBanner'])->name('admin.banner.update');
 
+Route::get('/admin/landing/highlight2/{id}/edit', [AdminLandingPageController::class, 'editHighlight2'])->name('admin.highlight2.edit');
+Route::put('/admin/highlight2/{id}', [AdminLandingPageController::class, 'updateHighlight2'])->name('admin.highlight2.update');
+Route::get('/', [AdminLandingPageController::class, 'showHome'])->name('home');

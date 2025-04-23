@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\LandingBanner;
+use App\Models\LandingHighlight2;
 
 class AdminLandingPageController extends Controller
 {
@@ -23,6 +24,7 @@ class AdminLandingPageController extends Controller
             'questions' => DB::table('landing_question')->get(),
         ]);
     }
+    
     public function editBanner($id)
     {
         // Ambil data banner berdasarkan id
@@ -53,4 +55,41 @@ class AdminLandingPageController extends Controller
 
     return redirect()->route('admin.landing.index')->with('success', 'Banner berhasil diperbarui');
 }
+
+public function editHighlight2($id)
+{
+    $highlight = LandingHighlight2::findOrFail($id);
+    return view('admin.edit-highlight2', compact('highlight'));
+}
+
+public function updateHighlight2(Request $request, $id)
+{
+    $request->validate([
+        'header' => 'required|string|max:255',
+        'deskripsi' => 'nullable|string',
+        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $highlight = LandingHighlight2::findOrFail($id);
+    $highlight->header = $request->header;
+    $highlight->deskripsi = $request->deskripsi;
+
+    if ($request->hasFile('image_url')) {
+        $imagePath = $request->file('image_url')->store('highlight2_images', 'public');
+        $highlight->image_url = $imagePath;
+    }
+
+    $highlight->save();
+
+    return redirect()->route('admin.landing.index')->with('success', 'Highlight 2 berhasil diperbarui');
+}
+
+public function showHome()
+{
+    $banner = LandingBanner::first(); // Ambil banner pertama
+    $highlight2 = LandingHighlight2::first(); // Ambil highlight 2 pertama
+    return view('pages.user.home', compact('banner', 'highlight2'));
+}
+
+
 }

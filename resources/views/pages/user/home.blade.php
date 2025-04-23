@@ -184,22 +184,34 @@
                 <img src="./images/v121_93.png" alt="ini gambar" width="352px" height="406"
                     style="border-radius: 30px;">
             </div>
-            <div class="row p-3 d-flex justify-content-center align-items-start g-5"
-                style="background-color: white; width: 90%;">
-                <div class="col-md-6 col-12 mbl-img-none">
-                    <img src="./images/v121_100.png" width="450px" height="450px" style="border-radius: 30px"
-                        alt="">
-                </div>
-                <div class="col-md-6 col-12">
-                    <h5 class="card-title fs-2" style="color: var(--primary-color);">Mengapa Harus Pilih PT. Bina
-                        Haramain ?</h5>
-                    <p class="mt-5 lh-lg">PT. Bina Haramain adalah perusahaan travel profesional dengan pengalaman 3
-                        tahun dalam penyelenggaraan perjalanan haji. Kami berkomitmen memberikan layanan terbaik dengan
-                        pemahaman mendalam tentang proses, regulasi, dan kebutuhan ibadah
-                        haji, sehingga perjalanan Anda menjadi lebih nyaman, aman, dan tanpa kendala. Dengan tim
-                        berpengalaman dan layanan eksklusif, kami siap mengantarkan Anda menuju Baitullah dengan
-                        kemudahan, kepastian, dan kenyamanan terbaik.</p>
-                </div>
+
+<div>
+@php
+    $highlight2 = \App\Models\LandingHighlight2::first(); // Ambil data Highlight 2
+@endphp
+@if ($highlight2)
+    <div class="row p-3 d-flex justify-content-center align-items-start g-5"
+         style="background-color: white; width: 90%;">
+        {{-- Gambar di kiri --}}
+        <div class="col-md-6 col-12 mbl-img-none">
+            <img src="{{ asset('storage/' . $highlight2->image_url) }}"
+                 width="450" height="450"
+                 style="border-radius: 30px;" alt="Highlight 2 Image">
+        </div>
+        {{-- Teks di kanan --}}
+        <div class="col-md-6 col-12">
+            <h5 class="card-title fs-2" style="color: var(--primary-color);">
+                {{ $highlight2->header }}
+            </h5>
+            <p class="mt-5 lh-lg">
+                {{ $highlight2->deskripsi }}
+            </p>
+        </div>
+    </div>
+@endif
+</div>
+
+                
                 <div class="row g-3 align-items-start">
                     <div class="col-6 p-0">
                         <div class="row g-0 align-items-center mb-5 d-flex item-row">

@@ -69,7 +69,7 @@
                             </div>
                             <div class="room-price">
                                 Harga : <span class="price">
-                                    Rp{{ number_format($tipe->harga, 0, ',', '.') }}
+                                    ${{ number_format($tipe->harga, 0, ',', '.') }}
                                 </span>/pax
                             </div>
                             <div class="room-input d-flex">

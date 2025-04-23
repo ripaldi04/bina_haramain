@@ -12,3 +12,24 @@ window.showVerifyAlert = function () {
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const inputs = document.querySelectorAll('.kamar-input');
+    const totalHargaEl = document.getElementById('totalHarga');
+
+    inputs.forEach(input => {
+        input.addEventListener('input', hitungTotal);
+    });
+
+    function hitungTotal() {
+        let total = 0;
+        inputs.forEach(input => {
+            const jumlah = parseInt(input.value) || 0;
+            const harga = parseInt(input.dataset.harga) || 0;
+            total += jumlah * harga;
+        });
+
+        // Format rupiah
+        totalHargaEl.innerText = `$ ${total.toLocaleString('id-ID')}`;
+    }
+});

@@ -74,8 +74,8 @@
                             </div>
                             <div class="room-input d-flex">
                                 <label for="jumlah_{{ $tipe->tipe }}" class="form-label">Jumlah</label>
-                                <input type="number" class="form-control custom-input" id="jumlah_{{ $tipe->tipe }}"
-                                    name="jumlah_{{ $tipe->tipe }}" min="0" max="100">
+                                <input type="number" class="form-control custom-input kamar-input" id="jumlah_{{ $tipe->tipe }}"
+                                    name="jumlah_{{ $tipe->tipe }}" data-harga="{{ $tipe->harga }}" min="0" max="100">
                                 <div class="tombol">Pax</div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
 
 
                     <div class="total-harga">
-                        <p>Total: <span>USD 0,00</span></p>
+                        <p>Total: <span id="totalHarga">USD 0,00</span></p>
                     </div>
 
                     @auth

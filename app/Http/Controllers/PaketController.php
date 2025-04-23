@@ -88,10 +88,13 @@ class PaketController extends Controller
             'jenis' => $request->jenis, // default
             'program_hari' => $request->program_hari,
         ]);
+
+        $hargaPaketDasar = $request->harga;
+
         $tipeKamarData = [
-            ['tipe' => 'quad', 'harga' => $request->harga_kamar_quad],
-            ['tipe' => 'double', 'harga' => $request->harga_kamar_double],
-            ['tipe' => 'triple', 'harga' => $request->harga_kamar_triple],
+            ['tipe' => 'quad', 'harga' => $request->harga_kamar_quad + $hargaPaketDasar],
+            ['tipe' => 'double', 'harga' => $request->harga_kamar_double + $hargaPaketDasar],
+            ['tipe' => 'triple', 'harga' => $request->harga_kamar_triple + $hargaPaketDasar],
         ];
 
         foreach ($tipeKamarData as $data) {
@@ -119,7 +122,7 @@ class PaketController extends Controller
      */
     public function show(string $id)
     {
-        $paket = Paket::with(['detail_layanan', 'detail_paket', 'tipeKamars'])->findOrFail($id) ;
+        $paket = Paket::with(['detail_layanan', 'detail_paket', 'tipeKamars'])->findOrFail($id);
         return view('pages.user.detail_layanan', compact('paket'));
     }
 

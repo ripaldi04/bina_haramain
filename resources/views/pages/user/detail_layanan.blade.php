@@ -53,58 +53,34 @@
 
                     <label>Kamar</label>
 
-                    <!--Quad Room-->
-                    <div class="room-box">
-                        <div class="room-header">
-                            <strong>Quad</strong> <span class="room-type">(1 Kamar Ber-4)</span>
+                    @foreach ($paket->tipeKamars as $tipe)
+                        <div class="room-box">
+                            <div class="room-header">
+                                <strong>{{ ucfirst($tipe->tipe) }}</strong>
+                                <span class="room-type">
+                                    @if ($tipe->tipe == 'quad')
+                                        (1 Kamar Ber-4)
+                                    @elseif ($tipe->tipe == 'double')
+                                        (1 Kamar Ber-2)
+                                    @elseif ($tipe->tipe == 'triple')
+                                        (1 Kamar Ber-3)
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="room-price">
+                                Harga : <span class="price">
+                                    Rp{{ number_format($tipe->harga, 0, ',', '.') }}
+                                </span>/pax
+                            </div>
+                            <div class="room-input d-flex">
+                                <label for="jumlah_{{ $tipe->tipe }}" class="form-label">Jumlah</label>
+                                <input type="number" class="form-control custom-input" id="jumlah_{{ $tipe->tipe }}"
+                                    name="jumlah_{{ $tipe->tipe }}" min="0" max="100">
+                                <div class="tombol">Pax</div>
+                            </div>
                         </div>
-                        <div class="room-price">
-                            Harga : <span class="price">
-                                Rp {{ number_format($hargaKamar['quad'] ?? 0, 0, ',', '.') }}
-                            </span>/pax
-                        </div>
-                        <div class="room-input d-flex">
-                            <label for="number-input" class="form-label">Jumlah</label>
-                            <input type="number" class="form-control custom-input" id="number-input" min="0"
-                                max="100">
-                            <div class="tombol">Pax</div>
-                        </div>
-                    </div>
+                    @endforeach
 
-                    <!-- Double  Room -->
-                    <div class="room-box">
-                        <div class="room-header">
-                            <strong>Double</strong> <span class="room-type">(1 Kamar Ber-2)</span>
-                        </div>
-                        <div class="room-price">
-                            Harga : <span class="price">
-                                Rp {{ number_format($hargaKamar['double'] ?? 0, 0, ',', '.') }}
-                            </span>/pax
-                        </div>
-                        <div class="room-input d-flex">
-                            <label for="number-input" class="form-label">Jumlah</label>
-                            <input type="number" class="form-control custom-input" id="number-input" min="0"
-                                max="100">
-                            <div class="tombol">Pax</div>
-                        </div>
-                    </div>
-
-                    <!--Triple Room-->
-                    <div class="room-box">
-                        <div class="room-header">
-                            <strong>Triple</strong> <span class="room-type">(1 Kamar Ber-3)</span>
-                        </div>
-                        <div class="room-price">
-                            Harga : <span class="price">
-                                Rp {{ number_format($hargaKamar['triple'] ?? 0, 0, ',', '.') }}
-                            </span>/pax                        </div>
-                        <div class="room-input d-flex">
-                            <label for="number-input" class="form-label">Jumlah</label>
-                            <input type="number" class="form-control custom-input" id="number-input" min="0"
-                                max="100">
-                            <div class="tombol">Pax</div>
-                        </div>
-                    </div>
 
                     <div class="total-harga">
                         <p>Total: <span>USD 0,00</span></p>
@@ -179,8 +155,7 @@
                             Fasilitas
                         </button>
                     </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body fw-bold">Biaya Sudah Termasuk (Include)</div>
                         <ul class="list-fasilitas">
                             <li><i class="bi bi-check-circle-fill green-icon"></i> Hotel Makkah (Deafah/Setaraf)</li>

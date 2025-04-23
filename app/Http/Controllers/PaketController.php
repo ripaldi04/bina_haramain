@@ -119,15 +119,8 @@ class PaketController extends Controller
      */
     public function show(string $id)
     {
-        $paket = Paket::with(['detail_layanan', 'detail_paket', 'tipeKamars'])->findOrFail($id);
-
-        $hargaKamar = [
-            'quad' => optional($paket->tipeKamars->firstWhere('tipe', 'quad'))->harga,
-            'double' => optional($paket->tipeKamars->firstWhere('tipe', 'double'))->harga,
-            'triple' => optional($paket->tipeKamars->firstWhere('tipe', 'triple'))->harga,
-        ];
-
-        return view('pages.user.detail_layanan', compact('paket', 'hargaKamar'));
+        $paket = Paket::with(['detail_layanan', 'detail_paket', 'tipeKamars'])->findOrFail($id) ;
+        return view('pages.user.detail_layanan', compact('paket'));
     }
 
     /**

@@ -69,10 +69,14 @@
                                 <li><i class="bi bi-geo-alt"></i> {{ $paket->bandara }}</li>
                             </ul>
                             <p class="fw-nomal text-dark">Harga Mulai Dari: <br>
-                                <span
-                                    class="fw-bolder fs-5 text-warning">${{ number_format($paket->harga, 0, ',', '.') }}</span><br>
+                                <span class="fw-bolder fs-5 text-warning">
+                                    @if ($paket && $paket->tipeKamars->isNotEmpty())
+                                        ${{ number_format($paket->tipeKamars->last()->harga, 0, ',', '.') }}
+                                    @endif
+                                </span><br>
                             </p>
-                            <a href="{{ route('layanan_haji.detail', $paket->id) }}" class="btn btn-dark w-100 fw-bolder">Detail
+                            <a href="{{ route('layanan_haji.detail', $paket->id) }}"
+                                class="btn btn-dark w-100 fw-bolder">Detail
                                 Paket</a>
                         </div>
                     </div>

@@ -221,6 +221,8 @@ class PaketController extends Controller
     public function destroy(string $id)
     {
         $paket = Paket::findOrFail($id);
+        $paket->tipeKamars()->delete();
+        $paket->detail_paket()->delete();
         // Hapus file gambar dari storage
         if ($paket->gambar && Storage::disk('public')->exists($paket->gambar)) {
             Storage::disk('public')->delete($paket->gambar);

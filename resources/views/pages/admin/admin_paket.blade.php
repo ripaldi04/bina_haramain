@@ -203,15 +203,27 @@
                                         <label for="editHarga" class="form-label">Harga</label>
                                         <input type="text" class="form-control" id="editHarga">
                                     </div>
+                                    <div class="col-md-4">
+                                        <label for="editHargaDouble" class="form-label">Harga Kamar Double</label>
+                                        <input type="number" class="form-control" id="editHargaDouble"
+                                            name="harga_kamar_double" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="editHargaTriple" class="form-label">Harga Kamar Triple</label>
+                                        <input type="number" class="form-control" id="editHargaTriple"
+                                            name="harga_kamar_triple" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="editHargaQuad" class="form-label">Harga Kamar Quad</label>
+                                        <input type="number" class="form-control" id="editHargaQuad"
+                                            name="harga_kamar_quad" required>
+                                    </div>
                                     <div class="row mb-2 jadwal-item">
                                         <div class="mb-3">
                                             <div>
                                                 <label class="form-label">Jadwal Keberangkatan & Jumlah Seat</label>
                                             </div>
                                             <div id="jadwalContainer"></div>
-                                            {{-- <button type="button" id="tambah-jadwal-edit"
-                                                class="btn btn-secondary mt-3">Tambah
-                                                Jadwal</button> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +314,10 @@
                                             data-hotel-mekkah="{{ $paket->hotel_mekkah }}"
                                             data-hotel-madinah="{{ $paket->hotel_madinah }}"
                                             data-maskapai="{{ $paket->maskapai }}" data-bandara="{{ $paket->bandara }}"
-                                            data-harga="{{ $paket->harga }}" data-gambar="{{ $paket->gambar }}"></i>
+                                            data-harga="{{ $paket->harga }}" data-gambar="{{ $paket->gambar }}"
+                                            data-harga-double="{{ $paket->tipeKamars->firstWhere('tipe', 'double')?->harga - $paket->harga }}"
+                                            data-harga-triple="{{ $paket->tipeKamars->firstWhere('tipe', 'triple')?->harga - $paket->harga }}"
+                                            data-harga-quad="{{ $paket->tipeKamars->firstWhere('tipe', 'quad')?->harga - $paket->harga }}"></i>
                                         <i class="fas fa-trash text-danger cursor-pointer delete-paket"
                                             data-id="{{ $paket->id }}"></i>
                                     </td>

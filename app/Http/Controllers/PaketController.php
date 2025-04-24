@@ -143,7 +143,8 @@ class PaketController extends Controller
      */
     public function edit(string $id)
     {
-        $paket = Paket::findOrFail($id);
+        // $paket = Paket::findOrFail(id: $id);
+        $paket = Paket::with(['tipeKamars', 'detail_paket'])->findOrFail($id);
         return response()->json($paket); // Untuk AJAX
     }
 
@@ -163,6 +164,9 @@ class PaketController extends Controller
             'harga' => 'required|numeric',
             'jenis' => 'required|string',
             'program_hari' => 'required|integer|min:1',
+            'harga_kamar_quad' => 'required|numeric',
+            'harga_kamar_triple' => 'required|numeric',
+            'harga_kamar_double' => 'required|numeric',
         ]);
 
         // Jika user upload gambar baru
@@ -186,6 +190,15 @@ class PaketController extends Controller
             'harga' => $request->harga,
             'jenis' => $request->jenis,
             'program_hari' => $request->program_hari,
+        ]);
+
+        // Update tipe kamar
+        $hargaDasar = $request->harga;
+        $paket->tipeKamars()->delete(); // Hapus semua dan buat ulang
+        $paket->tipeKamars()->createMany([
+            ['tipe' => 'double', 'harga' => $request->harga_kamar_double + $hargaDasar],
+            ['tipe' => 'triple', 'harga' => $request->harga_kamar_triple + $hargaDasar],
+            ['tipe' => 'quad', 'harga' => $request->harga_kamar_quad + $hargaDasar],
         ]);
 
         // Simpan tanggal keberangkatan baru

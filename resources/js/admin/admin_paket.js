@@ -68,6 +68,10 @@ $(document).ready(function () {
         $('#editMaskapai').val(data.maskapai);
         $('#editBandara').val(data.bandara);
         $('#editHarga').val(data.harga);
+        $('#editHargaDouble').val(data.hargaDouble);
+        $('#editHargaTriple').val(data.hargaTriple);
+        $('#editHargaQuad').val(data.hargaQuad);
+
 
         // Simpan ID ke button saveChanges
         $('#saveChanges').data('id', data.id);
@@ -124,6 +128,10 @@ $(document).ready(function () {
         formData.append('maskapai', $('#editMaskapai').val());
         formData.append('bandara', $('#editBandara').val());
         formData.append('harga', $('#editHarga').val());
+        formData.append('harga_kamar_double', $('#editHargaDouble').val());
+        formData.append('harga_kamar_triple', $('#editHargaTriple').val());
+        formData.append('harga_kamar_quad', $('#editHargaQuad').val());
+
 
         // Cek jika gambar diubah
         const newImage = $('#editGambar')[0].files[0];

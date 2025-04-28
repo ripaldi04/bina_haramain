@@ -1,26 +1,21 @@
-$('#editButton').on('click', function (event) {
-    var button = $(this);
-    var id = button.data('id');
-    var header1 = button.data('header1');
-    var header2 = button.data('header2');
-    var deskripsi = button.data('deskripsi');
-    var image_url = button.data('image_url');
+$(document).on('click', '.editBannerBtn', function () {
+    const id = $(this).data('id');
+    const header1 = $(this).data('header1');
+    const header2 = $(this).data('header2');
+    const deskripsi = $(this).data('deskripsi');
+    const image_url = $(this).data('image_url');
 
-    var modal = $('#editBannerModal'); // Referensi modal
-    modal.find('.modal-body #banner_id').val(id);
-    modal.find('.modal-body #header1').val(header1);
-    modal.find('.modal-body #header2').val(header2);
-    modal.find('.modal-body #deskripsi').val(deskripsi);
-    modal.find('.modal-body #currentImage').attr('src', image_url);
-
-    // Gunakan modal API untuk menampilkan modal
-    var modalInstance = new bootstrap.Modal(modal[0]);
-    modalInstance.show();
+    $('#banner_id').val(id);
+    $('#header1').val(header1);
+    $('#header2').val(header2);
+    $('#deskripsi').val(deskripsi);
+    $('#editBannerForm').attr('action', '/admin/update-banner/' + id);
+    $('#editBannerModal').modal('show');
 });
 
 
 $(document).ready(function () {
-    $('.btn-warning').click(function () {
+    $('.editBannerBtn').click(function () {
         const id = $(this).data('id');
         $('#banner_id').val(id);
         $('#header1').val($(this).data('header1'));
@@ -69,3 +64,47 @@ document.querySelectorAll('.edit-highlight2').forEach(button => {
         modal.show();
     });
 });
+
+
+$(document).ready(function () {
+    $('.edit-highlight-point').on('click', function () {
+        let id = $(this).data('id');
+
+        $.get(`/admin/landing/highlightpoint/${id}/edit`, function (data) {
+            $('#highlightPointId').val(data.id);
+            $('#highlightPointTitle').val(data.title);
+            $('#highlightPointDeskripsi').val(data.deskripsi);
+            $('#previewGambar').attr('src', '/images/' + data.gambar);
+            
+        });
+    });
+
+    $('#highlightPointsForm').on('submit', function (e) {
+        e.preventDefault();
+    
+        let formData = new FormData(this); // cukup ambil langsung dari `this`
+        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+    
+        let id = $('#highlightPointId').val(); // pastikan hidden input ada nilainya
+    
+        $.ajax({
+            url: '/admin/highlight-points/update/' + id,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                $('#highlightPointsModal').modal('hide');
+                location.reload();
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('Gagal menyimpan data.');
+            }
+        });
+    });
+}); 
+
+
+
+

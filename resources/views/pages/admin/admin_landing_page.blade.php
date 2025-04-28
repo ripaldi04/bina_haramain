@@ -35,11 +35,14 @@
                                 </td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <button class="btn btn-warning btn-sm" id="editButton" data-id="{{ $banner->id }}"
-                                        data-header1="{{ $banner->header1 }}" data-header2="{{ $banner->header2 }}"
-                                        data-deskripsi="{{ $banner->deskripsi }}" data-image_url="{{ $banner->image_url }}">
-                                        Edit
-                                    </button>
+                                    <button class="btn btn-warning btn-sm editBannerBtn"
+    data-id="{{ $banner->id }}"
+    data-header1="{{ $banner->header1 }}"
+    data-header2="{{ $banner->header2 }}"
+    data-deskripsi="{{ $banner->deskripsi }}"
+    data-image_url="{{ $banner->image_url }}">
+    Edit
+</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -54,7 +57,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editBannerModalLabel">Edit Banner</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -158,7 +161,6 @@
         </table>
     </div>
 </div>
-
 <!-- Modal Edit Highlight 2 -->
 <div class="modal fade" id="editHighlight2Modal" tabindex="-1" aria-labelledby="editHighlight2ModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -190,39 +192,86 @@
         <button type="submit" class="btn btn-primary">Simpan</button>
     </div>
 </form>
-
         </div>
     </div>
 </div>
 
 
+{{-- Highlight Points --}}
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="m-0">Highlight Points</h5>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Header</th>
+                    <th>Deskripsi</th>
+                    <th>Gambar</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($highlightPoints as $point)
+                <tr>
+                    <td>{{ $point->title }}</td>
+                    <td>{{ $point->deskripsi }}</td>
+                    <td>
+                        <img src="{{ asset('storage/' . $point->image_url) }}" width="100" class="img-fluid" />
+                    </td>
+                    <td>
+                        <button class="btn btn-primary edit-highlight-point"
+                                data-id="{{ $point->id }}"
+                                data-title="{{ $point->title }}"
+                                data-deskripsi="{{ $point->deskripsi }}"
+                                data-image="{{ $point->image_url }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#highlightPointsModal">
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        {{-- Highlight Points --}}
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="m-0">Highlight Points</h5>
-            </div>
-            <div class="card-body table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($highlightPoints as $item)
-                            <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+<!-- Modal Highlight Points -->
+<div class="modal fade" id="highlightPointsModal" tabindex="-1" aria-labelledby="highlightPointsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="highlightPointsModalLabel">Edit Highlight Point</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="highlightPointsForm" enctype="multipart/form-data">
+        <div class="modal-body">
+          <input type="hidden" id="highlightPointId" name="id">
+
+          <div class="mb-3">
+            <label for="highlightPointTitle" class="form-label">Judul</label>
+            <input type="text" class="form-control" id="highlightPointTitle" name="title">
+          </div>
+          <div class="mb-3">
+            <label for="highlightPointDeskripsi" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="highlightPointDeskripsi" name="deskripsi"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="highlightPointImage" class="form-label">Gambar</label>
+            <input type="file" class="form-control" id="highlightPointImage" name="image">
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 
         {{-- Keunggulan --}}
         <div class="card mb-4">

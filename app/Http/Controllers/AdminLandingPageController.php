@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\LandingBanner;
 use App\Models\LandingHighlight2;
+use App\Models\LandingHighlightPoints;
 
 class AdminLandingPageController extends Controller
 {
@@ -84,11 +85,45 @@ public function updateHighlight2(Request $request, $id)
     return redirect()->route('admin.landing.index')->with('success', 'Highlight 2 berhasil diperbarui');
 }
 
+
+public function editHighlightPoint($id)
+{
+    $highlightPoint = LandingHighlightPoints::findOrFail($id);
+    return response()->json($highlightPoint);
+}
+
+public function updateHighlightPoint(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'deskripsi' => 'required|string',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+    ]);
+
+    $highlight = LandingHighlightPoints::findOrFail($id);
+    $highlight->title = $request->title;
+    $highlight->deskripsi = $request->deskripsi;
+
+    // Upload gambar jika ada
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('highlight_points', 'public');
+        $highlight->image_url = $imagePath; // simpan path yang sudah cocok
+    }
+    
+
+    $highlight->save();
+
+    return response()->json(['success' => true]);
+}
+
+
+
 public function showHome()
 {
     $banner = LandingBanner::first(); // Ambil banner pertama
     $highlight2 = LandingHighlight2::first(); // Ambil highlight 2 pertama
-    return view('pages.user.home', compact('banner', 'highlight2'));
+    $highlightPoints = LandingHighlightPoints::all();
+    return view('pages.user.home', compact('banner', 'highlight2', 'highlightPoints'));
 }
 
 

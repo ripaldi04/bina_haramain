@@ -211,75 +211,24 @@
 @endif
 </div>
 
-                
-                <div class="row g-3 align-items-start">
-                    <div class="col-6 p-0">
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_107.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Paket Haji Lebih Murah</h5>
-                                <p>Dapatkan harga terbaik dengan fasilitas bintang ⭐⭐⭐⭐⭐ Lebih terjangkau, lebih mewah!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_120.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Haji Mudah Sesuai Syariah</h5>
-                                <p>Ibadah haji lebih tenang & berkah dengan layanan sesuai Syariah – Tanpa Riba, Tanpa
-                                    Akad Bathil, Tanpa Gharar!</p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_115.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>GARANSI Tahun 2025 Berangkat Haji</h5>
-                                <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
-                            </div>
-                        </div>
+<div class="row g-3 align-items-start">
+    @foreach ($highlightPoints->chunk(ceil($highlightPoints->count() / 2)) as $chunk)
+        <div class="col-6 p-0">
+            @foreach ($chunk as $point)
+                <div class="row g-0 align-items-center mb-5 d-flex item-row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <img src="{{ asset('storage/' . $point->image_url) }}" class="img-fluid fixed-img">
                     </div>
-
-                    <div class="col-6 p-0">
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/tawaf.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Program Eksklusif Haji</h5>
-                                <p>Selama 26 Hari Anda akan dibimbing untuk pengalaman haji yang berkesan meraih Mabrur
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_112.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Jaminan Kepuasan Layanan</h5>
-                                <p>Kami berkomitmen memberikan layanan & fasilitas terbaik, memastikan semua kebutuhan
-                                    Anda terpenuhi dengan sempurna.</p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_115.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Garansi 100% UANG KEMBALI</h5>
-                                <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
-                            </div>
-                        </div>
+                    <div class="col-10 h-100 ps-3">
+                        <h5>{{ $point->title }}</h5>
+                        <p>{{ $point->deskripsi }}</p>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-    </div>
+    @endforeach
+</div>
+
     <div class="mt-5 keunggulan">
         <div class="container">
             <h5 class="fw-bold fs-2 text-center" style="margin-top: 5%;">Keunggulan Travel Kami</h5>

@@ -23,26 +23,32 @@
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3">
                                 <label>Nama Lengkap Pemesan</label>
-                                <input type="text" class="form-control" placeholder="Nama Lengkap Pemesan" />
+                                <input type="text" class="form-control" placeholder="Nama Lengkap Pemesan"
+                                    name="nama_pemesan" />
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Jenis Kelamin Pemesan</label>
-                                <input type="text" class="form-control" placeholder="Jenis Kelamin Pemesan" />
+                                <select class="form-control" name="jenis_kelamin_pemesan" id="jenis_kelamin_pemesan" required>
+                                    <option value="Laki-Laki">Laki-Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Nomor Telepon Pemesan</label>
                                 <div class="input-group">
                                     <span class="input-group-text kode-negara">+62</span>
-                                    <input type="text" class="form-control" placeholder="Masukkan Nomor telepon" />
+                                    <input type="text" class="form-control" placeholder="Masukkan Nomor telepon"
+                                        name="telepon_pemesan" />
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Email Pemesan</label>
-                                <input type="email" class="form-control" placeholder="Email Pemesan" />
+                                <input type="email" class="form-control" placeholder="Email Pemesan"
+                                    name="email_pemesan" />
                             </div>
                             <div class="col-12 mb-3">
                                 <label>Catatan Pemesan</label>
-                                <input type="text" class="form-control" placeholder="Catatan Pemesan" />
+                                <input type="text" class="form-control" placeholder="Catatan Pemesan" name="catatan" />
                             </div>
                         </div>
 
@@ -78,10 +84,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="jenisKelamin{{ $jamaahCount }}">Jenis Kelamin</label>
-                                                <select id="jenisKelamin{{ $jamaahCount }}" name="jenis_kelamin[]"
+                                                <select id="jenisKelamin{{ $jamaahCount }}" name="jenis_kelamin_jamaah[]"
                                                     class="form-control">
-                                                    <option selected>Laki - Laki</option>
-                                                    <option>Perempuan</option>
+                                                    <option value="Laki - Laki" selected>Laki - Laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
                                                 </select>
                                             </div>
                                         </div>

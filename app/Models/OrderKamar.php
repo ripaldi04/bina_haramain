@@ -30,4 +30,8 @@ class OrderKamar extends Model
     {
         return $this->belongsTo(TipeKamar::class);
     }
+    public function jamaahs()
+    {
+        return $this->hasMany(Jamaah::class, 'order_kamar_id');
+    }
 }

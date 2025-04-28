@@ -19,6 +19,10 @@ use App\Http\Controllers\User\UserPaketController;
 
 // Route untuk halaman pertama (form pemesanan)
 // Route::post('/pesan-paket', [OrderPaketController::class, 'prosesPesan'])->name('prosesPesan');
+
+
+Route::get('/pesanan-sukses', [OrderPaketController::class, 'pesananSukses'])->name('pesananSukses');
+
 Route::post('/proses-pesan', [OrderPaketController::class, 'prosesPesan'])->name('prosesPesan');
 
 

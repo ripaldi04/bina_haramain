@@ -44,14 +44,13 @@ class OrderPaket extends Model
         return $this->belongsTo(User::class);
     }
 
-    // // Relasi ke tabel OrderKamar
-    // public function orderKamar()
-    // {
-    //     return $this->hasMany(OrderKamar::class);
-    // }
     public function orderKamar()
     {
         return $this->hasMany(OrderKamar::class);
+    }
+    public function jamaah()
+    {
+        return $this->hasMany(Jamaah::class, 'order_paket_id');
     }
 
 }

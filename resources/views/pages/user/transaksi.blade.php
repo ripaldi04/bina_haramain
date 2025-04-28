@@ -6,10 +6,6 @@
     @vite(['resources/css/user/transaksi.css'])
 @endsection
 
-@section('script')
-    @vite(['resources/js/user/transaksi.js'])
-@endsection
-
 @section('content')
     <div class="container my-5">
         <h4 class="mb-4 fw-bold">Transaksi Paket Haji – Selesaikan Pemesanan</h4>
@@ -18,83 +14,95 @@
             <div class="col-lg-8">
                 <div class="p-4 mb-4">
                     <!-- Data Pemesan -->
-                    <div class="d-flex flex-column align-items-center mb-4">
-                        <span class="judul-pemesan">Data Pemesan</span>
-                        <div class="garis-pemesan mt-1"></div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6 mb-3">
-                            <label>Nama Lengkap Pemesan</label>
-                            <input type="text" class="form-control" placeholder="Nama Lengkap Pemesan" />
+                    <form action="{{ route('prosesTransaksi', $order->id) }}" method="POST">
+                        @csrf
+                        <div class="d-flex flex-column align-items-center mb-4">
+                            <span class="judul-pemesan">Data Pemesan</span>
+                            <div class="garis-pemesan mt-1"></div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Jenis Kelamin Pemesan</label>
-                            <input type="text" class="form-control" placeholder="Jenis Kelamin Pemesan" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Nomor Telepon Pemesan</label>
-                            <div class="input-group">
-                                <span class="input-group-text kode-negara">+62</span>
-                                <input type="text" class="form-control" placeholder="Masukkan Nomor telepon" />
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label>Nama Lengkap Pemesan</label>
+                                <input type="text" class="form-control" placeholder="Nama Lengkap Pemesan" />
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Email Pemesan</label>
-                            <input type="email" class="form-control" placeholder="Email Pemesan" />
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label>Catatan Pemesan</label>
-                            <input type="text" class="form-control" placeholder="Catatan Pemesan" />
-                        </div>
-                    </div>
-
-                    <!-- Data Jamaah -->
-                    <div class="d-flex flex-column align-items-center mb-4">
-                        <span class="judul-pemesan">Data Jamaah</span>
-                        <div class="garis-pemesan mt-1"></div>
-                    </div>
-
-                    <div class="row" id="jamaahContainer">
-                        @for ($i = 1; $i <= 1; $i++)
-                            <div class="col-md-6 mb-4">
-                                <div class="jamaah-box">
-                                    <div class="jamaah-header">Jamaah {{ $i }} (Kamar Quad)</div>
-                                    <div class="form-group mt-4">
-                                        <label for="jenisJamaah{{ $i }}">Jenis Jamaah</label>
-                                        <select id="jenisJamaah{{ $i }}">
-                                            <option selected>Jamaah Baru</option>
-                                            <option>Sesuai Pemesan</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="namaJamaah{{ $i }}">Nama Lengkap Jamaah</label>
-                                        <input type="text" id="namaJamaah{{ $i }}"
-                                            placeholder="Nama Lengkap Jamaah" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="jenisKelamin{{ $i }}">Jenis Kelamin</label>
-                                        <select id="jenisKelamin{{ $i }}">
-                                            <option selected>Laki - Laki</option>
-                                            <option>Perempuan</option>
-                                        </select>
-                                    </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Jenis Kelamin Pemesan</label>
+                                <input type="text" class="form-control" placeholder="Jenis Kelamin Pemesan" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Nomor Telepon Pemesan</label>
+                                <div class="input-group">
+                                    <span class="input-group-text kode-negara">+62</span>
+                                    <input type="text" class="form-control" placeholder="Masukkan Nomor telepon" />
                                 </div>
                             </div>
-                        @endfor
-                    </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Email Pemesan</label>
+                                <input type="email" class="form-control" placeholder="Email Pemesan" />
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label>Catatan Pemesan</label>
+                                <input type="text" class="form-control" placeholder="Catatan Pemesan" />
+                            </div>
+                        </div>
 
-                    <div class="text-center">
-                        <button type="button" class="btn btn-outline-warning" id="btnTambahJamaah">+ Tambah Jamaah</button>
-                    </div>
+                        <!-- Data Jamaah -->
+                        <div class="d-flex flex-column align-items-center mb-4">
+                            <span class="judul-pemesan">Data Jamaah</span>
+                            <div class="garis-pemesan mt-1"></div>
+                        </div>
 
-                    <small class="text-muted d-block mt-3">
-                        <strong>Catatan:</strong><br>
-                        Jika membutuhkan panduan transaksi atau pemesanan, silakan luangkan waktu sejenak untuk membacanya
-                        dengan klik di sini.<br>
-                        Pembayaran uang muka minimal USD 4.500,00.<br>
-                        Tenggat waktu pembayaran uang muka adalah 2 jam sejak transaksi dilakukan. Jika melewati batas waktu
-                        tersebut, transaksi akan otomatis dibatalkan oleh sistem.
-                    </small>
+                        <div class="row" id="jamaahContainer">
+                            @php
+                                $jamaahCount = 1;
+                            @endphp
+
+                            @foreach ($order->orderKamar as $orderKamar)
+                                @for ($i = 0; $i < $orderKamar->jumlah_kamar; $i++)
+                                    <div class="col-md-6 mb-4">
+                                        <div class="jamaah-box">
+                                            <div class="jamaah-header">Jamaah {{ $jamaahCount }} (Kamar
+                                                {{ ucfirst($orderKamar->tipeKamar->tipe) }})</div>
+                                            <div class="form-group mt-4">
+                                                <label for="jenisJamaah{{ $jamaahCount }}">Jenis Jamaah</label>
+                                                <select id="jenisJamaah{{ $jamaahCount }}" name="jenis_jamaah[]">
+                                                    <option selected>Jamaah Baru</option>
+                                                    <option>Sesuai Pemesan</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="namaJamaah{{ $jamaahCount }}">Nama Lengkap Jamaah</label>
+                                                <input type="text" id="namaJamaah{{ $jamaahCount }}"
+                                                    name="nama_jamaah[]" placeholder="Nama Lengkap Jamaah"
+                                                    class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="jenisKelamin{{ $jamaahCount }}">Jenis Kelamin</label>
+                                                <select id="jenisKelamin{{ $jamaahCount }}" name="jenis_kelamin[]"
+                                                    class="form-control">
+                                                    <option selected>Laki - Laki</option>
+                                                    <option>Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @php
+                                        $jamaahCount++;
+                                    @endphp
+                                @endfor
+                            @endforeach
+                        </div>
+                        <button class="btn btn-warning" type="submit">Selesai</button>
+                        <small class="text-muted d-block mt-3">
+                            <strong>Catatan:</strong><br>
+                            Jika membutuhkan panduan transaksi atau pemesanan, silakan luangkan waktu sejenak untuk
+                            membacanya
+                            dengan klik di sini.<br>
+                            Pembayaran uang muka minimal USD 4.500,00.<br>
+                            Tenggat waktu pembayaran uang muka adalah 2 jam sejak transaksi dilakukan. Jika melewati batas
+                            waktu
+                            tersebut, transaksi akan otomatis dibatalkan oleh sistem.
+                        </small>
                 </div>
             </div>
 
@@ -110,21 +118,38 @@
                                 <strong>Kode Paket:</strong>
                                 <span class="kode-paket">HAJJ00265</span>
                             </li>
-                            <li><strong>Nama Paket:</strong> Haji Furoda 2025</li>
-                            <li><strong>Jenis Paket:</strong> Haji Furoda</li>
-                            <li><strong>Musim Haji:</strong> 1446 Hijriah</li>
-                            <li><strong>Hotel Makkah:</strong> Swiss Maqam</li>
-                            <li><strong>Hotel Madinah:</strong> Sofitel</li>
-                            <li><strong>Program Hari:</strong> 26 Hari</li>
-                            <li><strong>Waktu Pelaksanaan:</strong><br>08 April 2025 s/d 29 April 2025</li>
-                            <li><strong>Bandara Keberangkatan:</strong><br>Bandar Udara Internasional Soekarno–Hatta</li>
-                            <li><strong>Maskapai Keberangkatan:</strong><br>Saudi Arabian Airlines</li>
-                            <li><strong>Harga Paket:</strong> USD 22.500,00 (Quad)</li>
-                            <li><strong>Kombinasi Kamar:</strong> Quad: 1 Pax</li>
-                            <li><strong>Diskon:</strong> IDR 0,00</li>
+                            <li><strong>Nama Paket:</strong>{{ $order->paket->nama_paket ?? '-' }}</li>
+                            <li><strong>Jenis Paket:</strong> {{ $order->paket->jenis ?? '-' }}</li>
+                            <li><strong>Hotel Makkah:</strong>{{ $order->paket->hotel_mekkah ?? '-' }}</li>
+                            <li><strong>Hotel Madinah:</strong> {{ $order->paket->hotel_madinah ?? '-' }}</li>
+                            <li><strong>Program Hari:</strong> {{ $order->paket->program_hari ?? '-' }} Hari</li>
+                            <li><strong>Waktu Pelaksanaan:</strong><br>
+                                @if ($order->detailPaket && $order->paket)
+                                    @php
+                                        $tanggalKeberangkatan = \Carbon\Carbon::parse(
+                                            $order->detailPaket->tanggal_keberangkatan,
+                                        );
+                                        $tanggalKepulangan = $tanggalKeberangkatan
+                                            ->copy()
+                                            ->addDays($order->paket->program_hari - 1);
+                                    @endphp
+                                    {{ $tanggalKeberangkatan->format('d F Y') }} s/d
+                                    {{ $tanggalKepulangan->format('d F Y') }}
+                                @else
+                                    -
+                                @endif
+                            <li><strong>Bandara Keberangkatan:</strong><br>{{ $order->paket->bandara ?? '-' }}</li>
+                            <li><strong>Maskapai Keberangkatan:</strong><br>{{ $order->paket->maskapai ?? '-' }}</li>
+                            <li><strong>Harga Paket:</strong>$ {{ number_format($order->paket->harga) }}</li>
+                            <li><strong>Kombinasi Kamar:</strong><br>
+                                @foreach ($order->orderKamar as $kamar)
+                                    {{ ucfirst($kamar->tipeKamar->tipe) }}: {{ $kamar->jumlah_kamar }} kamar<br>
+                                @endforeach
+                            </li>
+                            <li><strong>Diskon:</strong> $ 0,00</li>
                         </ul>
                         <div class="custom-total-box text-white p-3 text-center rounded mb-3">
-                            <strong>Total : USD 22.500,00</strong>
+                            <strong>Total : $ {{ number_format($order->total_harga) }}</strong>
                         </div>
                         <div class="p-3 border rounded bg-white">
                             <h6 class="fw-bold">Kode Voucher</h6>

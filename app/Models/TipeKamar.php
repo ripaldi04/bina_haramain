@@ -24,4 +24,8 @@ class TipeKamar extends Model
     {
         return $this->belongsTo(Paket::class);
     }
+    public function orderKamars()
+    {
+        return $this->hasMany(OrderKamar::class);
+    }
 }

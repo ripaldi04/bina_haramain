@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderPaketController;
 use App\Http\Controllers\TipeKamarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,20 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\User\UserPaketController;
+
+
+// Route untuk halaman pertama (form pemesanan)
+// Route::post('/pesan-paket', [OrderPaketController::class, 'prosesPesan'])->name('prosesPesan');
+Route::post('/proses-pesan', [OrderPaketController::class, 'prosesPesan'])->name('prosesPesan');
+
+
+// Route untuk menampilkan halaman transaksi setelah pemesanan dilakukan
+Route::get('/transaksi/{order_id}', [OrderPaketController::class, 'showTransaksiForm'])->name('order.transaksi');
+
+// Route untuk mengolah data transaksi dan update ke database
+Route::post('/transaksi/{order_id}', [OrderPaketController::class, 'prosesTransaksi'])->name('prosesTransaksi');
+
+// Route::get('/transaksi', [OrderPaketController::class, 'create'])->name('transaksi');
 
 
 Route::get('/', [LandingBannerController::class, 'index'])->name('home');
@@ -82,9 +97,9 @@ Route::get('/riwayat', function () {
     return view('pages.user.riwayat');
 })->name('riwayat');
 
-Route::get('/transaksi', function () {
-    return view('pages.user.transaksi');
-})->name('transaksi');
+// Route::get('/transaksi', function () {
+//     return view('pages.user.transaksi');
+// })->name('transaksi');
 
 
 

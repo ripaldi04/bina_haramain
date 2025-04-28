@@ -27,83 +27,89 @@
             <div class="col-lg-4 d-flex align-items-start">
                 <div class="pesan-paket">
                     <h5 class="header-title">Pesan Paket</h5>
+                    <form action="{{ route('prosesPesan') }}" method="POST">
+                        @csrf
+                        <label>Program Hari</label>
+                        <select class="form-select" name="paket_id" required>
+                            <option value="{{ $paket->program_hari }}"> {{ $paket->program_hari }} Hari</option>
+                        </select>
+                        <input type="hidden" name="paket_id" value="{{ $paket->id }}">
 
-                    <label>Program Hari</label>
-                    <select class="form-select">
-                        <option> {{ $paket->program_hari }} Hari</option>
-                    </select>
+                        <label>Bandara Keberangkatan</label>
+                        <select class="form-select" name="bandara" required>
+                            <option value="{{ $paket->bandara }}"> {{ $paket->bandara }}</option>
+                        </select>
 
-                    <label>Bandara Keberangkatan</label>
-                    <select class="form-select">
-                        <option> {{ $paket->bandara }}</option>
-                    </select>
+                        <label>Tanggal Keberangkatan</label>
+                        <select class="form-select" name="tanggal_keberangkatan" required>
+                            @if ($paket->detail_paket && $paket->detail_paket->count() > 0)
+                                @foreach ($paket->detail_paket as $detail)
+                                    <option value="{{ $detail->id }}">
+                                        {{ \Carbon\Carbon::parse($detail->tanggal_keberangkatan)->format('d-m-Y') }}
+                                        (Seat
+                                        Tersedia {{ $detail->jumlah_seat }})
+                                    </option>
+                                @endforeach
+                            @else
+                                <option enable>Belum ada jadwal keberangkatan</option>
+                            @endif
+                        </select>
 
-                    <label>Tanggal Keberangkatan</label>
-                    <select class="form-select">
-                        @if ($paket->detail_paket && $paket->detail_paket->count() > 0)
-                            @foreach ($paket->detail_paket as $detail)
-                                <option>{{ \Carbon\Carbon::parse($detail->tanggal_keberangkatan)->format('d-m-Y') }} (Seat
-                                    Tersedia {{ $detail->jumlah_seat }})
-                                </option>
-                            @endforeach
-                        @else
-                            <option enable>Belum ada jadwal keberangkatan</option>
-                        @endif
-                    </select>
+                        <label>Kamar</label>
 
-                    <label>Kamar</label>
-
-                    @foreach ($paket->tipeKamars as $tipe)
-                        <div class="room-box">
-                            <div class="room-header">
-                                <strong>{{ ucfirst($tipe->tipe) }}</strong>
-                                <span class="room-type">
-                                    @if ($tipe->tipe == 'double')
-                                        (1 Kamar Ber-2)
-                                    @elseif ($tipe->tipe == 'triple')
-                                        (1 Kamar Ber-3)
-                                    @elseif ($tipe->tipe == 'quad')
-                                        (1 Kamar Ber-4)
-                                    @endif
-                                </span>
+                        @foreach ($paket->tipeKamars as $tipe)
+                            <div class="room-box">
+                                <div class="room-header">
+                                    <strong>{{ ucfirst($tipe->tipe) }}</strong>
+                                    <span class="room-type">
+                                        @if ($tipe->tipe == 'double')
+                                            (1 Kamar Ber-2)
+                                        @elseif ($tipe->tipe == 'triple')
+                                            (1 Kamar Ber-3)
+                                        @elseif ($tipe->tipe == 'quad')
+                                            (1 Kamar Ber-4)
+                                        @endif
+                                    </span>
+                                </div>
+                                <div class="room-price">
+                                    Harga : <span class="price">
+                                        ${{ number_format($tipe->harga, 0, ',', '.') }}
+                                    </span>/pax
+                                </div>
+                                <div class="room-input d-flex">
+                                    <label for="jumlah_{{ $tipe->tipe }}" class="form-label">Jumlah</label>
+                                    <input type="number" class="form-control custom-input kamar-input"
+                                        id="jumlah_{{ $tipe->tipe }}" name="jumlah_{{ $tipe->tipe }}"
+                                        data-harga="{{ $tipe->harga }}" min="0" max="100">
+                                    <div class="tombol">Pax</div>
+                                </div>
                             </div>
-                            <div class="room-price">
-                                Harga : <span class="price">
-                                    ${{ number_format($tipe->harga, 0, ',', '.') }}
-                                </span>/pax
-                            </div>
-                            <div class="room-input d-flex">
-                                <label for="jumlah_{{ $tipe->tipe }}" class="form-label">Jumlah</label>
-                                <input type="number" class="form-control custom-input kamar-input" id="jumlah_{{ $tipe->tipe }}"
-                                    name="jumlah_{{ $tipe->tipe }}" data-harga="{{ $tipe->harga }}" min="0" max="100">
-                                <div class="tombol">Pax</div>
-                            </div>
+                        @endforeach
+
+
+                        <div class="total-harga">
+                            <p>Total: <span id="totalHarga">USD 0,00</span></p>
                         </div>
-                    @endforeach
+
+                        @auth
+                            @if (auth()->user()->email_verified_at)
+                                <button type="submit" class="btn-pesan">
+                                    <i class="bi bi-cart-fill"></i> Pesan Paket
+                                </button>
+                            @else
+                                <button type="button" class="btn-pesan" onclick="showVerifyAlert()">
+                                    <i class="bi bi-cart-fill"></i> Pesan Paket
+                                </button>
+                            @endif
+                        @endauth
 
 
-                    <div class="total-harga">
-                        <p>Total: <span id="totalHarga">USD 0,00</span></p>
-                    </div>
-
-                    @auth
-                        @if (auth()->user()->email_verified_at)
-                            <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'">
+                        @guest
+                            <button type="button" class="btn-pesan" onclick="showVerifyAlert()">
                                 <i class="bi bi-cart-fill"></i> Pesan Paket
                             </button>
-                        @else
-                            <button class="btn-pesan" onclick="showVerifyAlert()">
-                                <i class="bi bi-cart-fill"></i> Pesan Paket
-                            </button>
-                        @endif
-                    @endauth
-
-
-                    @guest
-                        <button class="btn-pesan" onclick="showVerifyAlert()">
-                            <i class="bi bi-cart-fill"></i> Pesan Paket
-                        </button>
-                    @endguest
+                        @endguest
+                    </form>
                     <button class="btn-download">Konsultasi Paket</button>
                     <button class="btn-download">Download Brosur</button>
                 </div>

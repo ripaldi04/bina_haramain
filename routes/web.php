@@ -14,9 +14,48 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\User\UserPaketController;
+use App\Http\Controllers\LandingKeunggulanController;
+use App\Http\Controllers\LandingFasilitasController;
+use App\Http\Controllers\LandingGaleriController;
+use App\Http\Controllers\AdminQuestionController;
+
+Route::get('/admin/questions', [AdminQuestionController::class, 'index'])->name('questions.index');
+Route::post('/admin/questions', [AdminQuestionController::class, 'store'])->name('questions.store');
+Route::put('/admin/questions/{id}', [AdminQuestionController::class, 'update'])->name('questions.update');
+Route::delete('/admin/questions/{id}', [AdminQuestionController::class, 'destroy'])->name('questions.destroy');
 
 
-Route::get('/', [LandingBannerController::class, 'index'])->name('home');
+Route::get('/admin/galeri/{id}/edit', [LandingGaleriController::class, 'edit'])->name('admin.galeri.edit');
+Route::put('/admin/galeri/{id}', [LandingGaleriController::class, 'update'])->name('admin.galeri.update');
+
+Route::get('/', [AdminLandingPageController::class, 'index'])->name('home');
+// Rute untuk menyimpan fasilitas
+Route::post('/admin/fasilitas', [LandingFasilitasController::class, 'store'])->name('fasilitas.store');
+// Rute untuk memperbarui fasilitas
+Route::put('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'update'])->name('fasilitas.update');
+// Rute untuk menghapus fasilitas
+Route::delete('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'destroy'])->name('fasilitas.destroy');
+
+// Route::resource('admin/fasilitas', LandingFasilitasController::class)->only(['store', 'update', 'destroy']);
+// Route::resource('fasilitas', LandingFasilitasController::class);
+
+
+Route::get('/', [LandingKeunggulanController::class, 'index'])->name('home');
+Route::post('/admin/keunggulan', [LandingKeunggulanController::class, 'store'])->name('admin.keunggulan.store');
+Route::delete('/admin/keunggulan/{id}', [LandingKeunggulanController::class, 'destroy'])->name('keunggulan.destroy');
+// Route::post('/keunggulan', [LandingKeunggulanController::class, 'storeOrUpdate'])->name('keunggulan.storeOrUpdate');
+Route::post('/admin/storeOrUpdateKeunggulan', [AdminLandingPageController::class, 'storeOrUpdateKeunggulan'])->name('storeOrUpdateKeunggulan');
+// Route::delete('/admin/keunggulan/{id}', [AdminLandingPageController::class, 'destroy'])->name('keunggulan.destroy');
+Route::post('/keunggulan/store-or-update', [LandingKeunggulanController::class, 'storeOrUpdate'])->name('keunggulan.storeOrUpdate');
+// Route::post('/admin/keunggulan/store-or-update', [AdminLandingPageController::class, 'storeOrUpdateKeunggulan'])->name('keunggulan.storeOrUpdate');
+Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])->name('landing.index');
+Route::post('/keunggulan/store', [LandingKeunggulanController::class, 'store'])->name('keunggulan.store');
+Route::post('/keunggulan/update/{id}', [LandingKeunggulanController::class, 'update'])->name('keunggulan.update');
+Route::delete('/keunggulan/{id}', [LandingKeunggulanController::class, 'destroy'])->name('keunggulan.destroy');
+
+Route::resource('keunggulan', LandingKeunggulanController::class);
+// Route::get('/', [LandingBannerController::class, 'index'])->name('home');
+
 
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
@@ -127,4 +166,3 @@ Route::post('admin/update-banner/{id}', [AdminLandingPageController::class, 'upd
 Route::get('/admin/paket/{id}/detail-paket', [PaketController::class, 'getDetailPaket']);
 
 Route::resource('tipe-kamar', TipeKamarController::class);
-

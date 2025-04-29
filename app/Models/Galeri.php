@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Galeri extends Model
 {
-    use HasFactory;
-
-    protected $table = 'landing_galeri'; // Sesuaikan ke nama tabel kamu
+    protected $table = 'landing_galeri'; // <-- kasih tau nama tabel yang benar
 
     protected $fillable = [
         'image1_url',

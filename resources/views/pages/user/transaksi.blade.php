@@ -86,7 +86,7 @@
                                                 <label for="jenisKelamin{{ $jamaahCount }}">Jenis Kelamin</label>
                                                 <select id="jenisKelamin{{ $jamaahCount }}" name="jenis_kelamin_jamaah[]"
                                                     class="form-control">
-                                                    <option value="Laki - Laki" selected>Laki - Laki</option>
+                                                    <option value="Laki-Laki" selected>Laki - Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>
                                             </div>

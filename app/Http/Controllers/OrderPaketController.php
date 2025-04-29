@@ -98,7 +98,7 @@ class OrderPaketController extends Controller
             'catatan' => 'nullable|string',
             'nama_jamaah' => 'required|array',
             'jenis_kelamin_jamaah' => 'required|array',
-            'jenis_kelamin.*' => 'required|string',  // Validasi setiap item dalam array
+            'jenis_kelamin_jamaah.*' => 'required|string',  // Validasi setiap item dalam array
             'jenis_jamaah' => 'required|array',
         ]);
 
@@ -115,25 +115,26 @@ class OrderPaketController extends Controller
         $jamaahCount = count($request->nama_jamaah); // Jumlah jamaah
 
         // Menyimpan data jamaah
-        for ($i = 0; $i < $jamaahCount; $i++) {
-            // Pastikan `jenis_kelamin` valid atau set default jika tidak ada
-            $jenis_kelamin = isset($request->jenis_kelamin[$i]) ? $request->jenis_kelamin[$i] : 'default_value';  // Default value jika tidak ada
+        $jamaahIndex = 0;
 
-            // Cek apakah data kamar ada dan valid
-            if (isset($order->orderKamar[$i])) {
-                // Save Jamaah data dengan pengecekan
+        foreach ($order->orderKamar as $orderKamar) {
+            for ($j = 0; $j < $orderKamar->jumlah_kamar; $j++) {
+                $jenis_kelamin = isset($request->jenis_kelamin_jamaah[$jamaahIndex])
+                    ? $request->jenis_kelamin_jamaah[$jamaahIndex]
+                    : 'Laki-Laki'; // Atau default lain sesuai kebutuhan
+
                 Jamaah::create([
                     'order_paket_id' => $order->id,
-                    'order_kamar_id' => $order->orderKamar[$i]->id, // Pastikan ada data kamar
-                    'nama' => $request->nama_jamaah[$i],
+                    'order_kamar_id' => $orderKamar->id,
+                    'nama' => $request->nama_jamaah[$jamaahIndex],
                     'jenis_kelamin' => $jenis_kelamin,
-                    'jenis_jamaah' => $request->jenis_jamaah[$i],
+                    'jenis_jamaah' => $request->jenis_jamaah[$jamaahIndex],
                 ]);
-            } else {
-                // Jika kamar tidak ada, log error atau tangani sesuai kebutuhan
-                Log::error("Data kamar tidak ditemukan untuk jamaah pada indeks {$i} untuk pemesanan {$order->id}");
+
+                $jamaahIndex++;
             }
         }
+
 
         // Redirect ke halaman sukses pemesanan
         return redirect()->route('pesananSukses');

@@ -28,7 +28,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Jenis Kelamin Pemesan</label>
-                                <select class="form-control" name="jenis_kelamin_pemesan" id="jenis_kelamin_pemesan" required>
+                                <select class="form-control" name="jenis_kelamin_pemesan" id="jenis_kelamin_pemesan"
+                                    required>
                                     <option value="Laki-Laki">Laki-Laki</option>
                                     <option value="Perempuan">Perempuan</option>
                                 </select>
@@ -98,6 +99,15 @@
                                 @endfor
                             @endforeach
                         </div>
+                        <div class="col-12 mb-3">
+                            <label for="jenis_pembayaran">Pilih Jenis Pembayaran</label>
+                            <select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran" required>
+                                <option value="" disabled selected>Pilih salah satu</option>
+                                <option value="booking">Booking (50%)</option>
+                                <option value="dp">DP (12%)</option>
+                                <option value="cash">Cash (100%)</option>
+                            </select>
+                        </div>
                         <button class="btn btn-warning" type="submit">Selesai</button>
                         <small class="text-muted d-block mt-3">
                             <strong>Catatan:</strong><br>
@@ -122,7 +132,7 @@
                         <ul class="list-unstyled mb-3">
                             <li>
                                 <strong>Kode Paket:</strong>
-                                <span class="kode-paket">HAJJ00265</span>
+                                <span class="kode-paket">{{ $order->paket->kode_paket ?? '-' }}</span>
                             </li>
                             <li><strong>Nama Paket:</strong>{{ $order->paket->nama_paket ?? '-' }}</li>
                             <li><strong>Jenis Paket:</strong> {{ $order->paket->jenis ?? '-' }}</li>
@@ -155,8 +165,14 @@
                             <li><strong>Diskon:</strong> $ 0,00</li>
                         </ul>
                         <div class="custom-total-box text-white p-3 text-center rounded mb-3">
-                            <strong>Total : $ {{ number_format($order->total_harga) }}</strong>
+                            <strong>Total : $ <span
+                                    id="totalHarga">{{ number_format($order->total_harga) }}</span></strong>
                         </div>
+                        <div class="custom-total-box text-white p-3 text-center rounded mb-3 bg-success" id="totalBayarBox"
+                            style="display: none;">
+                            <strong>Jumlah yang harus dibayar : $ <span id="totalBayarValue"></span></strong>
+                        </div>
+
                         <div class="p-3 border rounded bg-white">
                             <h6 class="fw-bold">Kode Voucher</h6>
                             <p class="small">Silakan masukkan kode voucher (jika ada) saat transaksi untuk

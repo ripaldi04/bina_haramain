@@ -18,6 +18,8 @@ class OrderPaket extends Model
         'paket_id',
         'detail_paket_id',
         'user_id',
+        'jenis_pembayaran',
+        'jumlah_dibayar',
         'total_harga',
         'nama_pemesan',
         'jenis_kelamin_pemesan',

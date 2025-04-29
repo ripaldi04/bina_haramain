@@ -104,15 +104,29 @@ class OrderPaketController extends Controller
 
         // Update data pemesanan dengan data pemesan yang baru
         $order = OrderPaket::findOrFail($order_id);
+        $jenis = $request->jenis_pembayaran;
+        $jumlah = 0;
+
+        switch ($jenis) {
+            case 'booking':
+                $jumlah = $order->total_harga * 0.5;
+                break;
+            case 'dp':
+                $jumlah = $order->total_harga * 0.12;
+                break;
+            case 'cash':
+                $jumlah = $order->total_harga;
+                break;
+        }
         $order->update([
             'nama_pemesan' => $request->nama_pemesan,
             'jenis_kelamin_pemesan' => $request->jenis_kelamin_pemesan,
             'telepon_pemesan' => $request->telepon_pemesan,
             'email_pemesan' => $request->email_pemesan,
+            'jenis_pembayaran' => $jenis,
+            'jumlah_dibayar' => $jumlah,
             'catatan' => $request->catatan,
         ]);
-
-        $jamaahCount = count($request->nama_jamaah); // Jumlah jamaah
 
         // Menyimpan data jamaah
         $jamaahIndex = 0;

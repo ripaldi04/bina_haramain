@@ -18,7 +18,7 @@ class AdminLandingPageController extends Controller
             'fasilitas' => DB::table('landing_fasilitas')->get(),
             'muthawif' => DB::table('landing_muthawif')->get(),
             'galeri' => DB::table('landing_galeri')->get(),
-            'hotDeals' => DB::table('landing_hot_deal')->get(),
+            'hotDeals' => DB::table('landing_hot_deals')->get(),
             'questions' => DB::table('landing_question')->get(),
         ]);
     }

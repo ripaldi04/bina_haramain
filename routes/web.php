@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Controllers\HotDealController;
+use App\Http\Controllers\Highlight1Controller;
 use App\Http\Controllers\TipeKamarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -128,3 +131,14 @@ Route::get('/admin/paket/{id}/detail-paket', [PaketController::class, 'getDetail
 
 Route::resource('tipe-kamar', TipeKamarController::class);
 
+Route::put('/highlight1/{id}', [Highlight1Controller::class, 'update'])->name('highlight1.update');
+Route::put('/highlight1/{highlight1}', [Highlight1Controller::class, 'update'])->name('highlight1.update');
+Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])->name('admin.landing-page');
+// Route::get('/', [Highlight1Controller::class, 'home'])->name('home');
+
+
+
+// Route Landing Hot Deal (admin)
+Route::get('/admin/landing-hotdeal', [HotDealController::class, 'index'])->name('admin.hotdeal.index');
+Route::put('/admin/landing-hotdeal/{id}', [HotDealController::class, 'update'])->name('admin.hotdeal.update');
+Route::get('/', [HotDealController::class, 'home'])->name('home');

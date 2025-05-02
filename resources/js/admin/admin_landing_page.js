@@ -16,4 +16,9 @@ $('#editButton').on('click', function (event) {
     // Gunakan modal API untuk menampilkan modal
     var modalInstance = new bootstrap.Modal(modal[0]);
     modalInstance.show();
+
+
+    
 });
+
+

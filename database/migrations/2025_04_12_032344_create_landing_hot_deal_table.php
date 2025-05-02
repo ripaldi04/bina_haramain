@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('landing_hot_deal', function (Blueprint $table) {
+        Schema::create('landing_hot_deals', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('deskripsi');
-            $table->string('subtitle');
-            $table->string('image_url');
+            $table->string('subtitle')->nullable();
+            $table->text('deskripsi')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('landing_hot_deal');
+        Schema::dropIfExists('landing_hot_deals'); // ← diperbaiki disini
     }
 };

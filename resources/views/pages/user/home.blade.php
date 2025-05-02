@@ -28,13 +28,18 @@
 
                 <!-- Teks utama (Desktop) -->
                 <div class="col-md-6 text-md-start d-none d-md-block">
-                    <h1 class="fs-4">{{ $banner->header1 }}</h1>
-                    <p class="fs-4 fw-bold text-warning">{!! $banner->header2 !!}</p>
-                    <p class="fs-6">{{ $banner->deskripsi }}</p>
-                    <button class="btn btn-warning text-white mt-2" style="width: 150px; border-radius: 4px;">
-                        Lihat Paket
-                    </button>
+                    @if($banner)
+                        <h1 class="fs-4">{{ $banner->header1 }}</h1>
+                        <p class="fs-4 fw-bold text-warning">{!! $banner->header2 !!}</p>
+                        <p class="fs-6">{{ $banner->deskripsi }}</p>
+                        <button class="btn btn-warning text-white mt-2" style="width: 150px; border-radius: 4px;">
+                            Lihat Paket
+                        </button>
+                    @else
+                        <p>Banner tidak tersedia.</p> <!-- Menampilkan pesan jika data banner tidak ada -->
+                    @endif
                 </div>
+
 
                 <!-- Gambar (Desktop) -->
                 <div class="col-md-6 text-end d-none d-md-block">
@@ -60,8 +65,6 @@
             </div>
         </div>
     </div>
-
-
 
     <div class="container">
         <div class="container-card-highlight">
@@ -146,128 +149,132 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row p-3 d-flex justify-content-center align-items-center g-5 sudah-siap">
-            <div class="col-md-7 col-12">
-                <div style="margin-left: 15%; margin-bottom: 10%;">
-                    <h4 class="fs-6 mb-3 mt-5 header-sudah-siap" style="color: var(--primary-color);">Sudah Siap
-                        Menjadi Tamu Allah dengan Haji Eksklusif?
-                    </h4>
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin Berhaji Tanpa Menunggu Puluhan Tahun?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin berhaji dengan kepastian keberangkatan?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin merasakan kenyamanan fasilitas eksklusif & layanan premium?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin ibadah lebih khusyuk dengan bimbingan maksimal?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin berangkat di 2025 dengan Visa Haji Resmi?</p>
-                        </div>
-                    </div>
-                    <p class="mt-5 lh-lg">Kini, Anda bisa berhaji tanpa antre panjang! Dengan Haji Khusus, berangkat
-                        lebih cepat, harga lebih terjangkau, fasilitas tetap mewah! Saatnya wujudkan impian haji Anda
-                        dengan perjalanan yang nyaman, aman, dan penuh keberkahan!</p>
-                </div>
-            </div>
-            <div class="col-md-5 col-12">
-                <img src="./images/v121_93.png" alt="ini gambar" width="352px" height="406"
-                    style="border-radius: 30px;">
-            </div>
-            <div class="row p-3 d-flex justify-content-center align-items-start g-5"
-                style="background-color: white; width: 90%;">
-                <div class="col-md-6 col-12 mbl-img-none">
-                    <img src="./images/v121_100.png" width="450px" height="450px" style="border-radius: 30px"
-                        alt="">
-                </div>
-                <div class="col-md-6 col-12">
-                    <h5 class="card-title fs-2" style="color: var(--primary-color);">Mengapa Harus Pilih PT. Bina
-                        Haramain ?</h5>
-                    <p class="mt-5 lh-lg">PT. Bina Haramain adalah perusahaan travel profesional dengan pengalaman 3
-                        tahun dalam penyelenggaraan perjalanan haji. Kami berkomitmen memberikan layanan terbaik dengan
-                        pemahaman mendalam tentang proses, regulasi, dan kebutuhan ibadah
-                        haji, sehingga perjalanan Anda menjadi lebih nyaman, aman, dan tanpa kendala. Dengan tim
-                        berpengalaman dan layanan eksklusif, kami siap mengantarkan Anda menuju Baitullah dengan
-                        kemudahan, kepastian, dan kenyamanan terbaik.</p>
-                </div>
-                <div class="row g-3 align-items-start">
-                    <div class="col-6 p-0">
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_107.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Paket Haji Lebih Murah</h5>
-                                <p>Dapatkan harga terbaik dengan fasilitas bintang ⭐⭐⭐⭐⭐ Lebih terjangkau, lebih mewah!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_120.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Haji Mudah Sesuai Syariah</h5>
-                                <p>Ibadah haji lebih tenang & berkah dengan layanan sesuai Syariah – Tanpa Riba, Tanpa
-                                    Akad Bathil, Tanpa Gharar!</p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_115.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>GARANSI Tahun 2025 Berangkat Haji</h5>
-                                <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-6 p-0">
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/tawaf.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Program Eksklusif Haji</h5>
-                                <p>Selama 26 Hari Anda akan dibimbing untuk pengalaman haji yang berkesan meraih Mabrur
-                                </p>
-                            </div>
+    <div class="container" style="margin-top: -150px;">
+        <div class="row p-3 d-flex justify-content-center align-items-center g-5 sudah-siap">
+
+            @if(isset($highlight1))
+                <div class="col-md-7 col-12">
+                    <div class="ms-md-5 mb-5">
+                        @if(!empty($highlight1->header))
+                            <h4 class="fs-5 mb-3 mt-5 header-sudah-siap" style="color: var(--primary-color);">
+                                {{ $highlight1->header }}
+                            </h4>
+                        @endif
+
+                        <div class="d-flex flex-column gap-2">
+                            @foreach ([$highlight1->point1, $highlight1->point2, $highlight1->point3, $highlight1->point4, $highlight1->point5] as $point)
+                                @if (!empty($point))
+                                    <div class="icon-text d-flex align-items-start gap-2">
+                                        <img src="{{ asset('images/v121_56.png') }}" width="20" alt="Icon">
+                                        <p class="mb-0">{{ $point }}</p>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_112.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Jaminan Kepuasan Layanan</h5>
-                                <p>Kami berkomitmen memberikan layanan & fasilitas terbaik, memastikan semua kebutuhan
-                                    Anda terpenuhi dengan sempurna.</p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_115.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Garansi 100% UANG KEMBALI</h5>
-                                <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
-                            </div>
-                        </div>
+
+                        @if(!empty($highlight1->deskripsi))
+                            <p class="mt-5 lh-lg">{{ $highlight1->deskripsi }}</p>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-12 text-center">
+                    @if (!empty($highlight1->image_url))
+                        <img src="{{ asset('storage/' . $highlight1->image_url) }}" alt="Gambar Highlight"
+                            class="img-fluid rounded-4" style="max-width: 100%; height: auto;">
+                    @else
+                        <p>Gambar tidak tersedia</p>
+                    @endif
+                </div>
+            @else
+                <div class="col-12 text-center">
+                    <p>Data Highlight1 tidak ditemukan.</p>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <div class="row p-3 d-flex justify-content-center align-items-start g-5"
+        style="background-color: white; width: 90%; max-width: 1200px; margin: 0 auto;">
+        <div class="col-md-6 col-12 mbl-img-none">
+            <img src="./images/v121_100.png" width="450px" height="450px" style="border-radius: 30px" alt="">
+        </div>
+        <div class="col-md-6 col-12">
+            <h5 class="card-title fs-2" style="color: var(--primary-color); text-align: center;">Mengapa Harus Pilih PT.
+                Bina Haramain ?</h5>
+            <p class="mt-5 lh-lg" style="text-align: center;">PT. Bina Haramain adalah perusahaan travel profesional dengan
+                pengalaman 3 tahun dalam penyelenggaraan perjalanan haji. Kami berkomitmen memberikan layanan terbaik dengan
+                pemahaman mendalam tentang proses, regulasi, dan kebutuhan ibadah haji, sehingga perjalanan Anda menjadi
+                lebih nyaman, aman, dan tanpa kendala. Dengan tim berpengalaman dan layanan eksklusif, kami siap
+                mengantarkan Anda menuju Baitullah dengan kemudahan, kepastian, dan kenyamanan terbaik.</p>
+        </div>
+        <div class="row g-3 align-items-start">
+            <div class="col-6 p-0">
+                <div class="row g-0 align-items-center mb-5 d-flex item-row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <img src="./images/v121_107.png" class="img-fluid fixed-img">
+                    </div>
+                    <div class="col-10 h-100 ps-3">
+                        <h5>Paket Haji Lebih Murah</h5>
+                        <p>Dapatkan harga terbaik dengan fasilitas bintang ⭐⭐⭐⭐⭐ Lebih terjangkau, lebih mewah!</p>
+                    </div>
+                </div>
+                <div class="row g-0 align-items-center mb-5 d-flex item-row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <img src="./images/v121_120.png" class="img-fluid fixed-img">
+                    </div>
+                    <div class="col-10 h-100 ps-3">
+                        <h5>Haji Mudah Sesuai Syariah</h5>
+                        <p>Ibadah haji lebih tenang & berkah dengan layanan sesuai Syariah – Tanpa Riba, Tanpa Akad Bathil,
+                            Tanpa Gharar!</p>
+                    </div>
+                </div>
+                <div class="row g-0 align-items-center mb-5 d-flex item-row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <img src="./images/v121_115.png" class="img-fluid fixed-img">
+                    </div>
+                    <div class="col-10 h-100 ps-3">
+                        <h5>GARANSI Tahun 2025 Berangkat Haji</h5>
+                        <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 p-0">
+                <div class="row g-0 align-items-center mb-5 d-flex item-row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <img src="./images/tawaf.png" class="img-fluid fixed-img">
+                    </div>
+                    <div class="col-10 h-100 ps-3">
+                        <h5>Program Eksklusif Haji</h5>
+                        <p>Selama 26 Hari Anda akan dibimbing untuk pengalaman haji yang berkesan meraih Mabrur</p>
+                    </div>
+                </div>
+                <div class="row g-0 align-items-center mb-5 d-flex item-row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <img src="./images/v121_112.png" class="img-fluid fixed-img">
+                    </div>
+                    <div class="col-10 h-100 ps-3">
+                        <h5>Jaminan Kepuasan Layanan</h5>
+                        <p>Kami berkomitmen memberikan layanan & fasilitas terbaik, memastikan semua kebutuhan Anda
+                            terpenuhi dengan sempurna.</p>
+                    </div>
+                </div>
+                <div class="row g-0 align-items-center d-flex item-row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <img src="./images/v121_115.png" class="img-fluid fixed-img">
+                    </div>
+                    <div class="col-10 h-100 ps-3">
+                        <h5>Garansi 100% UANG KEMBALI</h5>
+                        <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="mt-5 keunggulan">
         <div class="container">
             <h5 class="fw-bold fs-2 text-center" style="margin-top: 5%;">Keunggulan Travel Kami</h5>
@@ -333,8 +340,7 @@
                 <div class="col-4 text-center">
                     <div class="d-flex flex-row justify-content-center align-items-center"
                         style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/harga terjangkau.png" alt="" height="60px"
-                            style="margin-left: 20px;">
+                        <img src="./images/harga terjangkau.png" alt="" height="60px" style="margin-left: 20px;">
                         <h5 class="m-4 text-start">Harga Sangat Bersahabat/Terjangkau
                         </h5>
                     </div>
@@ -378,8 +384,7 @@
     </div>
     <div class="container mt-5" style="margin-bottom: 10%;">
         <div>
-            <div class="fs-2 fw-bold d-flex justify-content-center align-items-center"
-                style="color: var(--primary-color);">
+            <div class="fs-2 fw-bold d-flex justify-content-center align-items-center" style="color: var(--primary-color);">
                 Fasilitas Untuk Jamaah</div>
             <div class="garis-bawah-fasilitas"></div>
             <div class="row" style="margin-left: 4%;">
@@ -670,8 +675,8 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center flex-column">
-                                <img src="./images/v160_64.png" alt=""
-                                    style="margin-left: 30%; margin-bottom: 10%;" width="200px">
+                                <img src="./images/v160_64.png" alt="" style="margin-left: 30%; margin-bottom: 10%;"
+                                    width="200px">
                                 <h5 class="fs-2 fw-bold" style="color: var(--secondary-color);">$20.000</h5>
                                 <button class="btn">Detail Paket</button>
                             </div>
@@ -718,8 +723,8 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center flex-column">
-                                <img src="./images/v160_64.png" alt=""
-                                    style="margin-left: 30%; margin-bottom: 10%;" width="200px">
+                                <img src="./images/v160_64.png" alt="" style="margin-left: 30%; margin-bottom: 10%;"
+                                    width="200px">
                                 <h5 class="fs-2 fw-bold" style="color: var(--secondary-color);">$27.500</h5>
                                 <button class="btn">Detail Paket</button>
                             </div>
@@ -730,27 +735,31 @@
             </div>
         </div>
     </div>
-    <div class="bg-secondary d-flex justify-content-evenly" style="margin-top: 9%;">
-        <div class="container">
-            <div class="row d-flex justify-content-between align-items-center">
-                <div class="col-6 mt-5" style="color: var(--for-color);">
-                    <h1 style="color: rgb(181, 0, 0); font-weight: bold;">HOT DEAL !!!!</h1>
-                    <h5 style="line-height: 50px;">
-                        Pendaftaran Bulan Februari 2025 ini akan mendapatkan potongan harga $1.000/pack! dan Anda berhak
-                        1 Bus serta 1 Hotel Bersama Ustadz Koh Dennis Lim & Teh Yunda
-                    </h5>
-                    <h3 style="color: var(--secondary-color); line-height: 30px;">
-                        SEAT TERBATAS <span style="color: rgb(181, 0, 0); font-weight: bold;">!!!!</span> <br> PASTIKAN
-                        ANDA KEBAGIAN <span style="color: rgb(181, 0, 0); font-weight: bold;">!!!</span>
-                    </h3>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <img src="./images/v185_130.png" class="img-fluid" alt="">
-                </div>
-            </div>
 
+    <div class="bg-secondary d-flex justify-content-evenly" style="margin-top: 9%;">
+    <div class="container">
+        <div class="row d-flex justify-content-between align-items-center">
+            <div class="col-6 mt-5" style="color: var(--for-color);">
+                <h1 style="color: rgb(181, 0, 0); font-weight: bold;">
+                    {{ $hotdeal->title ?? 'HOT DEAL !!!!' }}
+                </h1>
+
+                <h3 style="color: var(--secondary-color); line-height: 40px; text-align: justify;">
+                    {!! $hotdeal->deskripsi ?? '' !!}
+                </h3>
+
+                <h5 style="font-weight: bold; line-height: 50px;">
+                    {{ $hotdeal->subtitle ?? 'Subjudul tidak tersedia' }}
+                </h5>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+            <img src="{{ asset($hotdeal->image_url ?? 'storage/default.png') }}" class="img-fluid" alt="Hot Deal Image">
+            </div>
         </div>
     </div>
+</div>
+
+
     <div class="container" style="margin-top: 6%;">
         <h5 class="fw-bold fs-2">Hal yang sering ditanyakan</h5>
         <div class="garis-bawah-qanda"></div>

@@ -276,8 +276,9 @@
 
         {{-- Fasilitas --}}
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="m-0">Fasilitas</h5>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" onclick="openFasilitasModal()">+ Tambah</a>
             </div>
             <div class="card-body table-responsive">
                 <table class="table table-bordered table-striped">
@@ -286,18 +287,84 @@
                             <th>Judul</th>
                             <th>Deskripsi</th>
                             <th>Gambar</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($fasilitas as $item)
+                        @forelse ($fasilitas as $item)
                             <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
+                                <td><span class="ellipsis-judul" title="{{ $item->title }}">{{ $item->title }}</span>
+                                </td>
+                                <td><span class="ellipsis-deskripsi"
+                                        title="{{ $item->deskripsi }}">{{ $item->deskripsi }}</span></td>
+                                <td>
+                                    @if ($item->image_url)
+                                        <img src="{{ asset('storage/' . $item->image_url) }}" width="100"
+                                            class="img-fluid" />
+                                    @else
+                                        <span>No Image</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm"
+                                        onclick="openFasilitasModal({{ $item->id }}, '{{ $item->title }}', `{{ $item->deskripsi }}`, '{{ $item->image_url }}')">
+                                        Edit
+                                    </button>
+                                    <form action="{{ route('fasilitas.destroy', $item->id) }}" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                            data-id="{{ $item->id }}">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">Belum ada data fasilitas</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Modal Tambah/Edit Fasilitas -->
+        <div class="modal fade" id="fasilitasModal" tabindex="-1" aria-labelledby="fasilitasModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <form id="fasilitasForm" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="id" id="fasilitas_id">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="fasilitasModalLabel">Tambah/Edit Fasilitas</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Tutup"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label>Judul</label>
+                                <input type="text" class="form-control" name="title" id="title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Deskripsi</label>
+                                <textarea class="form-control" name="deskripsi" id="deskripsi" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label>Gambar</label>
+                                <input type="file" class="form-control" name="image_file" id="image_file">
+                            </div>
+                            <div id="previewImage" class="mb-3"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 

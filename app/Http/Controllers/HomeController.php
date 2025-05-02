@@ -16,10 +16,11 @@ class HomeController extends Controller
     {
         $keunggulan = Keunggulan::all();
         $banner = LandingBanner::first();
+        $fasilitas = Fasilitas::all();
         // $fasilitas = Fasilitas::all();
         // $galeri = Galeri::first(); // <-- ini yang betul
         // $questions = Question::all(); // atau ->latest() jika ingin urutan terbaru
 
-        return view('pages.user.home', compact('keunggulan'));
+        return view('pages.user.home', compact('keunggulan','fasilitas'));
     }
 }

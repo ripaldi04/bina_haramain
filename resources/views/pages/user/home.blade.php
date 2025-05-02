@@ -268,7 +268,7 @@
             </div>
         </div>
     </div>
-   
+
     {{-- Keunggulan --}}
     <div class="mt-5 keunggulan">
         <div class="container">
@@ -288,165 +288,42 @@
             </div>
         </div>
     </div>
-    
-    <div class="container mt-5" style="margin-bottom: 10%;">
+
+    <div class="container mt-5 mb-5">
         <div>
-            <div class="fs-2 fw-bold d-flex justify-content-center align-items-center"
-                style="color: var(--primary-color);">
-                Fasilitas Untuk Jamaah</div>
-            <div class="garis-bawah-fasilitas"></div>
-            <div class="row" style="margin-left: 4%;">
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_169.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Visa Haji
-                                Resmi
-                            </h5>
-                            <p class="card-text">Pengurusan Visa Haji Resmi untuk kemudahan jamaah melaksanakan haji
-                                dengan tenang</p>
+            <div class="fs-2 fw-bold text-center" style="color: var(--primary-color);">
+                Fasilitas Untuk Jamaah
+            </div>
+            <div class="garis-bawah-fasilitas mb-5"></div>
+
+            <div class="row gy-5 justify-content-center mt-5 mb-5"> <!-- gy-5 kasih jarak antar baris -->
+                @if ($fasilitas->isEmpty())
+                    <p class="text-center">Tidak ada fasilitas yang tersedia.</p>
+                @else
+                    @foreach ($fasilitas as $item)
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-stretch mt-5 mb-5">
+                            <div class="text-center p-4"
+                                style="background-color: #fff; border: 1px solid #ddd; border-radius: 12px; position: relative; padding-top: 80px; padding-bottom: 40px; box-shadow: 0px 4px 10px rgba(0,0,0,0.05); max-width: 320px; margin: 0 auto; word-wrap: break-word;">
+                                <div
+                                    style="width: 80px; height: 80px; overflow: hidden; margin: 0 auto; position: absolute; top: -40px; left: 0; right: 0; background-color: #fff;">
+                                    <img src="{{ asset('storage/' . $item->image_url) }}" alt="Fasilitas Image"
+                                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                                </div>
+                                <h5 class="fw-bold mt-4" style="color: #555; word-break: break-word;">
+                                    {{ $item->title }}
+                                </h5>
+                                <p style="color: #666; font-size: 15px; word-break: break-word;">
+                                    {{ $item->deskripsi }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_173.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Konsumsi
-                            </h5>
-                            <p class="card-text">Konsumsi yang terjamin berupa makan 3x Sehari dengan Menu Indonesia
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_174.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">
-                                Dokumentasi
-                            </h5>
-                            <p class="card-text">Dokumentasi untuk setiap jamaah secara apik & profesional</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20%; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_170.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">
-                                Perlengkapan
-                            </h5>
-                            <p class="card-text">Setiap Jamaah akan dibekali perlengkapan baik haji agar nyaman dan
-                                khusyur</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20%;height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_175.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Tl /
-                                Muthawif
-                            </h5>
-                            <p class="card-text">Akan didampingi oleh Tour Leader atau Muthowif berpengalaman</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20%; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v132_20.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Buku Doa &
-                                Pegangan
-                            </h5>
-                            <p class="card-text">Setiap jamaah akan mendapatkan buku doa atau pegangan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20%; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_171.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Hotel
-                                Menginap
-                            </h5>
-                            <p class="card-text">Akomodasi Hotel yang nyaman, terbaik, dan dekat selama pelaksanaan
-                                ibadah haji</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20% ; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_177.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">
-                                Transportasi
-                            </h5>
-                            <p class="card-text">Transportasi yang stand by mendampingi perjalanan jamaah</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20% ; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_172.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Tiket
-                                pesawat
-                            </h5>
-                            <p class="card-text">Seluruh Jamaah akan mendapatkan tiket pesawat internasional PP secara
-                                pasti dan terjamin</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20% ; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_178.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Sertifikat
-                                Haji
-                            </h5>
-                            <p class="card-text">Semua jamaah Haji akan mendapatkan sertifikat cetak Haji</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20% ; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_181.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">Air Zam
-                                Zam
-                            </h5>
-                            <p class="card-text">Setiap jamaah akan diberikan air Zam-zam sebanyak 5 Liter</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card" style="width: 18rem; margin-top:20% ; height: 180px;">
-                        <div class="card-body text-center">
-                            <img src="./images/v121_184.png" alt="" height="80px"
-                                style="margin-top: -25%; border-radius: 30%;">
-                            <h5 class="card-title" style="margin-top: 20px; color: var(--tertinary-color);">City Tour
-                            </h5>
-                            <p class="card-text">Diagendakan program city tour Makkah dan Madinah untuk seluruh Jamaah
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
+
+    
     <div class="container mt-5">
         <div class="text-center mb-5">
             <h2 class="fs-3 fw-bold" style="color: var(--primary-color);">Muthawif</h2>

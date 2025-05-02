@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingFasilitasController;
 use App\Http\Controllers\LandingKeunggulanController;
 use App\Http\Controllers\OrderPaketController;
 use App\Http\Controllers\TipeKamarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\LandingBannerController;
 use App\Http\Controllers\AdminLandingPageController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\RegisterController;
@@ -158,4 +158,10 @@ Route::post('admin/update-banner/{id}', [AdminLandingPageController::class, 'upd
 Route::get('/admin/paket/{id}/detail-paket', [PaketController::class, 'getDetailPaket']);
 
 Route::resource('tipe-kamar', TipeKamarController::class);
+
+Route::post('/admin/fasilitas', [LandingFasilitasController::class, 'store'])->name('fasilitas.store');
+// Rute untuk memperbarui fasilitas
+Route::put('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'update'])->name('fasilitas.update');
+// Rute untuk menghapus fasilitas
+Route::delete('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'destroy'])->name('fasilitas.destroy');
 

@@ -92,3 +92,67 @@ window.confirmDelete = function (id, event) {
         }
     });
 }
+
+window.openFasilitasModal = function (id = null, title = '', deskripsi = '', image = '') {
+    const form = document.getElementById('fasilitasForm');
+    const modalTitle = document.getElementById('fasilitasModalLabel');
+    const inputId = document.getElementById('fasilitas_id');
+
+    // Reset form
+    form.reset();
+    document.getElementById('previewImage').innerHTML = ''; // Reset preview image
+
+    if (id) {
+        // Edit mode
+        form.action = `/admin/fasilitas/${id}`;
+        document.querySelector('input[name="_method"]')?.remove();
+        const method = document.createElement('input');
+        method.type = 'hidden';
+        method.name = '_method';
+        method.value = 'PUT';
+        form.appendChild(method);
+
+        modalTitle.innerText = 'Edit Fasilitas';
+        inputId.value = id;
+        document.getElementById('title').value = title;
+        document.getElementById('deskripsi').value = deskripsi;
+
+        if (image) {
+            document.getElementById('previewImage').innerHTML =
+                `<img src="/storage/${image}" width="100" class="img-fluid" />`;
+        }
+    } else {
+        // Add mode
+        form.action = `/admin/fasilitas`; // Ganti dengan route URL statis
+        document.querySelector('input[name="_method"]')?.remove();
+        modalTitle.innerText = 'Tambah Fasilitas';
+        inputId.value = '';
+    }
+
+    const fasilitasModal = new bootstrap.Modal(document.getElementById('fasilitasModal'));
+    fasilitasModal.show();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function (e) {
+            const id = this.dataset.id;
+
+            Swal.fire({
+                title: 'Yakin ingin menghapus?',
+                text: "Data tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim form secara manual
+                    const form = this.closest('form');
+                    form.submit();
+                }
+            });
+        });
+    });
+});

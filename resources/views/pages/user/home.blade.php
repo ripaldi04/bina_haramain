@@ -27,14 +27,14 @@
                 @endforeach
 
                 <!-- Teks utama (Desktop) -->
-                <div class="col-md-6 text-md-start d-none d-md-block">
+                {{-- <div class="col-md-6 text-md-start d-none d-md-block">
                     <h1 class="fs-4">{{ $banner->header1 }}</h1>
                     <p class="fs-4 fw-bold text-warning">{!! $banner->header2 !!}</p>
                     <p class="fs-6">{{ $banner->deskripsi }}</p>
                     <button class="btn btn-warning text-white mt-2" style="width: 150px; border-radius: 4px;">
                         Lihat Paket
                     </button>
-                </div>
+                </div> --}}
 
                 <!-- Gambar (Desktop) -->
                 <div class="col-md-6 text-end d-none d-md-block">
@@ -268,114 +268,27 @@
             </div>
         </div>
     </div>
+   
+    {{-- Keunggulan --}}
     <div class="mt-5 keunggulan">
         <div class="container">
             <h5 class="fw-bold fs-2 text-center" style="margin-top: 5%;">Keunggulan Travel Kami</h5>
             <div class="row d-flex justify-content-center align-items-center"
                 style="color: black; margin-top: 5%; margin-bottom: 5%;">
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center text-start"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/berizin resmi.png" alt="" height="60px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Berizin Resmi dari Kementrian Agama RI</h5>
+                @foreach ($keunggulan as $item)
+                    <div class="col-lg-4 col-md-6 col-12 text-center mb-3">
+                        <div class="d-flex flex-row align-items-center gap-3"
+                            style="background-color: white; padding: 15px; margin: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: left;">
+                            <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->title }}"
+                                height="60" width="60" style="object-fit: cover; border-radius: 8px;">
+                            <h5 class="m-0 fw-bold" style="font-size: 1.2rem;">{{ $item->title }}</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4 text-center" style="width: 376; height: 156;">
-                    <div class="d-flex flex-row justify-content-center align-items-center text-start"
-                        style="background-color: white; border-radius: 5px; height: 100px;">
-                        <img src="./images/v160_83.png" alt="" height="35px">
-                        <h5 class="m-4 text-start">Maskapai Berkualitas
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; border-radius: 5px; height: 100px;">
-                        <img src="./images/v160_201.png" alt="" height="45px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Jaminan Kepastian Tiket Pesawat (PP)
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4 d-flex justify-content-center" style="color: black; margin-bottom: 5%;">
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_16.png" alt="" height="60px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Berpengalaman Melayani Haji
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_19.png" alt="" height="60px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Bimbingan Intensif Manasik Haji</h5>
-                    </div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_22.png" alt="" height="80px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Pembimbing Haji Berpengalaman
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4 d-flex justify-content-center" style="color: black; margin-bottom: 5%;">
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_31.png" alt="" height="40px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Pelayanan Ramah & Menyeluruh</h5>
-                    </div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/harga terjangkau.png" alt="" height="60px"
-                            style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Harga Sangat Bersahabat/Terjangkau
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_50.png" alt="" height="50px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Layanan Medis Untuk Jamaah
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4 d-flex justify-content-center" style="color: black; margin-bottom: 5%;">
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_37.png" alt="" height="60px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Fasilitas Berkelas & Memukau
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_40.png" alt="" height="60px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Memberikan Garansi 100% Uang Kembali
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center"
-                        style="background-color: white; width: 376; height: 156; border-radius: 5px; height: 100px;">
-                        <img src="./images/v185_53.png" alt="" height="50px" style="margin-left: 20px;">
-                        <h5 class="m-4 text-start">Group Support & Team Support
-                        </h5>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+    
     <div class="container mt-5" style="margin-bottom: 10%;">
         <div>
             <div class="fs-2 fw-bold d-flex justify-content-center align-items-center"

@@ -31,7 +31,7 @@
                                 <td class="text-wrap">{{ $banner->header1 }}</td>
                                 <td class="text-wrap">{{ $banner->header2 }}</td>
                                 <td class="text-wrap">{{ $banner->deskripsi }}</td>
-                                <td><img src="{{ asset('images/v146_30.png') }}" width="100" class="img-fluid"/></td>
+                                <td><img src="{{ asset('images/v146_30.png') }}" width="100" class="img-fluid" /></td>
                                 <td>
                                     <!-- Tombol Edit -->
                                     <button class="btn btn-warning btn-sm" id="editButton" data-id="{{ $banner->id }}"
@@ -178,8 +178,9 @@
 
         {{-- Keunggulan --}}
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="m-0">Keunggulan</h5>
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" onclick="openKeunggulanModal()">+ Tambah</a>
             </div>
             <div class="card-body table-responsive">
                 <table class="table table-bordered table-striped">
@@ -187,17 +188,89 @@
                         <tr>
                             <th>Judul</th>
                             <th>Gambar</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($keunggulan as $item)
+                        @forelse ($keunggulan as $item)
                             <tr>
-                                <td>{{ $item->title }}</td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
+                                {{-- Judul dibuat ellipsis --}}
+                                <td
+                                    style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    {{ $item->title }}
+                                </td>
+                                <td>
+                                    @if ($item->image_url)
+                                        <img src="{{ asset('storage/' . $item->image_url) }}" width="100"
+                                            class="img-fluid" />
+                                    @else
+                                        <span>No Image</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btn btn-warning btn-sm"
+                                        onclick="openKeunggulanModal(
+                                    {{ $item->id }},
+                                    '{{ $item->title }}',
+                                    '{{ $item->image_url ? asset('storage/' . $item->image_url) : '' }}'
+                                )">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('keunggulan.destroy', $item->id) }}" method="POST"
+                                        style="display: inline;" id="delete-form-{{ $item->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="confirmDelete({{ $item->id }}, event)"
+                                            class="btn btn-danger btn-sm">
+                                            Hapus
+                                        </button>
+                                    </form>
+
+                                </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-center">Belum ada data keunggulan</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+
+
+        <!-- Modal Form -->
+        <div class="modal fade" id="keunggulanModal" tabindex="-1" aria-labelledby="keunggulanModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('keunggulan.storeOrUpdate') }}">
+
+                    @csrf
+                    <input type="hidden" name="id" id="keunggulan_id">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="keunggulanModalLabel">Tambah/Edit Keunggulan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Tutup"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label>Judul</label>
+                                <input type="text" class="form-control" name="title" id="title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Gambar</label>
+                                <input type="file" class="form-control" name="image_url" id="image_url">
+                            </div>
+                            <div id="previewImage" class="mb-3"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 

@@ -20,23 +20,26 @@
 
 </head>
 
-<body>
+<body data-success="{{ session('success') }}" data-error="{{ session('error') }}"
+    data-delete="{{ session('swal_success') }}">
 
     @include('pages.admin.partials.sidebar')
-    
+
     <main>
         @yield('content')
     </main>
 
-    @yield('script')
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
 
     <!-- SweetAlert2 CDN -->
+    <!-- Tambahkan ini di <head> atau sebelum </body> -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    @yield('script')
+
 
 </body>
 

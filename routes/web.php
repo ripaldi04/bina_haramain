@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingKeunggulanController;
 use App\Http\Controllers\OrderPaketController;
 use App\Http\Controllers\TipeKamarController;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +37,7 @@ Route::post('/transaksi/{order_id}', [OrderPaketController::class, 'prosesTransa
 // Route::get('/transaksi', [OrderPaketController::class, 'create'])->name('transaksi');
 
 
-Route::get('/', [LandingBannerController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
@@ -114,6 +116,16 @@ Route::resource('/admin/users', AdminUserController::class)->names([
     'destroy' => 'admin.users.destroy',
 ]);
 
+Route::post('/admin/keunggulan', [LandingKeunggulanController::class, 'store'])->name('admin.keunggulan.store');
+Route::delete('/admin/keunggulan/{id}', [LandingKeunggulanController::class, 'destroy'])->name('keunggulan.destroy');
+Route::post('/admin/storeOrUpdateKeunggulan', [AdminLandingPageController::class, 'storeOrUpdateKeunggulan'])->name('storeOrUpdateKeunggulan');
+Route::post('/keunggulan/store-or-update', [LandingKeunggulanController::class, 'storeOrUpdate'])->name('keunggulan.storeOrUpdate');
+Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])->name('landing.index');
+Route::post('/keunggulan/store', [LandingKeunggulanController::class, 'store'])->name('keunggulan.store');
+Route::post('/keunggulan/update/{id}', [LandingKeunggulanController::class, 'update'])->name('keunggulan.update');
+Route::delete('/keunggulan/{id}', [LandingKeunggulanController::class, 'destroy'])->name('keunggulan.destroy');
+
+Route::resource('keunggulan', LandingKeunggulanController::class);
 
 
 Route::get('/admin/affiliate', function () {

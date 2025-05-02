@@ -16,8 +16,8 @@ class AdminUserController extends Controller
     public function index()
     {
         $users = User::latest()->get();
-        return view('pages.admin.admin_user', compact('users'));   
-    } 
+        return view('pages.admin.admin_user', compact('users'));
+    }
     public function update(Request $request)
     {
         // Validasi data
@@ -44,13 +44,13 @@ class AdminUserController extends Controller
 
     public function destroy($id)
     {
-        
+
         Log::info("Coba hapus user ID: " . $id);
-    
+
         try {
             $user = User::findOrFail($id);
             $user->delete();
-    
+
             Log::info("Berhasil hapus user ID: " . $id);
             return response()->json(['status' => 'success']);
         } catch (\Exception $e) {
@@ -59,30 +59,31 @@ class AdminUserController extends Controller
         }
     }
     public function store(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6',
-    ]);
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+        ]);
 
-    if ($validator->fails()) {
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'kode_referral' => Str::random(8),
+            'password' => bcrypt($request->password),
+            'email_verified_at' => now(), // Set auto verifikasi
+        ]);
+
         return response()->json([
-            'errors' => $validator->errors()
-        ], 422);
-    }
-
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'kode_referral' => Str::random(8),
-        'password' =>$request->password,
-    ]);
-
-    return response()->json([
-        'message' => 'User created successfully',
-        'user' => $user
-    ]);
+            'message' => 'User created successfully',
+            'user' => $user
+        ]);
     }
 
 }

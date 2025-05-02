@@ -14,7 +14,18 @@
     <!-- Custom CSS (jika ada) -->
     @vite(['resources/css/user/navbar.css', 'resources/css/user/footer.css'])
     @yield('style')
+     <!-- SweetAlert Meta Messages -->
+     @if (session('success'))
+     <meta name="success-message" content="{{ session('success') }}">
+ @endif
 
+ @if ($errors->has('email'))
+     <meta name="error-message" content="{{ $errors->first('email') }}">
+ @endif
+
+ @foreach ($errors->all() as $error)
+     <meta name="error-list" content="{{ $error }}">
+ @endforeach
 
 </head>
 
@@ -32,6 +43,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

@@ -14,7 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     <label for="jenisJamaah${jamaahCount}">Jenis Jamaah</label>
                     <select id="jenisJamaah${jamaahCount}">
                         <option selected>Jamaah Baru</option>
+<<<<<<< HEAD
                         <option>Jamaah Lama</option>
+=======
+                        <option>Sesuai Pemesan</option>
+>>>>>>> main
                     </select>
                 </div>
                 <div class="form-group">
@@ -32,4 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
         container.appendChild(col);
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> main

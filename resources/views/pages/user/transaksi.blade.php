@@ -63,7 +63,11 @@
                                         <label for="jenisJamaah{{ $i }}">Jenis Jamaah</label>
                                         <select id="jenisJamaah{{ $i }}">
                                             <option selected>Jamaah Baru</option>
+<<<<<<< HEAD
                                             <option>Jamaah Lama</option>
+=======
+                                            <option>Sesuai Pemesan</option>
+>>>>>>> main
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -128,7 +132,11 @@
                         </div>
                         <div class="p-3 border rounded bg-white">
                             <h6 class="fw-bold">Kode Voucher</h6>
+<<<<<<< HEAD
                             <p class="small">Silakan masukkan kode voucher (jika ada) saat transaksi paket haji untuk
+=======
+                            <p class="small">Silakan masukkan kode voucher (jika ada) saat transaksi untuk
+>>>>>>> main
                                 mendapatkan potongan harga spesial dari kami.</p>
                             <input type="text" class="form-control mb-2" placeholder="Kode Voucher" />
                             <button class="btn custom-voucher w-100">Gunakan Voucher</button>
@@ -137,4 +145,8 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     @endsection
+=======
+    @endsection
+>>>>>>> main

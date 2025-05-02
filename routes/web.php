@@ -1,22 +1,69 @@
 <?php
 
+use App\Http\Controllers\TipeKamarController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LandingBannerController;
 use App\Http\Controllers\AdminLandingPageController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PaketController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PackageDetailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\User\UserPaketController;
+use App\Http\Controllers\LandingKeunggulanController;
+use App\Http\Controllers\LandingFasilitasController;
+use App\Http\Controllers\LandingGaleriController;
+use App\Http\Controllers\AdminQuestionController;
+
+Route::get('/admin/questions', [AdminQuestionController::class, 'index'])->name('questions.index');
+Route::post('/admin/questions', [AdminQuestionController::class, 'store'])->name('questions.store');
+Route::put('/admin/questions/{id}', [AdminQuestionController::class, 'update'])->name('questions.update');
+Route::delete('/admin/questions/{id}', [AdminQuestionController::class, 'destroy'])->name('questions.destroy');
 
 
+<<<<<<< HEAD
 Route::get('/transaksi/create', [PackageDetailController::class, 'create'])->name('transaksi.create');
 Route::get('/', [LandingBannerController::class, 'index'])->name('home');
 Route::post('/package-details/store', [PackageDetailController::class, 'store'])->name('package-details.store');
+=======
+Route::get('/admin/galeri/{id}/edit', [LandingGaleriController::class, 'edit'])->name('admin.galeri.edit');
+Route::put('/admin/galeri/{id}', [LandingGaleriController::class, 'update'])->name('admin.galeri.update');
+
+Route::get('/', [AdminLandingPageController::class, 'index'])->name('home');
+// Rute untuk menyimpan fasilitas
+Route::post('/admin/fasilitas', [LandingFasilitasController::class, 'store'])->name('fasilitas.store');
+// Rute untuk memperbarui fasilitas
+Route::put('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'update'])->name('fasilitas.update');
+// Rute untuk menghapus fasilitas
+Route::delete('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'destroy'])->name('fasilitas.destroy');
+
+// Route::resource('admin/fasilitas', LandingFasilitasController::class)->only(['store', 'update', 'destroy']);
+// Route::resource('fasilitas', LandingFasilitasController::class);
+
+
+Route::get('/', [LandingKeunggulanController::class, 'index'])->name('home');
+Route::post('/admin/keunggulan', [LandingKeunggulanController::class, 'store'])->name('admin.keunggulan.store');
+Route::delete('/admin/keunggulan/{id}', [LandingKeunggulanController::class, 'destroy'])->name('keunggulan.destroy');
+// Route::post('/keunggulan', [LandingKeunggulanController::class, 'storeOrUpdate'])->name('keunggulan.storeOrUpdate');
+Route::post('/admin/storeOrUpdateKeunggulan', [AdminLandingPageController::class, 'storeOrUpdateKeunggulan'])->name('storeOrUpdateKeunggulan');
+// Route::delete('/admin/keunggulan/{id}', [AdminLandingPageController::class, 'destroy'])->name('keunggulan.destroy');
+Route::post('/keunggulan/store-or-update', [LandingKeunggulanController::class, 'storeOrUpdate'])->name('keunggulan.storeOrUpdate');
+// Route::post('/admin/keunggulan/store-or-update', [AdminLandingPageController::class, 'storeOrUpdateKeunggulan'])->name('keunggulan.storeOrUpdate');
+Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])->name('landing.index');
+Route::post('/keunggulan/store', [LandingKeunggulanController::class, 'store'])->name('keunggulan.store');
+Route::post('/keunggulan/update/{id}', [LandingKeunggulanController::class, 'update'])->name('keunggulan.update');
+Route::delete('/keunggulan/{id}', [LandingKeunggulanController::class, 'destroy'])->name('keunggulan.destroy');
+
+Route::resource('keunggulan', LandingKeunggulanController::class);
+// Route::get('/', [LandingBannerController::class, 'index'])->name('home');
+
+
+>>>>>>> main
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
@@ -29,11 +76,11 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
     $user = User::findOrFail($id);
 
-    if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+    if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
         abort(403);
     }
 
-    if (! $user->hasVerifiedEmail()) {
+    if (!$user->hasVerifiedEmail()) {
         $user->markEmailAsVerified();
     }
 
@@ -58,21 +105,20 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-Route::get('/haji', function () {
-    return view('pages.user.layanan_haji');
-})->name('layanan_haji');
+Route::get('/haji', [UserPaketController::class, 'index'])->name('layanan_haji');
+Route::get('/umrah', [UserPaketController::class, 'store'])->name('layanan_umrah');
 
-Route::get('/haji/detail-bintang-tiga', function () {
-    return view('pages.user.detailb3_layanan_haji');
-})->name('detailb3_layanan_haji');
 
-Route::get('/haji/detail-bintang-lima', function () {
-    return view('pages.user.detailb5_layanan_haji');
-})->name('detailb5_layanan_haji');
 
-Route::get('/umrah', function () {
-    return view('pages.user.layanan_umrah');
-})->name('layanan_umrah');
+// Route::get('/haji/detail-bintang-tiga', function () {
+//     return view('pages.user.detailb3_layanan_haji');
+// })->name('detailb3_layanan_haji');
+
+// Route::get('/haji/detail-bintang-lima', function () {
+//     return view('pages.user.detailb5_layanan_haji');
+// })->name('detailb5_layanan_haji');
+
+Route::get('/paket/detail/{id}', [UserPaketController::class, 'show'])->name('layanan_haji.detail');
 
 Route::get('/hubungi-kami', function () {
     return view('pages.user.hubungi_kami');
@@ -86,8 +132,11 @@ Route::get('/transaksi', function () {
     return view('pages.user.transaksi');
 })->name('transaksi');
 
+<<<<<<< HEAD
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+=======
+>>>>>>> main
 
 
 Route::resource('/admin/users', AdminUserController::class)->names([
@@ -107,9 +156,15 @@ Route::get('/admin/jamaah', function () {
     return view('pages.admin.admin_jamaah');
 })->name('admin_jamaah');
 
-Route::get('/admin/paket', function () {
-    return view('pages.admin.admin_paket');
-})->name('admin_paket');
+Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin_paket');
+Route::post('/admin/paket', [PaketController::class, 'store'])->name('paket.store');
+Route::get('/admin/paket/{id}/edit', [PaketController::class, 'edit'])->name('paket.edit');
+Route::put('/admin/paket/{id}', [PaketController::class, 'update'])->name('paket.update');
+Route::delete('/admin/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+Route::delete('/admin/paket/hapus-semua', [PaketController::class, 'destroyAll'])->name('paket.destroyAll');
+
+
+
 
 Route::get('/admin/agen', function () {
     return view('pages.admin.admin_agen');
@@ -120,4 +175,10 @@ Route::get('/admin/landing-page', [AdminLandingPageController::class, 'index'])-
 Route::get('admin/edit-banner/{id}', [AdminLandingPageController::class, 'editBanner'])->name('admin.banner.edit');
 Route::post('admin/update-banner/{id}', [AdminLandingPageController::class, 'updateBanner'])->name('admin.banner.update');
 
+<<<<<<< HEAD
 Route::post('/packages-details', [PackageDetailController::class, 'store'])->name('packages.details.store');
+=======
+Route::get('/admin/paket/{id}/detail-paket', [PaketController::class, 'getDetailPaket']);
+
+Route::resource('tipe-kamar', TipeKamarController::class);
+>>>>>>> main

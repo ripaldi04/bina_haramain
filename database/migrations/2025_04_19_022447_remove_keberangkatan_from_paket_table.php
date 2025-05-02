@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('landing_keunggulan', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('image_url');
-            $table->timestamps();
+        Schema::table('paket', function (Blueprint $table) {
+            $table->dropColumn('keberangkatan');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('landing_keunggulan');
+        Schema::table('paket', function (Blueprint $table) {
+            $table->date('keberangkatan')->nullable();
+        });
     }
 };

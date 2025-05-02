@@ -1,21 +1,25 @@
 @extends('layouts.user')
 
-@section('title', 'Haji Bintang 3')
+@section('title', 'Detail Paket')
 
 @section('style')
-    @vite(['resources/css/user/detailb3_layanan_haji.css'])
+    @vite(['resources/css/user/detail_layanan.css'])
+@endsection
+
+@section('script')
+    @vite(['resources/js/user/detail_layanan.js'])
 @endsection
 
 @section('content')
     <!-- Container -->
     <div class="container mt-5  ">
-        <h2 class="fw-bold" style="font-size: 40px; margin-top: 100px;">Haji Furoda 2025</h2>
+        <h2 class="fw-bold" style="font-size: 40px; margin-top: 100px;">{{ $paket->nama_paket }}</h2>
         <div class="row mt-5 bg-white p-4 rounded">
             <div class="col-md-8">
 
                 <!-- Header dengan Gambar -->
                 <div class="container header-container mt-4">
-                    <img src="{{ asset('images/DetailB3.png') }}" class="header-image" alt="Haji Furoda">
+                    <img src="{{ asset('storage/' . $paket->gambar) }}" class="header-image" alt="Haji Furoda">
                 </div>
             </div>
 
@@ -26,16 +30,26 @@
 
                     <label>Program Hari</label>
                     <select class="form-select">
-                        <option>Program 26 Hari</option>
+                        <option> {{ $paket->program_hari }} Hari</option>
                     </select>
 
                     <label>Bandara Keberangkatan</label>
                     <select class="form-select">
-                        <option>Soekarno-Hatta</option>
+                        <option> {{ $paket->bandara }}</option>
                     </select>
 
                     <label>Tanggal Keberangkatan</label>
-                    <input type="date" class="form-control">
+                    <select class="form-select">
+                        @if ($paket->detail_paket && $paket->detail_paket->count() > 0)
+                            @foreach ($paket->detail_paket as $detail)
+                                <option>{{ \Carbon\Carbon::parse($detail->tanggal_keberangkatan)->format('d-m-Y') }} (Seat
+                                    Tersedia {{ $detail->jumlah_seat }})
+                                </option>
+                            @endforeach
+                        @else
+                            <option enable>Belum ada jadwal keberangkatan</option>
+                        @endif
+                    </select>
 
                     <label>Kamar</label>
 
@@ -45,7 +59,9 @@
                             <strong>Quad</strong> <span class="room-type">(1 Kamar Ber-4)</span>
                         </div>
                         <div class="room-price">
-                            Harga : <span class="price">$ 20,000</span>/pax
+                            Harga : <span class="price">
+                                Rp {{ number_format($hargaKamar['quad'] ?? 0, 0, ',', '.') }}
+                            </span>/pax
                         </div>
                         <div class="room-input d-flex">
                             <label for="number-input" class="form-label">Jumlah</label>
@@ -61,7 +77,9 @@
                             <strong>Double</strong> <span class="room-type">(1 Kamar Ber-2)</span>
                         </div>
                         <div class="room-price">
-                            Harga : <span class="price">$ 27,500</span>/pax
+                            Harga : <span class="price">
+                                Rp {{ number_format($hargaKamar['double'] ?? 0, 0, ',', '.') }}
+                            </span>/pax
                         </div>
                         <div class="room-input d-flex">
                             <label for="number-input" class="form-label">Jumlah</label>
@@ -77,8 +95,9 @@
                             <strong>Triple</strong> <span class="room-type">(1 Kamar Ber-3)</span>
                         </div>
                         <div class="room-price">
-                            Harga : <span class="price">$ 27,500</span>/pax
-                        </div>
+                            Harga : <span class="price">
+                                Rp {{ number_format($hargaKamar['triple'] ?? 0, 0, ',', '.') }}
+                            </span>/pax                        </div>
                         <div class="room-input d-flex">
                             <label for="number-input" class="form-label">Jumlah</label>
                             <input type="number" class="form-control custom-input" id="number-input" min="0"
@@ -91,10 +110,31 @@
                         <p>Total: <span>USD 0,00</span></p>
                     </div>
 
+<<<<<<< HEAD:resources/views/pages/user/detailb3_layanan_haji.blade.php
                     <form method="GET" action="{{ route('transaksi.create') }}">
                         <input type="hidden" name="package_id" value="{{ $package->id ?? 1 }}"> {{-- sesuaikan dengan ID dari paket --}}
                         <button type="submit" class="btn-pesan"><i class="bi bi-cart-fill"></i> Pesan Paket</button>
                     </form>
+=======
+                    @auth
+                        @if (auth()->user()->email_verified_at)
+                            <button class="btn-pesan" onclick="window.location.href='{{ route('transaksi') }}'">
+                                <i class="bi bi-cart-fill"></i> Pesan Paket
+                            </button>
+                        @else
+                            <button class="btn-pesan" onclick="showVerifyAlert()">
+                                <i class="bi bi-cart-fill"></i> Pesan Paket
+                            </button>
+                        @endif
+                    @endauth
+
+
+                    @guest
+                        <button class="btn-pesan" onclick="showVerifyAlert()">
+                            <i class="bi bi-cart-fill"></i> Pesan Paket
+                        </button>
+                    @endguest
+>>>>>>> main:resources/views/pages/user/detail_layanan.blade.php
                     <button class="btn-download">Konsultasi Paket</button>
                     <button class="btn-download">Download Brosur</button>
                 </div>
@@ -104,28 +144,23 @@
             <div class="container info-box">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5><strong>Hotel Makkah</strong></h5>
-                        <p><i class="bi bi-geo-alt-fill custom-icon fs-4"></i> <span class="warna-text">Nada
-                                Deafah/Setaraf</span></p>
-                        <p class="star-rating fs-4">★★★</p>
-                        <h5 class="mt-3 fw-bold 15px">Jenis Paket</h5>
-                        <p><i class="fa-solid fa-kaaba custom-icon fs-4"></i><span class="warna-text">Haji Furoda
-                                2025</span></p>
-                        <h5><strong>Hotel Lain</strong></h5>
-                        <p><i class="bi bi-building-fill custom-icon fs-4"></i> <span class="warna-text">Maktab
-                                Arafah</span> (Makkah)</p>
-                        <p><i class="bi bi-building-fill custom-icon fs-4"></i> <span class="warna-text">Hotel
-                                Transit</span> (Makkah)</p>
+                        <h5 class="mb-2"><strong>Hotel Makkah</strong></h5>
+                        <p class="mb-4"><i class="bi bi-building custom-icon fs-4"></i> <span
+                                class="warna-text">{{ $paket->hotel_mekkah }}</span></p>
+                        {{-- <h5 class="mb-2 fw-bold 15px">Keberangkatan</h5>
+                        <p class="mb-4"><i class="bi bi-calendar-event custom-icon fs-4"></i><span
+                                class="warna-text">{{ $paket->keberangkatan }}</span></p> --}}
+                        <h5 class="fw-bold 15px">Bandara</h5>
+                        <p><i class="bi bi-geo-alt custom-icon fs-4"></i><span
+                                class="warna-text">{{ $paket->bandara }}</span> </p>
                     </div>
                     <div class="col-md-6">
-                        <h5><strong>Hotel Madinah</strong></h5>
-                        <p><i class="bi bi-geo-alt-fill custom-icon fs-4"></i> <span class="warna-text">Almukthara
-                                Gorbi/Setaraf</span></p>
-                        <p class="star-rating fs-4">★★★</p>
-
-                        <h5 class="mt-3 fw-bold 15px">Maskapai</h5>
-                        <p><i class="bi bi-airplane-fill custom-icon fs-4"></i><span class="warna-text">Airlines /
-                                Garuda Indonesia</span> </p>
+                        <h5 class="mb-2"><strong>Hotel Madinah</strong></h5>
+                        <p class="mb-4"><i class="bi bi-building custom-icon fs-4"></i> <span
+                                class="warna-text">{{ $paket->hotel_madinah }}</span></p>
+                        <h5 class="fw-bold 15px">Maskapai</h5>
+                        <p><i class="bi bi-airplane-engines custom-icon fs-4"></i><span
+                                class="warna-text">{{ $paket->maskapai }}</span> </p>
                     </div>
                 </div>
             </div>

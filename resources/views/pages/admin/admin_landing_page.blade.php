@@ -221,7 +221,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="confirmDelete({{ $item->id }}, event)"
-                                            class="btn btn-danger btn-sm">
+                                            class="btn btn-danger btn-sm btn-delete">
                                             Hapus
                                         </button>
                                     </form>
@@ -533,27 +533,114 @@
 
         {{-- Pertanyaan --}}
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="m-0">Pertanyaan</h5>
+                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addQuestionModal">
+                    Tambah Pertanyaan
+                </button>
             </div>
             <div class="card-body table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead class="thead-light">
                         <tr>
-                            <th>Pertanyaan</th>
-                            <th>Jawaban</th>
+                            <th style="width: 20%;">Judul Pertanyaan</th>
+                            <th style="width: 60%;">Deskripsi / Jawaban</th>
+                            <th style="width: 20%;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($questions as $item)
                             <tr>
-                                <td>{{ $item->question }}</td>
-                                <td>{{ $item->answer }}</td>
+                                <td>
+                                    <span class="d-inline-block text-truncate w-100" style="max-width: 200px;"
+                                        title="{{ $item->title }}">
+                                        {{ $item->title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="d-inline-block text-truncate w-100" style="max-width: 400px;"
+                                        title="{{ $item->deskripsi }}">
+                                        {{ $item->deskripsi }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editModal{{ $item->id }}">Edit</button>
+                                    <form action="{{ route('questions.destroy', $item->id) }}" method="POST"
+                                        style="display:inline-block" id="delete-form-{{ $item->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger btn-delete">Hapus</button>
+                                    </form>
+                                </td>
                             </tr>
+
+                            {{-- Modal Edit --}}
+                            <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1"
+                                aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form method="POST" action="{{ route('questions.update', $item->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit
+                                                    Pertanyaan</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Tutup"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group mb-2">
+                                                    <label for="title">Judul</label>
+                                                    <input type="text" name="title" class="form-control"
+                                                        value="{{ $item->title }}" required>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="deskripsi">Deskripsi</label>
+                                                    <textarea name="deskripsi" class="form-control" rows="3" required>{{ $item->deskripsi }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-@endsection
+
+        {{-- Modal Tambah --}}
+        <div class="modal fade" id="addQuestionModal" tabindex="-1" aria-labelledby="addQuestionModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" action="{{ route('questions.store') }}">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addQuestionModalLabel">Tambah Pertanyaan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Tutup"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group mb-2">
+                                <label for="title">Judul</label>
+                                <input type="text" name="title" class="form-control"
+                                    placeholder="Masukkan judul pertanyaan" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea name="deskripsi" class="form-control" rows="3" placeholder="Masukkan deskripsi" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endsection

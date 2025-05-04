@@ -559,76 +559,19 @@
     <div class="container" style="margin-top: 6%;">
         <h5 class="fw-bold fs-2">Hal yang sering ditanyakan</h5>
         <div class="garis-bawah-qanda"></div>
-        <div class="row">
-            <div class="col-6">
-                <div class="card" style="width: 100%; margin-top: 5%;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: var(--primary-color);">Apa itu Bina Haramain?</h5>
-                        <p class="card-text">Bina Haramain adalah pusat Informasi dan edukasi haji umrah PT Pradana
-                            Grasindo Travel</p>
+        @foreach ($questions->chunk(2) as $row)
+            <div class="row">
+                @foreach ($row as $q)
+                    <div class="col-6">
+                        <div class="card" style="width: 100%; margin-top: 20px;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: var(--primary-color);">{{ $q->title }}</h5>
+                                <p class="card-text">{{ $q->deskripsi }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            <div class="col-6">
-                <div class="card" style="width: 100%; margin-top: 5%;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: var(--primary-color);">Apakah calon jamaah haji akan
-                            mendapatkan Bimbingan Manasik Haji?</h5>
-                        <p class="card-text">Ya. Bina Haramain akan memberikan bimbingan manasik haji secara intensif
-                            kepada seluruh calon jamaah haji.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="card" style="width: 100%; margin-top: 1%;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: var(--primary-color);">Apakah telah memiliki izin?</h5>
-                        <p class="card-text">PT Pradana Grasindo Travel adalah perusahaan dengan legalitas lengkap dan
-                            memiliki izin PPIU No. U.541 Tahun 2021, serta Izin PIHK No. 02180102427260001 Tahun 2023.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card" style="width: 100%; margin-top: 5%;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: var(--primary-color);">Jika saya GAGAL berangkat, apakah
-                            uang pendaftaran saya akan kembali?</h5>
-                        <p class="card-text">Kami menggaransi bahwa Anda akan berangkat (jaminan Keberangkatan Haji
-                            2025). Namun jika hal terburuknya adalah Anda GAGAL berangkat sedangkan Anda telah melakukan
-                            pembayaran, maka kami Garansi 100% uang Anda kembali.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6" id="tanya-card">
-                <div class="card" style="width: 100%; margin-top: -7%;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: var(--primary-color);">Jika saya tertarik daftar Haji
-                            Langsung Berangkat 2025, bagaimana prosedurnya?</h5>
-                        <p class="card-text">Anda bisa mendaftar dengan meng-klik tombol DAFTAR SEKARANG yang berwarna
-                            hijau, setelah itu Anda akan diarahkan ke nomor Whatsapp Official Bina Haramain.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card" style="width: 100%; margin-top: 5%;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: var(--primary-color);">Jika saya melakukan pembayaran
-                            dengan cara angsur, Berapa DP yang harus saya bayar dan kapan saya harus melunasinya?
-                        </h5>
-                        <p class="card-text">Untuk Haji Furoda 2025 Anda harus membayar DP sebesar Rp 100.000.000
-                            (seratus juta rupiah) untuk Paket Bintang 3. Untuk Haji Furoda Paket Bintang 5 DP sebesar $
-                            11.000. Jika skema cash keras, maka pelunasan selambat-lambatnya 30
-                            hari setelah pembayaran DP. Jika Anda akan membayar dengan skema Angsur, Anda diharuskan
-                            melunasinya selambat-lambatnya pada bulan Syawal 1446 H. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 @endsection

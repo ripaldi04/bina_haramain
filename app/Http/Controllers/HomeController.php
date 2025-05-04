@@ -17,10 +17,9 @@ class HomeController extends Controller
         $keunggulan = Keunggulan::all();
         $banner = LandingBanner::first();
         $fasilitas = Fasilitas::all();
-        $galeri = Galeri::first(); // Ambil galeri pertama        // $fasilitas = Fasilitas::all();
-        // $galeri = Galeri::first(); // <-- ini yang betul
-        // $questions = Question::all(); // atau ->latest() jika ingin urutan terbaru
+        $galeri = Galeri::first();
+        $questions = Question::all();
 
-        return view('pages.user.home', compact('keunggulan', 'fasilitas', 'galeri'));
+        return view('pages.user.home', compact('keunggulan', 'fasilitas', 'galeri', 'questions'));
     }
 }

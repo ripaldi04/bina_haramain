@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminQuestionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingFasilitasController;
 use App\Http\Controllers\LandingGaleriController;
@@ -40,6 +41,11 @@ Route::post('/transaksi/{order_id}', [OrderPaketController::class, 'prosesTransa
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+Route::get('/admin/questions', [AdminQuestionController::class, 'index'])->name('questions.index');
+Route::post('/admin/questions', [AdminQuestionController::class, 'store'])->name('questions.store');
+Route::put('/admin/questions/{id}', [AdminQuestionController::class, 'update'])->name('questions.update');
+Route::delete('/admin/questions/{id}', [AdminQuestionController::class, 'destroy'])->name('questions.destroy');
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');

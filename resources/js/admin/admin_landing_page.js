@@ -73,26 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// ✅ Ekspor fungsi ke global (agar bisa diakses dari HTML onclick)
-window.confirmDelete = function (id, event) {
-    event.preventDefault();
-
-    Swal.fire({
-        title: 'Apakah kamu yakin?',
-        text: "Data akan dihapus permanen!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Ya, hapus!',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            document.getElementById(`delete-form-${id}`).submit();
-        }
-    });
-}
-
 window.openFasilitasModal = function (id = null, title = '', deskripsi = '', image = '') {
     const form = document.getElementById('fasilitasForm');
     const modalTitle = document.getElementById('fasilitasModalLabel');
@@ -136,7 +116,8 @@ window.openFasilitasModal = function (id = null, title = '', deskripsi = '', ima
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.btn-delete').forEach(button => {
         button.addEventListener('click', function (e) {
-            const id = this.dataset.id;
+            e.preventDefault(); // Mencegah form langsung disubmit
+            // const id = this.dataset.id;
 
             Swal.fire({
                 title: 'Yakin ingin menghapus?',

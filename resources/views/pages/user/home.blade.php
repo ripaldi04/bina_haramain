@@ -539,21 +539,19 @@
         <div class="container">
             <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-6 mt-5" style="color: var(--for-color);">
-                    <h1 style="color: rgb(181, 0, 0); font-weight: bold;">HOT DEAL !!!!</h1>
-                    <h5 style="line-height: 50px;">
-                        Pendaftaran Bulan Februari 2025 ini akan mendapatkan potongan harga $1.000/pack! dan Anda berhak
-                        1 Bus serta 1 Hotel Bersama Ustadz Koh Dennis Lim & Teh Yunda
+                    <h1 style="color: rgb(181, 0, 0); font-weight: bold;">{{ $hotDeals->first()->title }}</h1>
+                    <h5 style="line-height: 30px;">
+                        {!! $hotDeals->first()->deskripsi ?? '' !!}
                     </h5>
-                    <h3 style="color: var(--secondary-color); line-height: 30px;">
-                        SEAT TERBATAS <span style="color: rgb(181, 0, 0); font-weight: bold;">!!!!</span> <br> PASTIKAN
-                        ANDA KEBAGIAN <span style="color: rgb(181, 0, 0); font-weight: bold;">!!!</span>
+                    <h3 style="color: var(--secondary-color); line-height: 35px; margin-top: 20px;">
+                        {{ $hotDeals->first()->subtitle ?? 'Subjudul tidak tersedia' }}
                     </h3>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <img src="./images/v185_130.png" class="img-fluid" alt="">
+                    <img src="{{ asset($hotDeals->first()->image_url ?? 'storage/default.png') }}" class="img-fluid"
+                        alt="Hot Deal Image">
                 </div>
             </div>
-
         </div>
     </div>
     <div class="container" style="margin-top: 6%;">

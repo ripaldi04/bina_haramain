@@ -502,33 +502,130 @@
         </div>
 
 
-        {{-- Hot Deal --}}
+        {{-- LandingHotDeal --}}
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="m-0">Hot Deal</h5>
             </div>
-            <div class="card-body table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-light">
+
+            <table class="table table-bordered table-striped text-center align-middle">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Judul</th>
+                        <th>Sub Judul</th>
+                        <th>Deskripsi</th>
+                        <th>Gambar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($hotDeals as $item)
                         <tr>
-                            <th>Judul</th>
-                            <th>Sub Judul</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
+                            <td style="white-space: pre-line;">{{ $item->title }}</td>
+                            <td style="white-space: pre-line;">{{ $item->subtitle }}</td>
+                            <td class="text-start" style="white-space: pre-line;">
+                                {{ $item->deskripsi }}
+                            </td>
+                            <td>
+                                <img src="{{ asset($item->image_url) }}" alt="gambar" width="50" height="50">
+                            </td>
+
+                            <td>
+                                {{-- Tombol Edit --}}
+                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#editHotDealModal{{ $item->id }}">
+                                    Edit
+                                </button>
+
+
+                                {{-- Modal Edit --}}
+                                <div class="modal fade" id="editHotDealModal{{ $item->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="editHotDealModalLabel{{ $item->id }}"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            {{-- Tampilkan error validasi --}}
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul class="mb-0">
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+
+                                            <form action="{{ route('admin.hotdeal.update', $item->id) }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title"
+                                                        id="editHotDealModalLabel{{ $item->id }}">
+                                                        Edit Hot Deal
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Judul</label>
+                                                        <input type="text" name="title" class="form-control"
+                                                            value="{{ $item->title }}" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Sub Judul</label>
+                                                        <input type="text" name="subtitle" class="form-control"
+                                                            value="{{ $item->subtitle }}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Deskripsi (gunakan enter untuk membuat list)</label>
+                                                        <textarea name="deskripsi" class="form-control" rows="4">{{ $item->deskripsi }}</textarea>
+                                                    </div>
+
+                                                    {{-- Preview gambar saat ini --}}
+                                                    <div class="form-group">
+                                                        <label>Gambar Saat Ini</label><br>
+                                                        @if ($item->image_url)
+                                                            <img src="{{ asset($item->image_url) }}" alt="Hot Deal Image"
+                                                                class="img-thumbnail" style="max-width: 200px;">
+                                                        @else
+                                                            <p>Tidak ada gambar</p>
+                                                        @endif
+                                                    </div>
+
+                                                    {{-- Upload gambar baru --}}
+                                                    <div class="form-group">
+                                                        <label>Upload Gambar Baru</label>
+                                                        <input type="file" name="image" class="form-control">
+                                                        <small class="form-text text-muted">Format: jpg, jpeg, png, gif.
+                                                        </small>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Tutup</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan
+                                                        Perubahan</button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- End Modal --}}
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($hotDeals as $item)
-                            <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->subtitle }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 
         {{-- Pertanyaan --}}

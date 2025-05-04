@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminQuestionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HotDealController;
 use App\Http\Controllers\LandingFasilitasController;
 use App\Http\Controllers\LandingGaleriController;
 use App\Http\Controllers\LandingKeunggulanController;
@@ -118,6 +119,9 @@ Route::get('/riwayat', function () {
 // })->name('transaksi');
 
 
+// Route Landing Hot Deal (admin)
+Route::get('/admin/landing-hotdeal', [HotDealController::class, 'index'])->name('admin.hotdeal.index');
+Route::put('/admin/landing-hotdeal/{id}', [HotDealController::class, 'update'])->name('admin.hotdeal.update');
 
 Route::resource('/admin/users', AdminUserController::class)->names([
     'index' => 'admin.users.index',

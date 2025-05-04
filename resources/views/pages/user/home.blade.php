@@ -323,7 +323,7 @@
         </div>
     </div>
 
-    
+
     <div class="container mt-5">
         <div class="text-center mb-5">
             <h2 class="fs-3 fw-bold" style="color: var(--primary-color);">Muthawif</h2>
@@ -380,37 +380,52 @@
             <div class="row g-3">
                 <!-- Gunakan gap antara elemen -->
                 <div class="col-lg-3 col-md-6">
-                    <img src="./images/v145_16.png" class="galeri-img">
+                    @if (!empty($galeri->image1_url))
+                        <img src="{{ asset('storage/' . $galeri->image1_url) }}" class="galeri-img">
+                    @endif
                 </div>
                 <div class="col-lg-3 col-md-6 d-flex flex-column">
-                    <img src="./images/v185_79.png" class="galeri-img-small">
-                    <img src="./images/v185_87.png" class="galeri-img-small mt-3">
+                    @if (!empty($galeri->image2_url))
+                        <img src="{{ asset('storage/' . $galeri->image2_url) }}" class="galeri-img-small">
+                    @endif
+                    @if (!empty($galeri->image3_url))
+                        <img src="{{ asset('storage/' . $galeri->image3_url) }}" class="galeri-img-small mt-3">
+                    @endif
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <img src="./images/v185_84.png" class="galeri-img">
+                    @if (!empty($galeri->image4_url))
+                        <img src="{{ asset('storage/' . $galeri->image4_url) }}" class="galeri-img">
+                    @endif
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <img src="./images/v185_90.png" class="galeri-img">
+                    @if (!empty($galeri->image5_url))
+                        <img src="{{ asset('storage/' . $galeri->image5_url) }}" class="galeri-img">
+                    @endif
                 </div>
             </div>
 
             <div class="row mt-3 g-3">
                 <div class="col-lg-4 col-md-6">
-                    <img src="./images/v185_96.png" class="galeri-img">
+                    @if (!empty($galeri->image6_url))
+                        <img src="{{ asset('storage/' . $galeri->image6_url) }}" class="galeri-img">
+                    @endif
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <img src="./images/v185_93.png" class="galeri-img">
+                    @if (!empty($galeri->image7_url))
+                        <img src="{{ asset('storage/' . $galeri->image7_url) }}" class="galeri-img">
+                    @endif
                 </div>
                 <div class="col-lg-4 col-md-12">
-                    <img src="./images/v145_19.png" class="galeri-img">
+                    @if (!empty($galeri->image8_url))
+                        <img src="{{ asset('storage/' . $galeri->image8_url) }}" class="galeri-img">
+                    @endif
                 </div>
             </div>
         </div>
         <span class="galeri-bawah"></span>
         <div>
-            <h5 class="fs-5 fw-bold">57 Jamaah Haji Langsung Berangkat</h5>
-            <h5 class="fs-6 fw-semibold" style="color: var(--tertinary-color);">Musim Haji 2024 M/1445 H, ada 57
-                jamaah Haji Khusus Langsung Berangkat, Tanpa Antri</h5>
+            <h5 class="fs-5 fw-bold">{{ $galeri->title }}</h5>
+            <h5 class="fs-6 fw-semibold" style="color: var(--tertinary-color);">{{ $galeri->deskripsi }}</h5>
             <button style="background-color: var(--primary-color); color: white; border-radius: 5px;">Daftar
                 Sekarang!!</button>
         </div>

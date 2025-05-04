@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingFasilitasController;
+use App\Http\Controllers\LandingGaleriController;
 use App\Http\Controllers\LandingKeunggulanController;
 use App\Http\Controllers\OrderPaketController;
 use App\Http\Controllers\TipeKamarController;
@@ -73,6 +74,9 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return redirect('/login');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/admin/galeri/{id}/edit', [LandingGaleriController::class, 'edit'])->name('admin.galeri.edit');
+Route::put('/admin/galeri/{id}', [LandingGaleriController::class, 'update'])->name('admin.galeri.update');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login.proses');

@@ -156,3 +156,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// edit-galeri.js
+window.openEditGaleri = function (id, title, deskripsi, images) {
+    document.getElementById('edit_id').value = id;
+    document.getElementById('edit_title').value = title;
+    document.getElementById('edit_deskripsi').value = deskripsi;
+    document.getElementById('editGaleriForm').action = '/admin/galeri/' + id;
+
+    for (let i = 1; i <= 8; i++) {
+        let previewDiv = document.getElementById('preview_image' + i);
+        previewDiv.innerHTML = ''; // Clear previous previews
+
+        // Jika ada gambar
+        if (images[i - 1]) {
+            previewDiv.innerHTML = `<img src="/storage/${images[i - 1]}" style="width: 100px; height: 100px; object-fit: cover;" class="img-fluid">`;
+        }
+
+        // Reset input file jika tidak ada gambar
+        document.getElementsByName('image' + i)[0].value = '';
+    }
+};
+
+

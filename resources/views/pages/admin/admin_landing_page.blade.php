@@ -410,6 +410,7 @@
                             <th>Judul</th>
                             <th>Deskripsi</th>
                             <th>Galeri Gambar</th>
+                            <th>Aksi</th> <!-- Tambahan kolom untuk tombol Edit -->
                         </tr>
                     </thead>
                     <tbody>
@@ -419,9 +420,37 @@
                                 <td>{{ $item->deskripsi }}</td>
                                 <td>
                                     @for ($i = 1; $i <= 8; $i++)
-                                        <img src="{{ $item->{'image' . $i . '_url'} }}" width="70"
-                                            class="m-1 img-fluid" />
+                                        @php
+                                            $imageField = 'image' . $i . '_url';
+                                        @endphp
+                                        @if (!empty($item->$imageField))
+                                            <div style="width: 70px; height: 70px; overflow: hidden; margin: 3px;">
+                                                <img src="{{ asset('storage/' . $item->$imageField) }}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;"
+                                                    class="img-fluid" />
+                                            </div>
+                                        @endif
                                     @endfor
+                                </td>
+                                <td>
+                                    @php
+                                        $images = json_encode([
+                                            $item->image1_url,
+                                            $item->image2_url,
+                                            $item->image3_url,
+                                            $item->image4_url,
+                                            $item->image5_url,
+                                            $item->image6_url,
+                                            $item->image7_url,
+                                            $item->image8_url,
+                                        ]);
+                                    @endphp
+
+                                    <button type="button" class="btn btn-sm btn-primary"
+                                        onclick='openEditGaleri({{ $item->id }}, "{{ addslashes($item->title) }}", "{{ addslashes($item->deskripsi) }}", {!! $images !!})'
+                                        data-bs-toggle="modal" data-bs-target="#editGaleriModal">
+                                        Edit
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -429,6 +458,49 @@
                 </table>
             </div>
         </div>
+
+        <div class="modal fade" id="editGaleriModal" tabindex="-1" aria-labelledby="editGaleriModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <form method="POST" enctype="multipart/form-data" id="editGaleriForm">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" id="edit_id">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Galeri</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Tutup"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label>Judul</label>
+                                <input type="text" class="form-control" name="title" id="edit_title" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Deskripsi</label>
+                                <textarea class="form-control" name="deskripsi" id="edit_deskripsi" required></textarea>
+                            </div>
+
+                            <div class="row">
+                                @for ($i = 1; $i <= 8; $i++)
+                                    <div class="col-md-3 mb-3">
+                                        <label>Gambar {{ $i }}</label>
+                                        <input type="file" name="image{{ $i }}" class="form-control">
+                                        <div id="preview_image{{ $i }}" class="mt-2"></div>
+                                    </div>
+                                @endfor
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
         {{-- Hot Deal --}}
         <div class="card mb-4">

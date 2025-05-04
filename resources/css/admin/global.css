@@ -42,6 +42,19 @@ input[type="checkbox"] {
     color: #f0f0f0;
 }
 
+.ellipsis-judul,
+.ellipsis-deskripsi {
+    white-space: normal; /* Ganti dari nowrap */
+    overflow: visible; /* Bukan hidden */
+    text-overflow: unset; /* Tidak perlu ellipsis */
+}
+
+.table td {
+    white-space: normal !important;
+    word-break: break-word;
+    vertical-align: top;
+}
+
 
 
 /* Agar tabel tetap rapi */
@@ -50,12 +63,9 @@ input[type="checkbox"] {
     table-layout: fixed;
 }
 th, td {
-    white-space: nowrap;
+    /* white-space: nowrap; */
     text-align: center;
     padding: 10px;
-}
-th:first-child, td:first-child {
-    width: 5%;
 }
 /* Cursor pada ikon edit & delete */
 .cursor-pointer {

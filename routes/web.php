@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminQuestionController;
+use App\Http\Controllers\Highlight1Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotDealController;
 use App\Http\Controllers\LandingFasilitasController;
@@ -118,6 +119,8 @@ Route::get('/riwayat', function () {
 //     return view('pages.user.transaksi');
 // })->name('transaksi');
 
+Route::put('/highlight1/{id}', [Highlight1Controller::class, 'update'])->name('highlight1.update');
+Route::put('/highlight1/{highlight1}', [Highlight1Controller::class, 'update'])->name('highlight1.update');
 
 // Route Landing Hot Deal (admin)
 Route::get('/admin/landing-hotdeal', [HotDealController::class, 'index'])->name('admin.hotdeal.index');

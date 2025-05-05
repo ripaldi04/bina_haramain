@@ -22,5 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LandingBannerSeeder::class,
         ]);
+        $this->call([
+            PaketSeeder::class,
+        ]);
+        $this->call([
+            LandingHotDealSeeder::class,
+        ]);
     }
 }

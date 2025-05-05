@@ -8,8 +8,8 @@ use App\Models\Keunggulan;
 use App\Models\LandingBanner;
 use App\Models\LandingHotDeal;
 use App\Models\Question;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Models\LandingHighlight1; // pastikan model-nya di-import
+
 
 class HomeController extends Controller
 {
@@ -21,8 +21,9 @@ class HomeController extends Controller
         $galeri = Galeri::first();
         $questions = Question::all();
         $hotDeals = LandingHotDeal::all();
+        $highlight1 = LandingHighlight1::first();
 
 
-        return view('pages.user.home', compact('keunggulan', 'fasilitas', 'galeri', 'questions', 'hotDeals'));
+        return view('pages.user.home', compact('keunggulan', 'fasilitas', 'galeri', 'questions', 'hotDeals', 'highlight1'));
     }
 }

@@ -27,14 +27,18 @@
                 @endforeach
 
                 <!-- Teks utama (Desktop) -->
-                {{-- <div class="col-md-6 text-md-start d-none d-md-block">
-                    <h1 class="fs-4">{{ $banner->header1 }}</h1>
-                    <p class="fs-4 fw-bold text-warning">{!! $banner->header2 !!}</p>
-                    <p class="fs-6">{{ $banner->deskripsi }}</p>
+                <div class="col-md-6 text-md-start d-none d-md-block">
+                    <h1 class="fs-4">Haji Langsung Berangkat</h1>
+                    <p class="fs-4 fw-bold text-warning">Tanpa Antri <br>
+                        Visa Haji Resmi<br>
+                        Maktab VIP<br>
+                        Sepenuh Hati</p>
+                    <p class="fs-6">Spesial bersama Koh Dennis Lim dan Teh Yunda – Kuota Terbatas, Segera Amankan Kuota
+                        Anda sebelum Terlambat!</p>
                     <button class="btn btn-warning text-white mt-2" style="width: 150px; border-radius: 4px;">
                         Lihat Paket
                     </button>
-                </div> --}}
+                </div>
 
                 <!-- Gambar (Desktop) -->
                 <div class="col-md-6 text-end d-none d-md-block">
@@ -150,39 +154,33 @@
         <div class="row p-3 d-flex justify-content-center align-items-center g-5 sudah-siap">
             <div class="col-md-7 col-12">
                 <div style="margin-left: 15%; margin-bottom: 10%;">
-                    <h4 class="fs-6 mb-3 mt-5 header-sudah-siap" style="color: var(--primary-color);">Sudah Siap
-                        Menjadi Tamu Allah dengan Haji Eksklusif?
-                    </h4>
+                    @if (!empty($highlight1->header))
+                        <h4 class="fs-6 mb-3 mt-5 header-sudah-siap" style="color: var(--primary-color);">
+                            {{ $highlight1->header }}
+                        </h4>
+                    @endif
                     <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin Berhaji Tanpa Menunggu Puluhan Tahun?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin berhaji dengan kepastian keberangkatan?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin merasakan kenyamanan fasilitas eksklusif & layanan premium?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin ibadah lebih khusyuk dengan bimbingan maksimal?</p>
-                        </div>
-                        <div class="icon-text">
-                            <img src="./images/v121_56.png" width="20px" alt="">
-                            <p>Ingin berangkat di 2025 dengan Visa Haji Resmi?</p>
-                        </div>
+                        @foreach ([$highlight1->point1, $highlight1->point2, $highlight1->point3, $highlight1->point4, $highlight1->point5] as $point)
+                            @if (!empty($point))
+                                <div class="icon-text d-flex align-items-start gap-2">
+                                    <img src="{{ asset('images/v121_56.png') }}" width="20" alt="Icon">
+                                    <p class="mb-0">{{ $point }}</p>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
-                    <p class="mt-5 lh-lg">Kini, Anda bisa berhaji tanpa antre panjang! Dengan Haji Khusus, berangkat
-                        lebih cepat, harga lebih terjangkau, fasilitas tetap mewah! Saatnya wujudkan impian haji Anda
-                        dengan perjalanan yang nyaman, aman, dan penuh keberkahan!</p>
+                    @if (!empty($highlight1->deskripsi))
+                        <p class="mt-5 lh-lg">{{ $highlight1->deskripsi }}</p>
+                    @endif
                 </div>
             </div>
             <div class="col-md-5 col-12">
-                <img src="./images/v121_93.png" alt="ini gambar" width="352px" height="406"
-                    style="border-radius: 30px;">
+                @if (!empty($highlight1->image_url))
+                    <img src="{{ asset('storage/' . $highlight1->image_url) }}" alt="ini gambar" width="352px"
+                        height="406" style="border-radius: 30px;">
+                @else
+                    <p>Gambar tidak tersedia</p>
+                @endif
             </div>
             <div class="row p-3 d-flex justify-content-center align-items-start g-5"
                 style="background-color: white; width: 90%;">
@@ -543,9 +541,9 @@
                     <h5 style="line-height: 30px;">
                         {!! $hotDeals->first()->deskripsi ?? '' !!}
                     </h5>
-                    <h3 style="color: var(--secondary-color); line-height: 35px; margin-top: 20px;">
+                    <h4 style="color: var(--secondary-color); line-height: 35px; margin-top: 20px;">
                         {{ $hotDeals->first()->subtitle ?? 'Subjudul tidak tersedia' }}
-                    </h3>
+                    </h4>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
                     <img src="{{ asset($hotDeals->first()->image_url ?? 'storage/default.png') }}" class="img-fluid"

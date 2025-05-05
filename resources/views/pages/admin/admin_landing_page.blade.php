@@ -91,36 +91,120 @@
 
 
         {{-- Highlight 1 --}}
-        <div class="card mb-4">
+        <div class="card mb-5">
             <div class="card-header">
-                <h5 class="m-0">Highlight 1</h5>
+                <h5 class="m-0 font-weight-bold">Highlight 1</h5>
             </div>
             <div class="card-body table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped align-middle">
                     <thead class="thead-light">
                         <tr>
-                            <th>Header</th>
-                            <th>Deskripsi</th>
-                            <th>Points</th>
-                            <th>Gambar</th>
+                            <th style="width: 10%">Header</th>
+                            <th style="width: 30%">Deskripsi</th>
+                            <th style="width: 30%">Points</th>
+                            <th style="width: 15%">Gambar</th>
+                            <th style="width: 10%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($highlights1 as $item)
                             <tr>
-                                <td>{{ $item->header }}</td>
-                                <td>{{ $item->deskripsi }}</td>
                                 <td>
-                                    {{ $item->point1 }}, {{ $item->point2 }}, {{ $item->point3 }},
-                                    {{ $item->point4 }}, {{ $item->point5 }}
+                                    <div style="white-space: pre-line; line-height: 1.6; margin-bottom: 5px;">
+                                        {{ $item->header }}
+                                    </div>
                                 </td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
+                                <td>
+                                    <div style="white-space: pre-line; line-height: 1.6; margin-bottom: 5px;">
+                                        {{ $item->deskripsi }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <ul class="mb-0 pl-3">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if (!empty($item->{'point' . $i}))
+                                                <li>{{ $item->{'point' . $i} }}</li>
+                                            @endif
+                                        @endfor
+                                    </ul>
+                                </td>
+                                <td>
+                                    <img src="{{ Str::startsWith($item->image_url, ['http', 'storage']) ? asset($item->image_url) : asset('storage/' . $item->image_url) }}"
+                                        width="100" class="img-fluid rounded shadow-sm" />
+                                </td>
+                                <td class="text-center">
+                                    <!-- Tombol Edit -->
+                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editHighlightModal{{ $item->id }}">
+                                        Edit
+                                    </button>
+                                </td>
                             </tr>
+
+                            <!-- Modal Edit -->
+                            <div class="modal fade" id="editHighlightModal{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="editHighlightModalLabel{{ $item->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <form action="{{ route('highlight1.update', $item->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-light">
+                                                <h5 class="modal-title font-weight-bold">Edit Highlight</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span>&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body row g-3 px-3 py-2">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="font-weight-bold">Header</label>
+                                                    <input type="text" name="header" class="form-control"
+                                                        id="header{{ $item->id }}" value="{{ $item->header }}"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="font-weight-bold">Deskripsi</label>
+                                                    <textarea name="deskripsi" class="form-control" id="deskripsi{{ $item->id }}" rows="3" required>{{ $item->deskripsi }}</textarea>
+                                                </div>
+
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="font-weight-bold">Point {{ $i }}</label>
+                                                        <input type="text" name="point{{ $i }}"
+                                                            class="form-control"
+                                                            id="point{{ $i }}{{ $item->id }}"
+                                                            value="{{ $item->{'point' . $i} }}">
+                                                    </div>
+                                                @endfor
+
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="font-weight-bold">Gambar (Opsional)</label>
+                                                    <input type="file" name="image" class="form-control-file mb-2"
+                                                        id="image{{ $item->id }}">
+                                                    <img src="{{ $item->image_url }}" width="100"
+                                                        class="img-fluid rounded shadow-sm mt-1"
+                                                        id="currentImage{{ $item->id }}">
+                                                    <small class="form-text text-muted">Format: jpg, jpeg, png, gif.
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-success">Simpan</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Batal</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
+
 
         {{-- Highlight 2 --}}
         <div class="card mb-4">
@@ -446,7 +530,7 @@
                                         ]);
                                     @endphp
 
-                                    <button type="button" class="btn btn-sm btn-primary"
+                                    <button type="button" class="btn btn-sm btn-warning"
                                         onclick='openEditGaleri({{ $item->id }}, "{{ addslashes($item->title) }}", "{{ addslashes($item->deskripsi) }}", {!! $images !!})'
                                         data-bs-toggle="modal" data-bs-target="#editGaleriModal">
                                         Edit
@@ -662,7 +746,7 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#editModal{{ $item->id }}">Edit</button>
+                                        data-bs-target="#editPertanyaanModal{{ $item->id }}">Edit</button>
                                     <form action="{{ route('questions.destroy', $item->id) }}" method="POST"
                                         style="display:inline-block" id="delete-form-{{ $item->id }}">
                                         @csrf
@@ -673,8 +757,8 @@
                             </tr>
 
                             {{-- Modal Edit --}}
-                            <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1"
-                                aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
+                            <div class="modal fade" id="editPertanyaanModal{{ $item->id }}" tabindex="-1"
+                                aria-labelledby="editPertanyaanModalLabel{{ $item->id }}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <form method="POST" action="{{ route('questions.update', $item->id) }}">
                                         @csrf

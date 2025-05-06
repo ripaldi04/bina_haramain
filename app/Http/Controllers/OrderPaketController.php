@@ -14,8 +14,6 @@ class OrderPaketController extends Controller
 {
     public function prosesPesan(Request $request)
     {
-        \Log::info('Form diterima');
-        \Log::info($request->all());
         // Validasi input data dari form pemesanan
         $validated = $request->validate([
             'paket_id' => 'required|exists:paket,id',
@@ -26,9 +24,6 @@ class OrderPaketController extends Controller
             'jumlah_triple' => 'nullable|integer|min:0|max:100',
             'jumlah_quad' => 'nullable|integer|min:0|max:100',
         ]);
-
-        \Log::info($request->all());
-
 
         // Mengambil paket yang dipilih
         $paket = Paket::findOrFail($request->paket_id);

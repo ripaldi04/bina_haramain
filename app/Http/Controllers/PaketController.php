@@ -6,10 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\DetailPaket;
 use App\Models\Paket;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 

@@ -15,18 +15,27 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
         $this->call([
             LandingBannerSeeder::class,
         ]);
         $this->call([
-            PaketSeeder::class,
+            LandingHotDealSeeder::class,
         ]);
         $this->call([
-            LandingHotDealSeeder::class,
+            LandingMuthawifSeeder::class,
+        ]);
+        $this->call([
+            LandingHighlight1Seeder::class,
+        ]);
+        $this->call([
+            LandingHighlight2Seeder::class,
+        ]);
+        $this->call([
+            LandingHighlightPointSeeder::class,
         ]);
     }
 }

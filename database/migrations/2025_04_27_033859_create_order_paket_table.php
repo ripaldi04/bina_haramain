@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('paket_id')->constrained('paket')->onDelete('cascade');
             $table->foreignId('detail_paket_id')->constrained('detail_paket')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->decimal('total_harga', 15, 2)->default(0);  // Total harga berdasarkan kamar yang dipilih
+            $table->integer('total_harga')->default(0);  // Menyimpan sebagai integer tanpa angka desimal
             $table->string('nama_pemesan')->nullable();
             $table->enum('jenis_kelamin_pemesan', ['Laki-laki', 'Perempuan'])->nullable();
             $table->string('telepon_pemesan')->nullable();

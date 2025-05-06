@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('order_paket', function (Blueprint $table) {
             $table->enum('jenis_pembayaran', ['booking', 'dp', 'cash'])->nullable();
-            $table->decimal('jumlah_dibayar', 12, 2)->nullable();
+            $table->integer('jumlah_dibayar')->default(0);  // Menyimpan sebagai integer tanpa angka desimal
         });
     }
 

@@ -234,7 +234,7 @@ $(document).ready(function () {
             contentType: false,
             success: function (response) {
                 $('#highlightPointsModal').modal('hide');
-                // location.reload();
+                location.reload();
 
                 // SweetAlert notification
                 Swal.fire({

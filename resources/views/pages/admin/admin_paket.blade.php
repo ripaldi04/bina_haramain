@@ -305,7 +305,7 @@
                                             @endforeach
                                         </ul>
                                     </td>
-                                    <td>${{ $paket->harga }}</td>
+                                    <td>${{ number_format($paket->harga, 0, ',', '.') }}</td>
                                     <td>
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer btn-edit"
                                             data-id="{{ $paket->id }}" data-nama="{{ $paket->nama_paket }}"

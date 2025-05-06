@@ -553,7 +553,6 @@
                             <th>Nama</th>
                             <th>Daerah</th>
                             <th>Gambar</th>
-                            <th>Background</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -567,15 +566,10 @@
                                         class="img-fluid" />
                                 </td>
                                 <td>
-                                    <img src="{{ asset('storage/' . $item->background_image_url) }}" width="100"
-                                        class="img-fluid" />
-                                </td>
-                                <td>
                                     <!-- Tombol Edit -->
                                     <button class="btn btn-sm btn-warning edit-btn-muthawif"
                                         data-id="{{ $item->id }}" data-nama="{{ $item->nama }}"
-                                        data-daerah="{{ $item->daerah }}" data-image_url="{{ $item->image_url }}"
-                                        data-background_image_url="{{ $item->background_image_url }}">
+                                        data-daerah="{{ $item->daerah }}" data-image_url="{{ $item->image_url }}">
                                         Edit
                                     </button>
 
@@ -793,10 +787,7 @@
                                                         id="editHotDealModalLabel{{ $item->id }}">
                                                         Edit Hot Deal
                                                     </h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
                                                 <div class="modal-body">

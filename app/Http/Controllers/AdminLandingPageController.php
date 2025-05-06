@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\LandingBanner;
+use App\Models\LandingHighlight2;
+use App\Models\LandingHighlightPoints;
+use App\Models\LandingMuthawif;
 
 class AdminLandingPageController extends Controller
 {
@@ -22,6 +26,7 @@ class AdminLandingPageController extends Controller
             'questions' => DB::table('landing_question')->get(),
         ]);
     }
+
     public function editBanner($id)
     {
         // Ambil data banner berdasarkan id
@@ -30,38 +35,123 @@ class AdminLandingPageController extends Controller
     }
 
     public function updateBanner(Request $request, $id)
-{
-    // Validasi data yang diterima
-    $validated = $request->validate([
-        'header1' => 'required|string|max:255',
-        'header2' => 'required|string|max:255',
-        'deskripsi' => 'required|string',
-        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar (opsional)
-    ]);
-
-    // Cari banner berdasarkan ID
-    $banner = DB::table('landing_banners')->where('id', $id)->first();
-
-    if ($banner) {
-        // Jika ada file gambar baru, upload ke folder public/images
-        if ($request->hasFile('image_url')) {
-            $image = $request->file('image_url');
-            $imageName = time() . '-' . $image->getClientOriginalName(); // Menggunakan nama unik
-            $imagePath = $image->storeAs('public/images', $imageName); // Menyimpan di public/images
-            $validated['image_url'] = 'images/' . $imageName; // Menyimpan path relatif
-        }
-
-        // Update data banner
-        DB::table('landing_banners')->where('id', $id)->update([
-            'header1' => $validated['header1'],
-            'header2' => $validated['header2'],
-            'deskripsi' => $validated['deskripsi'],
-            'image_url' => $validated['image_url'] ?? $banner->image_url, // Gunakan gambar lama jika tidak ada yang baru
+    {
+        $request->validate([
+            'header1' => 'required|string|max:255',
+            'header2' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        return redirect()->back()->with('success', 'Banner updated successfully');
+        $banner = LandingBanner::findOrFail($id);
+        $banner->header1 = $request->header1;
+        $banner->header2 = $request->header2;
+        $banner->deskripsi = $request->deskripsi;
+
+        if ($request->hasFile('image_url')) {
+            $imagePath = $request->file('image_url')->store('banner_images', 'public');
+            $banner->image_url = $imagePath;
+        }
+
+        $banner->save();
+
+        return redirect()->route('admin.landing.index')->with('success', 'Banner berhasil diperbarui');
     }
 
-    return redirect()->back()->with('error', 'Banner not found');
-    }
+    // public function editHighlight2($id)
+    // {
+    //     $highlight = LandingHighlight2::findOrFail($id);
+    //     return view('admin.edit-highlight2', compact('highlight'));
+    // }
+
+    // public function updateHighlight2(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'header' => 'required|string|max:255',
+    //         'deskripsi' => 'nullable|string',
+    //         'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //     ]);
+
+    //     $highlight = LandingHighlight2::findOrFail($id);
+    //     $highlight->header = $request->header;
+    //     $highlight->deskripsi = $request->deskripsi;
+
+    //     if ($request->hasFile('image_url')) {
+    //         $imagePath = $request->file('image_url')->store('highlight2_images', 'public');
+    //         $highlight->image_url = $imagePath;
+    //     }
+
+    //     $highlight->save();
+
+    //     return redirect()->route('admin.landing.index')->with('success', 'Highlight 2 berhasil diperbarui');
+    // }
+
+
+    // public function editHighlightPoint($id)
+    // {
+    //     $highlightPoint = LandingHighlightPoints::findOrFail($id);
+    //     return response()->json($highlightPoint);
+    // }
+
+    // public function updateHighlightPoint(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'deskripsi' => 'required|string',
+    //         'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+    //     ]);
+
+    //     $highlight = LandingHighlightPoints::findOrFail($id);
+    //     $highlight->title = $request->title;
+    //     $highlight->deskripsi = $request->deskripsi;
+
+    //     // Upload gambar jika ada
+    //     if ($request->hasFile('image')) {
+    //         $imagePath = $request->file('image')->store('highlight_points', 'public');
+    //         $highlight->image_url = $imagePath; // simpan path yang sudah cocok
+    //     }
+
+
+    //     $highlight->save();
+
+    //     return response()->json(['success' => true]);
+    // }
+
+
+    // // Menampilkan form untuk mengedit data muthawif
+    // public function editMuthawif($id)
+    // {
+    //     $muthawif = LandingMuthawif::findOrFail($id);
+    //     return view('pages.admin.admin_landing_page', compact('muthawif'));
+    // }
+
+    // // Memperbarui data muthawif
+    // public function updateMuthawif(Request $request, $id)
+    // {
+    //     $muthawif = LandingMuthawif::findOrFail($id);
+
+    //     $request->validate([
+    //         'nama' => 'required|string',
+    //         'daerah' => 'required|string',
+    //         'image_url' => 'nullable|image|mimes:jpg,jpeg,png',
+    //         'background_image_url' => 'nullable|image|mimes:jpg,jpeg,png',
+    //     ]);
+
+    //     if ($request->hasFile('image_url')) {
+    //         $path = $request->file('image_url')->store('landing_muthawif', 'public');
+    //         $muthawif->image_url = $path;
+    //     }
+
+    //     if ($request->hasFile('background_image_url')) {
+    //         $path = $request->file('background_image_url')->store('landing_muthawif', 'public');
+    //         $muthawif->background_image_url = $path;
+    //     }
+
+    //     $muthawif->nama = $request->nama;
+    //     $muthawif->daerah = $request->daerah;
+    //     $muthawif->save();
+
+    //     return response()->json(['message' => 'Muthawif berhasil diperbarui']);
+    // }
+
 }

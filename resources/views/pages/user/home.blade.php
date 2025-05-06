@@ -28,13 +28,9 @@
 
                 <!-- Teks utama (Desktop) -->
                 <div class="col-md-6 text-md-start d-none d-md-block">
-                    <h1 class="fs-4">Haji Langsung Berangkat</h1>
-                    <p class="fs-4 fw-bold text-warning">Tanpa Antri <br>
-                        Visa Haji Resmi<br>
-                        Maktab VIP<br>
-                        Sepenuh Hati</p>
-                    <p class="fs-6">Spesial bersama Koh Dennis Lim dan Teh Yunda – Kuota Terbatas, Segera Amankan Kuota
-                        Anda sebelum Terlambat!</p>
+                    <h1 class="fs-4">{{$banner->header1}}</h1>
+                    <p class="fs-4 fw-bold text-warning">{{$banner->header2}}</p>
+                    <p class="fs-6">{{$banner->deskripsi}}</p>
                     <button class="btn btn-warning text-white mt-2" style="width: 150px; border-radius: 4px;">
                         Lihat Paket
                     </button>

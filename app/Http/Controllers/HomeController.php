@@ -24,6 +24,6 @@ class HomeController extends Controller
         $highlight1 = LandingHighlight1::first();
 
 
-        return view('pages.user.home', compact('keunggulan', 'fasilitas', 'galeri', 'questions', 'hotDeals', 'highlight1'));
+        return view('pages.user.home', compact('banner', 'keunggulan', 'fasilitas', 'galeri', 'questions', 'hotDeals', 'highlight1'));
     }
 }

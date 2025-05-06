@@ -31,10 +31,12 @@
                                 <td class="text-wrap">{{ $banner->header1 }}</td>
                                 <td class="text-wrap">{{ $banner->header2 }}</td>
                                 <td class="text-wrap">{{ $banner->deskripsi }}</td>
-                                <td><img src="{{ asset('images/v146_30.png') }}" width="100" class="img-fluid" /></td>
+                                <td><img src="{{ asset('storage/' . $banner->image_url) }}" class="img-fluid"
+                                        alt="Banner">
+                                </td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <button class="btn btn-warning btn-sm" id="editButton" data-id="{{ $banner->id }}"
+                                    <button class="btn btn-warning btn-sm editBannerBtn" data-id="{{ $banner->id }}"
                                         data-header1="{{ $banner->header1 }}" data-header2="{{ $banner->header2 }}"
                                         data-deskripsi="{{ $banner->deskripsi }}" data-image_url="{{ $banner->image_url }}">
                                         Edit
@@ -53,12 +55,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editBannerModalLabel">Edit Banner</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin.banner.update', '$banner->id') }}" method="POST"
+                        <form action="{{ route('admin.banner.update', ['id' => 0]) }}" method="POST"
                             enctype="multipart/form-data" id="editBannerForm">
                             @csrf
                             <input type="hidden" id="banner_id" name="banner_id">
@@ -142,8 +144,9 @@
                             </tr>
 
                             <!-- Modal Edit -->
-                            <div class="modal fade" id="editHighlightModal{{ $item->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="editHighlightModalLabel{{ $item->id }}" aria-hidden="true">
+                            <div class="modal fade" id="editHighlightModal{{ $item->id }}" tabindex="-1"
+                                role="dialog" aria-labelledby="editHighlightModalLabel{{ $item->id }}"
+                                aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
                                     <form action="{{ route('highlight1.update', $item->id) }}" method="POST"
                                         enctype="multipart/form-data">

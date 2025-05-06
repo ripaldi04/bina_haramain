@@ -55,9 +55,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editBannerModalLabel">Edit Banner</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('admin.banner.update', ['id' => 0]) }}" method="POST"
@@ -84,7 +82,7 @@
                                 <label for="image_url">Gambar Banner</label>
                                 <input type="file" class="form-control" id="image_url" name="image_url">
                             </div>
-                            <button type="submit" class="btn btn-primary">Update Banner</button>
+                            <button type="submit" class="btn btn-primary mt-3">Update Banner</button>
                         </form>
                     </div>
                 </div>
@@ -153,12 +151,10 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-content">
-                                            <div class="modal-header bg-light">
+                                            <div class="modal-header bg-light d-flex">
                                                 <h5 class="modal-title font-weight-bold">Edit Highlight</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span>&times;</span>
-                                                </button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body row g-3 px-3 py-2">
                                                 <div class="col-md-6 mb-3">
@@ -181,11 +177,10 @@
                                                             value="{{ $item->{'point' . $i} }}">
                                                     </div>
                                                 @endfor
-
                                                 <div class="col-md-6 mb-3">
-                                                    <label class="font-weight-bold">Gambar (Opsional)</label>
-                                                    <input type="file" name="image" class="form-control-file mb-2"
-                                                        id="image{{ $item->id }}">
+                                                    <label class="font-weight-bold">Gambar</label>
+                                                    <input type="file" name="image" class="form-control mb-2"
+                                                        id="image{{ $item->id }}" />
                                                     <img src="{{ $item->image_url }}" width="100"
                                                         class="img-fluid rounded shadow-sm mt-1"
                                                         id="currentImage{{ $item->id }}">
@@ -600,9 +595,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">Edit Muthawif</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form id="editMuthawifForm" enctype="multipart/form-data">

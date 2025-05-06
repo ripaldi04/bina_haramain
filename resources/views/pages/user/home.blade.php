@@ -189,69 +189,21 @@
                     <p class="mt-5 lh-lg"> {{ $highlight2->deskripsi }}</p>
                 </div>
                 <div class="row g-3 align-items-start">
-                    <div class="col-6 p-0">
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_107.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Paket Haji Lebih Murah</h5>
-                                <p>Dapatkan harga terbaik dengan fasilitas bintang ⭐⭐⭐⭐⭐ Lebih terjangkau, lebih mewah!
-                                </p>
-                            </div>
+                    @foreach ($landingPoint->chunk(ceil($landingPoint->count() / 2)) as $chunk)
+                        <div class="col-6 p-0">
+                            @foreach ($chunk as $point)
+                                <div class="row g-0 align-items-center mb-5 d-flex item-row">
+                                    <div class="col-2 d-flex justify-content-center">
+                                        <img src="{{ asset('storage/' . $point->image_url) }}" class="img-fluid fixed-img">
+                                    </div>
+                                    <div class="col-10 h-100 ps-3">
+                                        <h5>{{ $point->title }}</h5>
+                                        <p>{{ $point->deskripsi }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_120.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Haji Mudah Sesuai Syariah</h5>
-                                <p>Ibadah haji lebih tenang & berkah dengan layanan sesuai Syariah – Tanpa Riba, Tanpa
-                                    Akad Bathil, Tanpa Gharar!</p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_115.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>GARANSI Tahun 2025 Berangkat Haji</h5>
-                                <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-6 p-0">
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/tawaf.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Program Eksklusif Haji</h5>
-                                <p>Selama 26 Hari Anda akan dibimbing untuk pengalaman haji yang berkesan meraih Mabrur
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center mb-5 d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_112.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Jaminan Kepuasan Layanan</h5>
-                                <p>Kami berkomitmen memberikan layanan & fasilitas terbaik, memastikan semua kebutuhan
-                                    Anda terpenuhi dengan sempurna.</p>
-                            </div>
-                        </div>
-                        <div class="row g-0 align-items-center d-flex item-row">
-                            <div class="col-2 d-flex justify-content-center">
-                                <img src="./images/v121_115.png" class="img-fluid fixed-img">
-                            </div>
-                            <div class="col-10 h-100 ps-3">
-                                <h5>Garansi 100% UANG KEMBALI</h5>
-                                <p>Kami memberikan GARANSI bahwa tahun 2025 Anda bisa berangkat Haji.</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -267,8 +219,8 @@
                     <div class="col-lg-4 col-md-6 col-12 text-center mb-3">
                         <div class="d-flex flex-row align-items-center gap-3"
                             style="background-color: white; padding: 15px; margin: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: left;">
-                            <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->title }}"
-                                height="60" width="60" style="object-fit: cover; border-radius: 8px;">
+                            <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->title }}" height="60"
+                                width="60" style="object-fit: cover; border-radius: 8px;">
                             <h5 class="m-0 fw-bold" style="font-size: 1.2rem;">{{ $item->title }}</h5>
                         </div>
                     </div>

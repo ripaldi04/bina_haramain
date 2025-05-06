@@ -194,7 +194,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success">Simpan</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Batal</button>
                                             </div>
@@ -290,21 +290,67 @@
                 <table class="table table-bordered table-striped">
                     <thead class="thead-light">
                         <tr>
-                            <th>Judul</th>
+                            <th>Header</th>
                             <th>Deskripsi</th>
                             <th>Gambar</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($highlightPoints as $item)
+                        @foreach ($highlightPoints as $point)
                             <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
+                                <td>{{ $point->title }}</td>
+                                <td>{{ $point->deskripsi }}</td>
+                                <td>
+                                    <img src="{{ asset('storage/' . $point->image_url) }}" width="100"
+                                        class="img-fluid" />
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning edit-highlight-point" data-id="{{ $point->id }}"
+                                        data-title="{{ $point->title }}" data-deskripsi="{{ $point->deskripsi }}"
+                                        data-image="{{ $point->image_url }}" data-bs-toggle="modal"
+                                        data-bs-target="#highlightPointsModal">
+                                        Edit
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Modal Highlight Points -->
+        <div class="modal fade" id="highlightPointsModal" tabindex="-1" aria-labelledby="highlightPointsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="highlightPointsModalLabel">Edit Highlight Point</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="highlightPointsForm" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <input type="hidden" id="highlightPointId" name="id">
+
+                            <div class="mb-3">
+                                <label for="highlightPointTitle" class="form-label">Judul</label>
+                                <input type="text" class="form-control" id="highlightPointTitle" name="title">
+                            </div>
+                            <div class="mb-3">
+                                <label for="highlightPointDeskripsi" class="form-label">Deskripsi</label>
+                                <textarea class="form-control" id="highlightPointDeskripsi" name="deskripsi"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="highlightPointImage" class="form-label">Gambar</label>
+                                <input type="file" class="form-control" id="highlightPointImage" name="image">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -398,7 +444,7 @@
                             <div id="previewImage" class="mb-3"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         </div>
                     </div>
@@ -492,7 +538,7 @@
                             <div id="previewImage" class="mb-3"></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         </div>
                     </div>
@@ -625,7 +671,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         </div>
                     </div>
@@ -830,7 +876,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                             </div>
                                         </div>
                                     </form>

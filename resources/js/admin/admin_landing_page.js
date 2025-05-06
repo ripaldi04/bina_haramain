@@ -204,3 +204,51 @@ document.querySelectorAll('.edit-highlight2').forEach(button => {
         modal.show();
     });
 });
+
+$(document).ready(function () {
+    $('.edit-highlight-point').on('click', function () {
+        let id = $(this).data('id');
+
+        $.get(`/admin/landing/highlightpoint/${id}/edit`, function (data) {
+            $('#highlightPointId').val(data.id);
+            $('#highlightPointTitle').val(data.title);
+            $('#highlightPointDeskripsi').val(data.deskripsi);
+            $('#previewGambar').attr('src', '/images/' + data.gambar);
+
+        });
+    });
+
+    $('#highlightPointsForm').on('submit', function (e) {
+        e.preventDefault();
+
+        let formData = new FormData(this);
+        formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+        let id = $('#highlightPointId').val();
+
+        $.ajax({
+            url: '/admin/highlight-points/update/' + id,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                $('#highlightPointsModal').modal('hide');
+                // location.reload();
+
+                // SweetAlert notification
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data berhasil diperbarui',
+                    text: 'Highlight point telah berhasil diupdate!',
+                    timer : 2000,
+                    showConfirmButton: true
+                });
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+                alert('Gagal menyimpan data.');
+            }
+        });
+    });
+}); 

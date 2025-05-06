@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminQuestionController;
 use App\Http\Controllers\Highlight1Controller;
 use App\Http\Controllers\Highlight2Controller;
+use App\Http\Controllers\HighlightPoint;
+use App\Http\Controllers\HighlightPointController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotDealController;
 use App\Http\Controllers\LandingFasilitasController;
@@ -119,6 +121,11 @@ Route::get('/riwayat', function () {
 // Route::get('/transaksi', function () {
 //     return view('pages.user.transaksi');
 // })->name('transaksi');
+
+
+Route::get('/admin/landing/highlightpoint/{id}/edit', [HighlightPointController::class, 'editHighlightPoint'])->name('admin.highlightpoint.edit');
+Route::put('/admin/highlightpoint/{id}', [HighlightPointController::class, 'updateHighlightPoint'])->name('admin.highlightpoint.update');
+Route::post('/admin/highlight-points/update/{id}', [HighlightPointController::class, 'updateHighlightPoint']);
 
 Route::put('/highlight1/{id}', [Highlight1Controller::class, 'update'])->name('highlight1.update');
 Route::put('/highlight1/{highlight1}', [Highlight1Controller::class, 'update'])->name('highlight1.update');

@@ -9,6 +9,7 @@ use App\Models\LandingBanner;
 use App\Models\LandingHighlight2;
 use App\Models\LandingHighlightPoint;
 use App\Models\LandingHotDeal;
+use App\Models\LandingMuthawif;
 use App\Models\Question;
 use App\Models\LandingHighlight1; // pastikan model-nya di-import
 
@@ -26,8 +27,9 @@ class HomeController extends Controller
         $highlight1 = LandingHighlight1::first();
         $highlight2 = LandingHighlight2::first();
         $landingPoint = LandingHighlightPoint::All();
+        $muthawifs = LandingMuthawif::All();
 
 
-        return view('pages.user.home', compact('banner', 'keunggulan', 'fasilitas', 'galeri', 'questions', 'hotDeals', 'highlight1','highlight2','landingPoint'));
+        return view('pages.user.home', compact('banner', 'keunggulan', 'fasilitas', 'galeri', 'questions', 'hotDeals', 'highlight1','highlight2','landingPoint','muthawifs'));
     }
 }

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nama');
             $table->string('daerah');
             $table->string('image_url');
-            $table->string('background_image_url');
             $table->timestamps();
         });
     }

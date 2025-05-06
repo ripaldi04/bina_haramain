@@ -10,6 +10,7 @@ use App\Http\Controllers\HotDealController;
 use App\Http\Controllers\LandingFasilitasController;
 use App\Http\Controllers\LandingGaleriController;
 use App\Http\Controllers\LandingKeunggulanController;
+use App\Http\Controllers\LandingMuthawifController;
 use App\Http\Controllers\OrderPaketController;
 use App\Http\Controllers\TipeKamarController;
 use Illuminate\Support\Facades\Route;
@@ -122,6 +123,11 @@ Route::get('/riwayat', function () {
 //     return view('pages.user.transaksi');
 // })->name('transaksi');
 
+
+// Mengedit muthawif
+Route::get('/muthawif/{id}/edit', [LandingMuthawifController::class, 'editMuthawif'])->name('muthawif.edit');
+Route::put('/muthawif/{id}', [LandingMuthawifController::class, 'updateMuthawif'])->name('muthawif.update');
+Route::post('/muthawif/{id}', [LandingMuthawifController::class, 'updateMuthawif']);
 
 Route::get('/admin/landing/highlightpoint/{id}/edit', [HighlightPointController::class, 'editHighlightPoint'])->name('admin.highlightpoint.edit');
 Route::put('/admin/highlightpoint/{id}', [HighlightPointController::class, 'updateHighlightPoint'])->name('admin.highlightpoint.update');

@@ -559,6 +559,7 @@
                             <th>Daerah</th>
                             <th>Gambar</th>
                             <th>Background</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -566,13 +567,69 @@
                             <tr>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->daerah }}</td>
-                                <td><img src="{{ $item->image_url }}" width="100" class="img-fluid" /></td>
-                                <td><img src="{{ $item->background_image_url }}" width="100" class="img-fluid" />
+                                <td>
+                                    <img src="{{ asset('storage/' . $item->image_url) }}" width="100"
+                                        class="img-fluid" />
+                                </td>
+                                <td>
+                                    <img src="{{ asset('storage/' . $item->background_image_url) }}" width="100"
+                                        class="img-fluid" />
+                                </td>
+                                <td>
+                                    <!-- Tombol Edit -->
+                                    <button class="btn btn-sm btn-warning edit-btn-muthawif"
+                                        data-id="{{ $item->id }}" data-nama="{{ $item->nama }}"
+                                        data-daerah="{{ $item->daerah }}" data-image_url="{{ $item->image_url }}"
+                                        data-background_image_url="{{ $item->background_image_url }}">
+                                        Edit
+                                    </button>
+
+
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Modal Edit Muthawif -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Muthawif</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editMuthawifForm" enctype="multipart/form-data">
+                            <input type="hidden" id="muthawifId">
+
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" id="nama" name="nama" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="daerah">Daerah</label>
+                                <input type="text" class="form-control" id="daerah" name="daerah" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image_url">Foto Muthawif</label>
+                                <input type="file" name="image_url" id="image_url" class="form-control-file">
+                                <div class="mt-2">
+                                    <img id="currentImage" src="" alt="Foto Muthawif"
+                                        style="max-width: 100px;" />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 

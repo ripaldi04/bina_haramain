@@ -270,42 +270,20 @@
             <h2 class="fs-2 fw-bold" style="color: black;">Berpengalaman dan Profesional</h2>
         </div>
         <div class="row mt-4 justify-content-center">
-            <div class="col-md-4 d-flex justify-content-center">
-                <div class="card muthawif" style="width: 18rem; border-radius: 30px;">
-                    <div class="image-blur"></div>
-                    <!-- Elemen gambar dengan efek blur -->
-                    <img src="./images/v160_93.png" class="card-img-top" alt="...">
-                    <div class="card-body muthawif-body">
-                        <h5 class="card-title text-center fs-4" style="color:white;">Ustadz Ripaldi S.Kom M.Kom</h5>
-                        <p class="card-text text-center" style="color: var(--secondary-color);">Muthawif Indonesia
-                        </p>
+            @foreach ($muthawifs as $muthawif)
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="card muthawif" style="width: 18rem; border-radius: 30px; background-size: cover;">
+                        <div class="image-blur"></div>
+                        <img src="{{ asset('storage/' . $muthawif->image_url) }}" class="card-img-top"
+                            alt="Foto Muthawif">
+                        <div class="card-body muthawif-body">
+                            <h5 class="card-title text-center fs-4" style="color:white;">{{ $muthawif->nama }}</h5>
+                            <p class="card-text text-center" style="color: var(--secondary-color);">
+                                {{ $muthawif->daerah }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 d-flex justify-content-center">
-                <div class="card muthawif" style="width: 18rem;  border-radius: 30px;">
-                    <div class="image-blur"></div>
-                    <!-- Elemen gambar dengan efek blur -->
-                    <img src="./images/v160_93.png" class="card-img-top" alt="...">
-                    <div class="card-body muthawif-body">
-                        <h5 class="card-title text-center fs-4" style="color:white;">Ustadz Ripaldi S.Kom M.Kom</h5>
-                        <p class="card-text text-center" style="color: var(--secondary-color);">Muthawif Indonesia
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex justify-content-center">
-                <div class="card muthawif" style="width: 18rem;  border-radius: 30px;">
-                    <div class="image-blur"></div>
-                    <!-- Elemen gambar dengan efek blur -->
-                    <img src="./images/v160_93.png" class="card-img-top" alt="...">
-                    <div class="card-body muthawif-body">
-                        <h5 class="card-title text-center fs-4" style="color:white;">Ustadz Ripaldi S.Kom M.Kom</h5>
-                        <p class="card-text text-center" style="color: var(--secondary-color);">Muthawif Indonesia
-                        </p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 

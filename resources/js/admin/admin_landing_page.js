@@ -241,7 +241,7 @@ $(document).ready(function () {
                     icon: 'success',
                     title: 'Data berhasil diperbarui',
                     text: 'Highlight point telah berhasil diupdate!',
-                    timer : 2000,
+                    timer: 2000,
                     showConfirmButton: true
                 });
             },
@@ -251,4 +251,62 @@ $(document).ready(function () {
             }
         });
     });
-}); 
+});
+
+$(document).ready(function () {
+    $('.edit-btn-muthawif').on('click', function () {
+        var id = $(this).data('id');
+        var nama = $(this).data('nama');
+        var daerah = $(this).data('daerah');
+        var image_url = $(this).data('image_url');
+
+        $('#muthawifId').val(id);
+        $('#nama').val(nama);
+        $('#daerah').val(daerah);
+
+        $('#currentImage').attr('src', '/storage/' + image_url);
+
+        $('#editModal').modal('show');
+    });
+
+    $('#editMuthawifForm').submit(function (e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+        var id = $('#muthawifId').val();
+
+        // Tambahkan override method PUT
+        formData.append('_method', 'PUT');
+
+        $.ajax({
+            url: '/muthawif/' + id,
+            type: 'POST', // karena _method=PUT
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                $('#editModal').modal('hide');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Muthawif berhasil disimpan.',
+                    confirmButtonColor: '#3085d6'
+                }).then(() => {
+                    location.reload();
+                });
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: 'Periksa input atau file.',
+                    confirmButtonColor: '#d33'
+                });
+            }
+        });
+    });
+});

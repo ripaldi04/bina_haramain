@@ -5,6 +5,9 @@
 @section('style')
     @vite(['resources/css/user/transaksi.css'])
 @endsection
+@section('script')
+    @vite(['resources/js/user/transaksi.js'])
+@endsection
 
 @section('content')
     <div class="container my-5">
@@ -101,7 +104,8 @@
                         </div>
                         <div class="col-12 mb-3">
                             <label for="jenis_pembayaran">Pilih Jenis Pembayaran</label>
-                            <select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran" required>
+                            <select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran"
+                                data-total-harga="{{ $order->total_harga }}" required>
                                 <option value="" disabled selected>Pilih salah satu</option>
                                 <option value="booking">Booking (50%)</option>
                                 <option value="dp">DP (12%)</option>
@@ -164,15 +168,11 @@
                             </li>
                             <li><strong>Diskon:</strong> $ 0,00</li>
                         </ul>
-                        <div class="custom-total-box text-white p-3 text-center rounded mb-3">
+                        <div class="custom-total-box text-white p-3 text-center rounded mb-3" id="totalBayarBox">
                             <strong>Total : $ <span
-                                    id="totalHarga">{{ number_format($order->total_harga) }}</span></strong>
+                                    id="totalBayarValue">{{ number_format($order->total_harga, 0, ',', '.') }}
+                                </span></strong>
                         </div>
-                        <div class="custom-total-box text-white p-3 text-center rounded mb-3 bg-success" id="totalBayarBox"
-                            style="display: none;">
-                            <strong>Jumlah yang harus dibayar : $ <span id="totalBayarValue"></span></strong>
-                        </div>
-
                         <div class="p-3 border rounded bg-white">
                             <h6 class="fw-bold">Kode Voucher</h6>
                             <p class="small">Silakan masukkan kode voucher (jika ada) saat transaksi untuk

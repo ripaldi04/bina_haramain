@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminQuestionController;
 use App\Http\Controllers\Highlight1Controller;
+use App\Http\Controllers\Highlight2Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotDealController;
 use App\Http\Controllers\LandingFasilitasController;
@@ -121,6 +122,9 @@ Route::get('/riwayat', function () {
 
 Route::put('/highlight1/{id}', [Highlight1Controller::class, 'update'])->name('highlight1.update');
 Route::put('/highlight1/{highlight1}', [Highlight1Controller::class, 'update'])->name('highlight1.update');
+
+Route::get('/admin/landing/highlight2/{id}/edit', [Highlight2Controller::class, 'editHighlight2'])->name('admin.highlight2.edit');
+Route::put('/admin/highlight2/{id}', [Highlight2Controller::class, 'updateHighlight2'])->name('admin.highlight2.update');
 
 // Route Landing Hot Deal (admin)
 Route::get('/admin/landing-hotdeal', [HotDealController::class, 'index'])->name('admin.hotdeal.index');

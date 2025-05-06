@@ -28,9 +28,9 @@
 
                 <!-- Teks utama (Desktop) -->
                 <div class="col-md-6 text-md-start d-none d-md-block">
-                    <h1 class="fs-4">{{$banner->header1}}</h1>
-                    <p class="fs-4 fw-bold text-warning">{{$banner->header2}}</p>
-                    <p class="fs-6">{{$banner->deskripsi}}</p>
+                    <h1 class="fs-4">{{ $banner->header1 }}</h1>
+                    <p class="fs-4 fw-bold text-warning">{{ $banner->header2 }}</p>
+                    <p class="fs-6">{{ $banner->deskripsi }}</p>
                     <button class="btn btn-warning text-white mt-2" style="width: 150px; border-radius: 4px;">
                         Lihat Paket
                     </button>
@@ -181,18 +181,12 @@
             <div class="row p-3 d-flex justify-content-center align-items-start g-5"
                 style="background-color: white; width: 90%;">
                 <div class="col-md-6 col-12 mbl-img-none">
-                    <img src="./images/v121_100.png" width="450px" height="450px" style="border-radius: 30px"
-                        alt="">
+                    <img src="{{ asset('storage/' . $highlight2->image_url) }}" width="450px" height="450px"
+                        style="border-radius: 30px" alt="">
                 </div>
                 <div class="col-md-6 col-12">
-                    <h5 class="card-title fs-2" style="color: var(--primary-color);">Mengapa Harus Pilih PT. Bina
-                        Haramain ?</h5>
-                    <p class="mt-5 lh-lg">PT. Bina Haramain adalah perusahaan travel profesional dengan pengalaman 3
-                        tahun dalam penyelenggaraan perjalanan haji. Kami berkomitmen memberikan layanan terbaik dengan
-                        pemahaman mendalam tentang proses, regulasi, dan kebutuhan ibadah
-                        haji, sehingga perjalanan Anda menjadi lebih nyaman, aman, dan tanpa kendala. Dengan tim
-                        berpengalaman dan layanan eksklusif, kami siap mengantarkan Anda menuju Baitullah dengan
-                        kemudahan, kepastian, dan kenyamanan terbaik.</p>
+                    <h5 class="card-title fs-2" style="color: var(--primary-color);"> {{ $highlight2->header }}</h5>
+                    <p class="mt-5 lh-lg"> {{ $highlight2->deskripsi }}</p>
                 </div>
                 <div class="row g-3 align-items-start">
                     <div class="col-6 p-0">

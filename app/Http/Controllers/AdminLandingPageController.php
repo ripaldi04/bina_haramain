@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\LandingBanner;
 use App\Models\LandingHighlight2;
 use App\Models\LandingHighlightPoints;
+use App\Models\LandingMuthawif;
 
 class AdminLandingPageController extends Controller
 {
@@ -117,6 +118,42 @@ public function updateHighlightPoint(Request $request, $id)
 }
 
 
+// Menampilkan form untuk mengedit data muthawif
+public function editMuthawif($id)
+{
+    $muthawif = LandingMuthawif::findOrFail($id);
+    return view('pages.admin.admin_landing_page', compact('muthawif'));
+}
+
+// Memperbarui data muthawif
+public function updateMuthawif(Request $request, $id)
+{
+    $muthawif = LandingMuthawif::findOrFail($id);
+
+    $request->validate([
+        'nama' => 'required|string',
+        'daerah' => 'required|string',
+        'image_url' => 'nullable|image|mimes:jpg,jpeg,png',
+        'background_image_url' => 'nullable|image|mimes:jpg,jpeg,png',
+    ]);
+
+    if ($request->hasFile('image_url')) {
+        $path = $request->file('image_url')->store('landing_muthawif', 'public');
+        $muthawif->image_url = $path;
+    }
+
+    if ($request->hasFile('background_image_url')) {
+        $path = $request->file('background_image_url')->store('landing_muthawif', 'public');
+        $muthawif->background_image_url = $path;
+    }
+
+    $muthawif->nama = $request->nama;
+    $muthawif->daerah = $request->daerah;
+    $muthawif->save();
+
+    return response()->json(['message' => 'Muthawif berhasil diperbarui']);
+}
+
 
 public function showHome()
 {
@@ -125,6 +162,4 @@ public function showHome()
     $highlightPoints = LandingHighlightPoints::all();
     return view('pages.user.home', compact('banner', 'highlight2', 'highlightPoints'));
 }
-
-
 }

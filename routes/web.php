@@ -127,3 +127,17 @@ Route::get('/', [AdminLandingPageController::class, 'showHome'])->name('home');
 Route::get('/admin/landing/highlightpoint/{id}/edit', [AdminLandingPageController::class, 'editHighlightPoint'])->name('admin.highlightpoint.edit');
 Route::put('/admin/highlightpoint/{id}', [AdminLandingPageController::class, 'updateHighlightPoint'])->name('admin.highlightpoint.update');
 Route::post('/admin/highlight-points/update/{id}', [AdminLandingPageController::class, 'updateHighlightPoint']);
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Menampilkan data muthawif
+    Route::get('/landing-page', [AdminLandingPageController::class, 'index'])->name('landing-page.index');
+
+    // Mengedit muthawif
+    Route::get('/muthawif/{id}/edit', [AdminLandingPageController::class, 'editMuthawif'])->name('muthawif.edit');
+    Route::put('/muthawif/{id}', [AdminLandingPageController::class, 'updateMuthawif'])->name('muthawif.update');
+    Route::post('/muthawif/{id}', [AdminLandingPageController::class, 'updateMuthawif']);
+
+    // Menghapus muthawif
+    Route::delete('/muthawif/{id}', [AdminLandingPageController::class, 'destroyMuthawif'])->name('muthawif.destroy');
+});
+

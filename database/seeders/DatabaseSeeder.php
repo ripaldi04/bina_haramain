@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LandingHighlightPointsSeeder::class
         ]);
-
+        $this->call([
+            LandingMuthawifSeeder::class,
+        ]);
     }
 }

@@ -106,5 +106,57 @@ $(document).ready(function () {
 }); 
 
 
+$(document).ready(function () {
+    $('.edit-btn').on('click', function () {
+        var id = $(this).data('id');
+        var nama = $(this).data('nama');
+        var daerah = $(this).data('daerah');
+        var image_url = $(this).data('image_url');
+        var background_image_url = $(this).data('background_image_url');
+
+        $('#muthawifId').val(id);
+        $('#nama').val(nama);
+        $('#daerah').val(daerah);
+
+        $('#currentImage').attr('src', '/storage/' + image_url);
+        $('#currentBackgroundImage').attr('src', '/storage/' + background_image_url);
+
+        $('#editModal').modal('show');
+    });
+
+    $('#editMuthawifForm').submit(function(e) {
+        e.preventDefault();
+    
+        var formData = new FormData(this);
+        var id = $('#muthawifId').val();
+    
+        // Tambahkan override method PUT
+        formData.append('_method', 'PUT');
+    
+        $.ajax({
+            url: '/admin/muthawif/' + id,
+            type: 'POST', // karena _method=PUT
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                $('#editModal').modal('hide');
+                alert('Berhasil disimpan!');
+                location.reload();
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                alert('Gagal menyimpan. Periksa input atau file.');
+            }
+        });
+    });
+});
+
+
+
+
 
 

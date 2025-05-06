@@ -184,14 +184,15 @@
                 <img src="./images/v121_93.png" alt="ini gambar" width="352px" height="406"
                     style="border-radius: 30px;">
             </div>
-
 <div>
+
 @php
     $highlight2 = \App\Models\LandingHighlight2::first(); // Ambil data Highlight 2
 @endphp
 @if ($highlight2)
-    <div class="row p-3 d-flex justify-content-center align-items-start g-5"
-         style="background-color: white; width: 90%;">
+<div style="background-color: white; width: 100%;">
+<div>
+    <div class="row p-3 d-flex justify-content-center align-items-start g-5">
         {{-- Gambar di kiri --}}
         <div class="col-md-6 col-12 mbl-img-none">
             <img src="{{ asset('storage/' . $highlight2->image_url) }}"
@@ -227,6 +228,7 @@
             @endforeach
         </div>
     @endforeach
+</div>
 </div>
 
     <div class="mt-5 keunggulan">
@@ -495,50 +497,32 @@
             </div>
         </div>
     </div>
-    <div class="container mt-5">
-        <div class="text-center mb-5">
-            <h2 class="fs-3 fw-bold" style="color: var(--primary-color);">Muthawif</h2>
-            <h2 class="fs-2 fw-bold" style="color: black;">Berpengalaman dan Profesional</h2>
-        </div>
-        <div class="row mt-4 justify-content-center">
-            <div class="col-md-4 d-flex justify-content-center">
-                <div class="card muthawif" style="width: 18rem; border-radius: 30px;">
-                    <div class="image-blur"></div>
-                    <!-- Elemen gambar dengan efek blur -->
-                    <img src="./images/v160_93.png" class="card-img-top" alt="...">
-                    <div class="card-body muthawif-body">
-                        <h5 class="card-title text-center fs-4" style="color:white;">Ustadz Ripaldi S.Kom M.Kom</h5>
-                        <p class="card-text text-center" style="color: var(--secondary-color);">Muthawif Indonesia
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex justify-content-center">
-                <div class="card muthawif" style="width: 18rem;  border-radius: 30px;">
-                    <div class="image-blur"></div>
-                    <!-- Elemen gambar dengan efek blur -->
-                    <img src="./images/v160_93.png" class="card-img-top" alt="...">
-                    <div class="card-body muthawif-body">
-                        <h5 class="card-title text-center fs-4" style="color:white;">Ustadz Ripaldi S.Kom M.Kom</h5>
-                        <p class="card-text text-center" style="color: var(--secondary-color);">Muthawif Indonesia
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 d-flex justify-content-center">
-                <div class="card muthawif" style="width: 18rem;  border-radius: 30px;">
-                    <div class="image-blur"></div>
-                    <!-- Elemen gambar dengan efek blur -->
-                    <img src="./images/v160_93.png" class="card-img-top" alt="...">
-                    <div class="card-body muthawif-body">
-                        <h5 class="card-title text-center fs-4" style="color:white;">Ustadz Ripaldi S.Kom M.Kom</h5>
-                        <p class="card-text text-center" style="color: var(--secondary-color);">Muthawif Indonesia
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+@php
+    $muthawifs = \App\Models\LandingMuthawif::all();
+@endphp
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h2 class="fs-3 fw-bold" style="color: var(--primary-color);">Muthawif</h2>
+        <h2 class="fs-2 fw-bold" style="color: black;">Berpengalaman dan Profesional</h2>
     </div>
+    <div class="row mt-4 justify-content-center">
+        @foreach($muthawifs as $muthawif)
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card muthawif" style="width: 18rem; border-radius: 30px; background-image: url('{{ asset('storage/' . $muthawif->background_image_url) }}'); background-size: cover;">
+                    <div class="image-blur"></div>
+                    <img src="{{ asset('storage/' . $muthawif->image_url) }}" class="card-img-top" alt="Foto Muthawif">
+                    <div class="card-body muthawif-body">
+                        <h5 class="card-title text-center fs-4" style="color:white;">{{ $muthawif->nama }}</h5>
+                        <p class="card-text text-center" style="color: var(--secondary-color);">{{ $muthawif->daerah }}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
 
     <div class="container">
         <div class="mt-5 container-fluid">

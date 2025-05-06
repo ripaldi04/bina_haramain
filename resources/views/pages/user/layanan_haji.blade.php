@@ -65,6 +65,8 @@
                                 <li><i class="bi bi-building"></i> {{ $paket->hotel_madinah }} (Madinah)</li>
                                 <li><i class="bi bi-airplane"></i> {{ $paket->maskapai }}</li>
                                 <li><i class="bi bi-geo-alt"></i> {{ $paket->bandara }}</li>
+                                <li><i class="bi bi-box-seam"></i> Sisa Seat: {{ $paket->detail_Paket->sum('jumlah_seat') }}
+                                </li>
                             </ul>
                             <p class="fw-nomal text-dark">Harga Mulai Dari: <br>
                                 <span class="fw-bolder fs-5 text-warning">

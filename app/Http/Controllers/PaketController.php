@@ -126,21 +126,6 @@ class PaketController extends Controller
         return view('pages.user.detail_layanan', compact('paket'));
     }
 
-    public function showLayananHaji()
-    {
-        // Ambil paket dengan tipe kamar yang terkait, dan cari tipe kamar 'quad'
-        $paket = Paket::with([
-            'tipeKamars' => function ($query) {
-                $query->where('tipe', 'quad');
-            }
-        ])->first(); // Ambil paket pertama, atau gunakan get() jika ingin semua
-
-        return view('pages.user.layanan-haji', compact('paket'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         // $paket = Paket::findOrFail(id: $id);

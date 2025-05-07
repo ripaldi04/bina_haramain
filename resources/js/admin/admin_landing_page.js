@@ -188,12 +188,12 @@ document.querySelectorAll('.edit-highlight2').forEach(button => {
     button.addEventListener('click', function () {
         const id = this.getAttribute('data-id');
         const header = this.getAttribute('data-header');
-        const deskripsi = this.getAttribute('data-deskripsi');
+        const deskripsi = this.getAttribute('data-deskripsi-highlight');
 
         // Isi form dengan data yang diklik
         document.getElementById('highlight2-id').value = id;
         document.getElementById('header').value = header;
-        document.getElementById('deskripsi').value = deskripsi;
+        document.getElementById('deskripsi-highlight').value = deskripsi;
 
         // Update action form agar menyertakan ID
         const form = document.getElementById('highlight2-edit-form');
@@ -204,6 +204,10 @@ document.querySelectorAll('.edit-highlight2').forEach(button => {
         modal.show();
     });
 });
+
+
+
+
 
 $(document).ready(function () {
     $('.edit-highlight-point').on('click', function () {
@@ -234,7 +238,6 @@ $(document).ready(function () {
             contentType: false,
             success: function (response) {
                 $('#highlightPointsModal').modal('hide');
-                location.reload();
 
                 // SweetAlert notification
                 Swal.fire({
@@ -243,6 +246,8 @@ $(document).ready(function () {
                     text: 'Highlight point telah berhasil diupdate!',
                     timer: 2000,
                     showConfirmButton: true
+                }).then(() => {
+                    location.reload(); // reload setelah alert tertutup otomatis
                 });
             },
             error: function (xhr) {

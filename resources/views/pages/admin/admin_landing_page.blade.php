@@ -107,46 +107,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($highlights1 as $item)
+                        @foreach ($highlights1 as $highlight1)
                             <tr>
                                 <td>
                                     <div style="white-space: pre-line; line-height: 1.6; margin-bottom: 5px;">
-                                        {{ $item->header }}
+                                        {{ $highlight1->header }}
                                     </div>
                                 </td>
                                 <td>
                                     <div style="white-space: pre-line; line-height: 1.6; margin-bottom: 5px;">
-                                        {{ $item->deskripsi }}
+                                        {{ $highlight1->deskripsi }}
                                     </div>
                                 </td>
                                 <td>
                                     <ul class="mb-0 pl-3">
                                         @for ($i = 1; $i <= 5; $i++)
-                                            @if (!empty($item->{'point' . $i}))
-                                                <li>{{ $item->{'point' . $i} }}</li>
+                                            @if (!empty($highlight1->{'point' . $i}))
+                                                <li>{{ $highlight1->{'point' . $i} }}</li>
                                             @endif
                                         @endfor
                                     </ul>
                                 </td>
                                 <td>
-                                    <img src="{{ Str::startsWith($item->image_url, ['http', 'storage']) ? asset($item->image_url) : asset('storage/' . $item->image_url) }}"
+                                    <img src="{{ Str::startsWith($highlight1->image_url, ['http', 'storage']) ? asset($highlight1->image_url) : asset('storage/' . $highlight1->image_url) }}"
                                         width="100" class="img-fluid rounded shadow-sm" />
                                 </td>
                                 <td class="text-center">
                                     <!-- Tombol Edit -->
                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#editHighlightModal{{ $item->id }}">
+                                        data-bs-target="#editHighlightModal{{ $highlight1->id }}">
                                         Edit
                                     </button>
                                 </td>
                             </tr>
 
                             <!-- Modal Edit -->
-                            <div class="modal fade" id="editHighlightModal{{ $item->id }}" tabindex="-1"
-                                role="dialog" aria-labelledby="editHighlightModalLabel{{ $item->id }}"
+                            <div class="modal fade" id="editHighlightModal{{ $highlight1->id }}" tabindex="-1"
+                                role="dialog" aria-labelledby="editHighlightModalLabel{{ $highlight1->id }}"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
-                                    <form action="{{ route('highlight1.update', $item->id) }}" method="POST"
+                                    <form action="{{ route('highlight1.update', $highlight1->id) }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
@@ -160,12 +160,12 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="font-weight-bold">Header</label>
                                                     <input type="text" name="header" class="form-control"
-                                                        id="header{{ $item->id }}" value="{{ $item->header }}"
+                                                        id="header{{ $highlight1->id }}" value="{{ $highlight1->header }}"
                                                         required>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="font-weight-bold">Deskripsi</label>
-                                                    <textarea name="deskripsi" class="form-control" id="deskripsi{{ $item->id }}" rows="3" required>{{ $item->deskripsi }}</textarea>
+                                                    <textarea name="deskripsi" class="form-control" id="deskripsi{{ $highlight1->id }}" rows="3" required>{{ $highlight1->deskripsi }}</textarea>
                                                 </div>
 
                                                 @for ($i = 1; $i <= 5; $i++)
@@ -173,17 +173,17 @@
                                                         <label class="font-weight-bold">Point {{ $i }}</label>
                                                         <input type="text" name="point{{ $i }}"
                                                             class="form-control"
-                                                            id="point{{ $i }}{{ $item->id }}"
-                                                            value="{{ $item->{'point' . $i} }}">
+                                                            id="point{{ $i }}{{ $highlight1->id }}"
+                                                            value="{{ $highlight1->{'point' . $i} }}">
                                                     </div>
                                                 @endfor
                                                 <div class="col-md-6 mb-3">
                                                     <label class="font-weight-bold">Gambar</label>
                                                     <input type="file" name="image" class="form-control mb-2"
-                                                        id="image{{ $item->id }}" />
-                                                    <img src="{{ $item->image_url }}" width="100"
+                                                        id="image{{ $highlight1->id }}" />
+                                                    <img src="{{ $highlight1->image_url }}" width="100"
                                                         class="img-fluid rounded shadow-sm mt-1"
-                                                        id="currentImage{{ $item->id }}">
+                                                        id="currentImage{{ $highlight1->id }}">
                                                     <small class="form-text text-muted">Format: jpg, jpeg, png, gif.
                                                     </small>
                                                 </div>
@@ -220,17 +220,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($highlights2 as $item)
+                        @foreach ($highlights2 as $highlight2)
                             <tr>
-                                <td>{{ $item->header }}</td>
-                                <td>{{ $item->deskripsi }}</td>
-                                <td><img src="{{ asset('storage/' . $item->image_url) }}" width="100"
+                                <td>{{ $highlight2->header }}</td>
+                                <td>{{ $highlight2->deskripsi }}</td>
+                                <td><img src="{{ asset('storage/' . $highlight2->image_url) }}" width="100"
                                         class="img-fluid" /></td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <button class="btn btn-sm btn-warning edit-highlight2" data-id="{{ $item->id }}"
-                                        data-header="{{ $item->header }}" data-deskripsi="{{ $item->deskripsi }}"
-                                        data-image_url="{{ $item->image_url }}">
+                                    <button class="btn btn-sm btn-warning edit-highlight2" data-id="{{ $highlight2->id }}"
+                                        data-header="{{ $highlight2->header }}" data-deskripsi-highlight="{{ $highlight2->deskripsi }}"
+                                        data-image_url="{{ $highlight2->image_url }}">
                                         Edit
                                     </button>
                                 </td>
@@ -260,7 +260,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi</label>
-                                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
+                                <textarea class="form-control" id="deskripsi-highlight" name="deskripsi" rows="3" required></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="image_url" class="form-label">Gambar</label>
@@ -365,16 +365,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($keunggulan as $item)
+                        @forelse ($keunggulan as $keunggulanItem)
                             <tr>
                                 {{-- Judul dibuat ellipsis --}}
                                 <td
                                     style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                    {{ $item->title }}
+                                    {{ $keunggulanItem->title }}
                                 </td>
                                 <td>
-                                    @if ($item->image_url)
-                                        <img src="{{ asset('storage/' . $item->image_url) }}" width="100"
+                                    @if ($keunggulanItem->image_url)
+                                        <img src="{{ asset('storage/' . $keunggulanItem->image_url) }}" width="100"
                                             class="img-fluid" />
                                     @else
                                         <span>No Image</span>
@@ -383,17 +383,17 @@
                                 <td>
                                     <a href="javascript:void(0)" class="btn btn-warning btn-sm"
                                         onclick="openKeunggulanModal(
-                                    {{ $item->id }},
-                                    '{{ $item->title }}',
-                                    '{{ $item->image_url ? asset('storage/' . $item->image_url) : '' }}'
+                                    {{ $keunggulanItem->id }},
+                                    '{{ $keunggulanItem->title }}',
+                                    '{{ $keunggulanItem->image_url ? asset('storage/' . $keunggulanItem->image_url) : '' }}'
                                 )">
                                         Edit
                                     </a>
-                                    <form action="{{ route('keunggulan.destroy', $item->id) }}" method="POST"
-                                        style="display: inline;" id="delete-form-{{ $item->id }}">
+                                    <form action="{{ route('keunggulan.destroy', $keunggulanItem->id) }}" method="POST"
+                                        style="display: inline;" id="delete-form-{{ $keunggulanItem->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button onclick="confirmDelete({{ $item->id }}, event)"
+                                        <button onclick="confirmDelete({{ $keunggulanItem->id }}, event)"
                                             class="btn btn-danger btn-sm btn-delete">
                                             Hapus
                                         </button>
@@ -464,15 +464,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($fasilitas as $item)
+                        @forelse ($fasilitas as $itemFasilitas)
                             <tr>
-                                <td><span class="ellipsis-judul" title="{{ $item->title }}">{{ $item->title }}</span>
+                                <td><span class="ellipsis-judul" title="{{ $itemFasilitas->title }}">{{ $itemFasilitas->title }}</span>
                                 </td>
                                 <td><span class="ellipsis-deskripsi"
-                                        title="{{ $item->deskripsi }}">{{ $item->deskripsi }}</span></td>
+                                        title="{{ $itemFasilitas->deskripsi }}">{{ $itemFasilitas->deskripsi }}</span></td>
                                 <td>
-                                    @if ($item->image_url)
-                                        <img src="{{ asset('storage/' . $item->image_url) }}" width="100"
+                                    @if ($itemFasilitas->image_url)
+                                        <img src="{{ asset('storage/' . $itemFasilitas->image_url) }}" width="100"
                                             class="img-fluid" />
                                     @else
                                         <span>No Image</span>
@@ -480,15 +480,15 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-warning btn-sm"
-                                        onclick="openFasilitasModal({{ $item->id }}, '{{ $item->title }}', `{{ $item->deskripsi }}`, '{{ $item->image_url }}')">
+                                        onclick="openFasilitasModal({{ $itemFasilitas->id }}, '{{ $itemFasilitas->title }}', `{{ $itemFasilitas->deskripsi }}`, '{{ $itemFasilitas->image_url }}')">
                                         Edit
                                     </button>
-                                    <form action="{{ route('fasilitas.destroy', $item->id) }}" method="POST"
+                                    <form action="{{ route('fasilitas.destroy', $itemFasilitas->id) }}" method="POST"
                                         class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm btn-delete"
-                                            data-id="{{ $item->id }}">
+                                            data-id="{{ $itemFasilitas->id }}">
                                             Hapus
                                         </button>
                                     </form>

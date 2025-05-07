@@ -63,22 +63,22 @@
                             @csrf
                             <input type="hidden" id="banner_id" name="banner_id">
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="header1">Header 1</label>
                                 <input type="text" class="form-control" id="header1" name="header1" required>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="header2">Header 2</label>
                                 <input type="text" class="form-control" id="header2" name="header2" required>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="deskripsi">Deskripsi</label>
                                 <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="image_url">Gambar Banner</label>
                                 <input type="file" class="form-control" id="image_url" name="image_url">
                             </div>
@@ -160,8 +160,8 @@
                                                 <div class="col-md-6 mb-3">
                                                     <label class="font-weight-bold">Header</label>
                                                     <input type="text" name="header" class="form-control"
-                                                        id="header{{ $highlight1->id }}" value="{{ $highlight1->header }}"
-                                                        required>
+                                                        id="header{{ $highlight1->id }}"
+                                                        value="{{ $highlight1->header }}" required>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="font-weight-bold">Deskripsi</label>
@@ -181,9 +181,6 @@
                                                     <label class="font-weight-bold">Gambar</label>
                                                     <input type="file" name="image" class="form-control mb-2"
                                                         id="image{{ $highlight1->id }}" />
-                                                    <img src="{{ $highlight1->image_url }}" width="100"
-                                                        class="img-fluid rounded shadow-sm mt-1"
-                                                        id="currentImage{{ $highlight1->id }}">
                                                     <small class="form-text text-muted">Format: jpg, jpeg, png, gif.
                                                     </small>
                                                 </div>
@@ -228,8 +225,9 @@
                                         class="img-fluid" /></td>
                                 <td>
                                     <!-- Tombol Edit -->
-                                    <button class="btn btn-sm btn-warning edit-highlight2" data-id="{{ $highlight2->id }}"
-                                        data-header="{{ $highlight2->header }}" data-deskripsi-highlight="{{ $highlight2->deskripsi }}"
+                                    <button class="btn btn-sm btn-warning edit-highlight2"
+                                        data-id="{{ $highlight2->id }}" data-header="{{ $highlight2->header }}"
+                                        data-deskripsi-highlight="{{ $highlight2->deskripsi }}"
                                         data-image_url="{{ $highlight2->image_url }}">
                                         Edit
                                     </button>
@@ -466,10 +464,12 @@
                     <tbody>
                         @forelse ($fasilitas as $itemFasilitas)
                             <tr>
-                                <td><span class="ellipsis-judul" title="{{ $itemFasilitas->title }}">{{ $itemFasilitas->title }}</span>
+                                <td><span class="ellipsis-judul"
+                                        title="{{ $itemFasilitas->title }}">{{ $itemFasilitas->title }}</span>
                                 </td>
                                 <td><span class="ellipsis-deskripsi"
-                                        title="{{ $itemFasilitas->deskripsi }}">{{ $itemFasilitas->deskripsi }}</span></td>
+                                        title="{{ $itemFasilitas->deskripsi }}">{{ $itemFasilitas->deskripsi }}</span>
+                                </td>
                                 <td>
                                     @if ($itemFasilitas->image_url)
                                         <img src="{{ asset('storage/' . $itemFasilitas->image_url) }}" width="100"
@@ -595,20 +595,20 @@
                         <form id="editMuthawifForm" enctype="multipart/form-data">
                             <input type="hidden" id="muthawifId">
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama" required>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="daerah">Daerah</label>
                                 <input type="text" class="form-control" id="daerah" name="daerah" required>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="image_url">Foto Muthawif</label>
-                                <input type="file" name="image_url" id="image_url" class="form-control-file">
-                                <div class="mt-2">
+                                <input type="file" name="image_url" id="image_url" class="form-control">
+                                <div class="mt-2 mb-3">
                                     <img id="currentImage" src="" alt="Foto Muthawif"
                                         style="max-width: 100px;" />
                                 </div>
@@ -783,33 +783,34 @@
                                                 @method('PUT')
 
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title"
+                                                    <h5 class="modal-title text-start w-100"
                                                         id="editHotDealModalLabel{{ $item->id }}">
                                                         Edit Hot Deal
                                                     </h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-3 text-start">
                                                         <label>Judul</label>
                                                         <input type="text" name="title" class="form-control"
                                                             value="{{ $item->title }}" required>
                                                     </div>
 
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-3 text-start">
                                                         <label>Sub Judul</label>
                                                         <input type="text" name="subtitle" class="form-control"
                                                             value="{{ $item->subtitle }}">
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <label>Deskripsi (gunakan enter untuk membuat list)</label>
+                                                    <div class="form-group mb-3 text-start">
+                                                        <label>Deskripsi</label>
                                                         <textarea name="deskripsi" class="form-control" rows="4">{{ $item->deskripsi }}</textarea>
                                                     </div>
 
                                                     {{-- Preview gambar saat ini --}}
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-3 text-start">
                                                         <label>Gambar Saat Ini</label><br>
                                                         @if ($item->image_url)
                                                             <img src="{{ asset($item->image_url) }}" alt="Hot Deal Image"
@@ -820,7 +821,7 @@
                                                     </div>
 
                                                     {{-- Upload gambar baru --}}
-                                                    <div class="form-group">
+                                                    <div class="form-group mb-3 text-start">
                                                         <label>Upload Gambar Baru</label>
                                                         <input type="file" name="image" class="form-control">
                                                         <small class="form-text text-muted">Format: jpg, jpeg, png, gif.

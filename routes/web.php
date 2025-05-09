@@ -27,9 +27,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\User\UserPaketController;
 
 
-// Route untuk halaman pertama (form pemesanan)
-// Route::post('/pesan-paket', [OrderPaketController::class, 'prosesPesan'])->name('prosesPesan');
-
 
 Route::get('/pesanan-sukses', [OrderPaketController::class, 'pesananSukses'])->name('pesananSukses');
 
@@ -42,7 +39,6 @@ Route::get('/transaksi/{order_id}', [OrderPaketController::class, 'showTransaksi
 // Route untuk mengolah data transaksi dan update ke database
 Route::post('/transaksi/{order_id}', [OrderPaketController::class, 'prosesTransaksi'])->name('prosesTransaksi');
 
-// Route::get('/transaksi', [OrderPaketController::class, 'create'])->name('transaksi');
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -100,28 +96,19 @@ Route::get('/haji', [UserPaketController::class, 'index'])->name('layanan_haji')
 Route::get('/umrah', [UserPaketController::class, 'store'])->name('layanan_umrah');
 
 
-
-// Route::get('/haji/detail-bintang-tiga', function () {
-//     return view('pages.user.detailb3_layanan_haji');
-// })->name('detailb3_layanan_haji');
-
-// Route::get('/haji/detail-bintang-lima', function () {
-//     return view('pages.user.detailb5_layanan_haji');
-// })->name('detailb5_layanan_haji');
-
 Route::get('/paket/detail/{id}', [UserPaketController::class, 'show'])->name('layanan_haji.detail');
 
 Route::get('/hubungi-kami', function () {
     return view('pages.user.hubungi_kami');
 })->name('hubungi_kami');
 
+Route::get('/tentang-kami', function () {
+    return view('pages.user.tentang_kami');
+})->name('tentang_kami');
+
 Route::get('/riwayat', function () {
     return view('pages.user.riwayat');
 })->name('riwayat');
-
-// Route::get('/transaksi', function () {
-//     return view('pages.user.transaksi');
-// })->name('transaksi');
 
 
 // Mengedit muthawif

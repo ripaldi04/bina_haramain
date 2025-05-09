@@ -9,11 +9,11 @@
         <div class="d-flex">
             <!-- Main Content -->
             <div class="container-fluid p-4">
-                <div class="d-flex justify-content-end align-items-center mb-4">
+                {{-- <div class="d-flex justify-content-end align-items-center mb-4">
                     <div class="d-flex justify-content-end align-items-center mb-4">
                         @include('pages.admin.partials.profile')
                     </div>
-                </div>
+                </div> --}}
 
 
                 <h1 id="pageTitle" class="mb-4">Paket Umrah & Haji</h1>

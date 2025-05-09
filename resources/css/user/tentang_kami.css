@@ -1,0 +1,156 @@
+.background-cover {
+    position: relative;
+    /* background: url('asset/mekkah.jpg') center/cover no-repeat; */
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+
+}
+
+.background-cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 70%;
+    background: #404040; /* Overlay gelap */
+    z-index: 1;
+}
+
+.contact-section {
+    position: relative;
+    z-index: 2; /* Pastikan teks berada di atas overlay */
+    text-align: center;
+    color: white; /* Warna teks agar kontras */
+    padding: 50px;
+
+}
+
+.contact-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.contact-section p {
+    font-size: 30px;
+}
+
+.contact-section span {
+    color: #d4af37; /* Warna emas untuk highlight */
+    font-weight: bold;
+}
+/* .info-section {
+    padding: 50px;
+    padding-left: 50px;
+    background: #f0f0f0;
+    width: auto;
+    height: auto;
+    
+}
+.info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+.info-box i {
+    font-size: 26px;
+    color: #404040;
+    
+}
+.info-box a {
+    text-decoration: none;
+    color: #007bff;
+}
+.info-box a:hover {
+    text-decoration: underline;
+} */
+
+/* bagian Tentang Binaharamain */
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center; /* Posisikan logo di tengah secara horizontal */
+    align-items: center;
+    flex-direction: column; /* Susun logo dan teks secara vertikal */
+    margin-top: 40px; /* Jarak dari atas */
+}
+
+.logo {
+    width: 450px;
+    margin-bottom: 5px;
+}
+
+.text {
+    text-align: center; /* Posisikan teks di tengah */
+    margin-top: 40px; /* Jarak antara logo dan teks */
+    font-size: 40px;
+}
+
+h1 {
+    font-size: 38px;
+    font-weight: bold;
+}
+
+/* visi-misi binaharamain */
+.visi-misi-container {
+    width: 40%;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: white;
+    border: 5px solid #333;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.visi-misi-container h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    text-align: center; /* Pusatkan teks */
+}
+
+.highlight {
+    color: #f4a300; /* Warna emas/oranye */
+    font-weight: bold;
+}
+
+.visi, .misi {
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+.visi h2, .misi h2 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #f4a300;
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+ul {
+    list-style-type: decimal;
+    padding-left: 60px;
+    text-align: left;
+    margin-top: 50px;
+}
+
+ul li {
+    font-size: 20px;
+    margin-bottom: 8px;
+}

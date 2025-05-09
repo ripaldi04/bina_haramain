@@ -12,16 +12,6 @@
             </a>
         </li>
         <li class="p-2">
-            <a href="{{ url('/admin/agen') }}" class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/agen') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> Agen
-            </a>
-        </li>
-        <li class="p-2">
-            <a href="{{ url('/admin/affiliate') }}" class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/affiliate') ? 'active' : '' }}">
-                <i class="fas fa-handshake"></i> Affiliate
-            </a>
-        </li>
-        <li class="p-2">
             <a href="{{ url('/admin/jamaah') }}" class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/jamaah') ? 'active' : '' }}">
                 <i class="fas fa-user-shield"></i> Data Pemesan
             </a>

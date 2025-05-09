@@ -9,9 +9,9 @@
         <div class="d-flex">
             <!-- Main Content -->
             <div class="container-fluid p-4">
-                <div class="d-flex justify-content-end align-items-center mb-4">
+                {{-- <div class="d-flex justify-content-end align-items-center mb-4">
                     @include('pages.admin.partials.profile')
-                </div>
+                </div> --}}
                 <h1 id="pageTitle" class="mb-4">User</h1>
                 <div class="bg-white p-4 shadow rounded">
                     <div class="row mb-3">

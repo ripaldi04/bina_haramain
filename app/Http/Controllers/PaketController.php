@@ -48,7 +48,7 @@ class PaketController extends Controller
             'maskapai' => 'required|string',
             'bandara' => 'required|string',
             'harga' => 'required|numeric',
-            'jenis' => 'required|string|in:umrah,haji',
+            'jenis' => 'required|string|in:umrah,haji,islamic_tour',
             'program_hari' => 'required|integer|min:1',
             'tanggal_keberangkatan.*' => 'required|date',
             'jumlah_seat.*' => 'required|integer|min:1',

@@ -94,6 +94,7 @@ Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/haji', [UserPaketController::class, 'index'])->name('layanan_haji');
 Route::get('/umrah', [UserPaketController::class, 'store'])->name('layanan_umrah');
+Route::get('/islamic-tour', [UserPaketController::class, 'store2'])->name('islamic_tour');
 
 
 Route::get('/paket/detail/{id}', [UserPaketController::class, 'show'])->name('layanan_haji.detail');

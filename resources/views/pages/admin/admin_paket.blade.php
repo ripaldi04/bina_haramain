@@ -70,6 +70,7 @@
                                             <select class="form-control" id="paketJenis" name="jenis" required>
                                                 <option value="haji">Haji</option>
                                                 <option value="umrah">Umrah</option>
+                                                <option value="islamic_tour">Islamic Tour</option>
                                             </select>
                                         </div>
 
@@ -265,7 +266,8 @@
                             <tr>
                                 <th><input type="checkbox" id="selectAll"></th>
                                 <th>Gambar</th>
-                                <th>Paket</th>
+                                <th>Nama Paket</th>
+                                <th>Jenis Paket</th>
                                 <th>Fasilitas</th>
                                 <th>
                                     Tanggal berangkat <br>dan Sisa Seat</th>
@@ -282,7 +284,7 @@
                                             class="clickable-image" style="cursor: pointer;">
                                     </td>
                                     <td>{{ $paket->nama_paket }}</td>
-
+<td>{{$paket->jenis}}</td>
                                     <td style="text-align: left;">
                                         - Hotel Makkah: {{ $paket->hotel_mekkah }}<br>
                                         - Hotel Madinah: {{ $paket->hotel_madinah }}<br>

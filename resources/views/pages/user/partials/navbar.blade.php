@@ -22,6 +22,7 @@
                     <ul class="dropdown-menu" aria-labelledby="layananDropdown">
                         <li><a class="dropdown-item" href="{{ route('layanan_haji') }}">Layanan Haji</a></li>
                         <li><a class="dropdown-item" href="{{ route('layanan_umrah') }}">Layanan Umrah</a></li>
+                        <li><a class="dropdown-item" href="{{ route('islamic_tour') }}">Islamic Tour</a></li>
                         <li><a class="dropdown-item" href="{{ route('riwayat') }}">Riwayat Pesanan</a></li>
                     </ul>
                 </li>

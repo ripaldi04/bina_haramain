@@ -15,7 +15,7 @@ class LandingBannerSeeder extends Seeder
     {
         LandingBanner::create([
             'header1' => 'Haji Langsung Berangkat',
-            'header2' => 'Tanpa Antri <br> Visa Haji Resmi <br> Maktab VIP <br> Sepenuh Hati',
+            'header2' => 'Tanpa Antri dan Visa Haji Resmi',
             'deskripsi' => 'Spesial bersama Koh Dennis Lim dan Teh Yunda – Kuota Terbatas, Segera Amankan Kuota Anda sebelum Terlambat!',
             'image_url' => 'images/v146_30.png',
         ]);

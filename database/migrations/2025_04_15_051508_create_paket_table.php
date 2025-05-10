@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
             $table->string('kode_paket')->unique();
-            $table->enum('jenis', ['haji', 'umrah']); // Haji atau Umrah
+            $table->enum('jenis', ['haji', 'umrah','islamic_tour']); // Haji atau Umrah
             $table->string('nama_paket');
             $table->date('keberangkatan')->nullable();
             $table->string('hotel_mekkah')->nullable();

@@ -21,6 +21,8 @@ class OrderPaket extends Model
         'jenis_pembayaran',
         'jumlah_dibayar',
         'total_harga',
+        'bukti_pembayaran',
+        'status',
         'nama_pemesan',
         'jenis_kelamin_pemesan',
         'telepon_pemesan',

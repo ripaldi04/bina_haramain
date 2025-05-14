@@ -31,26 +31,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Muhammad Sumbul</td>
-                            <td>+628983863672<br>sumbulmuhammad@gmail.com</td>
-                            <td>Haji Furoda</td>
-                            <td>Khalid Kashmiri</td>
-                            <td>Cash</td>
-                            <td>Lunas</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">&nbsp;</td>
-                        </tr>
+                        @forelse ($orders as $order)
+                            <tr>
+                                <td>{{ $order->nama_pemesan }}</td>
+                                <td>+62{{ $order->telepon_pemesan }}<br>{{ $order->email_pemesan }}</td>
+                                <td>{{ $order->paket->nama_paket ?? '-' }}</td>
+                                <td>
+                                    @foreach ($order->orderKamar as $kamar)
+                                        @foreach ($kamar->jamaahs as $jamaah)
+                                            {{ $jamaah->nama }}<br>
+                                        @endforeach
+                                    @endforeach
+                                </td>
+                                <td>{{ ucfirst($order->jenis_pembayaran) }}</td>
+                                <td>
+                                    @if ($order->status === 'pending')
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    @elseif($order->status === 'lunas')
+                                        <span class="badge bg-success">Lunas</span>
+                                    @else
+                                        <span class="badge bg-secondary">{{ ucfirst($order->status) }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Belum ada riwayat pemesanan.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

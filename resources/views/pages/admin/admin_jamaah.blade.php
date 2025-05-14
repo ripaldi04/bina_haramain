@@ -80,81 +80,69 @@
                     <table class="table table-bordered text-center">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="selectAll"></th>
                                 <th>Nama Pemesan</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Paket</th>
-                                <th>Jumlah</th>
-                                <th>Jemaah</th>
-                                <th>Actions</th>
+                                <th>Jamaah</th>
+                                <th>Bukti Pembayaran</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBody">
-                            <tr data-row-id="1">
-                                <td><input type="checkbox" class="rowCheckbox"></td>
-                                <td>Muhammad Ripaldi</td>
-                                <td>ripaldi@gmail.com</td>
-                                <td>+62 8123000000</td>
-                                <td>Umrah 19 hari</td>
-                                <td>1</td>
-                                <td>Muhammad Ripaldi (Ikhwan)</td>
-                                <td>
-                                    <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
-                                    <i class="fas fa-trash text-danger cursor-pointer"></i>
-                                </td>
-                            </tr>
-                            <tr data-row-id="2">
-                                <td><input type="checkbox" class="rowCheckbox"></td>
-                                <td>Muhammad Faadihilah</td>
-                                <td>fadil@gmail.com</td>
-                                <td>+62 8132000000</td>
-                                <td>Haji Furodha</td>
-                                <td>3</td>
-                                <td>Muhammad Faadihilah (Ikhwan) <br>Mayang (Akhwat) <br>Sunandar (Ikhwan)</td>
-                                <td>
-                                    <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
-                                    <i class="fas fa-trash text-danger cursor-pointer"></i>
-                                </td>
-                            </tr>
-                            <tr data-row-id="3">
-                                <td><input type="checkbox" class="rowCheckbox"></td>
-                                <td>Muhammad Faadihilah</td>
-                                <td>fadil@gmail.com</td>
-                                <td>+62 8132000000</td>
-                                <td>Haji Furodha</td>
-                                <td>2</td>
-                                <td>Muhammad Faadihilah (Ikhwan) <br>Mayang (Akhwat)</td>
-                                <td>
-                                    <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
-                                    <i class="fas fa-trash text-danger cursor-pointer"></i>
-                                </td>
-                            </tr>
-                            <tr data-row-id="4">
-                                <td><input type="checkbox" class="rowCheckbox"></td>
-                                <td>Muhammad Faadihilah</td>
-                                <td>fadil@gmail.com</td>
-                                <td>+62 8132000000</td>
-                                <td>Haji Furodha</td>
-                                <td>2</td>
-                                <td>Muhammad Faadihilah (Ikhwan) <br>Mayang (Akhwat)</td>
-                                <td>
-                                    <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
-                                    <i class="fas fa-trash text-danger cursor-pointer"></i>
-                                </td>
-                            </tr>
-                            <tr data-row-id="5">
-                                <td><input type="checkbox" class="rowCheckbox"></td>
-                                <td>Muhammad Faadihilah</td>
-                                <td>fadil@gmail.com</td>
-                                <td>+62 8132000000</td>
-                                <td>Haji Furodha</td>
-                                <td>2</td>
-                                <td>Muhammad Faadihilah (Ikhwan) <br>Mayang (Akhwat)</td>
-                                <td>
-                                    <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
-                                    <i class="fas fa-trash text-danger cursor-pointer"></i>
-                                </td>
+                        <tbody>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td>{{ $order->user->name ?? '-' }}</td>
+                                    <td>{{ $order->user->email ?? '-' }}</td>
+                                    <td>{{ $order->telepon_pemesan ?? '-' }}</td> {{-- atau $order->phone jika bukan dari users --}}
+                                    <td>{{ $order->paket->nama_paket ?? '-' }}</td>
+                                    <td>
+                                        @foreach ($order->orderKamar as $kamar)
+                                            @foreach ($kamar->jamaahs as $jamaah)
+                                                {{ $jamaah->nama }} ({{ $jamaah->jenis_kelamin }})<br>
+                                            @endforeach
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @if ($order->bukti_pembayaran)
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#buktiModal{{ $order->id }}">
+                                                Lihat Bukti
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="buktiModal{{ $order->id }}" tabindex="-1"
+                                                aria-labelledby="buktiModalLabel{{ $order->id }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="buktiModalLabel{{ $order->id }}">
+                                                                Bukti Pembayaran</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-center">
+                                                            <img src="{{ asset('storage/' . $order->bukti_pembayaran) }}"
+                                                                class="img-fluid" alt="Bukti Pembayaran">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <span class="text-muted">Belum Ada</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($order->status === 'pending')
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        @elseif($order->status === 'lunas')
+                                            <span class="badge bg-success">Lunas</span>
+                                        @else
+                                            <span class="badge bg-secondary">{{ ucfirst($order->status) }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

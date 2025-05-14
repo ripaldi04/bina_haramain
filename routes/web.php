@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminJamaahController;
 use App\Http\Controllers\AdminQuestionController;
 use App\Http\Controllers\Highlight1Controller;
 use App\Http\Controllers\Highlight2Controller;
@@ -28,7 +29,7 @@ use App\Http\Controllers\User\UserPaketController;
 
 
 
-Route::get('/pesanan-sukses', [OrderPaketController::class, 'pesananSukses'])->name('pesananSukses');
+Route::get('/payment/{order_id}', [OrderPaketController::class, 'payment'])->name('payment');
 
 Route::post('/proses-pesan', [OrderPaketController::class, 'prosesPesan'])->name('prosesPesan');
 
@@ -39,6 +40,7 @@ Route::get('/transaksi/{order_id}', [OrderPaketController::class, 'showTransaksi
 // Route untuk mengolah data transaksi dan update ke database
 Route::post('/transaksi/{order_id}', [OrderPaketController::class, 'prosesTransaksi'])->name('prosesTransaksi');
 
+Route::post('/upload-bukti/{order_id}', [OrderPaketController::class, 'uploadBukti'])->name('uploadBuktiPembayaran');
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -83,6 +85,9 @@ Route::post('/email/verification-notification', function (Request $request) {
     return redirect('/login');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+
+Route::get('/admin/jamaah', [AdminJamaahController::class, 'semuaPemesan'])->name('admin.pemesan');
+
 Route::get('/admin/galeri/{id}/edit', [LandingGaleriController::class, 'edit'])->name('admin.galeri.edit');
 Route::put('/admin/galeri/{id}', [LandingGaleriController::class, 'update'])->name('admin.galeri.update');
 
@@ -107,9 +112,8 @@ Route::get('/tentang-kami', function () {
     return view('pages.user.tentang_kami');
 })->name('tentang_kami');
 
-Route::get('/riwayat', function () {
-    return view('pages.user.riwayat');
-})->name('riwayat');
+Route::get('/riwayat', [OrderPaketController::class, 'riwayat'])->name('riwayat');
+
 
 
 // Mengedit muthawif
@@ -154,9 +158,9 @@ Route::get('/admin/affiliate', function () {
     return view('pages.admin.admin_affiliate');
 })->name('admin_affiliate');
 
-Route::get('/admin/jamaah', function () {
-    return view('pages.admin.admin_jamaah');
-})->name('admin_jamaah');
+// Route::get('/admin/jamaah', function () {
+//     return view('pages.admin.admin_jamaah');
+// })->name('admin_jamaah');
 
 Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin_paket');
 Route::post('/admin/paket', [PaketController::class, 'store'])->name('paket.store');

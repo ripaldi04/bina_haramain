@@ -12,6 +12,13 @@ use Log;
 
 class OrderPaketController extends Controller
 {
+    public function riwayat()
+    {
+        // Ambil semua order milik user (bisa pakai auth jika sudah login)
+        $orders = OrderPaket::where('user_id', auth()->id())->with(['paket', 'orderKamar'])->get();
+        return view('pages.user.riwayat', compact('orders'));
+    }
+
     public function prosesPesan(Request $request)
     {
         // Validasi input data dari form pemesanan
@@ -144,14 +151,34 @@ class OrderPaketController extends Controller
             }
         }
 
+        $order = OrderPaket::with(['paket', 'orderKamar.tipeKamar', 'detailPaket'])->findOrFail($order_id);
 
         // Redirect ke halaman sukses pemesanan
-        return redirect()->route('pesananSukses');
+        return redirect()->route('payment', ['order_id' => $order->id]);
 
     }
-    public function pesananSukses()
+    public function uploadBukti(Request $request, $order_id)
     {
-        return view('pages.user.pesanan_sukses'); // Sesuaikan dengan nama tampilan yang sesuai
+        $request->validate([
+            'bukti_pembayaran' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        ]);
+
+        $order = OrderPaket::findOrFail($order_id);
+
+        if ($request->hasFile('bukti_pembayaran')) {
+            // Simpan file ke storage/app/public/bukti
+            $path = $request->file('bukti_pembayaran')->store('bukti', 'public');
+            $order->bukti_pembayaran = $path;
+            $order->status = 'pending'; // ⬅️ Set status pending saat upload bukti
+            $order->save();
+        }
+
+        return back()->with('success', 'Bukti pembayaran berhasil diunggah.');
+    }
+    public function payment($order_id)
+    {
+        $order = OrderPaket::with(['paket', 'orderKamar.tipeKamar', 'detailPaket'])->findOrFail($order_id);
+        return view('pages.user.payment', compact('order')); // Sesuaikan dengan nama tampilan yang sesuai
     }
 
 

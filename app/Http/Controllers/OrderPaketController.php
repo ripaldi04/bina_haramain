@@ -227,7 +227,7 @@ class OrderPaketController extends Controller
         // Jika status berubah menjadi diterima, kurangi jumlah seat
         if ($status_lama !== 'diterima' && $order->status === 'diterima') {
             $detail = DetailPaket::findOrFail($request->detail_paket_id);
-            $jumlah_jamaah = $order->jamaahs()->count();
+            $jumlah_jamaah = $order->jamaah()->count();
 
             if ($detail->jumlah_seat >= $jumlah_jamaah) {
                 $detail->jumlah_seat -= $jumlah_jamaah;
@@ -253,11 +253,11 @@ class OrderPaketController extends Controller
             }
         }
 
-        $detail = DetailPaket::findOrFail($request->detail_paket_id);
-        $jumlah_jamaah = $order->jamaahs()->count(); // assuming ada relasi jamaahs di model OrderPaket
+            // $detail = DetailPaket::findOrFail($request->detail_paket_id);
+            // $jumlah_jamaah = $order->jamaahs()->count(); // assuming ada relasi jamaahs di model OrderPaket
 
-        $detail->jumlah_seat -= $jumlah_jamaah;
-        $detail->save();
+            // $detail->jumlah_seat -= $jumlah_jamaah;
+            // $detail->save();
 
 
         // Kalau bukan AJAX, redirect biasa

@@ -83,7 +83,7 @@
                                 <th>Nama Pemesan</th>
                                 <th>Email Pemesan</th>
                                 <th>Phone Pemesan</th>
-                                <th>Paket</th>
+                                <th>Paket dan Tanggal berangkat</th>
                                 <th>Jamaah</th>
                                 <th>Jenis Pembayaran dan Harga Pembayaran</th>
                                 <th>Bukti Pembayaran</th>
@@ -98,7 +98,8 @@
                                     <td>{{ $order->nama_pemesan ?? '-' }}</td>
                                     <td>{{ $order->email_pemesan ?? '-' }}</td>
                                     <td>+62{{ $order->telepon_pemesan ?? '-' }}</td> {{-- atau $order->phone jika bukan dari users --}}
-                                    <td>{{ $order->paket->nama_paket ?? '-' }}</td>
+                                    <td>{{ $order->paket->nama_paket ?? '-' }}({{ $order->detail_paket->tanggal_keberangkatan ?? '-' }})
+                                    </td>
                                     <td>
                                         @foreach ($order->orderKamar as $kamar)
                                             @foreach ($kamar->jamaahs as $jamaah)
@@ -171,7 +172,8 @@
                                             enctype="multipart/form-data" id="editOrderModal{{ $order->id }}">
                                             @csrf
                                             @method('PUT')
-
+                                            <input type="hidden" name="detail_paket_id"
+                                                value="{{ $order->detail_paket_id }}">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="editOrderModalLabel{{ $order->id }}">
@@ -184,12 +186,12 @@
                                                         <div class="col-md-6">
                                                             <label>Nama Pemesan</label>
                                                             <input type="text" name="name" class="form-control"
-                                                                value="{{ $order->user->name ?? '' }}">
+                                                                value="{{ $order->nama_pemesan ?? '' }}">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label>Email</label>
                                                             <input type="email" name="email" class="form-control"
-                                                                value="{{ $order->user->email ?? '' }}">
+                                                                value="{{ $order->email_pemesan ?? '' }}">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label>Telepon</label>

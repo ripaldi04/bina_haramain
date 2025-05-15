@@ -187,19 +187,22 @@ class OrderPaketController extends Controller
         $request->validate([
             'name' => 'nullable|string',
             'email' => 'nullable|email',
+            'nama_pemesan' => 'nullable|string',
+            'email_pemesan' => 'nullable|email',
             'telepon_pemesan' => 'required|string',
             'jenis_pembayaran' => 'required|string',
             'jamaah.*.nama' => 'nullable|string',  // Validasi untuk nama jamaah
             'status' => 'required|string|in:pending,diterima,ditolak',
             'bukti_pembayaran' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'detail_paket_id' => 'required|exists:detail_paket,id',
         ]);
 
-        // Update user (jika relasi user ada)
-        if ($order->user) {
-            $order->user->name = $request->name;
-            $order->user->email = $request->email;
-            $order->user->save();
-        }
+        $status_lama = $order->status;
+
+        $order->nama_pemesan = $request->name;
+        $order->email_pemesan = $request->email;
+
+
         foreach ($request->jamaah as $jamaah_id => $jamaah_data) {
             $jamaah = Jamaah::find($jamaah_id); // Pastikan model Jamaah ada
             if ($jamaah) {
@@ -221,6 +224,21 @@ class OrderPaketController extends Controller
 
         $saved = $order->save();
 
+        // Jika status berubah menjadi diterima, kurangi jumlah seat
+        if ($status_lama !== 'diterima' && $order->status === 'diterima') {
+            $detail = DetailPaket::findOrFail($request->detail_paket_id);
+            $jumlah_jamaah = $order->jamaahs()->count();
+
+            if ($detail->jumlah_seat >= $jumlah_jamaah) {
+                $detail->jumlah_seat -= $jumlah_jamaah;
+                $detail->save();
+            } else {
+                // Bisa juga handle error disini jika seat tidak cukup
+                return redirect()->back()->withErrors(['error' => 'Jumlah seat tidak mencukupi.']);
+            }
+        }
+
+
         if ($request->ajax() || $request->wantsJson()) {
             if ($saved) {
                 return response()->json([
@@ -234,6 +252,13 @@ class OrderPaketController extends Controller
                 ]);
             }
         }
+
+        $detail = DetailPaket::findOrFail($request->detail_paket_id);
+        $jumlah_jamaah = $order->jamaahs()->count(); // assuming ada relasi jamaahs di model OrderPaket
+
+        $detail->jumlah_seat -= $jumlah_jamaah;
+        $detail->save();
+
 
         // Kalau bukan AJAX, redirect biasa
         return redirect()->route('admin.pemesan')

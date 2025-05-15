@@ -54,7 +54,7 @@ class OrderPaket extends Model
     }
     public function jamaah()
     {
-        return $this->hasMany(Jamaah::class, 'order_paket_id');
+        return $this->hasMany(Jamaah::class, 'order_paket_id','id');
     }
 
 }

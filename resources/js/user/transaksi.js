@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let totalBayar = 0;
 
         if (value === 'booking') {
-            totalBayar = totalHarga * 0.5;
+            totalBayar = totalHarga * 0.2;
         } else if (value === 'dp') {
-            totalBayar = totalHarga * 0.12;
+            totalBayar = totalHarga * 0.5;
         } else if (value === 'cash') {
             totalBayar = totalHarga;
         }

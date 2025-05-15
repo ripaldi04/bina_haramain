@@ -111,10 +111,10 @@ class OrderPaketController extends Controller
 
         switch ($jenis) {
             case 'booking':
-                $jumlah = $order->total_harga * 0.5;
+                $jumlah = $order->total_harga * 0.2;
                 break;
             case 'dp':
-                $jumlah = $order->total_harga * 0.12;
+                $jumlah = $order->total_harga * 0.5;
                 break;
             case 'cash':
                 $jumlah = $order->total_harga;
@@ -253,11 +253,11 @@ class OrderPaketController extends Controller
             }
         }
 
-            // $detail = DetailPaket::findOrFail($request->detail_paket_id);
-            // $jumlah_jamaah = $order->jamaahs()->count(); // assuming ada relasi jamaahs di model OrderPaket
+        // $detail = DetailPaket::findOrFail($request->detail_paket_id);
+        // $jumlah_jamaah = $order->jamaahs()->count(); // assuming ada relasi jamaahs di model OrderPaket
 
-            // $detail->jumlah_seat -= $jumlah_jamaah;
-            // $detail->save();
+        // $detail->jumlah_seat -= $jumlah_jamaah;
+        // $detail->save();
 
 
         // Kalau bukan AJAX, redirect biasa

@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="container my-5">
-        <h4 class="mb-4 fw-bold">Transaksi Paket {{$order->paket->nama_paket}} – Selesaikan Pemesanan</h4>
+        <h4 class="mb-4 fw-bold">Transaksi Paket {{ $order->paket->nama_paket }} – Selesaikan Pemesanan</h4>
         <div class="row">
             <!-- Form Data Pemesan dan Jamaah -->
             <div class="col-lg-8">
@@ -107,8 +107,8 @@
                             <select class="form-control" name="jenis_pembayaran" id="jenis_pembayaran"
                                 data-total-harga="{{ $order->total_harga }}" required>
                                 <option value="" disabled selected>Pilih salah satu</option>
-                                <option value="booking">Booking (50%)</option>
-                                <option value="dp">DP (12%)</option>
+                                <option value="booking">Booking (20%)</option>
+                                <option value="dp">DP (50%)</option>
                                 <option value="cash">Cash (100%)</option>
                             </select>
                         </div>

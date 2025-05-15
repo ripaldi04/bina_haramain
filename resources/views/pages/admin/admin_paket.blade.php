@@ -172,6 +172,7 @@
                                         <select class="form-control" id="editJenis">
                                             <option value="haji">Haji</option>
                                             <option value="umrah">Umrah</option>
+                                            <option value="islamic_tour">Islamic Tour</option>
                                         </select>
                                     </div>
 

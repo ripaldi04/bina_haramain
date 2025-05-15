@@ -160,6 +160,8 @@ class PaketController extends Controller
             // Simpan gambar baru
             $path = $request->file('gambar')->store('images/paket', 'public');
             $paket->gambar = $path;
+            $paket->save();  // Simpan dulu perubahan gambar
+
         }
 
         $paket->update([

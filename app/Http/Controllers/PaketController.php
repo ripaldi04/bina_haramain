@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\DetailPaket;
 use App\Models\Paket;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -66,11 +67,13 @@ class PaketController extends Controller
         // $tahun = $keberangkatan->format('Y');
 
         // Tentukan jenis paket (UMR untuk Umrah, HAJ untuk Haji)
-        $jenis = $request->jenis == 'umrah' ? 'UMR' : 'HAJ';
-        $nama_paket = $request->nama_paket;
+        $nama_paket = strtoupper(str_replace(' ', '', $request->nama_paket));
+        // Ambil tanggal keberangkatan pertama untuk kode paket
+        $tanggal_keberangkatan = $request->tanggal_keberangkatan[0];
+        $tanggalFormatted = Carbon::parse($tanggal_keberangkatan)->format('dmY');
 
         // Buat kode_paket
-        $kode_paket = $jenis . $nama_paket;
+        $kode_paket = $nama_paket . $tanggalFormatted;
 
         $paket = Paket::create([
             'kode_paket' => $kode_paket,

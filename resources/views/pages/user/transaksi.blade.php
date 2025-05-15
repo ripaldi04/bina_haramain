@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Haji Bintang 5')
+@section('title', 'Transaksi')
 
 @section('style')
     @vite(['resources/css/user/transaksi.css'])
@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="container my-5">
-        <h4 class="mb-4 fw-bold">Transaksi Paket Haji – Selesaikan Pemesanan</h4>
+        <h4 class="mb-4 fw-bold">Transaksi Paket {{$order->paket->nama_paket}} – Selesaikan Pemesanan</h4>
         <div class="row">
             <!-- Form Data Pemesan dan Jamaah -->
             <div class="col-lg-8">
@@ -136,7 +136,7 @@
                         <ul class="list-unstyled mb-3">
                             <li>
                                 <strong>Kode Paket:</strong>
-                                <span class="kode-paket">{{ $order->paket->kode_paket ?? '-' }}</span>
+                                <span class="kode-paket">{{ $order->paket->kode_paket ?? '-' }}*</span>
                             </li>
                             <li><strong>Nama Paket:</strong>{{ $order->paket->nama_paket ?? '-' }}</li>
                             <li><strong>Jenis Paket:</strong> {{ $order->paket->jenis ?? '-' }}</li>

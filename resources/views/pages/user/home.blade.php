@@ -348,6 +348,85 @@
                 Sekarang!!</button>
         </div>
     </div>
+    <div class="container mt-5 text-center">
+        <h6 class="fw-bold text-uppercase" style="color: #f7c53a; letter-spacing: 2px; line-height: 1.0;">
+            Berita Terbaru
+        </h6>
+        <h2 class="fw-bold mb-4" style="color: #404040; line-height: 1.0;">
+            Berita Artikel Terbaru
+        </h2>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+
+            <!-- Artikel 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card artikel-card shadow-sm h-100 text-start">
+                    <img src="./images/gambarumrah.jpg" class="artikel-img" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title artikel-title">
+                            Ini Dia Tips Menjaga Sikap Tawadhu Saat Menjalankan Umrah
+                        </h5>
+                        <p class="artikel-kategori">
+                            <span class="label">Kategori:</span> <span class="value">Umrah</span>
+                        </p>
+                        <p class="card-text artikel-text">
+                            Kita dapat menumbuhkan sikap tawadhu dengan jalan mendekatkan diri kepada Allah. Usahakan untuk
+                            memb...
+                        </p>
+                        <a href="#" class="artikel-btn">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Artikel 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card artikel-card shadow-sm h-100 text-start">
+                    <img src="./images/arafah.jpg" class="artikel-img" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title artikel-title">
+                            Cara Menabung yang Efektif untuk Berangkat Haji
+                        </h5>
+                        <p class="artikel-kategori">
+                            <span class="label">Kategori:</span> <span class="value">Haji</span>
+                        </p>
+                        <p class="card-text artikel-text">
+                            Disiplin menyisihkan rezeki setiap bulan adalah langkah pertama untuk wujudkan niat berhaji...
+                        </p>
+                        <a href="#" class="artikel-btn">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Artikel 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card artikel-card shadow-sm h-100 text-start">
+                    <img src="./images/doaumrah.jpg" class="artikel-img" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title artikel-title">
+                            Kumpulan Doa Harian yang Dianjurkan Saat Umrah
+                        </h5>
+                        <p class="artikel-kategori">
+                            <span class="label">Kategori:</span> <span class="value">Doa</span>
+                        </p>
+                        <p class="card-text artikel-text">
+                            Membaca doa di setiap tempat mustajab di tanah suci menjadi amalan utama bagi para jamaah...
+                        </p>
+                        <a href="#" class="artikel-btn">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- Tombol Semua Artikel -->
+    <div class="text-center mt-4">
+        <a href="#" class="semuaartikel-btn">Semua Artikel</a>
+    </div>
     <div class="mt-5 paket-haji">
         <div class="container text-center" style="margin-top: 5%;">
             <h5 class="fs-3 fw-bold text-center">Paket Haji Langsung Berangkat 2025</h5>

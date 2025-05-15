@@ -161,6 +161,8 @@ Route::get('/admin/affiliate', function () {
 // Route::get('/admin/jamaah', function () {
 //     return view('pages.admin.admin_jamaah');
 // })->name('admin_jamaah');
+Route::put('/admin/orders/{id}', [OrderPaketController::class, 'update'])->name('admin.orders.update');
+
 
 Route::get('/admin/paket', [PaketController::class, 'index'])->name('admin_paket');
 Route::post('/admin/paket', [PaketController::class, 'store'])->name('paket.store');

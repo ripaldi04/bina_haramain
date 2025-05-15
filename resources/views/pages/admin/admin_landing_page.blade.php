@@ -2,7 +2,7 @@
 
 
 @section('script')
-    @vite(['resources/js/admin/admin_landing_page.js'])
+    @vite(['resources/js/admin/partials/sidebar.js', 'resources/js/admin/admin_landing_page.js'])
 @endsection
 
 @section('content')

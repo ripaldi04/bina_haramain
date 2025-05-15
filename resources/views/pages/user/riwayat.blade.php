@@ -47,8 +47,10 @@
                                 <td>
                                     @if ($order->status === 'pending')
                                         <span class="badge bg-warning text-dark">Pending</span>
-                                    @elseif($order->status === 'lunas')
-                                        <span class="badge bg-success">Lunas</span>
+                                    @elseif($order->status === 'diterima')
+                                        <span class="badge bg-success">Diterima</span>
+                                    @elseif($order->status === 'ditolak')
+                                        <span class="badge bg-danger">Ditolak</span>
                                     @else
                                         <span class="badge bg-secondary">{{ ucfirst($order->status) }}</span>
                                     @endif

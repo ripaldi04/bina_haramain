@@ -29,7 +29,7 @@
 
                     <h5 class="mb-3">Pembayaran Manual</h5>
                     <p>Silakan transfer sejumlah:</p>
-                    <h3 class="text-success fw-bold mb-3">$ {{ number_format($order->total_harga) }}</h3>
+                    <h3 class="text-success fw-bold mb-3">$ {{ number_format($order->jumlah_dibayar) }}</h3>
 
                     <p>Ke Virtual Account (VA) berikut:</p>
                     <div class="bg-light border rounded p-3 mb-3">

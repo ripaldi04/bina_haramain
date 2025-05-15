@@ -180,6 +180,50 @@ class OrderPaketController extends Controller
         $order = OrderPaket::with(['paket', 'orderKamar.tipeKamar', 'detailPaket'])->findOrFail($order_id);
         return view('pages.user.payment', compact('order')); // Sesuaikan dengan nama tampilan yang sesuai
     }
+    public function update(Request $request, $id)
+    {
+        $order = OrderPaket::findOrFail($id);
+
+        $request->validate([
+            'name' => 'nullable|string',
+            'email' => 'nullable|email',
+            'telepon_pemesan' => 'required|string',
+            'jenis_pembayaran' => 'required|string',
+            'jamaah.*.nama' => 'nullable|string',  // Validasi untuk nama jamaah
+            'status' => 'required|string|in:pending,diterima,ditolak',
+            'bukti_pembayaran' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // Update user (jika relasi user ada)
+        if ($order->user) {
+            $order->user->name = $request->name;
+            $order->user->email = $request->email;
+            $order->user->save();
+        }
+        foreach ($request->jamaah as $jamaah_id => $jamaah_data) {
+            $jamaah = Jamaah::find($jamaah_id); // Pastikan model Jamaah ada
+            if ($jamaah) {
+                $jamaah->nama = $jamaah_data['nama'];
+                $jamaah->save();
+            }
+        }
+
+        // Update order
+        $order->telepon_pemesan = $request->telepon_pemesan;
+        $order->jenis_pembayaran = $request->jenis_pembayaran;
+        $order->status = $request->status;
+
+        // Upload bukti jika diinput
+        if ($request->hasFile('bukti_pembayaran')) {
+            $path = $request->file('bukti_pembayaran')->store('bukti', 'public');
+            $order->bukti_pembayaran = $path;
+        }
+
+        $order->save();
+
+        return redirect()->route('admin.pemesan')->with('success', 'Order berhasil diperbarui');
+    }
+
 
 
 }

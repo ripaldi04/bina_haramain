@@ -76,16 +76,16 @@
 
 
 
-                    <button id="deleteAll" class="btn btn-danger mb-3">Hapus Semua</button>
                     <table class="table table-bordered text-center">
                         <thead>
                             <tr>
+                                <th>User</th>
                                 <th>Nama Pemesan</th>
-                                <th>Email</th>
-                                <th>Phone</th>
+                                <th>Email Pemesan</th>
+                                <th>Phone Pemesan</th>
                                 <th>Paket</th>
                                 <th>Jamaah</th>
-                                <th>Jenis Pembayaran</th>
+                                <th>Jenis Pembayaran dan Harga Pembayaran</th>
                                 <th>Bukti Pembayaran</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
@@ -94,9 +94,10 @@
                         <tbody>
                             @foreach ($orders as $order)
                                 <tr>
-                                    <td>{{ $order->user->name ?? '-' }}</td>
-                                    <td>{{ $order->user->email ?? '-' }}</td>
-                                    <td>{{ $order->telepon_pemesan ?? '-' }}</td> {{-- atau $order->phone jika bukan dari users --}}
+                                    <td>{{ $order->user->name }}</td>
+                                    <td>{{ $order->nama_pemesan ?? '-' }}</td>
+                                    <td>{{ $order->email_pemesan ?? '-' }}</td>
+                                    <td>+62{{ $order->telepon_pemesan ?? '-' }}</td> {{-- atau $order->phone jika bukan dari users --}}
                                     <td>{{ $order->paket->nama_paket ?? '-' }}</td>
                                     <td>
                                         @foreach ($order->orderKamar as $kamar)
@@ -105,7 +106,15 @@
                                             @endforeach
                                         @endforeach
                                     </td>
-                                    <td>{{ $order->jenis_pembayaran }}</td>
+                                    <td>
+                                        {{ $order->jenis_pembayaran }} -
+                                        @if ($order->paket->jenis === 'haji')
+                                            $ {{ number_format($order->jumlah_dibayar, 0, ',', '.') }}
+                                        @else
+                                            Rp {{ number_format($order->jumlah_dibayar, 0, ',', '.') }}
+                                        @endif
+                                    </td>
+
                                     <td>
                                         @if ($order->bukti_pembayaran)
                                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
@@ -149,14 +158,17 @@
                                     </td>
                                     <td> <i class="fas fa-edit text-primary me-2 cursor-pointer btn-edit"
                                             data-bs-toggle="modal" data-bs-target="#editOrderModal{{ $order->id }}">
-                                        </i></td>
+                                        </i>
+                                        <i class="fas fa-trash text-danger cursor-pointer delete-order"
+                                            data-id="{{ $order->id }}"></i>
+                                    </td>
                                 </tr>
                                 <!-- Modal Edit Order -->
                                 <div class="modal fade" id="editOrderModal{{ $order->id }}" tabindex="-1"
                                     aria-labelledby="editOrderModalLabel{{ $order->id }}" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <form action="{{ route('admin.orders.update', $order->id) }}" method="POST"
-                                            enctype="multipart/form-data">
+                                            enctype="multipart/form-data" id="editOrderModal{{ $order->id }}">
                                             @csrf
                                             @method('PUT')
 

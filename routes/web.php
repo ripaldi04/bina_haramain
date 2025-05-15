@@ -114,6 +114,7 @@ Route::get('/tentang-kami', function () {
 
 Route::get('/riwayat', [OrderPaketController::class, 'riwayat'])->name('riwayat');
 
+Route::delete('/order/{id}', [OrderPaketController::class, 'destroy'])->name('order.destroy');
 
 
 // Mengedit muthawif

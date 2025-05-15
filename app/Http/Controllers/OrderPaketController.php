@@ -219,9 +219,32 @@ class OrderPaketController extends Controller
             $order->bukti_pembayaran = $path;
         }
 
-        $order->save();
+        $saved = $order->save();
 
-        return redirect()->route('admin.pemesan')->with('success', 'Order berhasil diperbarui');
+        if ($request->ajax() || $request->wantsJson()) {
+            if ($saved) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Pesanan berhasil diperbarui!'
+                ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal memperbarui Pesanan.'
+                ]);
+            }
+        }
+
+        // Kalau bukan AJAX, redirect biasa
+        return redirect()->route('admin.pemesan')
+            ->with('success', 'Pesanan berhasil diperbarui!');
+    }
+    public function destroy($id)
+    {
+        $order = OrderPaket::findOrFail($id);
+        $order->delete();
+
+        return response()->json(['success' => true]);
     }
 
 

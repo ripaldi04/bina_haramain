@@ -260,11 +260,9 @@
                         </div>
                     </div>
 
-                    <button id="deleteAll" class="btn btn-danger mb-3">Hapus Semua</button>
                     <table class="table table-bordered text-center">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="selectAll"></th>
                                 <th>Gambar</th>
                                 <th>Nama Paket</th>
                                 <th>Jenis Paket</th>
@@ -278,13 +276,12 @@
                         <tbody id="tableBody">
                             @foreach ($paket as $paket)
                                 <tr data-row-id="{{ $paket->id }}">
-                                    <td><input type="checkbox" class="rowCheckbox"></td>
                                     <td>
                                         <img src="{{ asset('storage/' . $paket->gambar) }}" alt="gambar" width="100"
                                             class="clickable-image" style="cursor: pointer;">
                                     </td>
                                     <td>{{ $paket->nama_paket }}</td>
-<td>{{$paket->jenis}}</td>
+                                    <td>{{ $paket->jenis }}</td>
                                     <td style="text-align: left;">
                                         - Hotel Makkah: {{ $paket->hotel_mekkah }}<br>
                                         - Hotel Madinah: {{ $paket->hotel_madinah }}<br>

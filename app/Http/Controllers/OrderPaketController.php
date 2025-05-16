@@ -7,6 +7,7 @@ use App\Models\DetailPaket;
 use App\Models\Jamaah;
 use App\Models\OrderPaket;
 use App\Models\Paket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Log;
 
@@ -102,12 +103,25 @@ class OrderPaketController extends Controller
             'jenis_kelamin_jamaah' => 'required|array',
             'jenis_kelamin_jamaah.*' => 'required|string',  // Validasi setiap item dalam array
             'jenis_jamaah' => 'required|array',
+            'kode_referral' => 'nullable|string|exists:users,kode_referral',
         ]);
 
         // Update data pemesanan dengan data pemesan yang baru
         $order = OrderPaket::findOrFail($order_id);
         $jenis = $request->jenis_pembayaran;
         $jumlah = 0;
+
+        // Cek apakah referral valid
+        $diskon = 0;
+        if ($request->filled('kode_referral')) {
+            $referrer = User::where('kode_referral', $request->kode_referral)->first();
+            if ($referrer) {
+                // Misal diskon flat $100
+                $diskon = 100;
+                $order->referral_user_id = $referrer->id;
+                $order->diskon = $diskon;
+            }
+        }
 
         switch ($jenis) {
             case 'booking':
@@ -119,6 +133,13 @@ class OrderPaketController extends Controller
             case 'cash':
                 $jumlah = $order->total_harga;
                 break;
+        }
+
+        if ($diskon > 0) {
+            $jumlah -= $diskon;
+            if ($jumlah < 0) {
+                $jumlah = 0; // supaya tidak negatif
+            }
         }
         $order->update([
             'nama_pemesan' => $request->nama_pemesan,

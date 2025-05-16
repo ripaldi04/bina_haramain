@@ -21,8 +21,10 @@
                         <li><strong>Nama Paket:</strong> {{ $order->paket->nama_paket ?? '-' }}</li>
                         <li><strong>Jenis Paket:</strong> {{ $order->paket->jenis ?? '-' }}</li>
                         <li><strong>Program Hari:</strong> {{ $order->paket->program_hari ?? '-' }} hari</li>
-                        <li><strong>Total Harga:</strong> ${{ number_format($order->total_harga) }}</li>
+                        <li><strong>Total Harga Paket:</strong> ${{ number_format($order->total_harga) }}</li>
+                        <li><strong>Diskon:</strong> ${{ number_format($order->diskon) }}</li>
                         <li><strong>Metode Pembayaran:</strong> {{ ucfirst($order->jenis_pembayaran) }}</li>
+                        <li><strong>Total Bayar:</strong> ${{ number_format($order->jumlah_dibayar) }}</li>
                     </ul>
 
                     <hr>

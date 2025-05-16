@@ -112,17 +112,14 @@
                                 <option value="cash">Cash (100%)</option>
                             </select>
                         </div>
+                        <!-- Tambahkan dalam <form> yang sudah ada -->
+                        <div class="col-12 mb-3">
+                            <label for="kode_referral">Kode Referral</label>
+                            <input type="text" class="form-control" id="kode_referral" name="kode_referral"
+                                placeholder="Masukkan kode referral (jika ada)" value="{{ old('kode_referral') }}">
+                        </div>
                         <button class="btn btn-warning" type="submit">Selesai</button>
-                        <small class="text-muted d-block mt-3">
-                            <strong>Catatan:</strong><br>
-                            Jika membutuhkan panduan transaksi atau pemesanan, silakan luangkan waktu sejenak untuk
-                            membacanya
-                            dengan klik di sini.<br>
-                            Pembayaran uang muka minimal USD 4.500,00.<br>
-                            Tenggat waktu pembayaran uang muka adalah 2 jam sejak transaksi dilakukan. Jika melewati batas
-                            waktu
-                            tersebut, transaksi akan otomatis dibatalkan oleh sistem.
-                        </small>
+                    </form>
                 </div>
             </div>
 
@@ -172,13 +169,6 @@
                             <strong>Total : $ <span
                                     id="totalBayarValue">{{ number_format($order->total_harga, 0, ',', '.') }}
                                 </span></strong>
-                        </div>
-                        <div class="p-3 border rounded bg-white">
-                            <h6 class="fw-bold">Kode Voucher</h6>
-                            <p class="small">Silakan masukkan kode voucher (jika ada) saat transaksi untuk
-                                mendapatkan potongan harga spesial dari kami.</p>
-                            <input type="text" class="form-control mb-2" placeholder="Kode Voucher" />
-                            <button class="btn custom-voucher w-100">Gunakan Voucher</button>
                         </div>
                     </div>
                 </div>

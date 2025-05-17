@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\LandingHighlightPoint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HighlightPointController extends Controller
 {
@@ -28,6 +29,10 @@ class HighlightPointController extends Controller
 
         // Upload gambar jika ada
         if ($request->hasFile('image')) {
+            if ($highlight->image_url && Storage::disk('public')->exists($highlight->image_url)) {
+                Storage::disk('public')->delete($highlight->image_url);
+            }
+
             $imagePath = $request->file('image')->store('highlight_points', 'public');
             $highlight->image_url = $imagePath; // simpan path yang sudah cocok
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LandingHighlight2;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Highlight2Controller extends Controller
 {
@@ -27,6 +28,9 @@ class Highlight2Controller extends Controller
         $highlight->deskripsi = $request->deskripsi;
 
         if ($request->hasFile('image_url')) {
+            if ($highlight->image_url && Storage::disk('public')->exists($highlight->image_url)) {
+                Storage::disk('public')->delete($highlight->image_url);
+            }
             $imagePath = $request->file('image_url')->store('highlight2_images', 'public');
             $highlight->image_url = $imagePath;
         }

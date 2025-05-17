@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LandingHotDeal;
+use Illuminate\Support\Facades\Storage;
 
 class HotDealController extends Controller
 {
@@ -47,6 +48,15 @@ class HotDealController extends Controller
         $data = $request->only(['title', 'subtitle', 'deskripsi']);
 
         if ($request->hasFile('image')) {
+            if (
+                $hotDeal->image_url &&
+                $hotDeal->image_url !== 'storage/image_hotdeal/default.jpg'
+            ) {
+                $oldPath = str_replace('storage/', '', $hotDeal->image_url);
+                if (Storage::disk('public')->exists($oldPath)) {
+                    Storage::disk('public')->delete($oldPath);
+                }
+            }
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $imagePath = $image->storeAs('image_hotdeal', $imageName, 'public');
@@ -57,15 +67,5 @@ class HotDealController extends Controller
 
         return redirect()->back()->with('success', 'Hot Deal berhasil diperbarui.');
     }
-
-    // public function home()
-    // {
-    //     $hotdeal = LandingHotDeal::first();
-    //     $banner = LandingBanner::first(); // Ambil data pertama untuk banner
-    //     $highlight1 = LandingHighlight1::first();
-
-
-    //     return view('pages.user.home', compact('hotdeal', 'banner', 'highlight1'));
-    // }
 
 }

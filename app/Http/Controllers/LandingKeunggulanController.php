@@ -25,10 +25,16 @@ class LandingKeunggulanController extends Controller
             $keunggulan = Keunggulan::findOrFail($request->id);
 
             if ($request->hasFile('image_url')) {
-                if ($keunggulan->image_url && $keunggulan->image_url !== 'image_keunggulan/default.jpg' && Storage::disk('public')->exists($keunggulan->image_url)) {
+                // Hapus gambar lama jika bukan default
+                if (
+                    $keunggulan->image_url &&
+                    $keunggulan->image_url !== 'image_keunggulan/default.jpg' &&
+                    Storage::disk('public')->exists($keunggulan->image_url)
+                ) {
                     Storage::disk('public')->delete($keunggulan->image_url);
                 }
 
+                // Simpan gambar baru
                 $imagePath = $request->file('image_url')->store('image_keunggulan', 'public');
                 $data['image_url'] = $imagePath;
             }

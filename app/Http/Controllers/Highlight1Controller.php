@@ -6,6 +6,7 @@ use App\Models\LandingBanner;
 use App\Models\LandingHighlight1;
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Highlight1Controller extends Controller
 {
@@ -53,6 +54,9 @@ class Highlight1Controller extends Controller
         ]);
 
         if ($request->hasFile('image')) {
+            if ($highlight->image_url && Storage::disk('public')->exists($highlight->image_url)) {
+                Storage::disk('public')->delete($highlight->image_url);
+            }
             $validated['image_url'] = $request->file('image')->store('highlight1', 'public');
         }
 

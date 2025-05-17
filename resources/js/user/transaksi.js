@@ -29,28 +29,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     jenisPembayaran.addEventListener('change', hitungBayar);
 });
-
-// const jenisPembayaranEl = document.getElementById('jenis_pembayaran');
-// const totalHarga = parseFloat(jenisPembayaranEl.dataset.totalHarga);
-// const previewEl = document.getElementById('preview-total');
-// const hasilEl = document.getElementById('totalSetelahDiskon');
-// const kodeReferralEl = document.getElementById('kode_referral');
-
-// const referralDiskon = 100; // nilai diskon tetap, bisa juga kamu fetch via AJAX
-
-// function updateTotal() {
-//     const jenis = jenisPembayaranEl.value;
-//     let diskon = kodeReferralEl.value.trim() !== '' ? referralDiskon : 0;
-//     let bayar = totalHarga;
-
-//     if (jenis === 'booking') bayar = totalHarga * 0.2;
-//     else if (jenis === 'dp') bayar = totalHarga * 0.5;
-
-//     bayar -= diskon;
-
-//     hasilEl.innerText = 'Rp ' + bayar.toLocaleString('id-ID');
-//     previewEl.classList.remove('d-none');
-// }
-
-// jenisPembayaranEl.addEventListener('change', updateTotal);
-// kodeReferralEl.addEventListener('input', updateTotal);

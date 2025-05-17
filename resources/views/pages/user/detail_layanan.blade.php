@@ -122,9 +122,6 @@
                         <h5 class="mb-2"><strong>Hotel Makkah</strong></h5>
                         <p class="mb-4"><i class="bi bi-building custom-icon fs-4"></i> <span
                                 class="warna-text">{{ $paket->hotel_mekkah }}</span></p>
-                        {{-- <h5 class="mb-2 fw-bold 15px">Keberangkatan</h5>
-                        <p class="mb-4"><i class="bi bi-calendar-event custom-icon fs-4"></i><span
-                                class="warna-text">{{ $paket->keberangkatan }}</span></p> --}}
                         <h5 class="fw-bold 15px">Bandara</h5>
                         <p><i class="bi bi-geo-alt custom-icon fs-4"></i><span
                                 class="warna-text">{{ $paket->bandara }}</span> </p>
@@ -164,14 +161,11 @@
                     <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body fw-bold">Biaya Sudah Termasuk (Include)</div>
                         <ul class="list-fasilitas">
-                            <li><i class="bi bi-check-circle-fill green-icon"></i> Hotel Makkah (Deafah/Setaraf)</li>
-                            <li><i class="bi bi-check-circle-fill green-icon"></i> Hotel Madinah (Almukhtara
-                                Garbi/Setaraf)</li>
-                            <li><i class="bi bi-check-circle-fill green-icon"></i> Hotel Aziziyah Al Hidayah Tower (Fly
-                                Nas)</li>
+                            <li><i class="bi bi-check-circle-fill green-icon"></i> Hotel Makkah</li>
+                            <li><i class="bi bi-check-circle-fill green-icon"></i> Hotel Madinah</li>
                             <li><i class="bi bi-check-circle-fill green-icon"></i> Pesawat International PP Start
                                 Jakarta</li>
-                            <li><i class="bi bi-check-circle-fill green-icon"></i> Maktab Arafah</li>
+                            <li><i class="bi bi-check-circle-fill green-icon"></i> Maktab</li>
                             <li><i class="bi bi-check-circle-fill green-icon"></i> Bus ber-AC selama di Saudi</li>
                             <li><i class="bi bi-check-circle-fill green-icon"></i> Handling Bnadara di Indonesia &
                                 Saudi</li>

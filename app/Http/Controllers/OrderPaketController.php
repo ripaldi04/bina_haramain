@@ -116,8 +116,10 @@ class OrderPaketController extends Controller
         if ($request->filled('kode_referral')) {
             $referrer = User::where('kode_referral', $request->kode_referral)->first();
             if ($referrer) {
-                // Misal diskon flat $100
-                $diskon = 100;
+                // Diskon berbeda tergantung jenis paket
+                $jenisPaket = strtolower($order->paket->jenis); // pastikan sudah load relasi 'paket'
+                $diskon = $jenisPaket === 'haji' ? 60 : 30;
+
                 $order->referral_user_id = $referrer->id;
                 $order->diskon = $diskon;
             }
@@ -160,14 +162,21 @@ class OrderPaketController extends Controller
                     ? $request->jenis_kelamin_jamaah[$jamaahIndex]
                     : 'Laki-Laki'; // Atau default lain sesuai kebutuhan
 
-                Jamaah::create([
-                    'order_paket_id' => $order->id,
-                    'order_kamar_id' => $orderKamar->id,
-                    'nama' => $request->nama_jamaah[$jamaahIndex],
-                    'jenis_kelamin' => $jenis_kelamin,
-                    'jenis_jamaah' => $request->jenis_jamaah[$jamaahIndex],
-                ]);
+                $namaJamaah = $request->nama_jamaah[$jamaahIndex];
 
+                $jamaahSudahAda = Jamaah::where('order_paket_id', $order->id)
+                    ->where('nama', $namaJamaah)
+                    ->exists();
+
+                if (!$jamaahSudahAda) {
+                    Jamaah::create([
+                        'order_paket_id' => $order->id,
+                        'order_kamar_id' => $orderKamar->id,
+                        'nama' => $request->nama_jamaah[$jamaahIndex],
+                        'jenis_kelamin' => $jenis_kelamin,
+                        'jenis_jamaah' => $request->jenis_jamaah[$jamaahIndex],
+                    ]);
+                }
                 $jamaahIndex++;
             }
         }
@@ -273,13 +282,6 @@ class OrderPaketController extends Controller
                 ]);
             }
         }
-
-        // $detail = DetailPaket::findOrFail($request->detail_paket_id);
-        // $jumlah_jamaah = $order->jamaahs()->count(); // assuming ada relasi jamaahs di model OrderPaket
-
-        // $detail->jumlah_seat -= $jumlah_jamaah;
-        // $detail->save();
-
 
         // Kalau bukan AJAX, redirect biasa
         return redirect()->route('admin.pemesan')

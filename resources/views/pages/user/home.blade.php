@@ -31,9 +31,11 @@
                     <h1 class="fs-4">{{ $banner->header1 }}</h1>
                     <p class="fs-4 fw-bold text-warning">{{ $banner->header2 }}</p>
                     <p class="fs-6">{{ $banner->deskripsi }}</p>
-                    <button class="btn btn-warning text-white mt-2" style="width: 150px; border-radius: 4px;">
+                    <a href="{{ route('layanan_haji') }}" class="btn btn-warning text-white mt-2"
+                        style="width: 150px; border-radius: 4px;">
                         Lihat Paket
-                    </button>
+                    </a>
+
                 </div>
 
                 <!-- Gambar (Desktop) -->
@@ -94,56 +96,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row mt-5">
-                <div class="col-md-12">
-                    <div class="card position-relative">
-                        <div class="card-body">
-                            <h5 class="card-title fs-4">Cari paket Haji dan Umrah Terbaik</h5>
-
-                            <!-- Row untuk input -->
-                            <div class="row mt-4 p-1" style="padding-right: 50px;">
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Keberangkatan</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Jenis Paket</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Maskapai</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Bandara Keberangkatan</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Ikon pencarian di luar row input -->
-                            <div class="position-absolute" style="right: 15px; bottom: 20px;">
-                                <button class="btn d-flex justify-content-center align-items-center"
-                                    style="background-color: var(--primary-color); height: 38px; width: 60px; border-radius: 5px; border: 2px solid #909090;">
-                                    <i class="bi bi-search fs-6 text-white"></i>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
     <div class="container">
@@ -420,13 +372,11 @@
 
         </div>
     </div>
-
-
-
     <!-- Tombol Semua Artikel -->
     <div class="text-center mt-4">
         <a href="#" class="semuaartikel-btn">Semua Artikel</a>
     </div>
+
     <div class="mt-5 paket-haji">
         <div class="container text-center" style="margin-top: 5%;">
             <h5 class="fs-3 fw-bold text-center">Paket Haji Langsung Berangkat 2025</h5>

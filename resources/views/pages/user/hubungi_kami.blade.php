@@ -85,31 +85,34 @@
 
     <section class="contact-container">
         <div class="contact-form">
-            <h2>Hubungi Kami</h2>
+            <form action="{{ route('kontak.kirim') }}" method="POST">
+                @csrf
+                <h2>Hubungi Kami</h2>
 
-            <label for="name">Nama</label>
-            <input type="text" id="name" placeholder="Masukkan Nama">
+                <label for="name">Nama</label>
+                <input type="text" id="name" name="name" placeholder="Masukkan Nama">
 
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Masukkan Email">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan Email">
 
-            <label for="phone">Nomor Handphone</label>
-            <div class="phone-input">
-                <span class="country-code">+62</span>
-                <input type="text" id="phone" placeholder="Masukkan Nomor Handphone">
-            </div>
+                <label for="phone">Nomor Handphone</label>
+                <div class="phone-input">
+                    <span class="country-code">+62</span>
+                    <input type="text" id="phone" name="phone" placeholder="Masukkan Nomor Handphone">
+                </div>
 
-            <label for="subject">Subjek Pertanyaan</label>
-            <input type="text" id="subject" placeholder="Masukkan Pertanyaan">
+                <label for="subject">Subjek Pertanyaan</label>
+                <input type="text" id="subject" name="subject" placeholder="Masukkan Pertanyaan">
 
-            <label for="message">Pesan</label>
-            <textarea id="message" placeholder="Masukkan Pesan"></textarea>
+                <label for="message">Pesan</label>
+                <textarea id="message" name="message" placeholder="Masukkan Pesan"></textarea>
 
-            <a href="#" class="btn btn-auth mt-3" style="width: 150px;">Kirim</a>
+                <button type="submit" class="btn btn-auth mt-3" style="width: 150px;">Kirim</button>
         </div>
 
         <div class="contact-image">
             <img src="{{ asset('images/masjid nabawi.jpg') }}" height="665px">
         </div>
+        </form>
     </section>
 @endsection

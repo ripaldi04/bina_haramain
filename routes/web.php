@@ -8,6 +8,7 @@ use App\Http\Controllers\HighlightPoint;
 use App\Http\Controllers\HighlightPointController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotDealController;
+use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LandingFasilitasController;
 use App\Http\Controllers\LandingGaleriController;
 use App\Http\Controllers\LandingKeunggulanController;
@@ -101,6 +102,8 @@ Route::get('/haji', [UserPaketController::class, 'index'])->name('layanan_haji')
 Route::get('/umrah', [UserPaketController::class, 'store'])->name('layanan_umrah');
 Route::get('/islamic-tour', [UserPaketController::class, 'store2'])->name('islamic_tour');
 
+
+Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.kirim');
 
 Route::get('/paket/detail/{id}', [UserPaketController::class, 'show'])->name('layanan_haji.detail');
 

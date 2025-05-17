@@ -382,103 +382,95 @@
             <h5 class="fs-3 fw-bold text-center">Paket Haji Langsung Berangkat 2025</h5>
             <span class="garis-bawah-paket"></span>
             <div class="row mt-5 justify-content-center align-items-center">
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./images/v160_58.png" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Haji Furodha</h5>
-                            <h5 class="card-title mb-4">⭐⭐⭐</h5>
-                            <div class="row align-items-center">
-                                <div class="col-3 d-flex align-items-end justify-content-end" style="margin-top: -40px;">
-                                    <img src="./images/v160_3.png" alt="" width="30px">
+                @foreach ($paketHaji as $paket)
+                    <div class="col-md-4 mb-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ asset('storage/' . $paket->gambar) }}" class="card-img-paket" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ $paket->nama }}</h5>
+                                {{-- Periode --}}
+                                <div class="row align-items-center">
+                                    <div class="col-3 d-flex align-items-end justify-content-end"
+                                        style="margin-top: -40px">
+                                        <img src="{{ asset('images/v160_3.png') }}" alt="" width="30px">
+                                    </div>
+                                    <div class="col-9 text-start ps-0">
+                                        <h5 class="fs-6 mb-2">Tanggal Keberangkatan</h5>
+                                        @foreach ($paket->detail_Paket as $detail)
+                                            <h6 class="fw-light" style="color: var(--tertinary-color);">
+                                                {{ $detail->tanggal_keberangkatan }}
+                                            </h6>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="col-9 text-start ps-0">
-                                    <h5 class="fs-5 mb-0">Periode</h5>
-                                    <h6 class="fw-light fs-6" style="color: var(--tertinary-color);">Aug 2023, Okt
-                                        2023, Feb 2024, Mart 2024</h6>
+                                <div class="row align-items-center mt-3">
+                                    <div class="col-3 d-flex align-items-end justify-content-end"
+                                        style="margin-top : -40px">
+                                        <img src="{{ asset('images/v160_3.png') }}" alt="" width="30px">
+                                    </div>
+                                    <div class="col-9 text-start ps-0">
+                                        <h5 class="fs-6 mb-2">Program Hari</h5>
+                                        <h6 class="fw-light" style="color: var(--tertinary-color);">
+                                            {{ $paket->program_hari }} hari
+                                        </h6>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row align-items-center mt-2">
-                                <div class="col-3 d-flex align-items-end justify-content-end" style="margin-top: -50px;">
-                                    <img src="./images/v160_8.png" alt="" width="30px">
-                                </div>
-                                <div class="col-9 text-start ps-0">
-                                    <h5 class="fs-5">Hotel</h5>
-                                    <h6 class="fw-light fs-6" style="color: var(--tertinary-color);">Mekkah: Mira
-                                        Ajyad / Setaraf</h6>
-                                    <h6 class="fw-light fs-6" style="color: var(--tertinary-color);">Madinah: Tulip In
-                                        / Setaraf
-                                    </h6>
-                                </div>
-                            </div>
-                            <div class="row align-items-center mt-2">
-                                <div class="col-3 d-flex align-items-end justify-content-end" style="margin-top: -100px;">
-                                    <img src="./images/v160_85.png" alt="" width="30px">
-                                </div>
-                                <div class="col-9 text-start ps-0 mb-5">
-                                    <h5 class="fs-5">Maskapai</h5>
-                                    <img src="./images/v160_15.png" width="100px" alt="">
-                                    <img src="./images/v160_16.png" width="100px" alt="">
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center align-items-center flex-column">
-                                <img src="./images/v160_64.png" alt=""
-                                    style="margin-left: 30%; margin-bottom: 10%;" width="200px">
-                                <h5 class="fs-2 fw-bold" style="color: var(--secondary-color);">$20.000</h5>
-                                <button class="btn">Detail Paket</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./images/v160_58.png" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Haji Furodha</h5>
-                            <h5 class="card-title mb-4">⭐⭐⭐⭐⭐</h5>
-                            <div class="row align-items-center">
-                                <div class="col-3 d-flex align-items-end justify-content-end" style="margin-top: -40px;">
-                                    <img src="./images/v160_3.png" alt="" width="30px">
-                                </div>
-                                <div class="col-9 text-start ps-0">
-                                    <h5 class="fs-5 mb-0">Periode</h5>
-                                    <h6 class="fw-light fs-6" style="color: var(--tertinary-color);">Aug 2023, Okt
-                                        2023, Feb 2024, Mart 2024</h6>
-                                </div>
-                            </div>
-                            <div class="row align-items-center mt-2">
-                                <div class="col-3 d-flex align-items-end justify-content-end" style="margin-top: -50px;">
-                                    <img src="./images/v160_8.png" alt="" width="30px">
-                                </div>
-                                <div class="col-9 text-start ps-0">
-                                    <h5 class="fs-5">Hotel</h5>
-                                    <h6 class="fw-light fs-6" style="color: var(--tertinary-color);">Mekkah: Mira
-                                        Ajyad / Setaraf</h6>
-                                    <h6 class="fw-light fs-6" style="color: var(--tertinary-color);">Madinah: Tulip In
-                                        / Setaraf
-                                    </h6>
-                                </div>
-                            </div>
-                            <div class="row align-items-center mt-2">
-                                <div class="col-3 d-flex align-items-end justify-content-end" style="margin-top: -100px;">
-                                    <img src="./images/v160_85.png" alt="" width="30px">
-                                </div>
-                                <div class="col-9 text-start ps-0 mb-5">
-                                    <h5 class="fs-5">Maskapai</h5>
-                                    <img src="./images/v160_15.png" width="100px" alt="">
-                                    <img src="./images/v160_16.png" width="100px" alt="">
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center align-items-center flex-column">
-                                <img src="./images/v160_64.png" alt=""
-                                    style="margin-left: 30%; margin-bottom: 10%;" width="200px">
-                                <h5 class="fs-2 fw-bold" style="color: var(--secondary-color);">$27.500</h5>
-                                <button class="btn">Detail Paket</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
+                                {{-- Hotel --}}
+                                <div class="row align-items-center mt-3">
+                                    <div class="col-3 d-flex align-items-end justify-content-end"
+                                        style="margin-top: -60px;">
+                                        <img src="{{ asset('images/v160_8.png') }}" alt="" width="30px">
+                                    </div>
+                                    <div class="col-9 text-start ps-0">
+                                        <h5 class="fs-6 mb-2">Hotel</h5>
+                                        <h6 class="fw-light" style="color: var(--tertinary-color);">
+                                            Mekkah: {{ $paket->hotel_mekkah ?? '-' }}
+                                        </h6>
+                                        <h6 class="fw-light" style="color: var(--tertinary-color);">
+                                            Madinah: {{ $paket->hotel_madinah ?? '-' }}
+                                        </h6>
+                                    </div>
+                                </div>
+
+                                {{-- Maskapai --}}
+                                <div class="row align-items-center mt-3">
+                                    <div class="col-3 d-flex align-items-end justify-content-end"
+                                        style="margin-top: -75px;">
+                                        <img src="{{ asset('images/v160_85.png') }}" alt="" width="30px">
+                                    </div>
+                                    <div class="col-9 text-start ps-0 mb-5">
+                                        <h5 class="fs-6 mb-2">Maskapai</h5>
+                                        <h6 class="fw-light" style="color: var(--tertinary-color);">
+                                            {{ $paket->maskapai ?? '-' }}
+                                        </h6>
+                                    </div>
+                                </div>
+                                {{-- Bandara --}}
+                                <div class="row align-items-center" style="margin-top: -30px">
+                                    <div class="col-3 d-flex align-items-end justify-content-end"
+                                        style="margin-top: -70px;">
+                                        <img src="{{ asset('images/v160_85.png') }}" alt="" width="30px">
+                                    </div>
+                                    <div class="col-9 text-start ps-0 mb-5">
+                                        <h5 class="fs-6 mb-2">Bandara</h5>
+                                        <h6 class="fw-light" style="color: var(--tertinary-color);">
+                                            {{ $paket->bandara ?? '-' }}
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center flex-column">
+                                    <img src="{{ asset('images/v160_64.png') }}" alt=""
+                                        style="margin-left: 30%; margin-bottom: 10%;" width="200px">
+                                    <h5 class="fs-2 fw-bold" style="color: var(--secondary-color);">$
+                                        {{ number_format($paket->harga, 0, ',', '.') }}</h5>
+                                    <a href="{{ route('layanan_haji.detail', $paket->id) }}" class="btn">Detail
+                                        Paket</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

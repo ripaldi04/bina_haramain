@@ -248,12 +248,11 @@ input[type="search"] {
 .paket-haji {
     position: relative;
     width: 100%;
-    height: 1000px;
     display: flex;
     align-items: center;
     flex-direction: column;
     /* Susun elemen ke bawah */
-    justify-content: start;
+    justify-content: center;
     color: white;
     overflow: hidden;
     /* Hindari blur keluar dari container */

@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminArtikelController;
 use App\Http\Controllers\AdminJamaahController;
 use App\Http\Controllers\AdminQuestionController;
 use App\Http\Controllers\Highlight1Controller;
 use App\Http\Controllers\Highlight2Controller;
-use App\Http\Controllers\HighlightPoint;
 use App\Http\Controllers\HighlightPointController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotDealController;
@@ -22,7 +22,6 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -111,6 +110,14 @@ Route::get('/hubungi-kami', function () {
     return view('pages.user.hubungi_kami');
 })->name('hubungi_kami');
 
+Route::get('/artikel', function () {
+    return view('pages.user.artikel');
+})->name('artikel');
+
+Route::get('/artikel/detail', function () {
+    return view('pages.user.detail_artikel');
+})->name('detail_artikel');
+
 Route::get('/tentang-kami', function () {
     return view('pages.user.tentang_kami');
 })->name('tentang_kami');
@@ -175,6 +182,14 @@ Route::put('/admin/paket/{id}', [PaketController::class, 'update'])->name('paket
 Route::delete('/admin/paket/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
 Route::delete('/admin/paket/hapus-semua', [PaketController::class, 'destroyAll'])->name('paket.destroyAll');
 
+
+Route::get('/admin/artikel', function () {
+    return view('pages.admin.admin_artikel');
+})->name('admin_artikel');
+
+Route::get('/admin/artikel', [AdminArtikelController::class, 'index'])->name('artikel.index');
+Route::post('/admin/artikel', [AdminArtikelController::class, 'store'])->name('artikel.store');
+Route::post('/admin/artikel/{id}/update', [AdminArtikelController::class, 'update']);
 
 
 

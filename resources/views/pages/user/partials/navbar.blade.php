@@ -26,6 +26,7 @@
                         <li><a class="dropdown-item" href="{{ route('riwayat') }}">Riwayat Pesanan</a></li>
                     </ul>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('artikel') }}">Artikel</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('hubungi_kami') }}">Hubungi Kami</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('tentang_kami') }}">Tentang Kami</a></li>
             </ul>

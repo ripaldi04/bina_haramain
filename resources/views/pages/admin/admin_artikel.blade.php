@@ -117,7 +117,7 @@
                                     </td>
                                     <td>{{ $artikel->judul }}</td>
                                     <td>{{ $artikel->subjudul }}</td> <!-- Isi subjudul -->
-                                    <td>{{ $artikel->isi }} </td>
+                                    <td> {{ \Illuminate\Support\Str::limit($artikel->isi, 200, '...') }} </td>
                                     <td>
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer" data-bs-toggle="modal"
                                             data-bs-target="#editModal"></i>

@@ -55,4 +55,18 @@ class AdminArtikelController extends Controller
 
         return response()->json(['success' => 'Artikel berhasil diperbarui.']);
     }
+    public function destroy($id)
+    {
+        $artikel = Artikel::findOrFail($id);
+
+        // Hapus gambar jika ada
+        if ($artikel->gambar && \Storage::disk('public')->exists($artikel->gambar)) {
+            \Storage::disk('public')->delete($artikel->gambar);
+        }
+
+        $artikel->delete();
+
+        return response()->json(['success' => 'Artikel berhasil dihapus.']);
+    }
+
 }

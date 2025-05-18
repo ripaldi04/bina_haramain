@@ -190,7 +190,7 @@ Route::get('/admin/artikel', function () {
 Route::get('/admin/artikel', [AdminArtikelController::class, 'index'])->name('artikel.index');
 Route::post('/admin/artikel', [AdminArtikelController::class, 'store'])->name('artikel.store');
 Route::post('/admin/artikel/{id}/update', [AdminArtikelController::class, 'update']);
-
+Route::delete('/admin/artikel/{id}/delete', [AdminArtikelController::class, 'destroy']);
 
 
 Route::get('/admin/agen', function () {

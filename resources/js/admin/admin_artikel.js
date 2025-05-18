@@ -94,3 +94,43 @@ saveChangesBtn.addEventListener('click', () => {
             Swal.fire('Error', 'Terjadi kesalahan saat memperbarui artikel.', 'error');
         });
 });
+
+document.querySelectorAll('.delete-artikel').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const tr = e.target.closest('tr');
+        const artikelId = tr.dataset.id;
+
+        Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            text: "Artikel akan dihapus secara permanen.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/admin/artikel/${artikelId}/delete`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire('Terhapus!', data.success, 'success')
+                                .then(() => window.location.reload());
+                        } else {
+                            Swal.fire('Error', 'Gagal menghapus artikel.', 'error');
+                        }
+                    })
+                    .catch(() => {
+                        Swal.fire('Error', 'Terjadi kesalahan saat menghapus artikel.', 'error');
+                    });
+            }
+        });
+    });
+});
+

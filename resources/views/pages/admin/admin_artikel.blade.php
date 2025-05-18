@@ -108,7 +108,7 @@
                                     <td>
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer" data-bs-toggle="modal"
                                             data-bs-target="#editModal"></i>
-                                        <i class="fas fa-trash text-danger cursor-pointer"></i>
+                                        <i class="fas fa-trash text-danger cursor-pointer delete-artikel"></i>
                                     </td>
                                 </tr>
                                 <tr>

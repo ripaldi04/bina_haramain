@@ -25,108 +25,30 @@
 
     <div class="container mt-5">
         <div class="row g-4">
-            <!-- Kartu Paket 1 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-img-top position-relative">
-                        <img src="asset/artikelPict.png" class="img-fluid rounded-top" alt="Haji Furada">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="fw-bold text-center">Alasan Orang Arab Senang Naik Unta</h6>
-                        <hr>
-                        <p class="blog-meta">
-                            Dipublikasi pada : 04 Februari 2025, 22:10:39
-                        </p>
-                        <p class="blog-spill">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Illo veniam laborum quis neque ab, alias nisi blanditiis itaque facilis aspernatur!
-                        </p>
-                        <a href="{{ route('detail_artikel') }}" class="btn btn-dark w-100 fw-bolder">Detail Artikel</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kartu Paket 2 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-img-top position-relative">
-                        <img src="asset/artikelPict.png" class="img-fluid rounded-top" alt="Haji Furada">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="fw-bold text-center">Alasan Orang Arab Senang Naik Unta</h6>
-                        <hr>
-                        <p class="blog-meta">
-                            Dipublikasi pada : 04 Februari 2025, 22:10:39
-                        </p>
-                        <p class="blog-spill">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Illo veniam laborum quis neque ab, alias nisi blanditiis itaque facilis aspernatur!
-                        </p>
-                        <button class="btn btn-dark w-100 fw-bolder">Detail Artikel</button>
+            @foreach ($artikels as $artikel)
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-img-top position-relative">
+                            <img src="{{ asset('storage/' . $artikel->gambar) }}" class="img-fluid rounded-top mb-3"
+                                alt="{{ $artikel->judul }}">
+                        </div>
+                        <div class="card-body">
+                            <h6 class="fw-bold text-center">{{ $artikel->judul }}</h6>
+                            <hr>
+                            <p class="blog-meta">
+                                Dipublikasi pada : {{ \Carbon\Carbon::parse($artikel->created_at)->format('d F Y H:i:s') }}
+                            </p>
+                            <p class="blog-spill">
+                                {{ \Illuminate\Support\Str::limit($artikel->isi, 200, '...') }}
+                            </p>
+                            <a href="{{ route('detail_artikel', $artikel->id) }}"
+                                class="btn btn-dark w-100 fw-bolder">Baca
+                                Artikel</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Kartu Paket 3 -->
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-img-top position-relative">
-                        <img src="asset/artikelPict.png" class="img-fluid rounded-top" alt="Haji Furada">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="fw-bold text-center">Alasan Orang Arab Senang Naik Unta</h6>
-                        <hr>
-                        <p class="blog-meta">
-                            Dipublikasi pada : 04 Februari 2025, 22:10:39
-                        </p>
-                        <p class="blog-spill">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Illo veniam laborum quis neque ab, alias nisi blanditiis itaque facilis aspernatur!
-                        </p>
-                        <button class="btn btn-dark w-100 fw-bolder">Detail Artikel</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-img-top position-relative">
-                        <img src="asset/artikelPict.png" class="img-fluid rounded-top" alt="Haji Furada">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="fw-bold text-center">Alasan Orang Arab Senang Naik Unta</h6>
-                        <hr>
-                        <p class="blog-meta">
-                            Dipublikasi pada : 04 Februari 2025, 22:10:39
-                        </p>
-                        <p class="blog-spill">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Illo veniam laborum quis neque ab, alias nisi blanditiis itaque facilis aspernatur!
-                        </p>
-                        <button class="btn btn-dark w-100 fw-bolder">Detail Artikel</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-img-top position-relative">
-                        <img src="asset/artikelPict.png" class="img-fluid rounded-top" alt="Haji Furada">
-                    </div>
-                    <div class="card-body">
-                        <h6 class="fw-bold text-center">Alasan Orang Arab Senang Naik Unta</h6>
-                        <hr>
-                        <p class="blog-meta">
-                            Dipublikasi pada : 04 Februari 2025, 22:10:39
-                        </p>
-                        <p class="blog-spill">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Illo veniam laborum quis neque ab, alias nisi blanditiis itaque facilis aspernatur!
-                        </p>
-                        <button class="btn btn-dark w-100 fw-bolder">Detail Artikel</button>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
+    </div>
     </div>
 @endsection

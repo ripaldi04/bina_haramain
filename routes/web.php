@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminArtikelController;
 use App\Http\Controllers\AdminJamaahController;
 use App\Http\Controllers\AdminQuestionController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\Highlight1Controller;
 use App\Http\Controllers\Highlight2Controller;
 use App\Http\Controllers\HighlightPointController;
@@ -110,13 +111,12 @@ Route::get('/hubungi-kami', function () {
     return view('pages.user.hubungi_kami');
 })->name('hubungi_kami');
 
-Route::get('/artikel', function () {
-    return view('pages.user.artikel');
-})->name('artikel');
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 
-Route::get('/artikel/detail', function () {
-    return view('pages.user.detail_artikel');
-})->name('detail_artikel');
+
+
+Route::get('/artikel/detail/{id}', [ArtikelController::class, 'show'])->name('detail_artikel');
+
 
 Route::get('/tentang-kami', function () {
     return view('pages.user.tentang_kami');

@@ -387,24 +387,6 @@ input[type="search"] {
     min-height: 50px;
 }
 
-.artikel-kategori {
-    font-size: 14px;
-    color: #888;
-    display: flex;
-    gap: 2px;
-    min-height: 0px;
-}
-
-.artikel-kategori .label {
-    font-weight: 600;
-    color: #909090;
-}
-
-.artikel-kategori .value {
-    font-weight: 600;
-    color: #F7C53A;
-}
-
 .artikel-text {
     font-size: 14px;
     color: #555;
@@ -438,7 +420,7 @@ input[type="search"] {
     color: #F0F0F0;
     font-weight: 600;
     padding: 9px 15px;
-    font-size: 10px;
+    font-size: 12px;
     text-decoration: none;
     border-radius: 10px;
     transition: all 0.3s ease;

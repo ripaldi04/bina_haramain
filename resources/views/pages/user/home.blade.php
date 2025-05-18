@@ -296,8 +296,11 @@
         <div>
             <h5 class="fs-5 fw-bold">{{ $galeri->title }}</h5>
             <h5 class="fs-6 fw-semibold" style="color: var(--tertinary-color);">{{ $galeri->deskripsi }}</h5>
-            <button style="background-color: var(--primary-color); color: white; border-radius: 5px;">Daftar
-                Sekarang!!</button>
+            <a href="{{ route('layanan_haji') }}">
+                <button style="background-color: var(--primary-color); color: white; border-radius: 5px;">
+                    Daftar Sekarang!!
+                </button>
+            </a>
         </div>
     </div>
     <div class="container mt-5 text-center">
@@ -313,68 +316,27 @@
         <div class="row">
 
             <!-- Artikel 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card artikel-card shadow-sm h-100 text-start">
-                    <img src="./images/gambarumrah.jpg" class="artikel-img" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title artikel-title">
-                            Ini Dia Tips Menjaga Sikap Tawadhu Saat Menjalankan Umrah
-                        </h5>
-                        <p class="artikel-kategori">
-                            <span class="label">Kategori:</span> <span class="value">Umrah</span>
-                        </p>
-                        <p class="card-text artikel-text">
-                            Kita dapat menumbuhkan sikap tawadhu dengan jalan mendekatkan diri kepada Allah. Usahakan untuk
-                            memb...
-                        </p>
-                        <a href="#" class="artikel-btn">Baca Selengkapnya</a>
+            @foreach ($artikels as $artikel)
+                <div class="col-md-4 mb-4">
+                    <div class="card artikel-card shadow-sm h-100 text-start">
+                        <img src="{{ asset('storage/' . $artikel->gambar) }}" class="artikel-img"
+                            alt="{{ $artikel->judul }}">
+                        <div class="card-body">
+                            <h5 class="card-title artikel-title">
+                                {{ $artikel->judul }} </h5>
+                            <p class="card-text artikel-text">
+                                {{ \Illuminate\Support\Str::limit($artikel->isi, 200, '...') }} </p>
+                            <a href="{{ route('detail_artikel', $artikel->id) }}" class="artikel-btn">Baca
+                                Selengkapnya</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Artikel 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card artikel-card shadow-sm h-100 text-start">
-                    <img src="./images/arafah.jpg" class="artikel-img" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title artikel-title">
-                            Cara Menabung yang Efektif untuk Berangkat Haji
-                        </h5>
-                        <p class="artikel-kategori">
-                            <span class="label">Kategori:</span> <span class="value">Haji</span>
-                        </p>
-                        <p class="card-text artikel-text">
-                            Disiplin menyisihkan rezeki setiap bulan adalah langkah pertama untuk wujudkan niat berhaji...
-                        </p>
-                        <a href="#" class="artikel-btn">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Artikel 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card artikel-card shadow-sm h-100 text-start">
-                    <img src="./images/doaumrah.jpg" class="artikel-img" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title artikel-title">
-                            Kumpulan Doa Harian yang Dianjurkan Saat Umrah
-                        </h5>
-                        <p class="artikel-kategori">
-                            <span class="label">Kategori:</span> <span class="value">Doa</span>
-                        </p>
-                        <p class="card-text artikel-text">
-                            Membaca doa di setiap tempat mustajab di tanah suci menjadi amalan utama bagi para jamaah...
-                        </p>
-                        <a href="#" class="artikel-btn">Baca Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-
+            @endforeach
         </div>
     </div>
     <!-- Tombol Semua Artikel -->
     <div class="text-center mt-4">
-        <a href="#" class="semuaartikel-btn">Semua Artikel</a>
+        <a href="{{ route('artikel') }}" class="semuaartikel-btn">Semua Artikel</a>
     </div>
 
     <div class="mt-5 paket-haji">

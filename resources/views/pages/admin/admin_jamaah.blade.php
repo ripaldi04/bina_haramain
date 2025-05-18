@@ -33,12 +33,12 @@
                                     <td>{{ $order->nama_pemesan ?? '-' }}</td>
                                     <td>{{ $order->email_pemesan ?? '-' }}</td>
                                     <td>+62{{ $order->telepon_pemesan ?? '-' }}</td> {{-- atau $order->phone jika bukan dari users --}}
-                                    <td>{{ $order->paket->nama_paket ?? '-' }}({{ $order->detail_paket->tanggal_keberangkatan ?? '-' }})
+                                    <td>{{ $order->paket->nama_paket ?? '-' }}({{ $order->detailPaket->tanggal_keberangkatan ?? '-' }})
                                     </td>
                                     <td>
                                         @foreach ($order->orderKamar as $kamar)
                                             @foreach ($kamar->jamaahs as $jamaah)
-                                                {{ $jamaah->nama }} ({{ $jamaah->jenis_kelamin }})<br>
+                                                • {{ $jamaah->nama }} ({{ $jamaah->jenis_kelamin }})<br>
                                             @endforeach
                                         @endforeach
                                     </td>

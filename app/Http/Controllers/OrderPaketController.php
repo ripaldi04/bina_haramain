@@ -9,6 +9,7 @@ use App\Models\OrderPaket;
 use App\Models\Paket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Log;
 
 class OrderPaketController extends Controller
@@ -103,7 +104,7 @@ class OrderPaketController extends Controller
             'jenis_kelamin_jamaah' => 'required|array',
             'jenis_kelamin_jamaah.*' => 'required|string',  // Validasi setiap item dalam array
             'jenis_jamaah' => 'required|array',
-            'kode_referral' => 'nullable|string|exists:users,kode_referral',
+            'kode_referral' => 'nullable|string',
         ]);
 
         // Update data pemesanan dengan data pemesan yang baru
@@ -113,15 +114,27 @@ class OrderPaketController extends Controller
 
         // Cek apakah referral valid
         $diskon = 0;
+        $order->referral_user_id = null; // reset dulu
+
         if ($request->filled('kode_referral')) {
             $referrer = User::where('kode_referral', $request->kode_referral)->first();
             if ($referrer) {
-                // Diskon berbeda tergantung jenis paket
-                $jenisPaket = strtolower($order->paket->jenis); // pastikan sudah load relasi 'paket'
-                $diskon = $jenisPaket === 'haji' ? 60 : 30;
+                $sudahDigunakan = OrderPaket::where('referral_user_id', $referrer->id)
+                    ->where('user_id', '!=', $order->user_id) // user_id ini adalah pemesan sekarang
+                    ->exists();
+                if (!$sudahDigunakan) {
+                    // Referral valid dan belum pernah digunakan user lain
+                    $jenisPaket = strtolower($order->paket->jenis);
+                    $diskon = $jenisPaket === 'haji' ? 60 : 30;
 
-                $order->referral_user_id = $referrer->id;
-                $order->diskon = $diskon;
+                    $order->referral_user_id = $referrer->id;
+                    $order->diskon = $diskon;
+                } else {
+                    // Referral valid tapi sudah dipakai user lain, tidak ada diskon
+                    $diskon = 0;
+                    $order->referral_user_id = null;
+                    $order->diskon = 0;
+                }
             }
         }
 
@@ -152,6 +165,9 @@ class OrderPaketController extends Controller
             'jumlah_dibayar' => $jumlah,
             'catatan' => $request->catatan,
         ]);
+
+        // Hapus semua jamaah lama untuk menghindari duplikat
+        Jamaah::where('order_paket_id', $order->id)->delete();
 
         // Menyimpan data jamaah
         $jamaahIndex = 0;
@@ -196,6 +212,9 @@ class OrderPaketController extends Controller
         $order = OrderPaket::findOrFail($order_id);
 
         if ($request->hasFile('bukti_pembayaran')) {
+            if ($order->bukti_pembayaran && Storage::disk('public')->exists($order->bukti_pembayaran)) {
+                Storage::disk('public')->delete($order->bukti_pembayaran);
+            }
             // Simpan file ke storage/app/public/bukti
             $path = $request->file('bukti_pembayaran')->store('bukti', 'public');
             $order->bukti_pembayaran = $path;

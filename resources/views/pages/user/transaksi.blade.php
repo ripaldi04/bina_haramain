@@ -163,7 +163,6 @@
                                     {{ ucfirst($kamar->tipeKamar->tipe) }}: {{ $kamar->jumlah_kamar }} kamar<br>
                                 @endforeach
                             </li>
-                            <li><strong>Diskon:</strong> $ 0,00</li>
                         </ul>
                         <div class="custom-total-box text-white p-3 text-center rounded mb-3" id="totalBayarBox">
                             <strong>Total : $ <span

@@ -18,6 +18,7 @@ class AdminArtikelController extends Controller
     {
         $request->validate([
             'judul' => 'required',
+            'subjudul' => 'nullable|string',
             'isi' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -29,6 +30,7 @@ class AdminArtikelController extends Controller
 
         Artikel::create([
             'judul' => $request->judul,
+            'subjudul' => $request->subjudul,
             'isi' => $request->isi,
             'gambar' => $gambarPath,
         ]);
@@ -37,9 +39,18 @@ class AdminArtikelController extends Controller
     }
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'judul' => 'required',
+            'subjudul' => 'nullable|string',
+            'isi' => 'required',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        
         $artikel = Artikel::findOrFail($id);
 
         $artikel->judul = $request->input('judul');
+        $artikel->subjudul = $request->input('subjudul');
         $artikel->isi = $request->input('isi');
 
         if ($request->hasFile('gambar')) {

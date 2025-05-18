@@ -1,20 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.editBtn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const id = this.dataset.id;
-            const judul = this.dataset.judul;
-            const isi = this.dataset.isi;
-
-            document.getElementById('editTitle').value = judul;
-            document.getElementById('editContent').value = isi;
-
-            // Ubah action form secara dinamis
-            const form = document.getElementById('editForm');
-            form.action = `/admin/artikel/${id}`;
-        });
-    });
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const successEl = document.getElementById('artikelSuccess');
     if (successEl) {
@@ -33,6 +16,7 @@ const editButtons = document.querySelectorAll('i.fa-edit');
 
 const editModal = new bootstrap.Modal(document.getElementById('editModal'));
 const editTitle = document.getElementById('editTitle');
+const editSubJudul = document.getElementById('editSubJudul');
 const editContent = document.getElementById('editContent');
 const editImage = document.getElementById('editImage');
 const saveChangesBtn = document.getElementById('saveChanges');
@@ -45,11 +29,10 @@ editButtons.forEach(btn => {
         const tr = e.target.closest('tr');
         currentArtikelId = tr.dataset.id;
 
-        // Isi form modal dengan data
-        editTitle.value = tr.querySelector('td:nth-child(2)').textContent.trim();
-        editContent.value = tr.querySelector('td:nth-child(3)').textContent.trim();
+        editTitle.value = tr.dataset.judul;
+        editSubJudul.value = tr.dataset.subjudul;
+        editContent.value = tr.dataset.isi;
 
-        // Kosongkan input file gambar agar tidak mengganggu
         editImage.value = null;
 
         editModal.show();
@@ -62,6 +45,7 @@ saveChangesBtn.addEventListener('click', () => {
 
     const formData = new FormData();
     formData.append('judul', editTitle.value);
+    formData.append('subjudul', editSubJudul.value);
     formData.append('isi', editContent.value);
     if (editImage.files[0]) {
         formData.append('gambar', editImage.files[0]);

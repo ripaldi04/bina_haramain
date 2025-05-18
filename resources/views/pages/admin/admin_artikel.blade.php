@@ -30,6 +30,11 @@
                                         <label for="judul" class="form-label">Judul</label>
                                         <input type="text" name="judul" id="judul" class="form-control" required>
                                     </div>
+                                    <!-- Tambahkan pada bagian form Tambah Artikel -->
+                                    <div class="mb-3">
+                                        <label for="subjudul" class="form-label">Subjudul (opsional)</label>
+                                        <input type="text" name="subjudul" id="subjudul" class="form-control">
+                                    </div>
                                     <div class="mb-3">
                                         <label for="isi" class="form-label">Isi</label>
                                         <textarea name="isi" id="isi" class="form-control" rows="5" required></textarea>
@@ -62,6 +67,12 @@
                                     <label for="editTitle" class="form-label">Judul</label>
                                     <input type="text" class="form-control" id="editTitle">
                                 </div>
+                                <!-- Tambahkan pada bagian form Edit Artikel -->
+                                <div class="mb-3">
+                                    <label for="editSubJudul" class="form-label">Subjudul</label>
+                                    <input type="text" class="form-control" id="editSubJudul">
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="editContent" class="form-label">Isi</label>
                                     <textarea class="form-control" id="editContent" rows="5"></textarea>
@@ -91,19 +102,21 @@
                             <tr>
                                 <th>Gambar</th>
                                 <th>Judul</th>
+                                <th>Subjudul</th>
                                 <th>Isi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- Dummy row --}}
                             @foreach ($artikels as $artikel)
-                                <tr data-id="{{ $artikel->id }}">
+                                <tr data-id="{{ $artikel->id }}" data-judul="{{ $artikel->judul }}"
+                                    data-subjudul="{{ $artikel->subjudul }}" data-isi="{{ $artikel->isi }}">
                                     <td>
                                         <img src="{{ asset('storage/' . $artikel->gambar) . '?' . time() }}"
                                             width="100">
                                     </td>
                                     <td>{{ $artikel->judul }}</td>
+                                    <td>{{ $artikel->subjudul }}</td> <!-- Isi subjudul -->
                                     <td>{{ $artikel->isi }} </td>
                                     <td>
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer" data-bs-toggle="modal"
@@ -111,7 +124,6 @@
                                         <i class="fas fa-trash text-danger cursor-pointer delete-artikel"></i>
                                     </td>
                                 </tr>
-                                <tr>
                             @endforeach
                         </tbody>
                     </table>

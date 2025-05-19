@@ -33,7 +33,7 @@
         </li>
         <li class="p-2">
             <a href="{{ url('/admin/artikel') }}"
-                class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/landing-page') ? 'active' : '' }}">
+                class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/artikel') ? 'active' : '' }}">
                 <i class="bi bi-file-earmark-fill"></i> Artikel
             </a>
         </li>

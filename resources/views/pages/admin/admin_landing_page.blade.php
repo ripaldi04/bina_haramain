@@ -84,6 +84,10 @@
                                 <div class="form-group mb-3">
                                     <label for="image_url">Gambar Banner</label>
                                     <input type="file" class="form-control" id="image_url" name="image_url">
+                                    <small class="form-text text-muted">
+                                        Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                        <strong>2MB</strong>.
+                                    </small>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">Update Banner</button>
                             </form>
@@ -185,7 +189,9 @@
                                                         <label class="font-weight-bold">Gambar</label>
                                                         <input type="file" name="image" class="form-control mb-2"
                                                             id="image{{ $highlight1->id }}" />
-                                                        <small class="form-text text-muted">Format: jpg, jpeg, png, gif.
+                                                        <small class="form-text text-muted">
+                                                            Format: jpg, jpeg, png. Maksimal ukuran:
+                                                            <strong>1MB</strong>.
                                                         </small>
                                                     </div>
                                                 </div>
@@ -268,10 +274,14 @@
                                 <div class="mb-3">
                                     <label for="image_url" class="form-label">Gambar</label>
                                     <input type="file" class="form-control" id="image_url" name="image_url">
+                                    <small class="form-text text-muted">
+                                        Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                        <strong>2MB</strong>.
+                                    </small>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </form>
@@ -344,6 +354,10 @@
                                 <div class="mb-3">
                                     <label for="highlightPointImage" class="form-label">Gambar</label>
                                     <input type="file" class="form-control" id="highlightPointImage" name="image">
+                                    <small class="form-text text-muted">
+                                        Format: jpg, jpeg, png. Maksimal ukuran:
+                                        <strong>2MB</strong>.
+                                    </small>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -442,6 +456,10 @@
                                 <div class="mb-3">
                                     <label>Gambar</label>
                                     <input type="file" class="form-control" name="image_url" id="image_url">
+                                    <small class="form-text text-muted">
+                                        Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                        <strong>2MB</strong>.
+                                    </small>
                                 </div>
                                 <div id="previewImage" class="mb-3"></div>
                             </div>
@@ -539,6 +557,10 @@
                                 <div class="mb-3">
                                     <label>Gambar</label>
                                     <input type="file" class="form-control" name="image_file" id="image_file">
+                                    <small class="form-text text-muted">
+                                        Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                        <strong>2MB</strong>.
+                                    </small>
                                 </div>
                                 <div id="previewImage" class="mb-3"></div>
                             </div>
@@ -625,6 +647,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             </form>
                         </div>
                     </div>
@@ -721,6 +744,10 @@
                                             <label>Gambar {{ $i }}</label>
                                             <input type="file" name="image{{ $i }}" class="form-control">
                                             <div id="preview_image{{ $i }}" class="mt-2"></div>
+                                            <small class="form-text text-muted">
+                                                Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                                <strong>2MB</strong>.
+                                            </small>
                                         </div>
                                     @endfor
                                 </div>
@@ -837,17 +864,19 @@
                                                         <div class="form-group mb-3 text-start">
                                                             <label>Upload Gambar Baru</label>
                                                             <input type="file" name="image" class="form-control">
-                                                            <small class="form-text text-muted">Format: jpg, jpeg, png,
-                                                                gif.
+                                                            <small class="form-text text-muted">
+                                                                Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                                                <strong>2MB</strong>.
                                                             </small>
                                                         </div>
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Tutup</button>
                                                         <button type="submit" class="btn btn-primary">Simpan
                                                             Perubahan</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Batal</button>
+
                                                     </div>
                                                 </form>
 
@@ -934,6 +963,8 @@
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-primary">Simpan
                                                         Perubahan</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -970,6 +1001,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Tambah</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             </div>
                         </div>
                     </form>

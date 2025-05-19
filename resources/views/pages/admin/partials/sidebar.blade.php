@@ -9,8 +9,14 @@
     <ul class="list-unstyled flex-grow-1">
         <li class="p-2">
             <a href="{{ url('/admin/users') }}"
-                class="text-dark text-decoration-none d-block menu-item{{ request()->is('admin/users') ? 'active' : '' }}">
+                class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/users') ? 'active' : '' }}">
                 <i class="fas fa-user"></i> User
+            </a>
+        </li>
+        <li class="p-2">
+            <a href="{{ url('/admin/agen') }}"
+                class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/agen') ? 'active' : '' }}">
+                <i class="fas fa-user"></i> Agen
             </a>
         </li>
         <li class="p-2">

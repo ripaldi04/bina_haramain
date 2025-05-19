@@ -54,7 +54,11 @@ class OrderPaket extends Model
     }
     public function jamaah()
     {
-        return $this->hasMany(Jamaah::class, 'order_paket_id','id');
+        return $this->hasMany(Jamaah::class, 'order_paket_id', 'id');
+    }
+    public function referralAgen()
+    {
+        return $this->belongsTo(Agen::class, 'referral_agen_id');
     }
 
 }

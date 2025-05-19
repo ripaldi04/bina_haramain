@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminArtikelController;
 use App\Http\Controllers\AdminJamaahController;
 use App\Http\Controllers\AdminQuestionController;
+use App\Http\Controllers\AgenController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\Highlight1Controller;
 use App\Http\Controllers\Highlight2Controller;
@@ -85,7 +86,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 
     return redirect('/login');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
 
 Route::get('/admin/jamaah', [AdminJamaahController::class, 'semuaPemesan'])->name('admin.pemesan');
 
@@ -211,4 +211,11 @@ Route::post('/admin/fasilitas', [LandingFasilitasController::class, 'store'])->n
 Route::put('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'update'])->name('fasilitas.update');
 // Rute untuk menghapus fasilitas
 Route::delete('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'destroy'])->name('fasilitas.destroy');
+
+
+Route::post('/admin/agen', [AgenController::class, 'store'])->name('agen.store');
+Route::get('/admin/agen', [AgenController::class, 'index'])->name('agen.index');
+Route::put('/admin/agen/{id}', [AgenController::class, 'update']);
+Route::delete('/admin/agen/{id}', [AgenController::class, 'destroy']);
+
 

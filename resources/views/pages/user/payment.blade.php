@@ -15,6 +15,9 @@
                 <div class="card shadow-sm p-4">
                     <h5 class="mb-3">Detail Pesanan</h5>
                     <ul class="list-unstyled">
+                        @if ($order->referralAgen)
+                            <p><strong>Referral oleh Agen:</strong> {{ $order->referralAgen->name }}</p>
+                        @endif
                         <li><strong>Nama Pemesan:</strong> {{ $order->nama_pemesan }}</li>
                         <li><strong>Nomor Telepon:</strong> +62{{ $order->telepon_pemesan }}</li>
                         <li><strong>Email:</strong> {{ $order->email_pemesan }}</li>

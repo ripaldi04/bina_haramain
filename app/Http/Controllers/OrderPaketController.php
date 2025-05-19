@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agen;
 use App\Models\DetailPaket;
 use App\Models\Jamaah;
 use App\Models\OrderPaket;
@@ -115,6 +116,7 @@ class OrderPaketController extends Controller
         // Cek apakah referral valid
         $diskon = 0;
         $order->referral_user_id = null; // reset dulu
+        $order->referral_agen_id = null;
 
         if ($request->filled('kode_referral')) {
             $referrer = User::where('kode_referral', $request->kode_referral)->first();
@@ -135,9 +137,16 @@ class OrderPaketController extends Controller
                     $order->referral_user_id = null;
                     $order->diskon = 0;
                 }
+            } else {
+                // 2. Jika tidak ditemukan di User, cek ke Agen
+                $referrerAgen = Agen::where('kode', $request->kode_referral)->first();
+                if ($referrerAgen) {
+                    $order->referral_agen_id = $referrerAgen->id;
+                    // Tidak ada diskon jika referral dari agen (jika sesuai requirement)
+                    $order->diskon = 0;
+                }
             }
         }
-
         switch ($jenis) {
             case 'booking':
                 $jumlah = $order->total_harga * 0.2;
@@ -203,6 +212,32 @@ class OrderPaketController extends Controller
         return redirect()->route('payment', ['order_id' => $order->id]);
 
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $order = OrderPaket::findOrFail($id);
+
+        $order->status = $request->status;
+
+        // Hanya jika status diubah ke "diterima"
+        if ($request->status === 'diterima') {
+            // Cek apakah sudah ada referral agen sebelumnya
+            if (!$order->referral_agen_id && $order->kode_referral) {
+                $referrerAgen = Agen::where('kode', $order->kode_referral)->first();
+                if ($referrerAgen) {
+                    $order->referral_agen_id = $referrerAgen->id;
+                }
+            }
+
+            // Jika mau tambahkan logika bonus referral juga bisa di sini
+        }
+
+        $order->save();
+
+        return back()->with('success', 'Status berhasil diperbarui.');
+    }
+
+
     public function uploadBukti(Request $request, $order_id)
     {
         $request->validate([

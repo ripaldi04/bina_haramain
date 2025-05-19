@@ -10,9 +10,6 @@
     color: #f0f0f0 !important;
 }
 
-.fa-user-circle {
-    color: gray;
-}
 
 table th, table td {
     vertical-align: middle;
@@ -73,11 +70,11 @@ th, td {
 }
 
 /* Membatasi lebar kolom "Jemaah" agar tidak terlalu lebar */
-th:nth-child(4), td:nth-child(4) {
+th:nth-child(41), td:nth-child(4) {
     white-space: normal;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    max-width: 300px; /* Sesuaikan lebar maksimal sesuai kebutuhan */
+    max-width: 300px;
 }
 
 

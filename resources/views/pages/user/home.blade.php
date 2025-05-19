@@ -38,7 +38,8 @@
 
                 <!-- Gambar (Desktop) -->
                 <div class="col-md-6 text-end d-none d-md-block">
-                    <img src="{{ asset('images/ImageBrandAmbasador.png') }}" class="img-fluid" alt="Icon">
+                    <td><img src="{{ asset('storage/' . $banner->image_url) }}" class="img-fluid" alt="Banner">
+                    </td>
                 </div>
 
                 <!-- Semua elemen dalam satu kolom (Mobile) -->
@@ -47,7 +48,8 @@
                     <p class="fs-4 fw-bold text-warning">
                         Tanpa Antri <br> Visa Haji Resmi <br> Maktab VIP <br> Sepenuh Hati
                     </p>
-                    <img src="./images/v146_30.png" class="img-fluid w-75 my-3" alt="Icon">
+                    <img src="{{ asset('storage/' . $banner->image_url) }}" class="img-fluid" alt="Banner">
+
                     <p class="fs-6">
                         Spesial bersama Koh Dennis Lim dan Teh Yunda – Kuota Terbatas, Segera Amankan Kuota Anda sebelum
                         Terlambat!
@@ -490,4 +492,10 @@
             </div>
         @endforeach
     </div>
+    <!-- Tombol WhatsApp Mengambang -->
+    <a href="https://wa.me/628121869994?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Anda" target="_blank"
+        class="wa-float">
+        <img src="{{ asset('images/wa-icon.png') }}" alt="WhatsApp" class="wa-icon">
+    </a>
+
 @endsection

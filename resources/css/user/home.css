@@ -2,7 +2,8 @@
     --primary-color: #B97012;
     --secondary-color: #F7C53A;
     --tertinary-color: #909090;
-    --for-color: #F0F0F0;}
+    --for-color: #F0F0F0;
+}
 
 body,
 html {
@@ -341,9 +342,11 @@ input[type="search"] {
     #tanya-card {
         margin-top: 27px;
     }
+
     .galeri-img {
         height: 350px;
     }
+
     .galeri-img-small {
         height: 170px;
     }
@@ -353,6 +356,7 @@ input[type="search"] {
     .container-card-highlight {
         width: 100%;
     }
+
     .card-highlight .dua {
         margin-top: 20px;
     }
@@ -366,10 +370,12 @@ input[type="search"] {
         /* Tengahkan setiap card */
         flex-wrap: wrap;
     }
+
     .container-card-highlight .col-4 {
         width: 100%;
         /* Supaya setiap card full width di mobile */
     }
+
     .card-highlight {
         width: 100%;
         /* Jangan terlalu kecil */
@@ -379,33 +385,40 @@ input[type="search"] {
         /* Tengahin teks */
         padding: 10px;
     }
+
     .card-highlight .dua {
         margin-top: 0;
     }
+
     .card-highlight .card-title {
         font-size: 10px;
         /* Ubah ukuran font */
     }
+
     .card-highlight .card-text {
         font-size: 8px;
     }
+
     .header-sudah-siap {
         font-size: 20px !important;
         text-align: center;
         margin-bottom: 40px !important;
     }
+
     .sudah-siap .col-md-7,
     .col-md-5,
     .col-md-6 {
         width: 100% !important;
         /* Paksa elemen menjadi full width */
     }
+
     .sudah-siap .col-md-7 div {
         margin-left: 0 !important;
         /* Hilangkan margin kiri */
         margin-bottom: 5% !important;
         /* Kurangi margin bawah */
     }
+
     .sudah-siap .col-md-5 img,
     .col-md-6 img {
         width: 100% !important;
@@ -413,25 +426,50 @@ input[type="search"] {
         height: auto !important;
         /* Sesuaikan tinggi */
     }
+
     .sudah-siap .row {
         flex-direction: column;
         /* Susun elemen jadi satu kolom */
         align-items: center !important;
         /* Tengahin semua item */
     }
+
     .sudah-siap .icon-text {
         flex-direction: row !important;
         /* Supaya icon tetap di samping teks */
         justify-content: center;
         align-items: center;
     }
+
     .sudah-siap .icon-text img {
         margin-right: 10px;
     }
+
     .mbl-img-none {
         display: none;
     }
+
     .sudah-siap .icon-text .img {
         margin-top: -20px;
     }
+}
+
+.wa-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    text-decoration: none;
+}
+
+.wa-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.wa-icon:hover {
+    transform: scale(1.1);
 }

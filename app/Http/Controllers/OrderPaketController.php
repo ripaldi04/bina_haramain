@@ -309,9 +309,29 @@ class OrderPaketController extends Controller
     public function destroy($id)
     {
         $order = OrderPaket::findOrFail($id);
-        $order->delete();
 
-        return response()->json(['success' => true]);
+        // Kembalikan jumlah seat jika status pesanan sebelumnya "diterima"
+        if ($order->status === 'diterima') {
+            $detail = DetailPaket::find($order->detail_paket_id);
+
+            if ($detail) {
+                $jumlah_jamaah = $order->jamaah()->count();
+                $detail->jumlah_seat += $jumlah_jamaah;
+                $detail->save();
+            }
+        }
+
+        // Hapus data jamaah yang terhubung (opsional, jika memang perlu)
+        foreach ($order->jamaah as $jamaah) {
+            $jamaah->delete();
+        }
+
+        // Hapus file bukti pembayaran jika ada
+        if ($order->bukti_pembayaran && \Storage::disk('public')->exists($order->bukti_pembayaran)) {
+            \Storage::disk('public')->delete($order->bukti_pembayaran);
+        }
+
+        $order->delete();
     }
 
 

@@ -6,6 +6,10 @@
     @vite(['resources/css/user/layanan_haji.css'])
 @endsection
 
+@section('script')
+    @vite(['resources/js/user/layanan.js'])
+@endsection
+
 @section('content')
     <!--Container Memasukan jenis-->
     <div class="container mt-4">
@@ -15,26 +19,26 @@
             <div class="row g-2">
                 <!-- Input Keberangkatan -->
                 <div class="col-md-3">
-                    <label class="form-label fw-bolder">Keberangkatan</label>
-                    <input type="text" class="form-control" placeholder="">
+                    <label class="form-label fw-bolder">Maskapai</label>
+                    <input id="searchMaskapai" type="text" class="form-control" placeholder="">
                 </div>
 
-                <!-- Input Jenis Paket -->
-                <div class="col-md-3">
-                    <label class="form-label fw-bolder">Jenis Paket</label>
-                    <input type="text" class="form-control" placeholder="">
-                </div>
 
                 <!-- Input Bandara -->
                 <div class="col-md-3">
                     <label class="form-label fw-bolder">Bandara</label>
-                    <input type="text" class="form-control" placeholder="">
+                    <input id="searchBandara" type="text" class="form-control" placeholder="">
                 </div>
 
+                <!-- Input Jenis Paket -->
+                <div class="col-md-3">
+                    <label class="form-label fw-bolder">Hotel Mekkah</label>
+                    <input id="searchHotelMekkah" type="text" class="form-control" placeholder="">
+                </div>
                 <!-- Input Promo -->
                 <div class="col-md-2">
-                    <label class="form-label fw-bolder">Promo</label>
-                    <input type="text" class="form-control" placeholder="">
+                    <label class="form-label fw-bolder">Hotel Madinah</label>
+                    <input id="searchHotelMadinah" type="text" class="form-control" placeholder="">
                 </div>
 
                 <!-- Tombol Search -->
@@ -50,7 +54,10 @@
     <div class="container mt-5">
         <div class="row g-4">
             @foreach ($paket_haji as $paket)
-                <div class="col-md-4">
+                <div class="col-md-4 paket-card" data-nama="{{ strtolower($paket->nama_paket) }}"
+                    data-maskapai="{{ strtolower($paket->maskapai) }}" data-bandara="{{ strtolower($paket->bandara) }}"
+                    data-hotelmekkah="{{ strtolower($paket->hotel_mekkah) }}"
+                    data-hotelmadinah="{{ strtolower($paket->hotel_madinah) }}">
                     <div class="card shadow-sm">
                         <div class="card-img-top position-relative">
                             <img src="{{ asset('storage/' . $paket->gambar) }}" class="img-fluid rounded-top"
@@ -65,7 +72,8 @@
                                 <li><i class="bi bi-building"></i> {{ $paket->hotel_madinah }} (Madinah)</li>
                                 <li><i class="bi bi-airplane"></i> {{ $paket->maskapai }}</li>
                                 <li><i class="bi bi-geo-alt"></i> {{ $paket->bandara }}</li>
-                                <li><i class="bi bi-box-seam"></i> Sisa Seat: {{ $paket->detail_Paket->sum('jumlah_seat') }}
+                                <li><i class="bi bi-box-seam"></i> Sisa Seat:
+                                    {{ $paket->detail_Paket->sum('jumlah_seat') }}
                                 </li>
                             </ul>
                             <p class="fw-nomal text-dark">Harga Mulai Dari: <br>

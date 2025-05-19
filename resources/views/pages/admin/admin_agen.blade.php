@@ -127,7 +127,8 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Kode</th>
-                                    <th>Total Jamaah</th>
+                                    <th>Total Jamaah dan Bukti</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -139,7 +140,23 @@
                                         <td>{{ $agen->email }}</td>
                                         <td>{{ $agen->phone }}</td>
                                         <td>{{ $agen->kode }}</td>
-                                        <td>{{ $agen->jumlah_jamaah }}</td>
+                                        <td>
+                                            @foreach ($agen->orderPaket as $order)
+                                                <li>{{ $order->jamaah->count() }} jamaah
+                                                    @if ($order->bukti_pembayaran)
+                                                        <a href="{{ asset('storage/' . $order->bukti_pembayaran) }}"
+                                                            target="_blank">Lihat Bukti</a>
+                                                    @else
+                                                        <span class="text-danger">Belum ada</span>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($agen->orderPaket as $order)
+                                                <div>{{ $order->status }}</div>
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <i class="fas fa-edit text-primary me-2 cursor-pointer"></i>
                                             <i class="fas fa-trash text-danger cursor-pointer btn-delete"

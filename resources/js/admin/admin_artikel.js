@@ -1,3 +1,30 @@
+// search kolom
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchPaket");
+    const tableBody = document.getElementById("tableBody");
+
+    if (searchInput && tableBody) {
+        searchInput.addEventListener("keyup", function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            const rows = tableBody.getElementsByTagName("tr");
+
+            for (let row of rows) {
+                const columns = row.getElementsByTagName("td");
+                let matchFound = false;
+
+                for (let col of columns) {
+                    if (col.textContent.toLowerCase().includes(searchTerm)) {
+                        matchFound = true;
+                        break;
+                    }
+                }
+
+                row.style.display = matchFound ? "" : "none";
+            }
+        });
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const successEl = document.getElementById('artikelSuccess');
     if (successEl) {

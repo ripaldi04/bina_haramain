@@ -476,7 +476,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="m-0">Fasilitas</h5>
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm" onclick="openFasilitasModal()">+
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm" onclick="openTambahFasilitasModal()">+
                         Tambah</a>
                 </div>
                 <div class="card-body table-responsive">
@@ -508,9 +508,10 @@
                                     </td>
                                     <td>
                                         <button class="btn btn-warning btn-sm"
-                                            onclick="openFasilitasModal({{ $itemFasilitas->id }}, '{{ $itemFasilitas->title }}', `{{ $itemFasilitas->deskripsi }}`, '{{ $itemFasilitas->image_url }}')">
+                                            onclick="openEditFasilitasModal({{ $itemFasilitas->id }}, '{{ $itemFasilitas->title }}', `{{ $itemFasilitas->deskripsi }}`, '{{ $itemFasilitas->image_url }}')">
                                             Edit
                                         </button>
+
                                         <form action="{{ route('fasilitas.destroy', $itemFasilitas->id) }}"
                                             method="POST" class="d-inline">
                                             @csrf
@@ -532,37 +533,33 @@
                 </div>
             </div>
 
-            <!-- Modal Tambah/Edit Fasilitas -->
-            <div class="modal fade" id="fasilitasModal" tabindex="-1" aria-labelledby="fasilitasModalLabel"
+            <!-- Modal Tambah Fasilitas -->
+            <div class="modal fade" id="tambahFasilitasModal" tabindex="-1" aria-labelledby="tambahFasilitasModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
-                    <form id="fasilitasForm" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('fasilitas.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="id" id="fasilitas_id">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="fasilitasModalLabel">Tambah/Edit Fasilitas</h5>
+                                <h5 class="modal-title" id="tambahFasilitasModalLabel">Tambah Fasilitas</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Tutup"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label>Judul</label>
-                                    <input type="text" class="form-control" name="title" id="title" required>
+                                    <input type="text" class="form-control" name="title" required>
                                 </div>
                                 <div class="mb-3">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" name="deskripsi" id="deskripsi" required></textarea>
+                                    <textarea class="form-control" name="deskripsi" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label>Gambar</label>
-                                    <input type="file" class="form-control" name="image_file" id="image_file">
-                                    <small class="form-text text-muted">
-                                        Format: jpg, jpeg, png, gif. Maksimal ukuran:
-                                        <strong>2MB</strong>.
-                                    </small>
+                                    <input type="file" class="form-control" name="image_file">
+                                    <small class="form-text text-muted">Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                        <strong>2MB</strong>.</small>
                                 </div>
-                                <div id="previewImage" class="mb-3"></div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -572,6 +569,46 @@
                     </form>
                 </div>
             </div>
+            <!-- Modal Edit Fasilitas -->
+            <div class="modal fade" id="editFasilitasModal" tabindex="-1" aria-labelledby="editFasilitasModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <form id="editFasilitasForm" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="id" id="edit_fasilitas_id">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editFasilitasModalLabel">Edit Fasilitas</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Tutup"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label>Judul</label>
+                                    <input type="text" class="form-control" name="title" id="edit_title" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Deskripsi</label>
+                                    <textarea class="form-control" name="deskripsi" id="edit_deskripsi" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Gambar</label>
+                                    <input type="file" class="form-control" name="image_file" id="edit_image_file">
+                                    <small class="form-text text-muted">Format: jpg, jpeg, png, gif. Maksimal ukuran:
+                                        <strong>2MB</strong>.</small>
+                                </div>
+                                <div id="editPreviewImage" class="mb-3"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
 
             {{-- Muthawif --}}
             <div class="card mb-4">

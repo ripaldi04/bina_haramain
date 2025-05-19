@@ -82,45 +82,68 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-window.openFasilitasModal = function (id = null, title = '', deskripsi = '', image = '') {
-    const form = document.getElementById('fasilitasForm');
-    const modalTitle = document.getElementById('fasilitasModalLabel');
-    const inputId = document.getElementById('fasilitas_id');
-
-    // Reset form
+window.openTambahFasilitasModal = function () {
+    // reset form tambah
+    const form = document.querySelector('#tambahFasilitasModal form');
     form.reset();
-    document.getElementById('previewImage').innerHTML = ''; // Reset preview image
 
-    if (id) {
-        // Edit mode
-        form.action = `/admin/fasilitas/${id}`;
-        document.querySelector('input[name="_method"]')?.remove();
-        const method = document.createElement('input');
-        method.type = 'hidden';
-        method.name = '_method';
-        method.value = 'PUT';
-        form.appendChild(method);
+    // kosongkan preview gambar jika ada
+    document.getElementById('tambahFasilitasModal').querySelector('#previewImage')?.remove();
 
-        modalTitle.innerText = 'Edit Fasilitas';
-        inputId.value = id;
-        document.getElementById('title').value = title;
-        document.getElementById('deskripsi').value = deskripsi;
+    // tampilkan modal tambah
+    const tambahModal = new bootstrap.Modal(document.getElementById('tambahFasilitasModal'));
+    tambahModal.show();
+}
 
-        if (image) {
-            document.getElementById('previewImage').innerHTML =
-                `<img src="/storage/${image}" width="100" class="img-fluid" />`;
-        }
+window.openEditFasilitasModal = function (id, title, deskripsi, image) {
+    // isi form edit
+    const form = document.getElementById('editFasilitasForm');
+    form.action = `/admin/fasilitas/${id}`; // sesuaikan route update
+
+    document.getElementById('edit_fasilitas_id').value = id;
+    document.getElementById('edit_title').value = title;
+    document.getElementById('edit_deskripsi').value = deskripsi;
+
+    // tampilkan preview image
+    const preview = document.getElementById('editPreviewImage');
+    if (image) {
+        preview.innerHTML = `<img src="/storage/${image}" width="100" class="img-fluid" />`;
     } else {
-        // Add mode
-        form.action = `/admin/fasilitas`; // Ganti dengan route URL statis
-        document.querySelector('input[name="_method"]')?.remove();
-        modalTitle.innerText = 'Tambah Fasilitas';
-        inputId.value = '';
+        preview.innerHTML = 'Tidak ada gambar';
     }
 
-    const fasilitasModal = new bootstrap.Modal(document.getElementById('fasilitasModal'));
-    fasilitasModal.show();
+    // tampilkan modal edit
+    const editModal = new bootstrap.Modal(document.getElementById('editFasilitasModal'));
+    editModal.show();
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-edit-fasilitas').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const title = this.dataset.title;
+            const deskripsi = this.dataset.deskripsi;
+            const image = this.dataset.image;
+
+            // Isi form edit
+            document.getElementById('edit_fasilitas_id').value = id;
+            document.getElementById('edit_title').value = title;
+            document.getElementById('edit_deskripsi').value = deskripsi;
+
+            const preview = document.getElementById('editPreviewImage');
+            preview.innerHTML = image ? `<img src="${image}" class="img-fluid" style="max-width: 150px;">` : 'Tidak ada gambar';
+
+            // Set action form (ubah route sesuai id)
+            const form = document.getElementById('editFasilitasForm');
+            form.action = `/admin/fasilitas/${id}`; // sesuaikan route update kamu
+
+            // Tampilkan modal edit
+            const editModal = new bootstrap.Modal(document.getElementById('editFasilitasModal'));
+            editModal.show();
+        });
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.btn-delete').forEach(button => {

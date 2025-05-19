@@ -40,26 +40,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Konfirmasi logout
-const logoutBtn = document.getElementById('logout-confirm');
-if (logoutBtn) {
-    logoutBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logout-confirm');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
 
-        Swal.fire({
-            title: 'Keluar dari akun?',
-            text: 'Anda yakin ingin logout?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, keluar',
-            cancelButtonText: 'Batal',
-            confirmButtonColor: '#dc3545',
-            cancelButtonColor: '#6c757d',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('logout-form').submit();
-            }
+            Swal.fire({
+                title: 'Keluar dari akun?',
+                text: 'Anda yakin ingin logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, keluar',
+                cancelButtonText: 'Batal',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
+            });
         });
-    });
-}
-
+    }
+});

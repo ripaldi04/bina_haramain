@@ -13,6 +13,7 @@ use App\Http\Controllers\LandingKeunggulanController;
 use App\Http\Controllers\LandingMuthawifController;
 use App\Http\Controllers\OrderPaketController;
 use App\Http\Controllers\TipeKamarController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminLandingPageController;
@@ -199,3 +200,9 @@ Route::put('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'update'
 // Rute untuk menghapus fasilitas
 Route::delete('/admin/fasilitas/{id}', [LandingFasilitasController::class, 'destroy'])->name('fasilitas.destroy');
 
+Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
+Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
+Route::get('/videos/{video}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+Route::put('/videos/{video}', [VideoController::class, 'update'])->name('videos.update');
+Route::get('/videos', [AdminLandingPageController::class, 'index'])->name('videos.index');

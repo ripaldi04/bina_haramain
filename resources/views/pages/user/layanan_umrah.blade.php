@@ -72,12 +72,14 @@
                             <p class="fw-nomal text-dark">Harga Mulai Dari: <br>
                                 <span class="fw-bolder fs-5 text-warning">
                                     @if ($paket && $paket->tipeKamars->isNotEmpty())
-                                        ${{ number_format($paket->tipeKamars->last()->harga, 0, ',', '.') }}
+                                        @php $tipe = $paket->tipeKamars->first(); @endphp
+                                        <span class="price">
+                                            {{ $paket->formatHarga($tipe->harga) }}
+                                        </span>
                                     @endif
                                 </span><br>
                             </p>
-                            <a href="{{ route('layanan_haji.detail', $paket->id) }}"
-                                class="btn btn-dark w-100 fw-bolder">Detail
+                            <a href="{{ route('layanan_haji.detail', $paket->id) }}" class="btn btn-dark w-100 fw-bolder">Detail
                                 Paket</a>
                         </div>
                     </div>

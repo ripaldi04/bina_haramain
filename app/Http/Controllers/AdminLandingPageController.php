@@ -8,24 +8,26 @@ use App\Models\LandingBanner;
 use App\Models\LandingHighlight2;
 use App\Models\LandingHighlightPoints;
 use App\Models\LandingMuthawif;
+use App\Models\Video;
 
 class AdminLandingPageController extends Controller
 {
-    public function index()
-    {
-        return view('pages.admin.admin_landing_page', [
-            'banners' => DB::table('landing_banners')->get(),
-            'highlights1' => DB::table('landing_highlights1')->get(),
-            'highlights2' => DB::table('landing_highlights2')->get(),
-            'highlightPoints' => DB::table('landing_highlights_points')->get(),
-            'keunggulan' => DB::table('landing_keunggulan')->get(),
-            'fasilitas' => DB::table('landing_fasilitas')->get(),
-            'muthawif' => DB::table('landing_muthawif')->get(),
-            'galeri' => DB::table('landing_galeri')->get(),
-            'hotDeals' => DB::table('landing_hot_deal')->get(),
-            'questions' => DB::table('landing_question')->get(),
-        ]);
-    }
+   public function index()
+{
+    return view('pages.admin.admin_landing_page', [
+        'banners' => DB::table('landing_banners')->get(),
+        'highlights1' => DB::table('landing_highlights1')->get(),
+        'highlights2' => DB::table('landing_highlights2')->get(),
+        'highlightPoints' => DB::table('landing_highlights_points')->get(),
+        'keunggulan' => DB::table('landing_keunggulan')->get(),
+        'fasilitas' => DB::table('landing_fasilitas')->get(),
+        'muthawif' => DB::table('landing_muthawif')->get(),
+        'galeri' => DB::table('landing_galeri')->get(),
+        'hotDeals' => DB::table('landing_hot_deal')->get(),
+        'questions' => DB::table('landing_question')->get(),
+        'video' => Video::latest()->first(), // hanya ambil satu video
+    ]);
+}
 
     public function editBanner($id)
     {

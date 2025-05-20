@@ -102,18 +102,15 @@
 
                                         <div class="mb-3">
                                             <label for="paketHarga" class="form-label">Harga</label>
-                                            <input type="text" class="form-control" id="paketHarga" name="harga"
-                                                required>
+                                            <input type="text" class="form-control" id="paketHarga" name="harga" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Harga Kamar Double</label>
-                                            <input type="number" class="form-control" name="harga_kamar_double"
-                                                required>
+                                            <input type="number" class="form-control" name="harga_kamar_double" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Harga Kamar Triple</label>
-                                            <input type="number" class="form-control" name="harga_kamar_triple"
-                                                required>
+                                            <input type="number" class="form-control" name="harga_kamar_triple" required>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Harga Kamar Quad</label>
@@ -122,8 +119,8 @@
                                         <div id="jadwal-container">
                                             <div class="jadwal-item mb-2">
                                                 <label for="tanggal" class="form-label">Tanggal Keberangkatan</label>
-                                                <input type="date" name="tanggal_keberangkatan[]"
-                                                    class="form-control mb-1" required>
+                                                <input type="date" name="tanggal_keberangkatan[]" class="form-control mb-1"
+                                                    required>
                                                 <label for="seat" class="form-label">Jumlah Seat</label>
                                                 <input type="number" name="jumlah_seat[]" class="form-control"
                                                     placeholder="Jumlah Seat" required>
@@ -215,8 +212,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="editHargaQuad" class="form-label">Harga Kamar Quad</label>
-                                        <input type="number" class="form-control" id="editHargaQuad"
-                                            name="harga_kamar_quad" required>
+                                        <input type="number" class="form-control" id="editHargaQuad" name="harga_kamar_quad"
+                                            required>
                                     </div>
                                     <div class="row mb-2 jadwal-item">
                                         <div class="mb-3">
@@ -228,8 +225,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     <button type="button" class="btn btn-primary" id="saveChanges">Simpan
                                         Perubahan</button>
                                 </div>
@@ -290,8 +286,13 @@
                                         - Program Hari: {{ $paket->program_hari }}<br>
                                         - Bandara: {{ $paket->bandara }}<br>
                                         @foreach ($paket->tipeKamars as $tipeKamar)
-                                            - Tipe Kamar: {{ $tipeKamar->tipe }},
-                                            ${{ number_format($tipeKamar->harga - $paket->harga, 0, ',', '.') }}<br>
+                                           - Tipe Kamar: {{ $tipeKamar->tipe }},
+                                            @if(strtolower($paket->jenis) === 'umrah')
+                                                Rp{{ number_format($tipeKamar->harga - $paket->harga, 0, ',', '.') }}
+                                            @else
+                                                ${{ number_format($tipeKamar->harga - $paket->harga, 0, ',', '.') }}
+                                        @endif
+                                    <br>
                                         @endforeach
                                     </td>
                                     <td>
@@ -305,12 +306,17 @@
                                             @endforeach
                                         </ul>
                                     </td>
-                                    <td>${{ number_format($paket->harga, 0, ',', '.') }}</td>
+                                    <td>
+                                        @if(strtolower($paket->jenis) === 'umrah')
+                                            Rp{{ number_format($paket->harga, 0, ',', '.') }}
+                                        @else
+                                            ${{ number_format($paket->harga, 0, ',', '.') }}
+                                        @endif
+                                    </td>
                                     <td>
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer btn-edit"
                                             data-id="{{ $paket->id }}" data-nama="{{ $paket->nama_paket }}"
-                                            data-jenis="{{ $paket->jenis }}"
-                                            data-program-hari="{{ $paket->program_hari }}"
+                                            data-jenis="{{ $paket->jenis }}" data-program-hari="{{ $paket->program_hari }}"
                                             data-hotel-mekkah="{{ $paket->hotel_mekkah }}"
                                             data-hotel-madinah="{{ $paket->hotel_madinah }}"
                                             data-maskapai="{{ $paket->maskapai }}" data-bandara="{{ $paket->bandara }}"

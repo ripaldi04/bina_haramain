@@ -73,8 +73,9 @@
                                 </div>
                                 <div class="room-price">
                                     Harga : <span class="price">
-                                        ${{ number_format($tipe->harga, 0, ',', '.') }}
-                                    </span>/pax
+                                        {{ $paket->formatHarga($tipe->harga) }}
+                                    </span>
+                                    /pax
                                 </div>
                                 <div class="room-input d-flex">
                                     <label for="jumlah_{{ $tipe->tipe }}" class="form-label">Jumlah</label>
@@ -86,9 +87,12 @@
                             </div>
                         @endforeach
 
+                       <input type="hidden" id="layanan" value="{{ strtolower($paket->jenis) }}">
 
                         <div class="total-harga">
-                            <p>Total: <span id="totalHarga">USD 0,00</span></p>
+                            <p>Total: <span id="totalHarga">
+                                    {{ $paket->jenis == 'umrah' ? 'Rp 0' : 'USD 0.00' }}
+                                </span></p>
                         </div>
 
                         @auth
@@ -123,8 +127,8 @@
                         <p class="mb-4"><i class="bi bi-building custom-icon fs-4"></i> <span
                                 class="warna-text">{{ $paket->hotel_mekkah }}</span></p>
                         {{-- <h5 class="mb-2 fw-bold 15px">Keberangkatan</h5>
-                        <p class="mb-4"><i class="bi bi-calendar-event custom-icon fs-4"></i><span
-                                class="warna-text">{{ $paket->keberangkatan }}</span></p> --}}
+                        <p class="mb-4"><i class="bi bi-calendar-event custom-icon fs-4"></i><span class="warna-text">{{
+                                $paket->keberangkatan }}</span></p> --}}
                         <h5 class="fw-bold 15px">Bandara</h5>
                         <p><i class="bi bi-geo-alt custom-icon fs-4"></i><span
                                 class="warna-text">{{ $paket->bandara }}</span> </p>
@@ -197,8 +201,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseThree" aria-expanded="false"
-                            aria-controls="flush-collapseThree">
+                            data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                             Persyaratan Peserta
                         </button>
                     </h2>
@@ -211,8 +214,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseFour" aria-expanded="false"
-                            aria-controls="flush-collapseFour">
+                            data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
                             Syarat & Ketentuan
                         </button>
                     </h2>

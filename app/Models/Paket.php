@@ -35,4 +35,13 @@ class Paket extends Model
         return $this->hasMany(TipeKamar::class, 'paket_id');
     }
 
+    public function formatHarga($harga)
+    {
+        if (strtolower($this->jenis) === 'umrah') {
+            return 'Rp' . number_format($harga, 0, ',', '.');
+        }
+
+        return '$' . number_format($harga, 0, ',', '.');
+    }
+
 }

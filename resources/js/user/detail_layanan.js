@@ -13,23 +13,30 @@ window.showVerifyAlert = function () {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const inputs = document.querySelectorAll('.kamar-input');
-    const totalHargaEl = document.getElementById('totalHarga');
+   document.addEventListener('DOMContentLoaded', function () {
+        const inputs = document.querySelectorAll('.kamar-input');
+        const totalEl = document.getElementById('totalHarga');
+        const layanan = document.getElementById('layanan').value;
 
-    inputs.forEach(input => {
-        input.addEventListener('input', hitungTotal);
-    });
+        function formatCurrency(value) {
+            if (layanan === 'umrah') {
+                return 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
+            } else {
+                return 'USD ' + new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+            }
+        }
 
-    function hitungTotal() {
-        let total = 0;
+        function updateTotal() {
+            let total = 0;
+            inputs.forEach(input => {
+                const jumlah = parseInt(input.value) || 0;
+                const harga = parseFloat(input.dataset.harga) || 0;
+                total += jumlah * harga;
+            });
+            totalEl.textContent = formatCurrency(total);
+        }
+
         inputs.forEach(input => {
-            const jumlah = parseInt(input.value) || 0;
-            const harga = parseInt(input.dataset.harga) || 0;
-            total += jumlah * harga;
+            input.addEventListener('input', updateTotal);
         });
-
-        // Format rupiah
-        totalHargaEl.innerText = `$ ${total.toLocaleString('id-ID')}`;
-    }
-});
+    });

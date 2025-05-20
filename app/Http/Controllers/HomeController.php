@@ -11,7 +11,8 @@ use App\Models\LandingHighlightPoint;
 use App\Models\LandingHotDeal;
 use App\Models\LandingMuthawif;
 use App\Models\Question;
-use App\Models\LandingHighlight1; // pastikan model-nya di-import
+use App\Models\LandingHighlight1; 
+use App\Models\Video;// pastikan model-nya di-import
 
 
 class HomeController extends Controller
@@ -28,8 +29,23 @@ class HomeController extends Controller
         $highlight2 = LandingHighlight2::first();
         $landingPoint = LandingHighlightPoint::All();
         $muthawifs = LandingMuthawif::All();
+        $video = Video::latest()->first(); // Atau sesuai kebutuhan
 
 
-        return view('pages.user.home', compact('banner', 'keunggulan', 'fasilitas', 'galeri', 'questions', 'hotDeals', 'highlight1','highlight2','landingPoint','muthawifs'));
+
+        return view('pages.user.home', compact(
+            'banner',
+            'keunggulan',
+            'fasilitas',
+            'galeri',
+            'questions',
+            'hotDeals',
+            'highlight1',
+            'highlight2',
+            'landingPoint',
+            'muthawifs',
+            'video' // ✅ tambahkan ini
+        ));
+        
     }
 }

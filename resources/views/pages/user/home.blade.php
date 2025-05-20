@@ -63,9 +63,10 @@
 
 
 
-    <div class="container">
+   <div class="container mt-3">
         <div class="container-card-highlight">
-            <div class="row mt-5 justify-content-center mobile-card--highlight-container">
+            <div class="row mt-5 mb-2 justify-content-center mobile-card--highlight-container">
+
                 <div class="col-4">
                     <div class="card card-scale">
                         <div class="card-body card-highlight">
@@ -94,59 +95,75 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row mt-5">
-                <div class="col-md-12">
-                    <div class="card position-relative">
-                        <div class="card-body">
-                            <h5 class="card-title fs-4">Cari paket Haji dan Umrah Terbaik</h5>
-
-                            <!-- Row untuk input -->
-                            <div class="row mt-4 p-1" style="padding-right: 50px;">
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Keberangkatan</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Jenis Paket</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Maskapai</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div>
-                                        <p class="card-text text-search text-nowrap">Bandara Keberangkatan</p>
-                                        <input type="search" class="form-control"
-                                            style="border-radius: 5px; border-color: #909090;">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Ikon pencarian di luar row input -->
-                            <div class="position-absolute" style="right: 15px; bottom: 20px;">
-                                <button class="btn d-flex justify-content-center align-items-center"
-                                    style="background-color: var(--primary-color); height: 38px; width: 60px; border-radius: 5px; border: 2px solid #909090;">
-                                    <i class="bi bi-search fs-6 text-white"></i>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
-    <div class="container">
+
+
+    {{-- <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card position-relative">
+                <div class="card-body">
+                    <h5 class="card-title fs-4">Cari paket Haji dan Umrah Terbaik</h5>
+
+                    <!-- Row untuk input -->
+                    <div class="row mt-4 p-1" style="padding-right: 50px;">
+                        <div class="col-3">
+                            <div>
+                                <p class="card-text text-search text-nowrap">Keberangkatan</p>
+                                <input type="search" class="form-control"
+                                    style="border-radius: 5px; border-color: #909090;">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <p class="card-text text-search text-nowrap">Jenis Paket</p>
+                                <input type="search" class="form-control"
+                                    style="border-radius: 5px; border-color: #909090;">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <p class="card-text text-search text-nowrap">Maskapai</p>
+                                <input type="search" class="form-control"
+                                    style="border-radius: 5px; border-color: #909090;">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                <p class="card-text text-search text-nowrap">Bandara Keberangkatan</p>
+                                <input type="search" class="form-control"
+                                    style="border-radius: 5px; border-color: #909090;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ikon pencarian di luar row input -->
+                    <div class="position-absolute" style="right: 15px; bottom: 20px;">
+                        <button class="btn d-flex justify-content-center align-items-center"
+                            style="background-color: var(--primary-color); height: 38px; width: 60px; border-radius: 5px; border: 2px solid #909090;">
+                            <i class="bi bi-search fs-6 text-white"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+   @if ($video)
+    <div class="container d-flex justify-content-center" style="margin-top: -50px; margin-bottom: 40px;">
+
+        <div style="width: 950px; height: 500px;">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ $video->youtube_id }}?autoplay=0"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border-radius: 20px;">
+            </iframe>
+        </div>
+    </div>
+@endif
+
+
+
+    <div class="container" style="margin-top: 50px;">
         <div class="row p-3 d-flex justify-content-center align-items-center g-5 sudah-siap">
             <div class="col-md-7 col-12">
                 <div style="margin-left: 15%; margin-bottom: 10%;">
@@ -172,12 +189,13 @@
             </div>
             <div class="col-md-5 col-12">
                 @if (!empty($highlight1->image_url))
-                    <img src="{{ asset('storage/' . $highlight1->image_url) }}" alt="ini gambar" width="352px"
-                        height="406" style="border-radius: 30px;">
+                    <img src="{{ asset('storage/' . $highlight1->image_url) }}" alt="ini gambar" width="352px" height="406"
+                        style="border-radius: 30px;">
                 @else
                     <p>Gambar tidak tersedia</p>
                 @endif
             </div>
+
             <div class="row p-3 d-flex justify-content-center align-items-start g-5"
                 style="background-color: white; width: 90%;">
                 <div class="col-md-6 col-12 mbl-img-none">
@@ -274,12 +292,12 @@
                 <div class="col-md-4 d-flex justify-content-center">
                     <div class="card muthawif" style="width: 18rem; border-radius: 30px; background-size: cover;">
                         <div class="image-blur"></div>
-                        <img src="{{ asset('storage/' . $muthawif->image_url) }}" class="card-img-top"
-                            alt="Foto Muthawif">
+                        <img src="{{ asset('storage/' . $muthawif->image_url) }}" class="card-img-top" alt="Foto Muthawif">
                         <div class="card-body muthawif-body">
                             <h5 class="card-title text-center fs-4" style="color:white;">{{ $muthawif->nama }}</h5>
                             <p class="card-text text-center" style="color: var(--secondary-color);">
-                                {{ $muthawif->daerah }}</p>
+                                {{ $muthawif->daerah }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -393,8 +411,8 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center flex-column">
-                                <img src="./images/v160_64.png" alt=""
-                                    style="margin-left: 30%; margin-bottom: 10%;" width="200px">
+                                <img src="./images/v160_64.png" alt="" style="margin-left: 30%; margin-bottom: 10%;"
+                                    width="200px">
                                 <h5 class="fs-2 fw-bold" style="color: var(--secondary-color);">$20.000</h5>
                                 <button class="btn">Detail Paket</button>
                             </div>
@@ -441,8 +459,8 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center flex-column">
-                                <img src="./images/v160_64.png" alt=""
-                                    style="margin-left: 30%; margin-bottom: 10%;" width="200px">
+                                <img src="./images/v160_64.png" alt="" style="margin-left: 30%; margin-bottom: 10%;"
+                                    width="200px">
                                 <h5 class="fs-2 fw-bold" style="color: var(--secondary-color);">$27.500</h5>
                                 <button class="btn">Detail Paket</button>
                             </div>

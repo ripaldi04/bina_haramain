@@ -43,6 +43,12 @@
                 <i class="bi bi-file-earmark-fill"></i> Artikel
             </a>
         </li>
+        <li class="p-2">
+            <a href="{{ url('/admin/hubungi-kami') }}"
+                class="text-dark text-decoration-none d-block menu-item {{ request()->is('admin/hubungi-kami') ? 'active' : '' }}">
+                <i class="bi bi-file-earmark-fill"></i> Hubungi Kami
+            </a>
+        </li>
     </ul>
 
     <div class="mt-auto">

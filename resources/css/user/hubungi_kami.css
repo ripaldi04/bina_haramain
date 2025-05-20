@@ -55,7 +55,7 @@ body{
     background: #f0f0f0;
     width: auto;
     height: auto;
-    
+    margin-bottom: 100px;
 }
 .info-box {
     display: flex;

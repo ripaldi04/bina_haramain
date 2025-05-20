@@ -13,9 +13,8 @@
         <section class="contact-section">
             <div class="container">
                 <h1>Hubungi Kami</h1>
-                <p><span>Reservasi | Konsultasi | Layanan</span></p>
-                <p>Hubungi PT. Bina Haramain sekarang untuk informasi, reservasi, atau kebutuhan <br> khusus Anda. Kami siap
-                    melayani dengan profesionalisme dan dedikasi terbaik</p>
+                <p><span>{{$data->layanan}}</span></p>
+                <p style="width: 700px">{{$data->deskripsi}}</p>
             </div>
         </section>
     </div>
@@ -30,8 +29,7 @@
                         <div>
                             <h5 class="fw-bold">PT. Bina Haramain</h5>
                             <div style="color: #909090;">
-                                <p>Maktab Square. Jl. K S <br>Tubun No. 19 RT 03/RW 02, <br>
-                                    Cibuluh Kec. Bogor Utara, <br>Kota Bogor, Jawa Barat. 16151</p>
+                                <p >{{$data->alamat}}</p>
                             </div>
                         </div>
                     </div>
@@ -43,8 +41,8 @@
                         <div>
                             <h5 class="fw-bold">Telp & Whatsapp (Kantor Pusat)</h5>
                             <div style="color: #909090;">
-                                <p><a href ="tel:0817141529">0817-141-529</a> Customer Service</p>
-                                <p><a href="tel:082110474600">0821-1047-4600</a> Customer Service</p>
+                                <p><a href ="tel:0817141529">{{$data->no_cs_1}}</a> Customer Service</p>
+                                <p><a href="tel:082110474600">{{$data->no_cs_2}}</a> Customer Service</p>
                             </div>
                         </div>
                     </div>
@@ -55,12 +53,12 @@
                         <i class="bi bi-envelope-fill"></i>
                         <div>
                             <h5 class="fw-bold">Email</h5>
-                            <p><a href="mailto:binaharamain@gmail.com">binaharamain@gmail.com</a></p>
-                            <p><a href="mailto:binaharamain@gmail.com">binaharamain@hotmail.com</a></p>
+                            <p><a href="mailto:binaharamain@gmail.com">{{$data->email_1}}</a></p>
+                            <p><a href="mailto:binaharamain@gmail.com">{{$data->email_2}}</a></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                {{-- <div class="col-md-3">
                     <div class="info-box">
                         <i class="bi bi-clock-fill"></i>
                         <div>
@@ -76,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

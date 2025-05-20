@@ -10,6 +10,7 @@ use App\Http\Controllers\Highlight2Controller;
 use App\Http\Controllers\HighlightPointController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HotDealController;
+use App\Http\Controllers\HubungiKamiController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\LandingFasilitasController;
 use App\Http\Controllers\LandingGaleriController;
@@ -46,6 +47,9 @@ Route::post('/upload-bukti/{order_id}', [OrderPaketController::class, 'uploadBuk
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/admin/hubungi-kami', [HubungiKamiController::class, 'index'])->name('hubungi-kami.index');
+Route::post('/admin/hubungi-kami/update', [HubungiKamiController::class, 'update'])->name('hubungi-kami.update');
 
 
 Route::get('/admin/questions', [AdminQuestionController::class, 'index'])->name('questions.index');
@@ -107,9 +111,12 @@ Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.k
 
 Route::get('/paket/detail/{id}', [UserPaketController::class, 'show'])->name('layanan_haji.detail');
 
-Route::get('/hubungi-kami', function () {
-    return view('pages.user.hubungi_kami');
-})->name('hubungi_kami');
+// Route::get('/hubungi-kami', function () {
+//     return view('pages.user.hubungi_kami');
+// })->name('hubungi_kami');
+
+Route::get('/hubungi-kami', [HubungiKamiController::class, 'indexUser'])->name('hubungi_kami');
+
 
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 

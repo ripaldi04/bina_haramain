@@ -44,8 +44,6 @@
         </div>
     </section>
     <div class="visi-misi-container">
-        <h1><span class="highlight">VISI</span> & <span class="highlight">MISI</span></h1>
-
         <div class="visi">
             <h2>VISI</h2>
             <p>Menjadi Biro Haji Umrah yang InsyaAllah amanah sesuai Syariat

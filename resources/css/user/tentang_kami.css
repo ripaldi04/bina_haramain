@@ -140,14 +140,12 @@ h1 {
 
 p {
     font-size: 20px;
-    margin-top: 10px;
 }
 
 ul {
     list-style-type: decimal;
     padding-left: 60px;
     text-align: left;
-    margin-top: 50px;
 }
 
 ul li {

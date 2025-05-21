@@ -98,6 +98,17 @@
             </div>
         </div>
     </div>
+    @if ($video)
+        <div class="container d-flex justify-content-center" style="margin-top: -50px; margin-bottom: 40px;">
+
+            <div style="width: 950px; height: 500px;">
+                <iframe width="100%" height="100%"
+                    src="https://www.youtube.com/embed/{{ $video->youtube_id }}?autoplay=0" frameborder="0"
+                    allow="autoplay; encrypted-media" allowfullscreen style="border-radius: 20px;">
+                </iframe>
+            </div>
+        </div>
+    @endif
     <div class="container">
         <div class="row p-3 d-flex justify-content-center align-items-center g-5 sudah-siap">
             <div class="col-md-7 col-12">
@@ -171,8 +182,8 @@
                     <div class="col-lg-4 col-md-6 col-12 text-center mb-3">
                         <div class="d-flex flex-row align-items-center gap-3"
                             style="background-color: white; padding: 15px; margin: 20px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: left;">
-                            <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->title }}" height="60"
-                                width="60" style="object-fit: cover; border-radius: 8px;">
+                            <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->title }}"
+                                height="60" width="60" style="object-fit: cover; border-radius: 8px;">
                             <h5 class="m-0 fw-bold" style="font-size: 1.2rem;">{{ $item->title }}</h5>
                         </div>
                     </div>

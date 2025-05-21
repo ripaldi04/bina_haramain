@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\LandingBanner;
@@ -22,6 +23,8 @@ class AdminLandingPageController extends Controller
             'galeri' => DB::table('landing_galeri')->get(),
             'hotDeals' => DB::table('landing_hot_deal')->get(),
             'questions' => DB::table('landing_question')->get(),
+            'video' => Video::latest()->first(), // hanya ambil satu video
+
         ]);
     }
 

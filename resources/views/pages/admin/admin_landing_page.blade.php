@@ -95,7 +95,81 @@
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <h2 class="mb-4">Video Tampil</h2>
 
+                @if ($video)
+                    <!-- Kotak untuk video -->
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $video->title }}</h5>
+                            <p class="card-text">{{ $video->description }}</p>
+                            <div class="ratio ratio-16x9 mb-3">
+                                <iframe src="https://www.youtube.com/embed/{{ $video->youtube_id }}" frameborder="0"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kotak untuk form edit -->
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Edit Video</h5>
+                            <form action="{{ route('videos.update', $video) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                <div class="mb-3">
+                                    <label class="form-label">Judul Video</label>
+                                    <input type="text" name="title" class="form-control" value="{{ $video->title }}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">YouTube ID (contoh: fvEbsy-ixQI)</label>
+                                    <input type="text" name="youtube_id" class="form-control"
+                                        value="{{ $video->youtube_id }}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Deskripsi</label>
+                                    <textarea name="description" class="form-control">{{ $video->description }}</textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Perbarui Video</button>
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    <p>Tidak ada video yang tersedia.</p>
+
+                    <!-- Kotak untuk form create -->
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Tambah Video Baru</h5>
+                            <form action="{{ route('videos.store') }}" method="POST">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <label class="form-label">Judul Video</label>
+                                    <input type="text" name="title" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">YouTube ID (contoh: fvEbsy-ixQI)</label>
+                                    <input type="text" name="youtube_id" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Deskripsi</label>
+                                    <textarea name="description" class="form-control"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+            </div>
 
             {{-- Highlight 1 --}}
             <div class="card mb-5">

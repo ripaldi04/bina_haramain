@@ -91,7 +91,6 @@ document.addEventListener('click', function (e) {
         const email = row.children[2].textContent.trim();
         const phone = row.children[3].textContent.trim();
         const kode = row.children[4].textContent.trim();
-        const jumlahJamaah = row.children[5].textContent.trim();
 
         // Set ke form edit
         document.getElementById('editId').value = id;
@@ -99,7 +98,6 @@ document.addEventListener('click', function (e) {
         document.getElementById('editEmail').value = email;
         document.getElementById('editPhone').value = phone;
         document.getElementById('editKode').value = kode;
-        document.getElementById('editJumlahJamaah').value = jumlahJamaah;
 
         // Tampilkan modal
         const editModal = new bootstrap.Modal(document.getElementById('editModal'));
@@ -113,7 +111,6 @@ document.getElementById('saveChanges').addEventListener('click', function () {
     const email = document.getElementById('editEmail').value;
     const phone = document.getElementById('editPhone').value;
     const kode = document.getElementById('editKode').value;
-    const jumlah_jamaah = document.getElementById('editJumlahJamaah').value;
 
     fetch(`/admin/agen/${id}`, {
         method: 'PUT',

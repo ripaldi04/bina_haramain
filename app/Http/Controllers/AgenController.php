@@ -15,7 +15,6 @@ class AgenController extends Controller
             'email' => 'required|email|unique:agens,email',
             'phone' => 'required|string|max:20',
             'kode' => 'required|string|max:50|unique:agens,kode',
-            'jumlah_jamaah' => 'required|integer|min:0',
         ]);
 
         $agen = Agen::create($validated);
@@ -23,9 +22,18 @@ class AgenController extends Controller
         return response()->json(['agen' => $agen]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $agens = Agen::with('orderPaket.jamaah')->get();
+        $year = $request->input('year'); // ambil filter tahun dari request
+
+        $agens = Agen::with([
+            'orderPaket' => function ($query) use ($year) {
+                if ($year) {
+                    $query->whereYear('created_at', $year);
+                }
+            },
+            'orderPaket.jamaah'
+        ])->get();
         return view('pages.admin.admin_agen', compact('agens'));
     }
     public function update(Request $request, $id)
@@ -35,7 +43,6 @@ class AgenController extends Controller
             'email' => "required|email|unique:agens,email,{$id}",
             'phone' => 'required|string|max:20',
             'kode' => "required|string|max:50|unique:agens,kode,{$id}",
-            'jumlah_jamaah' => 'required|integer|min:0',
         ]);
 
         $agen = Agen::findOrFail($id);

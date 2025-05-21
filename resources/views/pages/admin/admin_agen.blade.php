@@ -53,11 +53,6 @@
                                         <input type="text" class="form-control" id="phone" name="phone" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="jumlah_jamaah" class="form-label">Jumlah Jamaah</label>
-                                        <input type="number" class="form-control" id="jumlah_jamaah" name="jumlah_jamaah"
-                                            min="0" value="0" required>
-                                    </div>
-                                    <div class="mb-3">
                                         <label for="kode" class="form-label">Kode</label>
                                         <input type="text" class="form-control" id="kode" name="kode" required>
                                     </div>
@@ -98,10 +93,6 @@
                                         <label for="editKode" class="form-label">Kode</label>
                                         <input type="text" class="form-control" id="editKode">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="editJamaah" class="form-label">Jumlah Jamaah</label>
-                                        <input type="number" class="form-control" id="editJumlahJamaah">
-                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -112,7 +103,20 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <button id="deleteAll" class="btn btn-danger">Hapus Semua</button>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <form id="filterForm" method="GET">
+                                    <select name="year" class="form-select"
+                                        onchange="document.getElementById('filterForm').submit()">
+                                        <option value="">Semua Tahun</option>
+                                        @foreach (range(now()->year, now()->year - 5) as $y)
+                                            <option value="{{ $y }}"
+                                                {{ request('year') == $y ? 'selected' : '' }}>{{ $y }}</option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
                             <i class="fas fa-plus"></i>
                         </button>
@@ -128,7 +132,6 @@
                                     <th>Phone</th>
                                     <th>Kode</th>
                                     <th>Total Jamaah dan Bukti</th>
-                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -141,20 +144,22 @@
                                         <td>{{ $agen->phone }}</td>
                                         <td>{{ $agen->kode }}</td>
                                         <td>
+                                            @php
+                                                $yearFilter = request('year');
+                                            @endphp
                                             @foreach ($agen->orderPaket as $order)
-                                                <li>{{ $order->jamaah->count() }} jamaah
-                                                    @if ($order->bukti_pembayaran)
-                                                        <a href="{{ asset('storage/' . $order->bukti_pembayaran) }}"
-                                                            target="_blank">Lihat Bukti</a>
-                                                    @else
-                                                        <span class="text-danger">Belum ada</span>
-                                                    @endif
-                                                </li>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($agen->orderPaket as $order)
-                                                <div>{{ $order->status }}</div>
+                                                @if (!$yearFilter || $order->created_at->format('Y') == $yearFilter)
+                                                    <div class="mb-2">
+                                                        <strong>{{ $order->jamaah->count() }} jamaah</strong> -
+                                                        <span>{{ ucfirst($order->status) }}</span><br>
+                                                        @if ($order->bukti_pembayaran)
+                                                            <a href="{{ asset('storage/' . $order->bukti_pembayaran) }}"
+                                                                target="_blank">Lihat Bukti</a>
+                                                        @else
+                                                            <span class="text-danger">Belum ada bukti</span>
+                                                        @endif
+                                                    </div>
+                                                @endif
                                             @endforeach
                                         </td>
                                         <td>

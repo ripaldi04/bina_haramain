@@ -104,7 +104,6 @@ class OrderPaketController extends Controller
             'nama_jamaah' => 'required|array',
             'jenis_kelamin_jamaah' => 'required|array',
             'jenis_kelamin_jamaah.*' => 'required|string',  // Validasi setiap item dalam array
-            'jenis_jamaah' => 'required|array',
             'kode_referral' => 'nullable|string',
         ]);
 
@@ -199,7 +198,6 @@ class OrderPaketController extends Controller
                         'order_kamar_id' => $orderKamar->id,
                         'nama' => $request->nama_jamaah[$jamaahIndex],
                         'jenis_kelamin' => $jenis_kelamin,
-                        'jenis_jamaah' => $request->jenis_jamaah[$jamaahIndex],
                     ]);
                 }
                 $jamaahIndex++;

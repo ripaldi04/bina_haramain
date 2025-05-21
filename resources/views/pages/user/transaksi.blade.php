@@ -73,13 +73,6 @@
                                         <div class="jamaah-box">
                                             <div class="jamaah-header">Jamaah {{ $jamaahCount }} (Kamar
                                                 {{ ucfirst($orderKamar->tipeKamar->tipe) }})</div>
-                                            <div class="form-group mt-4">
-                                                <label for="jenisJamaah{{ $jamaahCount }}">Jenis Jamaah</label>
-                                                <select id="jenisJamaah{{ $jamaahCount }}" name="jenis_jamaah[]">
-                                                    <option selected>Jamaah Baru</option>
-                                                    <option>Sesuai Pemesan</option>
-                                                </select>
-                                            </div>
                                             <div class="form-group">
                                                 <label for="namaJamaah{{ $jamaahCount }}">Nama Lengkap Jamaah</label>
                                                 <input type="text" id="namaJamaah{{ $jamaahCount }}"

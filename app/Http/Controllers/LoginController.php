@@ -31,7 +31,15 @@ class LoginController extends Controller
             }
             $request->session()->regenerate(); // Tambahkan regenerasi session demi keamanan
 
-            return redirect()->intended('/'); // redirect ke home setelah login
+            if ($user->role === 'admin') {
+                return redirect('/admin/users');
+            } elseif ($user->role === 'user') {
+                return redirect('/');
+            } else {
+                // fallback jika role tidak dikenali
+                Auth::logout();
+                return back()->withErrors(['email' => 'Role tidak dikenali. Hubungi admin.']);
+            }
         }
 
         return back()->withErrors([

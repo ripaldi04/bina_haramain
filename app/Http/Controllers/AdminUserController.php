@@ -15,7 +15,7 @@ class AdminUserController extends Controller
     //
     public function index()
     {
-        $users = User::latest()->get();
+        $users = User::where('role', 'user')->get();
         return view('pages.admin.admin_user', compact('users'));
     }
     public function update(Request $request)

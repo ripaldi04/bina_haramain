@@ -532,3 +532,23 @@ input[type="search"] {
         margin-top: -20px;
     }
 }
+
+.wa-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    text-decoration: none;
+}
+
+.wa-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.wa-icon:hover {
+    transform: scale(1.1);
+}

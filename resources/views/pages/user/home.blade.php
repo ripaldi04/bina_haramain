@@ -484,4 +484,9 @@
             </div>
         @endforeach
     </div>
+    <!-- Tombol WhatsApp Mengambang -->
+    <a href="https://wa.me/628121869994?text=Halo%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20Anda" target="_blank"
+        class="wa-float">
+        <img src="{{ asset('images/wa-icon.png') }}" alt="WhatsApp" class="wa-icon">
+    </a>
 @endsection

@@ -80,7 +80,7 @@
                             <p class="fw-nomal text-dark">Harga Mulai Dari: <br>
                                 <span class="fw-bolder fs-5 text-warning">
                                     @if ($paket && $paket->tipeKamars->isNotEmpty())
-                                        ${{ number_format($paket->tipeKamars->last()->harga, 0, ',', '.') }}
+                                        Rp {{ number_format($paket->tipeKamars->last()->harga, 0, ',', '.') }}
                                     @endif
                                 </span><br>
                             </p>

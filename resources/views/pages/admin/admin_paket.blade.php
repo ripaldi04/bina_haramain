@@ -276,6 +276,9 @@
                         </thead>
                         <tbody id="tableBody">
                             @foreach ($paket as $paket)
+                                @php
+                                    $mataUang = $paket->jenis === 'haji' ? '$' : 'Rp';
+                                @endphp
                                 <tr data-row-id="{{ $paket->id }}">
                                     <td>
                                         <img src="{{ asset('storage/' . $paket->gambar) }}" alt="gambar" width="100"
@@ -291,7 +294,8 @@
                                         - Bandara: {{ $paket->bandara }}<br>
                                         @foreach ($paket->tipeKamars as $tipeKamar)
                                             - Tipe Kamar: {{ $tipeKamar->tipe }},
-                                            ${{ number_format($tipeKamar->harga - $paket->harga, 0, ',', '.') }}<br>
+                                            {{ $mataUang }}
+                                            {{ number_format($tipeKamar->harga - $paket->harga, 0, ',', '.') }}
                                         @endforeach
                                     </td>
                                     <td>
@@ -305,7 +309,7 @@
                                             @endforeach
                                         </ul>
                                     </td>
-                                    <td>${{ number_format($paket->harga, 0, ',', '.') }}</td>
+                                    <td>{{ $mataUang }} {{ number_format($paket->harga, 0, ',', '.') }}</td>
                                     <td>
                                         <i class="fas fa-edit text-primary me-2 cursor-pointer btn-edit"
                                             data-id="{{ $paket->id }}" data-nama="{{ $paket->nama_paket }}"

@@ -7,6 +7,10 @@
 @endsection
 
 @section('content')
+    @php
+        $mataUang = $order->paket->jenis === 'haji' ? '$' : 'Rp';
+    @endphp
+
     <div class="container my-5">
         <h4 class="mb-4 fw-bold text-center">Ringkasan Pemesanan & Pembayaran</h4>
 
@@ -24,17 +28,21 @@
                         <li><strong>Nama Paket:</strong> {{ $order->paket->nama_paket ?? '-' }}</li>
                         <li><strong>Jenis Paket:</strong> {{ $order->paket->jenis ?? '-' }}</li>
                         <li><strong>Program Hari:</strong> {{ $order->paket->program_hari ?? '-' }} hari</li>
-                        <li><strong>Total Harga Paket:</strong> ${{ number_format($order->total_harga) }}</li>
-                        <li><strong>Diskon:</strong> ${{ number_format($order->diskon) }}</li>
+                        <li><strong>Total Harga Paket:</strong> {{ $mataUang }}
+                            {{ number_format($order->total_harga, 0, ',', '.') }}</li>
+                        <li><strong>Diskon:</strong> {{ $mataUang }} {{ number_format($order->diskon, 0, ',', '.') }}
+                        </li>
                         <li><strong>Metode Pembayaran:</strong> {{ ucfirst($order->jenis_pembayaran) }}</li>
-                        <li><strong>Total Bayar:</strong> ${{ number_format($order->jumlah_dibayar) }}</li>
+                        <li><strong>Total Bayar:</strong> {{ $mataUang }}
+                            {{ number_format($order->jumlah_dibayar, 0, ',', '.') }}</li>
                     </ul>
 
                     <hr>
 
                     <h5 class="mb-3">Pembayaran Manual</h5>
                     <p>Silakan transfer sejumlah:</p>
-                    <h3 class="text-success fw-bold mb-3">$ {{ number_format($order->jumlah_dibayar) }}</h3>
+                    <h3 class="text-success fw-bold mb-3">{{ $mataUang }}
+                        {{ number_format($order->jumlah_dibayar, 0, ',', '.') }}</h3>
 
                     <p>Ke Virtual Account (VA) berikut:</p>
                     <div class="bg-light border rounded p-3 mb-3">

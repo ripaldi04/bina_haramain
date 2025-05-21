@@ -72,9 +72,14 @@
                                     </span>
                                 </div>
                                 <div class="room-price">
+                                    @php
+                                        $mataUang = $paket->jenis === 'haji' ? '$' : 'Rp';
+                                    @endphp
+
                                     Harga : <span class="price">
-                                        ${{ number_format($tipe->harga, 0, ',', '.') }}
+                                        {{ $mataUang }} {{ number_format($tipe->harga, 0, ',', '.') }}
                                     </span>/pax
+
                                 </div>
                                 <div class="room-input d-flex">
                                     <label for="jumlah_{{ $tipe->tipe }}" class="form-label">Jumlah</label>
@@ -88,8 +93,10 @@
 
 
                         <div class="total-harga">
-                            <p>Total: <span id="totalHarga">USD 0,00</span></p>
+                            <p>Total: <span id="totalHarga"
+                                    data-currency="{{ $paket->jenis === 'haji' ? '$' : 'Rp' }}">0,00</span></p>
                         </div>
+
 
                         @auth
                             @if (auth()->user()->email_verified_at)
@@ -139,18 +146,6 @@
 
             <!--list isi-->
             <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Itenary
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Isi dari Itenary.</div>
-                    </div>
-                </div>
-
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"

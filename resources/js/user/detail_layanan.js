@@ -16,6 +16,7 @@ window.showVerifyAlert = function () {
 document.addEventListener('DOMContentLoaded', function () {
     const inputs = document.querySelectorAll('.kamar-input');
     const totalHargaEl = document.getElementById('totalHarga');
+    const mataUang = totalHargaEl.dataset.currency;
 
     inputs.forEach(input => {
         input.addEventListener('input', hitungTotal);
@@ -29,7 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
             total += jumlah * harga;
         });
 
-        // Format rupiah
-        totalHargaEl.innerText = `$ ${total.toLocaleString('id-ID')}`;
+        // Tampilkan total sesuai mata uang
+        if (mataUang === 'Rp') {
+            totalHargaEl.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+        } else {
+            totalHargaEl.innerText = `$ ${total.toLocaleString('id-ID')}`;
+        }
     }
 });

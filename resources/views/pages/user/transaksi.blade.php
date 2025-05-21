@@ -157,7 +157,11 @@
                                 @endif
                             <li><strong>Bandara Keberangkatan:</strong><br>{{ $order->paket->bandara ?? '-' }}</li>
                             <li><strong>Maskapai Keberangkatan:</strong><br>{{ $order->paket->maskapai ?? '-' }}</li>
-                            <li><strong>Harga Paket:</strong>$ {{ number_format($order->paket->harga) }}</li>
+                            @php
+                                $mataUang = $order->paket->jenis === 'haji' ? '$' : 'Rp';
+                            @endphp
+                            <li><strong>Harga Paket:</strong> {{ $mataUang }}
+                                {{ number_format($order->paket->harga, 0, ',', '.') }}</li>
                             <li><strong>Kombinasi Kamar:</strong><br>
                                 @foreach ($order->orderKamar as $kamar)
                                     {{ ucfirst($kamar->tipeKamar->tipe) }}: {{ $kamar->jumlah_kamar }} kamar<br>
@@ -165,9 +169,9 @@
                             </li>
                         </ul>
                         <div class="custom-total-box text-white p-3 text-center rounded mb-3" id="totalBayarBox">
-                            <strong>Total : $ <span
-                                    id="totalBayarValue">{{ number_format($order->total_harga, 0, ',', '.') }}
-                                </span></strong>
+                            <strong>Total : {{ $mataUang }} <span
+                                    id="totalBayarValue">{{ number_format($order->total_harga, 0, ',', '.') }}</span></strong>
+                            </span></strong>
                         </div>
                     </div>
                 </div>

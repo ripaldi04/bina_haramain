@@ -36,6 +36,9 @@
                             color: #999;
                         "></i>
                 </div>
+                <small style="color: #888; display: block; margin-bottom: 0px;"">
+                    * Sandi minimal 6 karakter
+                </small>
 
                 <label>Ulangi Sandi</label>
                 <div style="position: relative;">
@@ -51,6 +54,9 @@
                             color: #999;
                         "></i>
                 </div>
+                <small style="color: #888; display: block; margin-bottom: 0px;"">
+                    * Sandi minimal 6 karakter
+                </small>
 
                 <p class="login-text">Sudah Punya Akun? <a href="{{ asset('login') }}">Masuk disini</a></p>
 

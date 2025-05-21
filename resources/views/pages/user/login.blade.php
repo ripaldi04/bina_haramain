@@ -48,7 +48,6 @@
                             color: #999;
                         "></i>
                 </div>
-
                 <p class="login-text">Belum Punya Akun? <a href="{{ asset('register') }}">Daftar disini</a></p>
                 <button type="submit">Masuk</button>
             </form>

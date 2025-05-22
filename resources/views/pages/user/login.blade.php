@@ -48,7 +48,8 @@
                             color: #999;
                         "></i>
                 </div>
-                <p class="login-text">Belum Punya Akun? <a href="{{ asset('register') }}">Daftar disini</a></p>
+                <p class="login-text mb-0">Belum Punya Akun? <a href="{{ asset('register') }}">Daftar disini</a></p>
+                <p class="login-text"><a href="{{ route('password.request') }}">Lupa Password?</a></p>
                 <button type="submit">Masuk</button>
             </form>
         </div>

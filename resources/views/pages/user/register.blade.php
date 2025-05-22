@@ -11,6 +11,16 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <section class="register-section" style="background-image: url('{{ asset('images/bg_Register.jpg') }}');">
         <div class="register-container">
             <h2 style="color: #b97012; margin-bottom: 40px;">Halaman Registrasi</h2>
@@ -20,12 +30,12 @@
                 <input type="text" name="name" placeholder="Masukkan Nama Lengkap" required>
 
                 <label>Email</label>
-                <input type="email" name="email" placeholder="Masukkan Email">
+                <input type="email" name="email" placeholder="Masukkan Email" required>
 
                 <label>Sandi</label>
                 <div style="position: relative; margin-bottom: 15px;">
                     <input type="password" name="password" id="password" placeholder="Masukkan Sandi"
-                        style="padding-right: 2.5rem; width: 100%;">
+                        style="padding-right: 2.5rem; width: 100%;" required>
                     <i class="bi bi-eye toggle-password" data-target="password"
                         style="
                             position: absolute;
@@ -36,14 +46,14 @@
                             color: #999;
                         "></i>
                 </div>
-                <small style="color: #888; display: block; margin-bottom: 0px;"">
+                <small style="color: #888; display: block; margin-bottom: 0px;">
                     * Sandi minimal 6 karakter
                 </small>
 
                 <label>Ulangi Sandi</label>
                 <div style="position: relative;">
                     <input type="password" name="password_confirmation" id="password_confirmation"
-                        placeholder="Ulangi Sandi" style="padding-right: 2.5rem; width: 100%;">
+                        placeholder="Ulangi Sandi" style="padding-right: 2.5rem; width: 100%;" required>
                     <i class="bi bi-eye toggle-password" data-target="password_confirmation"
                         style="
                             position: absolute;

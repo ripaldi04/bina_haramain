@@ -22,7 +22,7 @@ class KontakController extends Controller
         Mail::raw(
             "Nama: {$data['name']}\nEmail: {$data['email']}\nNo HP: +62{$data['phone']}\n\nPesan:\n{$data['message']}",
             function ($message) use ($data) {
-                $message->to('muhammadripaldi383@gmail.com') // Ganti dengan email tujuan
+                $message->to('muhamadripaldi75@gmail.com') // Ganti dengan email tujuan
                     ->subject($data['subject']);
             }
         );

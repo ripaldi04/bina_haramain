@@ -74,7 +74,7 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) 
 
     Auth::logout(); // << Ini penting agar user keluar dari sesi
 
-    return redirect()->route('login.form')->with('success', 'Email kamu berhasil diverifikasi! Silakan login.');
+    return redirect()->route('login')->with('success', 'Email kamu berhasil diverifikasi! Silakan login.');
 })->middleware(['signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {

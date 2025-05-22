@@ -19,6 +19,8 @@ use App\Http\Controllers\LandingMuthawifController;
 use App\Http\Controllers\OrderPaketController;
 use App\Http\Controllers\TipeKamarController;
 use App\Http\Controllers\VideoController;
+use App\Models\OrderPaket;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminLandingPageController;
@@ -124,9 +126,6 @@ Route::get('/tentang-kami', function () {
 })->name('tentang_kami');
 
 Route::get('/riwayat', [OrderPaketController::class, 'riwayat'])->name('riwayat');
-
-Route::delete('/order/{id}', [OrderPaketController::class, 'destroy'])->name('order.destroy');
-
 
 Route::middleware(['auth', 'cekRole:admin'])->group(function () {
     // Route resource untuk admin users

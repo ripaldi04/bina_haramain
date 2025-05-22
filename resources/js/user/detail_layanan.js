@@ -38,3 +38,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('formPesanPaket');
+
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            let kamarInputs = document.querySelectorAll('.kamar-input');
+            let isAnyKamarFilled = false;
+
+            kamarInputs.forEach(input => {
+                if (parseInt(input.value) > 0) {
+                    isAnyKamarFilled = true;
+                }
+            });
+
+            if (!isAnyKamarFilled) {
+                e.preventDefault(); // Mencegah submit
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Kamar Belum Diisi',
+                    text: 'Silakan pilih minimal 1 tipe kamar untuk melanjutkan pemesanan.',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    }
+});

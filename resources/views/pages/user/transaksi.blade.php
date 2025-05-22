@@ -27,7 +27,7 @@
                             <div class="col-md-6 mb-3">
                                 <label>Nama Lengkap Pemesan</label>
                                 <input type="text" class="form-control" placeholder="Nama Lengkap Pemesan"
-                                    name="nama_pemesan" />
+                                    name="nama_pemesan" required/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Jenis Kelamin Pemesan</label>
@@ -42,13 +42,13 @@
                                 <div class="input-group">
                                     <span class="input-group-text kode-negara">+62</span>
                                     <input type="text" class="form-control" placeholder="Masukkan Nomor telepon"
-                                        name="telepon_pemesan" />
+                                        name="telepon_pemesan" required />
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>Email Pemesan</label>
                                 <input type="email" class="form-control" placeholder="Email Pemesan"
-                                    name="email_pemesan" />
+                                    name="email_pemesan" required/>
                             </div>
                             <div class="col-12 mb-3">
                                 <label>Catatan Pemesan</label>
@@ -77,12 +77,12 @@
                                                 <label for="namaJamaah{{ $jamaahCount }}">Nama Lengkap Jamaah</label>
                                                 <input type="text" id="namaJamaah{{ $jamaahCount }}"
                                                     name="nama_jamaah[]" placeholder="Nama Lengkap Jamaah"
-                                                    class="form-control" />
+                                                    class="form-control" required />
                                             </div>
                                             <div class="form-group">
                                                 <label for="jenisKelamin{{ $jamaahCount }}">Jenis Kelamin</label>
                                                 <select id="jenisKelamin{{ $jamaahCount }}" name="jenis_kelamin_jamaah[]"
-                                                    class="form-control">
+                                                    class="form-control" required>
                                                     <option value="Laki-Laki" selected>Laki - Laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>

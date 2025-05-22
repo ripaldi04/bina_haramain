@@ -27,7 +27,7 @@
             <div class="col-lg-4 d-flex align-items-start">
                 <div class="pesan-paket">
                     <h5 class="header-title">Pesan Paket</h5>
-                    <form action="{{ route('prosesPesan') }}" method="POST">
+                    <form id="formPesanPaket" action="{{ route('prosesPesan') }}" method="POST">
                         @csrf
                         <label>Program Hari</label>
                         <select class="form-select" name="paket_id" required>

@@ -70,7 +70,7 @@
                                             <select class="form-control" id="paketJenis" name="jenis" required>
                                                 <option value="haji">Haji</option>
                                                 <option value="umrah">Umrah</option>
-                                                <option value="islamic_tour">Islamic Tour</option>
+                                                <option value="islamic_tour">Halal Tour</option>
                                             </select>
                                         </div>
 

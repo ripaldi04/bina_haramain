@@ -118,7 +118,7 @@ document.getElementById('saveChanges').addEventListener('click', function () {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
-        body: JSON.stringify({ name, email, phone, kode, jumlah_jamaah })
+        body: JSON.stringify({ name, email, phone, kode })
     })
         .then(res => {
             if (!res.ok) throw res;

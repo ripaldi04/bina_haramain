@@ -229,6 +229,7 @@ Route::middleware(['auth', 'cekRole:admin'])->group(function () {
 
     Route::get('/admin/hubungi-kami', [HubungiKamiController::class, 'index'])->name('hubungi-kami.index');
     Route::post('/admin/hubungi-kami/update', [HubungiKamiController::class, 'update'])->name('hubungi-kami.update');
+    Route::delete('/order/{id}', [OrderPaketController::class, 'destroy'])->name('order.destroy');
 
 
     Route::get('/admin/questions', [AdminQuestionController::class, 'index'])->name('questions.index');

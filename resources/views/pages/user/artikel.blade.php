@@ -28,8 +28,8 @@
             @foreach ($artikels as $artikel)
                 <div class="col-md-4">
                     <div class="card shadow-sm">
-                        <div class="card-img-top position-relative">
-                            <img src="{{ asset('storage/' . $artikel->gambar) }}" class="img-fluid rounded-top mb-3"
+                        <div class="artikel-card mb-3">
+                            <img src="{{ asset('storage/' . $artikel->gambar) }}" class="artikel-img"
                                 alt="{{ $artikel->judul }}">
                         </div>
                         <div class="card-body">
@@ -41,8 +41,7 @@
                             <p class="blog-spill">
                                 {{ \Illuminate\Support\Str::limit($artikel->isi, 200, '...') }}
                             </p>
-                            <a href="{{ route('detail_artikel', $artikel->id) }}"
-                                class="btn btn-dark w-100 fw-bolder">Baca
+                            <a href="{{ route('detail_artikel', $artikel->id) }}" class="btn btn-dark w-100 fw-bolder">Baca
                                 Artikel</a>
                         </div>
                     </div>

@@ -126,7 +126,6 @@
                         <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" id="selectAll"></th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -138,7 +137,6 @@
                             <tbody id="tableBody">
                                 @foreach ($agens as $agen)
                                     <tr data-row-id="{{ $agen->id }}">
-                                        <td><input type="checkbox" class="rowCheckbox"></td>
                                         <td>{{ $agen->name }}</td>
                                         <td>{{ $agen->email }}</td>
                                         <td>{{ $agen->phone }}</td>

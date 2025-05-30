@@ -108,10 +108,11 @@
 
                     <!-- Konten Artikel -->
                     <div class="bg-white p-4 shadow rounded">
-                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
-                            <i class="fas fa-plus"></i> Tambah Artikel
-                        </button>
-
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
+                                <i class="fas fa-plus"></i> Tambah Artikel
+                            </button>
+                        </div>
 
                         <table class="table table-bordered text-center align-middle">
                             <thead>

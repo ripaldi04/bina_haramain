@@ -17,7 +17,6 @@
 
 
                 <h1 id="pageTitle" class="mb-4">Paket Umrah & Haji</h1>
-
                 <div class="bg-white p-4 shadow rounded">
                     <!-- Search Field -->
                     <div class="row mb-3">
@@ -31,12 +30,12 @@
                     </div>
 
 
-
-                    <button id="addPaketBtn" class="btn btn-success mb-3" data-bs-toggle="modal"
-                        data-bs-target="#addPaketModal">
-                        <i class="fas fa-plus"></i>
-                    </button>
-
+                    <div class="d-flex justify-content-end">
+                        <button id="addPaketBtn" class="btn btn-success mb-3" data-bs-toggle="modal"
+                            data-bs-target="#addPaketModal">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
 
 
                     <!-- Modal Tambah Paket -->

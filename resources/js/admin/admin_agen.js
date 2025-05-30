@@ -87,10 +87,10 @@ document.addEventListener('click', function (e) {
     if (e.target.classList.contains('fa-edit')) {
         const row = e.target.closest('tr');
         const id = row.getAttribute('data-row-id');
-        const name = row.children[1].textContent.trim();
-        const email = row.children[2].textContent.trim();
-        const phone = row.children[3].textContent.trim();
-        const kode = row.children[4].textContent.trim();
+        const name = row.children[0].textContent.trim();
+        const email = row.children[1].textContent.trim();
+        const phone = row.children[2].textContent.trim();
+        const kode = row.children[3].textContent.trim();
 
         // Set ke form edit
         document.getElementById('editId').value = id;

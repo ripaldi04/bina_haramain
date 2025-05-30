@@ -97,8 +97,8 @@
                     </div>
 
 
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <button id="deleteAll" class="btn btn-danger">Hapus Semua</button>
+                    <div class="d-flex justify-content-end align-items-center mb-3">
+                        {{-- <button id="deleteAll" class="btn btn-danger">Hapus Semua</button> --}}
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
                             <i class="fas fa-plus"></i>
                         </button>

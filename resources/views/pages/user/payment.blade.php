@@ -68,7 +68,8 @@
                             <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran"
                                 accept="image/*,.pdf" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Kirim Bukti Pembayaran</button>
+                        <button style="margin-bottom: 15px" type="submit" class="btn btn-primary">Kirim Bukti
+                            Pembayaran</button>
                     </form>
 
                     @if ($order->bukti_pembayaran)

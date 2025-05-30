@@ -179,22 +179,36 @@ class PaketController extends Controller
         ]);
 
         // Update tipe kamar
-        $hargaDasar = $request->harga;
-        $paket->tipeKamars()->delete(); // Hapus semua dan buat ulang
-        $paket->tipeKamars()->createMany([
-            ['tipe' => 'double', 'harga' => $request->harga_kamar_double + $hargaDasar],
-            ['tipe' => 'triple', 'harga' => $request->harga_kamar_triple + $hargaDasar],
-            ['tipe' => 'quad', 'harga' => $request->harga_kamar_quad + $hargaDasar],
-        ]);
+        // $hargaDasar = $request->harga;
+        foreach (['double', 'triple', 'quad'] as $tipe) {
+            $existing = $paket->tipeKamars()->where('tipe', $tipe)->first();
+            $hargaInput = $request->input("harga_kamar_$tipe") + $request->harga;
+
+            if ($existing) {
+                $existing->update(['harga' => $hargaInput]);
+            } else {
+                $paket->tipeKamars()->create([
+                    'tipe' => $tipe,
+                    'harga' => $hargaInput
+                ]);
+            }
+        }
+
 
         // Simpan tanggal keberangkatan baru
         if ($request->has('tanggal_keberangkatan')) {
             foreach ($request->tanggal_keberangkatan as $i => $tanggal) {
-                DetailPaket::create([
-                    'paket_id' => $paket->id,
-                    'tanggal_keberangkatan' => $tanggal,
-                    'jumlah_seat' => $request->jumlah_seat[$i] ?? 0,
-                ]);
+                $detail = $paket->detailPakets()->whereDate('tanggal_keberangkatan', $tanggal)->first();
+                $jumlah_seat = $request->jumlah_seat[$i] ?? 0;
+
+                if ($detail) {
+                    $detail->update(['jumlah_seat' => $jumlah_seat]);
+                } else {
+                    $paket->detailPakets()->create([
+                        'tanggal_keberangkatan' => $tanggal,
+                        'jumlah_seat' => $jumlah_seat,
+                    ]);
+                }
             }
         }
 

@@ -1,16 +1,16 @@
 *UNTUK INSTALL*
-buat folder untuk menyimpan codingan hasil cloning
-lalu buka cmd di folder yang telah di buat
-git clone https://github.com/ripaldi04/bina_haramain.git
-cd bina_haramain
-npm install
-composer install
-code .
-copy .env.example .env
-sesuaikan .env nya
-php artisan key:generate
-php artisan storage:link
+1.buat folder untuk menyimpan codingan hasil cloning
+2.lalu buka cmd di folder yang telah di buat
+3.git clone https://github.com/ripaldi04/bina_haramain.git
+4.cd bina_haramain
+5.npm install
+6.composer install
+7.code .
+8.copy .env.example .env
+9.sesuaikan .env nya
+10.php artisan key:generate
+11.php artisan storage:link
 
 *UNTUK MENJALANKAN*
-npm run dev
-php artisan serve
+1.npm run dev
+2.php artisan serve
